@@ -2,11 +2,11 @@
  * Database Seed Script
  * 
  * Creates initial users including super admin for the ERP system.
- * Run: npx tsx prisma/seed.ts
+ * Run: node prisma/seed.js
  */
 
-import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcrypt';
+const { PrismaClient } = require('../app/generated/prisma/index.js');
+const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient();
 

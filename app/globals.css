@@ -100,7 +100,7 @@
   /* Main Theme Colors (Base) */
   --theme-brand: oklch(0.55 0.25 260);
   /* Primary brand color - vibrant purple/blue */
-  --theme-accent: oklch(0.65 0.20 180);
+  --theme-accent: oklch(52.842% 0.24521 326.541);
   /* Accent color - teal/cyan */
   --theme-neutral: oklch(0.50 0.02 260);
   /* Neutral color - warm gray */
