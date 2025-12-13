@@ -19,22 +19,6 @@ import type {
 
 
 // ============================================
-// DEMO USER (In-Memory) - Remove for Production
-// ============================================
-const DEMO_USER = {
-    id: 1,
-    email: 'test@example.com',
-    name: 'Test User',
-    password: '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5.7gJ8qK9Y7xG', // password123
-};
-
-const refreshTokenStore = new Map<string, {
-    userId: number;
-    expiresAt: Date;
-    isRevoked: boolean;
-}>();
-
-// ============================================
 // Helper Functions
 // ============================================
 
@@ -80,18 +64,10 @@ export async function login(
         // Sanitize email
         const sanitizedEmail = sanitizeEmail(email);
 
-        // ========== IN-MEMORY DEMO ==========
-        let user = null;
-        if (sanitizedEmail === DEMO_USER.email) {
-            user = DEMO_USER;
-        }
-
-        /* PRODUCTION CODE (Prisma):
+        // Fetch user from database
         const user = await prisma.user.findUnique({
-          where: { email: sanitizedEmail },
+            where: { email: sanitizedEmail },
         });
-        */
-        // ====================================
 
         if (!user) {
             return {
@@ -120,23 +96,14 @@ export async function login(
         const refreshToken = generateRefreshToken(tokenPayload);
         const expiresAt = calculateExpiryDate(TOKEN_CONFIG.REFRESH_TOKEN_EXPIRY);
 
-        // ========== IN-MEMORY DEMO ==========
-        refreshTokenStore.set(refreshToken, {
-            userId: user.id,
-            expiresAt,
-            isRevoked: false,
-        });
-
-        /* PRODUCTION CODE (Prisma):
+        // Store refresh token in database
         await prisma.refreshToken.create({
-          data: {
-            token: refreshToken,
-            userId: user.id,
-            expiresAt,
-          },
+            data: {
+                token: refreshToken,
+                userId: user.id,
+                expiresAt,
+            },
         });
-        */
-        // ====================================
 
         return {
             success: true,
@@ -188,15 +155,10 @@ export async function refresh(
             };
         }
 
-        // ========== IN-MEMORY DEMO ==========
-        const tokenData = refreshTokenStore.get(refreshToken);
-
-        /* PRODUCTION CODE (Prisma):
+        // Check refresh token in database
         const tokenData = await prisma.refreshToken.findUnique({
-          where: { token: refreshToken },
+            where: { token: refreshToken },
         });
-        */
-        // ====================================
 
         if (!tokenData) {
             return {
@@ -257,15 +219,10 @@ export async function logout(refreshToken: string): Promise<ControllerResponse<{
             };
         }
 
-        // ========== IN-MEMORY DEMO ==========
-        refreshTokenStore.delete(refreshToken);
-
-        /* PRODUCTION CODE (Prisma):
+        // Delete refresh token from database
         await prisma.refreshToken.deleteMany({
-          where: { token: refreshToken },
+            where: { token: refreshToken },
         });
-        */
-        // ====================================
 
         return {
             success: true,

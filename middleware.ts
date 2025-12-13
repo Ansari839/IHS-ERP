@@ -1,14 +1,19 @@
 /**
- * Root Middleware - Edge Authentication
+ * Root Middleware - Authentication
  * 
- * Runs at the edge before route handlers load.
+ * Runs before route handlers load.
  * Protects API routes and dashboard pages.
  * Handles smart redirects based on auth state.
+ * 
+ * Note: Uses Node.js runtime for JWT verification (requires crypto module)
  */
 
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { verifyAccessToken } from '@/lib/jwt'
+
+// Use Node.js runtime instead of Edge for JWT verification
+export const runtime = 'nodejs'
 
 /**
  * Check if user is authenticated
@@ -16,14 +21,23 @@ import { verifyAccessToken } from '@/lib/jwt'
 function isAuthenticated(request: NextRequest): boolean {
     const accessToken = request.cookies.get('accessToken')?.value
 
+    console.log('🔍 Middleware auth check:', {
+        path: request.nextUrl.pathname,
+        hasCookie: !!accessToken,
+        cookiePreview: accessToken ? accessToken.substring(0, 20) + '...' : 'none'
+    })
+
     if (!accessToken) {
+        console.log('❌ No access token found')
         return false
     }
 
     try {
         verifyAccessToken(accessToken)
+        console.log('✅ Token verified successfully')
         return true
-    } catch {
+    } catch (error) {
+        console.log('❌ Token verification failed:', error instanceof Error ? error.message : 'unknown')
         return false
     }
 }
@@ -32,9 +46,12 @@ export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname
     const authenticated = isAuthenticated(request)
 
+    console.log(`🌐 Middleware: ${pathname} | Auth: ${authenticated}`)
+
     // 1. Handle login page
     if (pathname === '/login') {
         if (authenticated) {
+            console.log('↩️  Already authenticated, redirecting to dashboard')
             // Already logged in, redirect to dashboard
             return NextResponse.redirect(new URL('/dashboard', request.url))
         }
@@ -59,11 +76,13 @@ export function middleware(request: NextRequest) {
     // 3. Protected dashboard routes
     if (pathname.startsWith('/dashboard')) {
         if (!authenticated) {
+            console.log('🚫 Not authenticated, redirecting to login')
             // Save the attempted URL for redirect after login
             const loginUrl = new URL('/login', request.url)
             loginUrl.searchParams.set('redirect', pathname)
             return NextResponse.redirect(loginUrl)
         }
+        console.log('✅ Authenticated, allowing access to dashboard')
         return NextResponse.next()
     }
 

@@ -19,7 +19,10 @@ export async function loginAction(formData: FormData) {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
 
+    console.log('🔐 Login attempt:', { email, passwordLength: password?.length })
+
     if (!email || !password) {
+        console.error('❌ Missing credentials')
         return {
             success: false,
             error: 'Email and password are required',
@@ -27,6 +30,12 @@ export async function loginAction(formData: FormData) {
     }
 
     const result = await login(email, password)
+
+    console.log('📊 Login result:', {
+        success: result.success,
+        error: result.error,
+        hasData: !!result.data
+    })
 
     if (!result.success) {
         return {
@@ -55,7 +64,10 @@ export async function loginAction(formData: FormData) {
         path: '/',
     })
 
+    console.log('✅ Login successful, redirecting to dashboard')
+
     // Redirect to dashboard after successful login
+    // Note: This throws NEXT_REDIRECT internally, which is normal!
     redirect('/dashboard')
 }
 
