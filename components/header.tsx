@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
+import { LogoutButton } from "@/components/logout-button"
+
 interface HeaderProps {
     title?: string
 }
@@ -70,8 +72,8 @@ export function Header({ title = "Dashboard" }: HeaderProps) {
                         <DropdownMenuItem>Settings</DropdownMenuItem>
                         <DropdownMenuItem>Billing</DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-destructive">
-                            Log out
+                        <DropdownMenuItem asChild>
+                            <LogoutButton />
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

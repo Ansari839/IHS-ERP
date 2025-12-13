@@ -5,7 +5,7 @@
  * Clean separation: No HTTP handling, pure business logic.
  */
 
-import { PrismaClient } from '@/app/generated/prisma';
+import prisma from '@/lib/prisma';
 import { hashPassword, comparePassword } from '@/lib/password';
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '@/lib/jwt';
 import { validateLoginInput, validateRefreshInput, sanitizeEmail } from '@/lib/validation';
@@ -17,7 +17,6 @@ import type {
     User,
 } from '@/types/auth.types';
 
-const prisma = new PrismaClient();
 
 // ============================================
 // DEMO USER (In-Memory) - Remove for Production
