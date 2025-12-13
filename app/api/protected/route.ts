@@ -1,31 +1,41 @@
 /**
  * GET /api/protected
  * 
- * Example protected route demonstrating middleware usage.
+ * Example protected route.
+ * Authentication is handled by edge middleware in /middleware.ts
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { authenticate } from '@/middleware/authenticate';
+import { verifyAccessToken } from '@/lib/jwt';
 import { success } from '@/lib/response';
 import { withErrorHandler } from '@/middleware/errorHandler';
 
-async function handleProtected(req: NextRequest) {
-    // Authenticate user
-    const authResult = await authenticate(req);
+// Use edge runtime for better performance
+export const runtime = 'edge';
 
-    if (!authResult.authenticated) {
-        return NextResponse.json(authResult.error, { status: 401 });
+async function handleProtected(req: NextRequest) {
+    // Extract token from Authorization header
+    // Middleware has already verified the token exists and is valid
+    const authHeader = req.headers.get('authorization');
+    const token = authHeader?.split(' ')[1];
+
+    if (!token) {
+        // This shouldn't happen since middleware blocks unauthorized requests
+        return NextResponse.json(
+            { success: false, error: { message: 'Unauthorized' } },
+            { status: 401 }
+        );
     }
 
-    // User is authenticated
-    const user = authResult.user;
+    // Decode token to get user info
+    const decoded = verifyAccessToken(token);
 
     return success({
         message: 'This is protected data',
         user: {
-            id: user.id,
-            email: user.email,
-            name: user.name,
+            id: decoded.id,
+            email: decoded.email,
+            name: decoded.name,
         },
         timestamp: new Date().toISOString(),
     });

@@ -9,49 +9,80 @@ import {
   TrendingDown,
   Activity
 } from "lucide-react"
+import prisma from "@/lib/prisma"
 
 export default async function Home() {
+  // Fetch real data from database with parallel queries
+  const [
+    totalUsers,
+    totalPosts,
+    publishedPosts,
+    todayPosts,
+  ] = await Promise.all([
+    prisma.user.count(),
+    prisma.post.count(),
+    prisma.post.count({ where: { published: true } }),
+    prisma.post.count({
+      where: {
+        id: {
+          gte: 1, // This is a placeholder - adjust based on your actual data
+        },
+      },
+    }),
+  ])
+
+  // Get recent posts for activity feed
+  const recentPosts = await prisma.post.findMany({
+    take: 4,
+    orderBy: { id: 'desc' },
+    include: {
+      author: {
+        select: { name: true, email: true },
+      },
+    },
+  })
+
   const stats = [
     {
-      title: "Total Products",
-      value: "1,234",
+      title: "Total Users",
+      value: totalUsers.toLocaleString(),
       change: "+12.5%",
-      trend: "up",
-      icon: Package,
-      description: "Active products in inventory",
-    },
-    {
-      title: "Orders Today",
-      value: "89",
-      change: "+8.2%",
-      trend: "up",
-      icon: ShoppingCart,
-      description: "Orders received today",
-    },
-    {
-      title: "Revenue (Month)",
-      value: "$45,231",
-      change: "+23.1%",
-      trend: "up",
-      icon: DollarSign,
-      description: "Total revenue this month",
-    },
-    {
-      title: "Active Customers",
-      value: "573",
-      change: "-3.2%",
-      trend: "down",
+      trend: "up" as const,
       icon: Users,
-      description: "Customers with active orders",
+      description: "Registered users",
+    },
+    {
+      title: "Total Posts",
+      value: todayPosts.toLocaleString(),
+      change: "+8.2%",
+      trend: "up" as const,
+      icon: ShoppingCart,
+      description: "Posts created",
+    },
+    {
+      title: "Published Posts",
+      value: publishedPosts.toLocaleString(),
+      change: "+23.1%",
+      trend: "up" as const,
+      icon: Package,
+      description: "Published content",
+    },
+    {
+      title: "All Posts",
+      value: totalPosts.toLocaleString(),
+      change: "-3.2%",
+      trend: "down" as const,
+      icon: DollarSign,
+      description: "Total posts in system",
     },
   ]
 
-  const recentActivities = [
-    { id: 1, action: "New order #1234", customer: "ABC Textiles", time: "2 min ago" },
-    { id: 2, action: "Product updated", customer: "System", time: "15 min ago" },
-    { id: 3, action: "Payment received", customer: "XYZ Corp", time: "1 hour ago" },
-    { id: 4, action: "New customer registered", customer: "John's Shop", time: "2 hours ago" },
-  ]
+  const recentActivities = recentPosts.map((post) => ({
+    id: post.id,
+    action: post.published ? `Published: ${post.title}` : `Draft: ${post.title}`,
+    customer: post.author?.name || post.author?.email || "Unknown",
+    time: `Post #${post.id}`,
+  }))
 
   return (
     <DashboardLayout title="Dashboard">
@@ -186,3 +217,6 @@ function BarChart3(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+// Revalidate data every 5 minutes
+export const revalidate = 300
