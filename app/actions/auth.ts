@@ -33,8 +33,8 @@ export async function loginAction(formData: FormData) {
 
     console.log('📊 Login result:', {
         success: result.success,
-        error: result.error,
-        hasData: !!result.data
+        error: result.success ? undefined : result.error,
+        hasData: result.success ? !!result.data : false
     })
 
     if (!result.success) {
@@ -76,6 +76,8 @@ export async function loginAction(formData: FormData) {
  * Handles user logout and cookie clearing
  */
 export async function logoutAction() {
+    console.log('🚪 Logout initiated')
+
     const cookieStore = await cookies()
 
     // Get refresh token before deleting
@@ -83,12 +85,19 @@ export async function logoutAction() {
 
     // Call logout service if refresh token exists
     if (refreshToken) {
+        console.log('🔄 Revoking refresh token in database')
         await logoutService(refreshToken)
+        console.log('✅ Refresh token revoked')
+    } else {
+        console.log('⚠️  No refresh token found')
     }
 
     // Delete cookies
     cookieStore.delete('accessToken')
     cookieStore.delete('refreshToken')
+    console.log('🍪 Cookies cleared')
+
+    console.log('👋 Logout successful, redirecting to home')
 
     // Redirect to home
     redirect('/')

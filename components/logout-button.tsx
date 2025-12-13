@@ -17,9 +17,13 @@ export function LogoutButton() {
         setIsLoading(true)
         try {
             await logoutAction()
+            // The logoutAction will redirect, so we won't reach here
         } catch (error) {
             console.error('Logout error:', error)
             setIsLoading(false)
+
+            // Show error to user (you can replace with toast notification)
+            alert('Failed to logout. Please try again.')
         }
     }
 
@@ -27,7 +31,7 @@ export function LogoutButton() {
         <button
             onClick={handleLogout}
             disabled={isLoading}
-            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
+            className="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
             title="Logout"
         >
             {isLoading ? (
