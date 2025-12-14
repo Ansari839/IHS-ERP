@@ -5,19 +5,22 @@ import { Sidebar, MobileSidebar } from "@/components/sidebar"
 import { Header } from "@/components/header"
 import { cn } from "@/lib/utils"
 
+import { TokenPayload } from "@/types/auth.types"
+
 interface DashboardLayoutProps {
     children: React.ReactNode
     title?: string
+    user?: TokenPayload | null
 }
 
-export function DashboardLayout({ children, title }: DashboardLayoutProps) {
+export function DashboardLayout({ children, title, user }: DashboardLayoutProps) {
     const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false)
 
     return (
         <div className="relative min-h-screen">
             {/* Desktop Sidebar */}
             <div className="hidden md:block">
-                <Sidebar />
+                <Sidebar user={user} />
             </div>
 
             {/* Mobile Sidebar */}

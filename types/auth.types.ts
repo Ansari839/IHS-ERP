@@ -9,6 +9,8 @@ export interface User {
     id: number;
     email: string;
     name: string | null;
+    roles?: string[]; // Simplified list of role names
+    permissions?: string[]; // Simplified list of permission strings "action:resource"
 }
 
 export interface UserWithPassword extends User {
@@ -22,7 +24,10 @@ export interface TokenPayload {
     id: number;
     email: string;
     name: string | null;
+    roles?: string[];
+    permissions?: string[];
     type: 'access' | 'refresh';
+    exp?: number;
 }
 
 export interface AuthTokens {

@@ -29,16 +29,27 @@ const navigation = [
     { name: "Orders", href: "/orders", icon: ShoppingCart },
     { name: "Customers", href: "/customers", icon: Users },
     { name: "Reports", href: "/reports", icon: BarChart3 },
+    { name: "Users", href: "/users", icon: Users },
     { name: "Settings", href: "/settings", icon: Settings },
 ]
 
+import { hasPermission } from "@/lib/rbac"
+import { TokenPayload } from "@/types/auth.types"
+
 interface SidebarProps {
     className?: string
+    user?: TokenPayload | null
 }
 
-export function Sidebar({ className }: SidebarProps) {
+export function Sidebar({ className, user }: SidebarProps) {
     const [isCollapsed, setIsCollapsed] = React.useState(false)
     const pathname = usePathname()
+
+    const filteredNavigation = navigation.filter(item => {
+        if (item.name === "Users" && !hasPermission(user || null, "read:users")) return false
+        if (item.name === "Settings" && !hasPermission(user || null, "read:settings")) return false
+        return true
+    })
 
     return (
         <aside
@@ -71,7 +82,7 @@ export function Sidebar({ className }: SidebarProps) {
                 {/* Navigation */}
                 <ScrollArea className="flex-1 px-3 py-4">
                     <nav className="space-y-1">
-                        {navigation.map((item) => {
+                        {filteredNavigation.map((item) => {
                             const isActive = pathname === item.href
                             return (
                                 <Link

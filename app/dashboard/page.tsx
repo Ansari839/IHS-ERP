@@ -11,7 +11,11 @@ import {
 } from "lucide-react"
 import prisma from "@/lib/prisma"
 
+import { getCurrentUser } from "@/lib/auth"
+
 export default async function Home() {
+  const user = await getCurrentUser()
+
   // Fetch real data from database with parallel queries
   const [
     totalUsers,
@@ -85,7 +89,7 @@ export default async function Home() {
   }))
 
   return (
-    <DashboardLayout title="Dashboard">
+    <DashboardLayout title="Dashboard" user={user}>
       {/* Stats Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-6">
         {stats.map((stat) => (

@@ -12,11 +12,68 @@ model User {
   email         String         @unique
   name          String?
   password      String         // Bcrypt-hashed password
-  role          String         @default("USER") // USER, ADMIN, SUPER_ADMIN
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  
+  // Relations
   posts         Post[]
-  refreshTokens RefreshToken[] // One user can have multiple refresh tokens
+  refreshTokens RefreshToken[]
+  
+  // RBAC & Organization
+  departmentId  Int?
+  department    Department?    @relation(fields: [departmentId], references: [id])
+  userRoles     UserRole[]
+}
+
+model Department {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  users       User[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Role {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique // e.g., "SUPER_ADMIN", "HR_MANAGER"
+  description String?
+  userRoles   UserRole[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Permission {
+  id          Int              @id @default(autoincrement())
+  action      String           // e.g., "create", "read", "update", "delete"
+  resource    String           // e.g., "users", "reports", "inventory"
+  description String?
+  roles       RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@unique([action, resource]) // Prevent duplicate permissions
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  assignedAt   DateTime   @default(now())
+
+  @@id([roleId, permissionId])
+}
+
+model UserRole {
+  userId     Int
+  roleId     Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  assignedAt DateTime @default(now())
+
+  @@id([userId, roleId])
 }
 
 model Post {
@@ -30,11 +87,11 @@ model Post {
 
 model RefreshToken {
   id        String   @id @default(uuid())
-  token     String   @unique // The actual JWT refresh token
+  token     String   @unique
   userId    Int
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   expiresAt DateTime
-  isRevoked Boolean  @default(false) // For manual token revocation
+  isRevoked Boolean  @default(false)
   createdAt DateTime @default(now())
 
   @@index([userId])

@@ -64,9 +64,24 @@ export async function login(
         // Sanitize email
         const sanitizedEmail = sanitizeEmail(email);
 
-        // Fetch user from database
+        // Fetch user from database with roles and permissions
         const user = await prisma.user.findUnique({
             where: { email: sanitizedEmail },
+            include: {
+                userRoles: {
+                    include: {
+                        role: {
+                            include: {
+                                permissions: {
+                                    include: {
+                                        permission: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         });
 
         if (!user) {
@@ -85,11 +100,23 @@ export async function login(
             };
         }
 
+        // Flatten roles and permissions
+        const roles = user.userRoles.map((ur: any) => ur.role.name);
+        const permissions = Array.from(new Set(
+            user.userRoles.flatMap((ur: any) =>
+                ur.role.permissions.map((rp: any) =>
+                    `${rp.permission.action}:${rp.permission.resource}`
+                )
+            )
+        )) as string[];
+
         // Generate tokens
         const tokenPayload = {
             id: user.id,
             email: user.email,
             name: user.name,
+            roles,
+            permissions,
         };
 
         const accessToken = generateAccessToken(tokenPayload);
@@ -114,6 +141,8 @@ export async function login(
                     id: user.id,
                     email: user.email,
                     name: user.name,
+                    roles,
+                    permissions,
                 },
             },
             message: AUTH_SUCCESS.LOGIN_SUCCESS,
@@ -181,11 +210,50 @@ export async function refresh(
             };
         }
 
+        // Fetch user to get latest roles and permissions
+        const user = await prisma.user.findUnique({
+            where: { id: decoded.id },
+            include: {
+                userRoles: {
+                    include: {
+                        role: {
+                            include: {
+                                permissions: {
+                                    include: {
+                                        permission: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        if (!user) {
+            return {
+                success: false,
+                error: AUTH_ERRORS.USER_NOT_FOUND,
+            };
+        }
+
+        // Flatten roles and permissions
+        const roles = user.userRoles.map((ur: any) => ur.role.name);
+        const permissions = Array.from(new Set(
+            user.userRoles.flatMap((ur: any) =>
+                ur.role.permissions.map((rp: any) =>
+                    `${rp.permission.action}:${rp.permission.resource}`
+                )
+            )
+        )) as string[];
+
         // Generate new access token
         const newAccessToken = generateAccessToken({
-            id: decoded.id,
-            email: decoded.email,
-            name: decoded.name,
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            roles,
+            permissions,
         });
 
         return {
