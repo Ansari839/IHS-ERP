@@ -7,7 +7,7 @@
 
 import prisma from '@/lib/prisma';
 import { hashPassword, comparePassword } from '@/lib/password';
-import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '@/lib/jwt';
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken, verifyAccessToken } from '@/lib/jwt';
 import { validateLoginInput, validateRefreshInput, sanitizeEmail } from '@/lib/validation';
 import { AUTH_ERRORS, AUTH_SUCCESS, TOKEN_CONFIG } from '@/constants';
 import type {
@@ -97,6 +97,29 @@ export async function login(
             return {
                 success: false,
                 error: AUTH_ERRORS.INVALID_CREDENTIALS,
+            };
+        }
+
+        // Check if password change is required
+        // @ts-ignore - forcePasswordChange exists after migration
+        if (user.forcePasswordChange) {
+            // Generate temporary token for password change (10 minutes)
+            const tempToken = generateAccessToken({
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                // type is added by generateAccessToken
+                permissions: ['AUTH:PASSWORD_CHANGE'], // Special permission
+            }, '10m');
+
+            return {
+                success: true,
+                data: {
+                    requirePasswordChange: true,
+                    userId: user.id,
+                    tempToken,
+                },
+                message: 'Password change required',
             };
         }
 
@@ -298,6 +321,138 @@ export async function logout(refreshToken: string): Promise<ControllerResponse<{
         };
     } catch (error) {
         console.error('Logout error:', error);
+        return {
+            success: false,
+            error: 'Internal server error',
+        };
+    }
+}
+
+/**
+ * Change password for first-time login
+ */
+export async function changePassword(
+    tempToken: string,
+    newPassword: string
+): Promise<ControllerResponse<LoginResponse>> {
+    try {
+        // Verify temp token
+        let decoded;
+        try {
+            // We use verifyAccessToken because tempToken is signed with ACCESS_TOKEN_SECRET
+            // (see login function where we used generateAccessToken)
+            decoded = verifyAccessToken(tempToken);
+        } catch (error) {
+            return {
+                success: false,
+                error: AUTH_ERRORS.TOKEN_INVALID,
+            };
+        }
+
+        // Check for specific permission
+        if (!decoded.permissions?.includes('AUTH:PASSWORD_CHANGE')) {
+            return {
+                success: false,
+                error: AUTH_ERRORS.UNAUTHORIZED,
+            };
+        }
+
+        // Hash new password
+        const hashedPassword = await hashPassword(newPassword);
+
+        // Update user
+        const user = await prisma.user.update({
+            where: { id: decoded.id },
+            data: {
+                password: hashedPassword,
+                // @ts-ignore - fields exist
+                firstLogin: false,
+                forcePasswordChange: false,
+            },
+            include: {
+                userRoles: {
+                    include: {
+                        role: {
+                            include: {
+                                permissions: {
+                                    include: {
+                                        permission: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Flatten roles and permissions for the new tokens
+        const roles = (user as any).userRoles.map((ur: any) => ur.role.name);
+        const permissions = Array.from(new Set(
+            (user as any).userRoles.flatMap((ur: any) =>
+                ur.role.permissions.map((rp: any) =>
+                    `${rp.permission.action}:${rp.permission.resource}`
+                )
+            )
+        )) as string[];
+
+        // Generate normal tokens
+        const tokenPayload = {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            roles,
+            permissions,
+        };
+
+        const accessToken = generateAccessToken(tokenPayload);
+        const refreshToken = generateRefreshToken(tokenPayload);
+        // const expiresAt = calculateExpiryDate(TOKEN_CONFIG.REFRESH_TOKEN_EXPIRY);
+        // Re-implement calculateExpiryDate locally or import it if exported. 
+        // It was not exported in the original file, so I need to copy the logic or export it.
+        // Checking the file content again... it was NOT exported.
+        // I will just use a hardcoded date for now or copy the logic.
+        // Better: I'll use the same logic as in login function.
+
+        const match = TOKEN_CONFIG.REFRESH_TOKEN_EXPIRY.match(/^(\d+)([dhmsDHMS])$/);
+        let expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // Default 7 days
+
+        if (match) {
+            const value = parseInt(match[1]);
+            const unit = match[2].toLowerCase();
+            const multipliers: Record<string, number> = {
+                s: 1000, m: 60 * 1000, h: 60 * 60 * 1000, d: 24 * 60 * 60 * 1000,
+            };
+            expiresAt = new Date(Date.now() + value * multipliers[unit]);
+        }
+
+        // Store refresh token
+        await prisma.refreshToken.create({
+            data: {
+                token: refreshToken,
+                userId: user.id,
+                expiresAt,
+            },
+        });
+
+        return {
+            success: true,
+            data: {
+                accessToken,
+                refreshToken,
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    name: user.name,
+                    roles,
+                    permissions,
+                },
+            },
+            message: 'Password changed successfully',
+        };
+
+    } catch (error) {
+        console.error('Change password error:', error);
         return {
             success: false,
             error: 'Internal server error',

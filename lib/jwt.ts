@@ -12,7 +12,10 @@ import type { TokenPayload } from '@/types/auth.types';
 /**
  * Generate a short-lived access token
  */
-export function generateAccessToken(payload: Omit<TokenPayload, 'type'>): string {
+export function generateAccessToken(
+    payload: Omit<TokenPayload, 'type'>,
+    expiresIn: string = TOKEN_CONFIG.ACCESS_TOKEN_EXPIRY
+): string {
     if (!SECURITY_CONFIG.ACCESS_TOKEN_SECRET) {
         throw new Error('ACCESS_TOKEN_SECRET is not configured');
     }
@@ -24,7 +27,7 @@ export function generateAccessToken(payload: Omit<TokenPayload, 'type'>): string
         },
         SECURITY_CONFIG.ACCESS_TOKEN_SECRET,
         {
-            expiresIn: TOKEN_CONFIG.ACCESS_TOKEN_EXPIRY,
+            expiresIn: expiresIn as any, // Cast to avoid overload confusion
             issuer: 'erp-auth-system',
             audience: 'erp-client',
         }
@@ -43,6 +46,7 @@ export function generateRefreshToken(payload: Omit<TokenPayload, 'type'>): strin
         {
             ...payload,
             type: TOKEN_CONFIG.TOKEN_TYPE.REFRESH,
+            jti: crypto.randomUUID(), // Ensure uniqueness even within same second
         },
         SECURITY_CONFIG.REFRESH_TOKEN_SECRET,
         {

@@ -42,9 +42,12 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-    accessToken: string;
-    refreshToken: string;
-    user: User;
+    accessToken?: string;
+    refreshToken?: string;
+    user?: User;
+    requirePasswordChange?: boolean;
+    tempToken?: string;
+    userId?: number;
 }
 
 export interface RefreshRequest {
@@ -58,6 +61,11 @@ export interface RefreshResponse {
 
 export interface LogoutRequest {
     refreshToken: string;
+}
+
+export interface ChangePasswordRequest {
+    tempToken: string;
+    newPassword: string;
 }
 
 // Controller Response Types

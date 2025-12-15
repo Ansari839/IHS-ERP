@@ -70,6 +70,8 @@ export async function createUser(formData: FormData) {
                 name,
                 email,
                 password: hashedPassword,
+                firstLogin: true,
+                forcePasswordChange: true,
                 userRoles: {
                     create: roleIds.map(roleId => ({
                         roleId

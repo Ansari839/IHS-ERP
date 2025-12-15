@@ -33,8 +33,8 @@ export async function loginAction(formData: FormData) {
 
     console.log('📊 Login result:', {
         success: result.success,
-        error: result.error,
-        hasData: !!result.data
+        error: result.success ? undefined : result.error,
+        hasData: result.success ? !!result.data : false
     })
 
     if (!result.success) {
@@ -45,10 +45,25 @@ export async function loginAction(formData: FormData) {
         }
     }
 
+    // Handle password change requirement
+    if (result.data.requirePasswordChange) {
+        const cookieStore = await cookies()
+
+        cookieStore.set('tempToken', result.data.tempToken!, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 60 * 10, // 10 minutes
+            path: '/',
+        })
+
+        return redirect('/change-password')
+    }
+
     // Set httpOnly cookies for secure token storage
     const cookieStore = await cookies()
 
-    cookieStore.set('accessToken', result.data.accessToken, {
+    cookieStore.set('accessToken', result.data.accessToken!, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
@@ -56,7 +71,7 @@ export async function loginAction(formData: FormData) {
         path: '/',
     })
 
-    cookieStore.set('refreshToken', result.data.refreshToken, {
+    cookieStore.set('refreshToken', result.data.refreshToken!, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
@@ -68,6 +83,59 @@ export async function loginAction(formData: FormData) {
 
     // Redirect to dashboard after successful login
     // Note: This throws NEXT_REDIRECT internally, which is normal!
+    redirect('/dashboard')
+}
+
+/**
+ * Change Password Action
+ */
+export async function changePasswordAction(formData: FormData) {
+    const newPassword = formData.get('newPassword') as string
+    const confirmPassword = formData.get('confirmPassword') as string
+
+    if (!newPassword || !confirmPassword) {
+        return { success: false, error: 'All fields are required' }
+    }
+
+    if (newPassword !== confirmPassword) {
+        return { success: false, error: 'Passwords do not match' }
+    }
+
+    const cookieStore = await cookies()
+    const tempToken = cookieStore.get('tempToken')?.value
+
+    if (!tempToken) {
+        return { success: false, error: 'Session expired. Please login again.' }
+    }
+
+    // Dynamic import to avoid circular dependency if any (though controller is safe)
+    const { changePassword } = await import('@/controllers/authController')
+
+    const result = await changePassword(tempToken, newPassword)
+
+    if (!result.success) {
+        return { success: false, error: result.error }
+    }
+
+    // Clear temp token and set new tokens
+    cookieStore.delete('tempToken')
+
+    cookieStore.set('accessToken', result.data.accessToken!, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 60 * 15,
+        path: '/',
+    })
+
+    cookieStore.set('refreshToken', result.data.refreshToken!, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/',
+    })
+
     redirect('/dashboard')
 }
 
@@ -89,6 +157,7 @@ export async function logoutAction() {
     // Delete cookies
     cookieStore.delete('accessToken')
     cookieStore.delete('refreshToken')
+    cookieStore.delete('tempToken')
 
     // Redirect to home
     redirect('/')
@@ -108,10 +177,17 @@ export async function loginWithCredentials(email: string, password: string) {
         }
     }
 
+    if (result.data.requirePasswordChange) {
+        return {
+            success: true,
+            data: result.data, // Contains tempToken and requirePasswordChange flag
+        }
+    }
+
     // Set cookies
     const cookieStore = await cookies()
 
-    cookieStore.set('accessToken', result.data.accessToken, {
+    cookieStore.set('accessToken', result.data.accessToken!, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
@@ -119,7 +195,7 @@ export async function loginWithCredentials(email: string, password: string) {
         path: '/',
     })
 
-    cookieStore.set('refreshToken', result.data.refreshToken, {
+    cookieStore.set('refreshToken', result.data.refreshToken!, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',

@@ -52,8 +52,13 @@ export function middleware(request: NextRequest) {
     if (pathname === '/login') {
         if (authenticated) {
             console.log('↩️  Already authenticated, redirecting to dashboard')
-            // Already logged in, redirect to dashboard
             return NextResponse.redirect(new URL('/dashboard', request.url))
+        }
+        // Check for tempToken (password change required)
+        const tempToken = request.cookies.get('tempToken')?.value
+        if (tempToken) {
+            console.log('↩️  Password change required, redirecting to change-password')
+            return NextResponse.redirect(new URL('/change-password', request.url))
         }
         // Not logged in, show login page
         return NextResponse.next()
@@ -76,6 +81,13 @@ export function middleware(request: NextRequest) {
     // 3. Protected dashboard routes
     if (pathname.startsWith('/dashboard')) {
         if (!authenticated) {
+            // Check if they have a temp token
+            const tempToken = request.cookies.get('tempToken')?.value
+            if (tempToken) {
+                console.log('↩️  Password change required, redirecting to change-password')
+                return NextResponse.redirect(new URL('/change-password', request.url))
+            }
+
             console.log('🚫 Not authenticated, redirecting to login')
             // Save the attempted URL for redirect after login
             const loginUrl = new URL('/login', request.url)

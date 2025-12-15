@@ -15,6 +15,10 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   
+  // Auth Flags
+  firstLogin          Boolean        @default(true)
+  forcePasswordChange Boolean        @default(true)
+  
   // Relations
   posts         Post[]
   refreshTokens RefreshToken[]
