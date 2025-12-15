@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import prisma from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
 import { ProfileForm } from '@/components/profile/profile-form'
+import { ThemeSettings } from '@/components/settings/theme-settings'
 import { DashboardLayout } from '@/components/dashboard-layout'
 
 export const dynamic = 'force-dynamic'
@@ -36,6 +37,10 @@ export default async function ProfilePage() {
                 </div>
 
                 <ProfileForm user={user} />
+
+                <div className="pt-6">
+                    <ThemeSettings />
+                </div>
             </div>
         </DashboardLayout>
     )

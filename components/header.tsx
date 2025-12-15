@@ -84,7 +84,9 @@ export function Header({ title = "Dashboard", user }: HeaderProps) {
                         <DropdownMenuItem asChild>
                             <Link href="/profile" className="cursor-pointer">Profile</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Settings</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Link href="/settings" className="cursor-pointer">Settings</Link>
+                        </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>
                             <LogoutButton />

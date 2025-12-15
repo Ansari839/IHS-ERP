@@ -97,52 +97,54 @@
      3 Main Colors with Auto-Generated Shades
      ============================================ */
 
+  /* Default Hues (Blue) */
+  --brand-hue: 260;
+  --accent-hue: 326.541;
+  --neutral-hue: 260;
+
   /* Main Theme Colors (Base) */
-  --theme-brand: oklch(0.55 0.25 260);
-  /* Primary brand color - vibrant purple/blue */
-  --theme-accent: oklch(52.842% 0.24521 326.541);
-  /* Accent color - teal/cyan */
-  --theme-neutral: oklch(0.50 0.02 260);
-  /* Neutral color - warm gray */
+  --theme-brand: oklch(0.55 0.25 var(--brand-hue));
+  --theme-accent: oklch(52.842% 0.24521 var(--accent-hue));
+  --theme-neutral: oklch(0.50 0.02 var(--neutral-hue));
 
   /* Brand Color Shades (Auto-generated via JS) */
-  --brand-50: oklch(0.950 0.150 260.000);
-  --brand-100: oklch(0.900 0.150 260.000);
-  --brand-200: oklch(0.800 0.200 260.000);
-  --brand-300: oklch(0.700 0.250 260.000);
-  --brand-400: oklch(0.600 0.250 260.000);
-  --brand-500: oklch(0.500 0.250 260.000);
-  --brand-600: oklch(0.400 0.250 260.000);
-  --brand-700: oklch(0.300 0.250 260.000);
-  --brand-800: oklch(0.200 0.250 260.000);
-  --brand-900: oklch(0.150 0.225 260.000);
-  --brand-950: oklch(0.100 0.225 260.000);
+  --brand-50: oklch(0.950 0.150 var(--brand-hue));
+  --brand-100: oklch(0.900 0.150 var(--brand-hue));
+  --brand-200: oklch(0.800 0.200 var(--brand-hue));
+  --brand-300: oklch(0.700 0.250 var(--brand-hue));
+  --brand-400: oklch(0.600 0.250 var(--brand-hue));
+  --brand-500: oklch(0.500 0.250 var(--brand-hue));
+  --brand-600: oklch(0.400 0.250 var(--brand-hue));
+  --brand-700: oklch(0.300 0.250 var(--brand-hue));
+  --brand-800: oklch(0.200 0.250 var(--brand-hue));
+  --brand-900: oklch(0.150 0.225 var(--brand-hue));
+  --brand-950: oklch(0.100 0.225 var(--brand-hue));
 
   /* Accent Color Shades (Auto-generated via JS) */
-  --accent-50: oklch(0.950 0.120 180.000);
-  --accent-100: oklch(0.900 0.120 180.000);
-  --accent-200: oklch(0.800 0.160 180.000);
-  --accent-300: oklch(0.700 0.200 180.000);
-  --accent-400: oklch(0.600 0.200 180.000);
-  --accent-500: oklch(0.500 0.200 180.000);
-  --accent-600: oklch(0.400 0.200 180.000);
-  --accent-700: oklch(0.300 0.200 180.000);
-  --accent-800: oklch(0.200 0.200 180.000);
-  --accent-900: oklch(0.150 0.180 180.000);
-  --accent-950: oklch(0.100 0.180 180.000);
+  --accent-50: oklch(0.950 0.120 var(--accent-hue));
+  --accent-100: oklch(0.900 0.120 var(--accent-hue));
+  --accent-200: oklch(0.800 0.160 var(--accent-hue));
+  --accent-300: oklch(0.700 0.200 var(--accent-hue));
+  --accent-400: oklch(0.600 0.200 var(--accent-hue));
+  --accent-500: oklch(0.500 0.200 var(--accent-hue));
+  --accent-600: oklch(0.400 0.200 var(--accent-hue));
+  --accent-700: oklch(0.300 0.200 var(--accent-hue));
+  --accent-800: oklch(0.200 0.200 var(--accent-hue));
+  --accent-900: oklch(0.150 0.180 var(--accent-hue));
+  --accent-950: oklch(0.100 0.180 var(--accent-hue));
 
   /* Neutral Color Shades (Auto-generated via JS) */
-  --neutral-50: oklch(0.950 0.012 260.000);
-  --neutral-100: oklch(0.900 0.012 260.000);
-  --neutral-200: oklch(0.800 0.016 260.000);
-  --neutral-300: oklch(0.700 0.020 260.000);
-  --neutral-400: oklch(0.600 0.020 260.000);
-  --neutral-500: oklch(0.500 0.020 260.000);
-  --neutral-600: oklch(0.400 0.020 260.000);
-  --neutral-700: oklch(0.300 0.020 260.000);
-  --neutral-800: oklch(0.200 0.020 260.000);
-  --neutral-900: oklch(0.150 0.018 260.000);
-  --neutral-950: oklch(0.100 0.018 260.000);
+  --neutral-50: oklch(0.950 0.012 var(--neutral-hue));
+  --neutral-100: oklch(0.900 0.012 var(--neutral-hue));
+  --neutral-200: oklch(0.800 0.016 var(--neutral-hue));
+  --neutral-300: oklch(0.700 0.020 var(--neutral-hue));
+  --neutral-400: oklch(0.600 0.020 var(--neutral-hue));
+  --neutral-500: oklch(0.500 0.020 var(--neutral-hue));
+  --neutral-600: oklch(0.400 0.020 var(--neutral-hue));
+  --neutral-700: oklch(0.300 0.020 var(--neutral-hue));
+  --neutral-800: oklch(0.200 0.020 var(--neutral-hue));
+  --neutral-900: oklch(0.150 0.018 var(--neutral-hue));
+  --neutral-950: oklch(0.100 0.018 var(--neutral-hue));
 
   /* ============================================
      SEMANTIC COLOR MAPPINGS - Light Mode
@@ -212,43 +214,43 @@
      ============================================ */
 
   /* Brand Color Shades (Auto-generated via JS - Dark Mode) */
-  --brand-50: oklch(0.950 0.127 260.000);
-  --brand-100: oklch(0.900 0.127 260.000);
-  --brand-200: oklch(0.800 0.170 260.000);
-  --brand-300: oklch(0.700 0.212 260.000);
-  --brand-400: oklch(0.600 0.212 260.000);
-  --brand-500: oklch(0.500 0.212 260.000);
-  --brand-600: oklch(0.400 0.212 260.000);
-  --brand-700: oklch(0.300 0.212 260.000);
-  --brand-800: oklch(0.200 0.212 260.000);
-  --brand-900: oklch(0.150 0.191 260.000);
-  --brand-950: oklch(0.100 0.191 260.000);
+  --brand-50: oklch(0.950 0.127 var(--brand-hue));
+  --brand-100: oklch(0.900 0.127 var(--brand-hue));
+  --brand-200: oklch(0.800 0.170 var(--brand-hue));
+  --brand-300: oklch(0.700 0.212 var(--brand-hue));
+  --brand-400: oklch(0.600 0.212 var(--brand-hue));
+  --brand-500: oklch(0.500 0.212 var(--brand-hue));
+  --brand-600: oklch(0.400 0.212 var(--brand-hue));
+  --brand-700: oklch(0.300 0.212 var(--brand-hue));
+  --brand-800: oklch(0.200 0.212 var(--brand-hue));
+  --brand-900: oklch(0.150 0.191 var(--brand-hue));
+  --brand-950: oklch(0.100 0.191 var(--brand-hue));
 
   /* Accent Color Shades (Auto-generated via JS - Dark Mode) */
-  --accent-50: oklch(0.950 0.102 180.000);
-  --accent-100: oklch(0.900 0.102 180.000);
-  --accent-200: oklch(0.800 0.136 180.000);
-  --accent-300: oklch(0.700 0.170 180.000);
-  --accent-400: oklch(0.600 0.170 180.000);
-  --accent-500: oklch(0.500 0.170 180.000);
-  --accent-600: oklch(0.400 0.170 180.000);
-  --accent-700: oklch(0.300 0.170 180.000);
-  --accent-800: oklch(0.200 0.170 180.000);
-  --accent-900: oklch(0.150 0.153 180.000);
-  --accent-950: oklch(0.100 0.153 180.000);
+  --accent-50: oklch(0.950 0.102 var(--accent-hue));
+  --accent-100: oklch(0.900 0.102 var(--accent-hue));
+  --accent-200: oklch(0.800 0.136 var(--accent-hue));
+  --accent-300: oklch(0.700 0.170 var(--accent-hue));
+  --accent-400: oklch(0.600 0.170 var(--accent-hue));
+  --accent-500: oklch(0.500 0.170 var(--accent-hue));
+  --accent-600: oklch(0.400 0.170 var(--accent-hue));
+  --accent-700: oklch(0.300 0.170 var(--accent-hue));
+  --accent-800: oklch(0.200 0.170 var(--accent-hue));
+  --accent-900: oklch(0.150 0.153 var(--accent-hue));
+  --accent-950: oklch(0.100 0.153 var(--accent-hue));
 
   /* Neutral Color Shades (Auto-generated via JS - Dark Mode) */
-  --neutral-50: oklch(0.950 0.010 260.000);
-  --neutral-100: oklch(0.900 0.010 260.000);
-  --neutral-200: oklch(0.800 0.014 260.000);
-  --neutral-300: oklch(0.700 0.017 260.000);
-  --neutral-400: oklch(0.600 0.017 260.000);
-  --neutral-500: oklch(0.500 0.017 260.000);
-  --neutral-600: oklch(0.400 0.017 260.000);
-  --neutral-700: oklch(0.300 0.017 260.000);
-  --neutral-800: oklch(0.200 0.017 260.000);
-  --neutral-900: oklch(0.150 0.015 260.000);
-  --neutral-950: oklch(0.100 0.015 260.000);
+  --neutral-50: oklch(0.950 0.010 var(--neutral-hue));
+  --neutral-100: oklch(0.900 0.010 var(--neutral-hue));
+  --neutral-200: oklch(0.800 0.014 var(--neutral-hue));
+  --neutral-300: oklch(0.700 0.017 var(--neutral-hue));
+  --neutral-400: oklch(0.600 0.017 var(--neutral-hue));
+  --neutral-500: oklch(0.500 0.017 var(--neutral-hue));
+  --neutral-600: oklch(0.400 0.017 var(--neutral-hue));
+  --neutral-700: oklch(0.300 0.017 var(--neutral-hue));
+  --neutral-800: oklch(0.200 0.017 var(--neutral-hue));
+  --neutral-900: oklch(0.150 0.015 var(--neutral-hue));
+  --neutral-950: oklch(0.100 0.015 var(--neutral-hue));
 
   /* ============================================
      SEMANTIC COLOR MAPPINGS - Dark Mode
