@@ -20,7 +20,11 @@ export function DashboardLayout({ children, title, user }: DashboardLayoutProps)
         <div className="relative min-h-screen">
             {/* Desktop Sidebar */}
             <div className="hidden md:block">
-                <Sidebar user={user} />
+                <Sidebar
+                    user={user}
+                    isCollapsed={sidebarCollapsed}
+                    onCollapse={setSidebarCollapsed}
+                />
             </div>
 
             {/* Mobile Sidebar */}
@@ -30,7 +34,7 @@ export function DashboardLayout({ children, title, user }: DashboardLayoutProps)
             <div
                 className={cn(
                     "transition-all duration-300",
-                    "md:pl-64", // Default sidebar width
+                    sidebarCollapsed ? "md:pl-16" : "md:pl-64",
                     "min-h-screen"
                 )}
             >

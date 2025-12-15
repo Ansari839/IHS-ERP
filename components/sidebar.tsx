@@ -39,10 +39,12 @@ import { TokenPayload } from "@/types/auth.types"
 interface SidebarProps {
     className?: string
     user?: TokenPayload | null
+    isCollapsed?: boolean
+    onCollapse?: (collapsed: boolean) => void
 }
 
-export function Sidebar({ className, user }: SidebarProps) {
-    const [isCollapsed, setIsCollapsed] = React.useState(false)
+export function Sidebar({ className, user, isCollapsed = false, onCollapse }: SidebarProps) {
+    // const [isCollapsed, setIsCollapsed] = React.useState(false) // Removed local state
     const pathname = usePathname()
 
     const filteredNavigation = navigation.filter(item => {
@@ -68,7 +70,7 @@ export function Sidebar({ className, user }: SidebarProps) {
                     <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => setIsCollapsed(!isCollapsed)}
+                        onClick={() => onCollapse?.(!isCollapsed)}
                         className={cn("ml-auto", isCollapsed && "mx-auto")}
                     >
                         {isCollapsed ? (
