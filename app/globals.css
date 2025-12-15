@@ -108,43 +108,43 @@
   --theme-neutral: oklch(0.50 0.02 var(--neutral-hue));
 
   /* Brand Color Shades (Auto-generated via JS) */
-  --brand-50: oklch(0.950 0.150 var(--brand-hue));
-  --brand-100: oklch(0.900 0.150 var(--brand-hue));
-  --brand-200: oklch(0.800 0.200 var(--brand-hue));
-  --brand-300: oklch(0.700 0.250 var(--brand-hue));
-  --brand-400: oklch(0.600 0.250 var(--brand-hue));
-  --brand-500: oklch(0.500 0.250 var(--brand-hue));
-  --brand-600: oklch(0.400 0.250 var(--brand-hue));
-  --brand-700: oklch(0.300 0.250 var(--brand-hue));
-  --brand-800: oklch(0.200 0.250 var(--brand-hue));
-  --brand-900: oklch(0.150 0.225 var(--brand-hue));
-  --brand-950: oklch(0.100 0.225 var(--brand-hue));
+  --brand-50: oklch(0.970 0.050 var(--brand-hue));
+  --brand-100: oklch(0.920 0.080 var(--brand-hue));
+  --brand-200: oklch(0.850 0.120 var(--brand-hue));
+  --brand-300: oklch(0.750 0.180 var(--brand-hue));
+  --brand-400: oklch(0.650 0.220 var(--brand-hue));
+  --brand-500: oklch(0.550 0.250 var(--brand-hue));
+  --brand-600: oklch(0.450 0.250 var(--brand-hue));
+  --brand-700: oklch(0.350 0.220 var(--brand-hue));
+  --brand-800: oklch(0.250 0.180 var(--brand-hue));
+  --brand-900: oklch(0.150 0.120 var(--brand-hue));
+  --brand-950: oklch(0.100 0.100 var(--brand-hue));
 
   /* Accent Color Shades (Auto-generated via JS) */
-  --accent-50: oklch(0.950 0.120 var(--accent-hue));
-  --accent-100: oklch(0.900 0.120 var(--accent-hue));
-  --accent-200: oklch(0.800 0.160 var(--accent-hue));
-  --accent-300: oklch(0.700 0.200 var(--accent-hue));
-  --accent-400: oklch(0.600 0.200 var(--accent-hue));
-  --accent-500: oklch(0.500 0.200 var(--accent-hue));
-  --accent-600: oklch(0.400 0.200 var(--accent-hue));
-  --accent-700: oklch(0.300 0.200 var(--accent-hue));
-  --accent-800: oklch(0.200 0.200 var(--accent-hue));
-  --accent-900: oklch(0.150 0.180 var(--accent-hue));
-  --accent-950: oklch(0.100 0.180 var(--accent-hue));
+  --accent-50: oklch(0.970 0.050 var(--accent-hue));
+  --accent-100: oklch(0.920 0.080 var(--accent-hue));
+  --accent-200: oklch(0.850 0.120 var(--accent-hue));
+  --accent-300: oklch(0.750 0.180 var(--accent-hue));
+  --accent-400: oklch(0.650 0.220 var(--accent-hue));
+  --accent-500: oklch(0.550 0.250 var(--accent-hue));
+  --accent-600: oklch(0.450 0.250 var(--accent-hue));
+  --accent-700: oklch(0.350 0.220 var(--accent-hue));
+  --accent-800: oklch(0.250 0.180 var(--accent-hue));
+  --accent-900: oklch(0.150 0.120 var(--accent-hue));
+  --accent-950: oklch(0.100 0.100 var(--accent-hue));
 
-  /* Neutral Color Shades (Auto-generated via JS) */
-  --neutral-50: oklch(0.950 0.012 var(--neutral-hue));
-  --neutral-100: oklch(0.900 0.012 var(--neutral-hue));
-  --neutral-200: oklch(0.800 0.016 var(--neutral-hue));
-  --neutral-300: oklch(0.700 0.020 var(--neutral-hue));
-  --neutral-400: oklch(0.600 0.020 var(--neutral-hue));
-  --neutral-500: oklch(0.500 0.020 var(--neutral-hue));
-  --neutral-600: oklch(0.400 0.020 var(--neutral-hue));
-  --neutral-700: oklch(0.300 0.020 var(--neutral-hue));
-  --neutral-800: oklch(0.200 0.020 var(--neutral-hue));
-  --neutral-900: oklch(0.150 0.018 var(--neutral-hue));
-  --neutral-950: oklch(0.100 0.018 var(--neutral-hue));
+  /* Neutral Color Shades (Light Mode - Clean Grey) */
+  --neutral-50: oklch(0.985 0.002 var(--neutral-hue));
+  --neutral-100: oklch(0.950 0.005 var(--neutral-hue));
+  --neutral-200: oklch(0.900 0.010 var(--neutral-hue));
+  --neutral-300: oklch(0.820 0.015 var(--neutral-hue));
+  --neutral-400: oklch(0.700 0.020 var(--neutral-hue));
+  --neutral-500: oklch(0.550 0.025 var(--neutral-hue));
+  --neutral-600: oklch(0.450 0.025 var(--neutral-hue));
+  --neutral-700: oklch(0.350 0.025 var(--neutral-hue));
+  --neutral-800: oklch(0.250 0.025 var(--neutral-hue));
+  --neutral-900: oklch(0.150 0.025 var(--neutral-hue));
+  --neutral-950: oklch(0.100 0.025 var(--neutral-hue));
 
   /* ============================================
      SEMANTIC COLOR MAPPINGS - Light Mode
@@ -158,11 +158,11 @@
   --foreground: var(--neutral-950);
 
   /* Card colors */
-  --card: oklch(1 0 0);
+  --card: oklch(0.995 0.002 var(--neutral-hue));
   --card-foreground: var(--neutral-900);
 
   /* Popover colors */
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.995 0.002 var(--neutral-hue));
   --popover-foreground: var(--neutral-900);
 
   /* Primary colors (Brand) */
@@ -214,43 +214,43 @@
      ============================================ */
 
   /* Brand Color Shades (Auto-generated via JS - Dark Mode) */
-  --brand-50: oklch(0.950 0.127 var(--brand-hue));
-  --brand-100: oklch(0.900 0.127 var(--brand-hue));
-  --brand-200: oklch(0.800 0.170 var(--brand-hue));
-  --brand-300: oklch(0.700 0.212 var(--brand-hue));
-  --brand-400: oklch(0.600 0.212 var(--brand-hue));
-  --brand-500: oklch(0.500 0.212 var(--brand-hue));
-  --brand-600: oklch(0.400 0.212 var(--brand-hue));
-  --brand-700: oklch(0.300 0.212 var(--brand-hue));
-  --brand-800: oklch(0.200 0.212 var(--brand-hue));
-  --brand-900: oklch(0.150 0.191 var(--brand-hue));
-  --brand-950: oklch(0.100 0.191 var(--brand-hue));
+  --brand-50: oklch(0.950 0.100 var(--brand-hue));
+  --brand-100: oklch(0.900 0.120 var(--brand-hue));
+  --brand-200: oklch(0.800 0.150 var(--brand-hue));
+  --brand-300: oklch(0.700 0.180 var(--brand-hue));
+  --brand-400: oklch(0.600 0.200 var(--brand-hue));
+  --brand-500: oklch(0.500 0.200 var(--brand-hue));
+  --brand-600: oklch(0.400 0.200 var(--brand-hue));
+  --brand-700: oklch(0.300 0.180 var(--brand-hue));
+  --brand-800: oklch(0.200 0.150 var(--brand-hue));
+  --brand-900: oklch(0.150 0.120 var(--brand-hue));
+  --brand-950: oklch(0.100 0.100 var(--brand-hue));
 
   /* Accent Color Shades (Auto-generated via JS - Dark Mode) */
-  --accent-50: oklch(0.950 0.102 var(--accent-hue));
-  --accent-100: oklch(0.900 0.102 var(--accent-hue));
-  --accent-200: oklch(0.800 0.136 var(--accent-hue));
-  --accent-300: oklch(0.700 0.170 var(--accent-hue));
-  --accent-400: oklch(0.600 0.170 var(--accent-hue));
-  --accent-500: oklch(0.500 0.170 var(--accent-hue));
-  --accent-600: oklch(0.400 0.170 var(--accent-hue));
-  --accent-700: oklch(0.300 0.170 var(--accent-hue));
-  --accent-800: oklch(0.200 0.170 var(--accent-hue));
-  --accent-900: oklch(0.150 0.153 var(--accent-hue));
-  --accent-950: oklch(0.100 0.153 var(--accent-hue));
+  --accent-50: oklch(0.950 0.100 var(--accent-hue));
+  --accent-100: oklch(0.900 0.120 var(--accent-hue));
+  --accent-200: oklch(0.800 0.150 var(--accent-hue));
+  --accent-300: oklch(0.700 0.180 var(--accent-hue));
+  --accent-400: oklch(0.600 0.200 var(--accent-hue));
+  --accent-500: oklch(0.500 0.200 var(--accent-hue));
+  --accent-600: oklch(0.400 0.200 var(--accent-hue));
+  --accent-700: oklch(0.300 0.180 var(--accent-hue));
+  --accent-800: oklch(0.200 0.150 var(--accent-hue));
+  --accent-900: oklch(0.150 0.120 var(--accent-hue));
+  --accent-950: oklch(0.100 0.100 var(--accent-hue));
 
-  /* Neutral Color Shades (Auto-generated via JS - Dark Mode) */
-  --neutral-50: oklch(0.950 0.010 var(--neutral-hue));
-  --neutral-100: oklch(0.900 0.010 var(--neutral-hue));
-  --neutral-200: oklch(0.800 0.014 var(--neutral-hue));
-  --neutral-300: oklch(0.700 0.017 var(--neutral-hue));
-  --neutral-400: oklch(0.600 0.017 var(--neutral-hue));
-  --neutral-500: oklch(0.500 0.017 var(--neutral-hue));
-  --neutral-600: oklch(0.400 0.017 var(--neutral-hue));
-  --neutral-700: oklch(0.300 0.017 var(--neutral-hue));
-  --neutral-800: oklch(0.200 0.017 var(--neutral-hue));
-  --neutral-900: oklch(0.150 0.015 var(--neutral-hue));
-  --neutral-950: oklch(0.100 0.015 var(--neutral-hue));
+  /* Neutral Color Shades (Dark Mode - Clean Dark Grey) */
+  --neutral-50: oklch(0.980 0.005 var(--neutral-hue));
+  --neutral-100: oklch(0.920 0.010 var(--neutral-hue));
+  --neutral-200: oklch(0.800 0.015 var(--neutral-hue));
+  --neutral-300: oklch(0.700 0.020 var(--neutral-hue));
+  --neutral-400: oklch(0.600 0.025 var(--neutral-hue));
+  --neutral-500: oklch(0.500 0.025 var(--neutral-hue));
+  --neutral-600: oklch(0.400 0.025 var(--neutral-hue));
+  --neutral-700: oklch(0.300 0.025 var(--neutral-hue));
+  --neutral-800: oklch(0.200 0.025 var(--neutral-hue));
+  --neutral-900: oklch(0.140 0.020 var(--neutral-hue));
+  --neutral-950: oklch(0.100 0.020 var(--neutral-hue));
 
   /* ============================================
      SEMANTIC COLOR MAPPINGS - Dark Mode

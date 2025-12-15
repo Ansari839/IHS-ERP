@@ -108,7 +108,7 @@ export function ThemeSettings() {
 
                         <div className="space-y-4">
                             <Label>Theme Color</Label>
-                            <div className="grid grid-cols-3 gap-4 md:grid-cols-6">
+                            <div className="grid grid-cols-4 gap-4 md:grid-cols-6 lg:grid-cols-8">
                                 {THEME_COLORS.map((color) => (
                                     <button
                                         key={color.name}
@@ -118,10 +118,11 @@ export function ThemeSettings() {
                                             ${themeColor === color.name ? "border-primary bg-accent" : "border-transparent"}
                                         `}
                                     >
-                                        <div
-                                            className="h-10 w-10 rounded-full border shadow-sm"
-                                            style={{ backgroundColor: color.activeColor }}
-                                        />
+                                        <div className="flex h-10 w-full overflow-hidden rounded-md border shadow-sm">
+                                            {color.previewColors.map((c, i) => (
+                                                <div key={i} style={{ backgroundColor: c }} className="flex-1" />
+                                            ))}
+                                        </div>
                                         <span className="text-xs font-medium">{color.label}</span>
                                     </button>
                                 ))}
