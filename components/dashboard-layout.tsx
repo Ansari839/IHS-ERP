@@ -34,7 +34,7 @@ export function DashboardLayout({ children, title, user }: DashboardLayoutProps)
                     "min-h-screen"
                 )}
             >
-                <Header title={title} />
+                <Header title={title} user={user} />
                 <main className="p-6">{children}</main>
             </div>
         </div>
