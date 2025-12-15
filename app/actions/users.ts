@@ -163,12 +163,11 @@ export async function updateUser(id: number, formData: FormData) {
 
         revalidatePath('/users')
         revalidatePath(`/users/${id}/edit`)
+        return { success: true }
     } catch (error) {
         console.error('Error updating user:', error)
         return { success: false, error: 'Failed to update user' }
     }
-
-    redirect('/users')
 }
 
 export async function deleteUser(id: number) {
