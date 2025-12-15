@@ -12,20 +12,22 @@ import {
 import { Plus, User as UserIcon } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Protect } from '@/components/protect'
+import { UserActions } from '@/components/users/user-actions'
+import { Badge } from '@/components/ui/badge'
 
 export const dynamic = 'force-dynamic'
 
 import { getCurrentUser } from '@/lib/auth'
-import { DashboardLayout } from '@/components/dashboard-layout'
 
 export default async function UsersPage() {
-    const user = await getCurrentUser()
+    const currentUser = await getCurrentUser()
     const users = await prisma.user.findMany({
         orderBy: { createdAt: 'desc' },
         select: {
             id: true,
             name: true,
             email: true,
+            isActive: true,
             userRoles: {
                 include: {
                     role: true
@@ -60,6 +62,7 @@ export default async function UsersPage() {
                                 <TableHead>Name</TableHead>
                                 <TableHead>Email</TableHead>
                                 <TableHead>Roles</TableHead>
+                                <TableHead>Status</TableHead>
                                 <TableHead>Joined</TableHead>
                                 <TableHead className="text-right">Actions</TableHead>
                             </TableRow>
@@ -89,18 +92,27 @@ export default async function UsersPage() {
                                         </div>
                                     </TableCell>
                                     <TableCell>
+                                        <Badge variant={user.isActive ? 'default' : 'secondary'}>
+                                            {user.isActive ? 'Active' : 'Inactive'}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell>
                                         {new Date(user.createdAt).toLocaleDateString()}
                                     </TableCell>
                                     <TableCell className="text-right">
-                                        <Button variant="ghost" size="sm">
-                                            Edit
-                                        </Button>
+                                        <Protect permission="update:users">
+                                            <UserActions
+                                                userId={user.id}
+                                                isActive={user.isActive}
+                                                currentUserId={currentUser.id}
+                                            />
+                                        </Protect>
                                     </TableCell>
                                 </TableRow>
                             ))}
                             {users.length === 0 && (
                                 <TableRow>
-                                    <TableCell colSpan={5} className="text-center py-10 text-muted-foreground">
+                                    <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">
                                         No users found. Create one to get started.
                                     </TableCell>
                                 </TableRow>

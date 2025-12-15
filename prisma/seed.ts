@@ -103,9 +103,9 @@ async function main() {
         });
     }
 
-    // User gets read permissions only
-    const readPermissions = allPermissions.filter(p => p.action === 'read');
-    for (const perm of readPermissions) {
+    // User gets read and update permissions (for testing CRUD)
+    const userPermissions = allPermissions.filter(p => p.action === 'read' || p.action === 'update');
+    for (const perm of userPermissions) {
         await prisma.rolePermission.upsert({
             where: {
                 roleId_permissionId: {

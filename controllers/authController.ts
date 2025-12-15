@@ -102,6 +102,16 @@ export async function login(
 
         // Check if password change is required
         // @ts-ignore - forcePasswordChange exists after migration
+        // Check if user is active
+        // @ts-ignore - isActive is a new field
+        if (user.isActive === false) {
+            return {
+                success: false,
+                error: 'Your account has been deactivated. Please contact the administrator.',
+            };
+        }
+
+        // Check if password change is required
         if (user.forcePasswordChange) {
             // Generate temporary token for password change (10 minutes)
             const tempToken = generateAccessToken({
