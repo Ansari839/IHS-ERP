@@ -23,6 +23,7 @@ model User {
   // Relations
   posts         Post[]
   refreshTokens RefreshToken[]
+  auditLogs     AuditLog[]
   
   // RBAC & Organization
   departmentId  Int?
@@ -101,4 +102,22 @@ model RefreshToken {
 
   @@index([userId])
   @@index([token])
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  action      String   // e.g. "CREATE", "UPDATE", "DELETE"
+  module      String   // e.g. "ROLES", "USERS"
+  resourceId  String?  // ID of the affected resource
+  before      Json?    // State before action
+  after       Json?    // State after action
+  metadata    Json?    // IP, User Agent, etc.
+  timestamp   DateTime @default(now())
+
+  @@index([userId])
+  @@index([module])
+  @@index([action])
+  @@index([timestamp])
 }

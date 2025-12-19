@@ -15,6 +15,7 @@ import {
     ChevronRight,
     Menu,
     X,
+    ScrollText,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -30,6 +31,7 @@ const navigation = [
     { name: "Customers", href: "/customers", icon: Users },
     { name: "Reports", href: "/reports", icon: BarChart3 },
     { name: "Users", href: "/users", icon: Users },
+    { name: "Audit Logs", href: "/admin/audit-logs", icon: ScrollText },
     { name: "Settings", href: "/settings", icon: Settings },
 ]
 
@@ -50,6 +52,7 @@ export function Sidebar({ className, user, isCollapsed = false, onCollapse }: Si
     const filteredNavigation = navigation.filter(item => {
         if (item.name === "Users" && !hasPermission(user || null, "read:users")) return false
         if (item.name === "Settings" && !hasPermission(user || null, "read:settings")) return false
+        if (item.name === "Audit Logs" && !hasPermission(user || null, "read:audit_logs")) return false
         return true
     })
 

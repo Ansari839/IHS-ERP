@@ -16,7 +16,7 @@ export function CreateRoleForm() {
         try {
             const result = await createRole(formData)
             if (result && !result.success) {
-                setError(result.error)
+                setError(result.error || 'An unexpected error occurred')
                 setIsLoading(false)
             }
             // On success, the server action redirects, so we don't need to reset loading state

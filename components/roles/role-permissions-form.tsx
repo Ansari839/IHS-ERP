@@ -34,7 +34,7 @@ export function RolePermissionsForm({ roleId, permissionsByResource, assignedPer
             .map((key) => parseInt(key.replace('perm_', '')))
 
         startTransition(async () => {
-            const result = await updateRolePermissions(roleId, selectedPermissionIds)
+            const result = await updateRolePermissions({ roleId, permissionIds: selectedPermissionIds })
 
             if (result.success) {
                 toast.success('Permissions updated successfully')

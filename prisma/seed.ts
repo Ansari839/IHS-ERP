@@ -35,7 +35,7 @@ async function main() {
     console.log('✅ Departments created');
 
     // 2. Create Permissions
-    const resources = ['users', 'products', 'orders', 'reports', 'settings'];
+    const resources = ['users', 'products', 'orders', 'reports', 'settings', 'audit_logs'];
     const actions = ['create', 'read', 'update', 'delete'];
 
     const permissionsMap = new Map();

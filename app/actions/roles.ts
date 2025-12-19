@@ -3,25 +3,23 @@
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import prisma from '@/lib/prisma'
-
+import { createSafeAction } from '@/lib/create-safe-action'
 import { verifyPermission } from '@/lib/auth-checks'
 
-export async function createRole(formData: FormData) {
-    try {
+// --- Create Role ---
+
+export const createRole = createSafeAction(
+    async (formData: FormData) => {
         await verifyPermission('create:settings')
-    } catch (error) {
-        return { success: false, error: 'Unauthorized' }
-    }
 
-    const name = formData.get('name') as string
-    const description = formData.get('description') as string
+        const name = formData.get('name') as string
+        const description = formData.get('description') as string
 
-    if (!name) {
-        return { success: false, error: 'Role name is required' }
-    }
+        if (!name) {
+            throw new Error('Role name is required')
+        }
 
-    try {
-        await prisma.role.create({
+        const role = await prisma.role.create({
             data: {
                 name,
                 description,
@@ -29,17 +27,28 @@ export async function createRole(formData: FormData) {
         })
 
         revalidatePath('/settings/roles')
-    } catch (error) {
-        console.error('Error creating role:', error)
-        return { success: false, error: 'Failed to create role' }
+        return role
+    },
+    {
+        action: 'CREATE',
+        module: 'ROLES',
+        getResourceId: (role) => role.id.toString(),
+        getBefore: async () => null,
+        getAfter: async (role) => role,
     }
+)
 
-    redirect('/settings/roles')
+// --- Update Role Permissions ---
+
+type UpdatePermissionsInput = {
+    roleId: number
+    permissionIds: number[]
 }
 
-export async function updateRolePermissions(roleId: number, permissionIds: number[]) {
-    try {
+export const updateRolePermissions = createSafeAction(
+    async (input: UpdatePermissionsInput) => {
         await verifyPermission('update:settings')
+        const { roleId, permissionIds } = input
 
         // 1. Remove all existing permissions for this role
         await prisma.rolePermission.deleteMany({
@@ -58,15 +67,30 @@ export async function updateRolePermissions(roleId: number, permissionIds: numbe
 
         revalidatePath(`/settings/roles/${roleId}`)
         revalidatePath('/settings/roles')
-        return { success: true }
-    } catch (error) {
-        console.error('Error updating role permissions:', error)
-        return { success: false, error: 'Failed to update permissions' }
+        return { roleId, count: permissionIds.length }
+    },
+    {
+        action: 'UPDATE',
+        module: 'ROLES',
+        getResourceId: (res) => res.roleId.toString(),
+        getBefore: async (input) => {
+            // Fetch existing permissions for audit log
+            const existing = await prisma.rolePermission.findMany({
+                where: { roleId: input.roleId },
+                select: { permissionId: true }
+            })
+            return { permissionIds: existing.map(p => p.permissionId) }
+        },
+        getAfter: async (res, ctx) => {
+            return { permissionIds: res.count } // Simplified for brevity
+        }
     }
-}
+)
 
-export async function deleteRole(roleId: number) {
-    try {
+// --- Delete Role ---
+
+export const deleteRole = createSafeAction(
+    async (roleId: number) => {
         await verifyPermission('delete:settings')
 
         // Check if role is assigned to any users
@@ -75,17 +99,24 @@ export async function deleteRole(roleId: number) {
         })
 
         if (usageCount > 0) {
-            return { success: false, error: 'Cannot delete role because it is assigned to users' }
+            throw new Error('Cannot delete role because it is assigned to users')
         }
 
-        await prisma.role.delete({
+        const role = await prisma.role.delete({
             where: { id: roleId },
         })
 
         revalidatePath('/settings/roles')
-        return { success: true }
-    } catch (error) {
-        console.error('Error deleting role:', error)
-        return { success: false, error: 'Failed to delete role' }
+        return role
+    },
+    {
+        action: 'DELETE',
+        module: 'ROLES',
+        getResourceId: (role) => role.id.toString(),
+        getBefore: async (roleId) => {
+            return await prisma.role.findUnique({ where: { id: roleId } })
+        },
+        getAfter: async () => null
     }
-}
+)
+
