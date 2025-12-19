@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import prisma from '@/lib/prisma'
 import { Button } from '@/components/ui/button'
 import {
@@ -21,6 +22,10 @@ import { getCurrentUser } from '@/lib/auth'
 
 export default async function UsersPage() {
     const currentUser = await getCurrentUser()
+
+    if (!currentUser) {
+        redirect('/login?redirect=/users')
+    }
     const users = await prisma.user.findMany({
         orderBy: { createdAt: 'desc' },
         select: {

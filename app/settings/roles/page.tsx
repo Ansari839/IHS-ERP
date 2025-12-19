@@ -9,9 +9,9 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table'
-import { Plus, Shield } from 'lucide-react'
+import { Shield } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { createRole } from '@/app/actions/roles'
+import { CreateRoleForm } from './create-role-form'
 
 export const dynamic = 'force-dynamic'
 
@@ -38,37 +38,7 @@ export default async function RolesPage() {
                         <CardTitle>Create New Role</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <form action={createRole} className="space-y-4">
-                            <div className="space-y-2">
-                                <label htmlFor="name" className="text-sm font-medium">
-                                    Role Name
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    placeholder="e.g. Inventory Manager"
-                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label htmlFor="description" className="text-sm font-medium">
-                                    Description
-                                </label>
-                                <input
-                                    type="text"
-                                    name="description"
-                                    id="description"
-                                    placeholder="Role description"
-                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                />
-                            </div>
-                            <Button type="submit" className="w-full">
-                                <Plus className="mr-2 h-4 w-4" />
-                                Create Role
-                            </Button>
-                        </form>
+                        <CreateRoleForm />
                     </CardContent>
                 </Card>
 

@@ -48,9 +48,9 @@ export function generateRefreshToken(payload: Omit<TokenPayload, 'type'>): strin
             type: TOKEN_CONFIG.TOKEN_TYPE.REFRESH,
             jti: crypto.randomUUID(), // Ensure uniqueness even within same second
         },
-        SECURITY_CONFIG.REFRESH_TOKEN_SECRET,
+        SECURITY_CONFIG.REFRESH_TOKEN_SECRET as string,
         {
-            expiresIn: TOKEN_CONFIG.REFRESH_TOKEN_EXPIRY,
+            expiresIn: TOKEN_CONFIG.REFRESH_TOKEN_EXPIRY as any,
             issuer: 'erp-auth-system',
             audience: 'erp-client',
         }

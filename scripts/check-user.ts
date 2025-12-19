@@ -14,6 +14,7 @@ async function main() {
     console.log('Checking user admin@erp.com...');
     const user = await prisma.user.findUnique({
         where: { email: 'admin@erp.com' },
+        include: { userRoles: { include: { role: true } } }
     });
 
     if (!user) {
@@ -23,7 +24,7 @@ async function main() {
 
     console.log('✅ User found:', user.email);
     console.log('   ID:', user.id);
-    console.log('   Role:', user.role);
+    console.log('   Roles:', user.userRoles.map(ur => ur.role.name).join(', '));
     console.log('   Password Hash:', user.password.substring(0, 10) + '...');
 
     const password = 'Admin@123';
