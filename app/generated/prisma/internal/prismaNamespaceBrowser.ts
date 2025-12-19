@@ -59,7 +59,9 @@ export const ModelName = {
   UserRole: 'UserRole',
   Post: 'Post',
   RefreshToken: 'RefreshToken',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  Warehouse: 'Warehouse',
+  UserWarehouse: 'UserWarehouse'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -182,6 +184,27 @@ export const AuditLogScalarFieldEnum = {
 } as const
 
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const WarehouseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  location: 'location',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WarehouseScalarFieldEnum = (typeof WarehouseScalarFieldEnum)[keyof typeof WarehouseScalarFieldEnum]
+
+
+export const UserWarehouseScalarFieldEnum = {
+  userId: 'userId',
+  warehouseId: 'warehouseId',
+  assignedAt: 'assignedAt'
+} as const
+
+export type UserWarehouseScalarFieldEnum = (typeof UserWarehouseScalarFieldEnum)[keyof typeof UserWarehouseScalarFieldEnum]
 
 
 export const SortOrder = {

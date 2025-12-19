@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowLeft } from 'lucide-react'
 import { Protect } from '@/components/protect'
 import { EditUserForm } from '@/components/users/edit-user-form'
+import { UserWarehouseForm } from '@/components/users/user-warehouse-form'
 
 interface EditUserPageProps {
     params: Promise<{ id: string }>
@@ -22,7 +23,12 @@ export default async function EditUserPage({ params }: EditUserPageProps) {
     const user = await prisma.user.findUnique({
         where: { id: userId },
         include: {
-            userRoles: true
+            userRoles: true,
+            userWarehouses: {
+                include: {
+                    warehouse: true
+                }
+            }
         }
     })
 
@@ -32,6 +38,11 @@ export default async function EditUserPage({ params }: EditUserPageProps) {
 
     const roles = await prisma.role.findMany({
         orderBy: { name: 'asc' },
+    })
+
+    const warehouses = await prisma.warehouse.findMany({
+        orderBy: { name: 'asc' },
+        select: { id: true, name: true }
     })
 
     return (
@@ -52,9 +63,23 @@ export default async function EditUserPage({ params }: EditUserPageProps) {
                     </CardHeader>
                     <CardContent>
                         <EditUserForm user={user} roles={roles} />
+
+                    </CardContent>
+                </Card>
+
+                <Card className="max-w-2xl">
+                    <CardHeader>
+                        <CardTitle>Warehouse Access</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <UserWarehouseForm
+                            userId={userId}
+                            assignedWarehouses={user.userWarehouses.map(uw => uw.warehouse)}
+                            availableWarehouses={warehouses}
+                        />
                     </CardContent>
                 </Card>
             </div>
-        </Protect>
+        </Protect >
     )
 }

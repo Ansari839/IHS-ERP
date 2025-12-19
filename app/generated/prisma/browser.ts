@@ -62,3 +62,13 @@ export type RefreshToken = Prisma.RefreshTokenModel
  * 
  */
 export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model Warehouse
+ * 
+ */
+export type Warehouse = Prisma.WarehouseModel
+/**
+ * Model UserWarehouse
+ * 
+ */
+export type UserWarehouse = Prisma.UserWarehouseModel

@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 
-export type AuditAction = 'CREATE' | 'UPDATE' | 'DELETE' | 'LOGIN' | 'LOGOUT' | 'CUSTOM'
+export type AuditAction = 'CREATE' | 'UPDATE' | 'DELETE' | 'LOGIN' | 'LOGOUT' | 'ASSIGN_WAREHOUSE' | 'REMOVE_WAREHOUSE' | 'CUSTOM'
 
 interface AuditLogEntry {
     userId: number

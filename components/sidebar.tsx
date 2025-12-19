@@ -27,6 +27,7 @@ const navigation = [
     { name: "Dashboard", href: "/", icon: LayoutDashboard },
     { name: "Products", href: "/products", icon: Package },
     { name: "Inventory", href: "/inventory", icon: Warehouse },
+    { name: "Warehouses", href: "/inventory/warehouses", icon: Warehouse },
     { name: "Orders", href: "/orders", icon: ShoppingCart },
     { name: "Customers", href: "/customers", icon: Users },
     { name: "Reports", href: "/reports", icon: BarChart3 },
@@ -53,6 +54,7 @@ export function Sidebar({ className, user, isCollapsed = false, onCollapse }: Si
         if (item.name === "Users" && !hasPermission(user || null, "read:users")) return false
         if (item.name === "Settings" && !hasPermission(user || null, "read:settings")) return false
         if (item.name === "Audit Logs" && !hasPermission(user || null, "read:audit_logs")) return false
+        if (item.name === "Warehouses" && !hasPermission(user || null, "read:warehouses")) return false
         return true
     })
 
