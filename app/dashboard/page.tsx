@@ -54,6 +54,7 @@ export default async function Home() {
       trend: "up" as const,
       icon: Users,
       description: "Registered users",
+      color: "blue",
     },
     {
       title: "Total Posts",
@@ -62,6 +63,7 @@ export default async function Home() {
       trend: "up" as const,
       icon: ShoppingCart,
       description: "Posts created",
+      color: "purple",
     },
     {
       title: "Published Posts",
@@ -70,6 +72,7 @@ export default async function Home() {
       trend: "up" as const,
       icon: Package,
       description: "Published content",
+      color: "green",
     },
     {
       title: "All Posts",
@@ -78,6 +81,7 @@ export default async function Home() {
       trend: "down" as const,
       icon: DollarSign,
       description: "Total posts in system",
+      color: "orange",
     },
   ]
 
@@ -93,12 +97,14 @@ export default async function Home() {
       {/* Stats Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-6">
         {stats.map((stat) => (
-          <Card key={stat.title} className="relative overflow-hidden">
+          <Card key={stat.title} className={`relative overflow-hidden border-t-4 shadow-md border-${stat.color}-500`}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
               </CardTitle>
-              <stat.icon className="h-4 w-4 text-muted-foreground" />
+              <div className={`p-2 rounded-full bg-${stat.color}-500/10`}>
+                <stat.icon className={`h-4 w-4 text-${stat.color}-500`} />
+              </div>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stat.value}</div>
@@ -124,7 +130,7 @@ export default async function Home() {
       {/* Two Column Layout */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
         {/* Recent Activity */}
-        <Card className="lg:col-span-4">
+        <Card className="lg:col-span-4 border-t-4 border-indigo-500 shadow-md">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Activity className="h-5 w-5" />
@@ -154,7 +160,7 @@ export default async function Home() {
         </Card>
 
         {/* Quick Actions */}
-        <Card className="lg:col-span-3">
+        <Card className="lg:col-span-3 border-t-4 border-pink-500 shadow-md">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
@@ -182,7 +188,7 @@ export default async function Home() {
       </div>
 
       {/* Performance Overview */}
-      <Card className="mt-6">
+      <Card className="mt-6 border-t-4 border-cyan-500 shadow-md">
         <CardHeader>
           <CardTitle>Performance Overview</CardTitle>
         </CardHeader>

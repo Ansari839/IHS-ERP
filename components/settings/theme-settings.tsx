@@ -1,14 +1,13 @@
 "use client"
 
 import { useTheme } from "@/components/theme-provider"
-import { THEME_COLORS } from "@/lib/themes"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Moon, Sun, Laptop } from "lucide-react"
 
 export function ThemeSettings() {
-    const { theme, setTheme, themeColor, setThemeColor } = useTheme()
+    const { theme, setTheme } = useTheme()
 
     return (
         <div className="space-y-6">
@@ -106,28 +105,6 @@ export function ThemeSettings() {
                             </RadioGroup>
                         </div>
 
-                        <div className="space-y-4">
-                            <Label>Theme Color</Label>
-                            <div className="grid grid-cols-4 gap-4 md:grid-cols-6 lg:grid-cols-8">
-                                {THEME_COLORS.map((color) => (
-                                    <button
-                                        key={color.name}
-                                        onClick={() => setThemeColor(color.name)}
-                                        className={`
-                                            group flex flex-col items-center gap-2 rounded-lg border-2 p-2 hover:bg-accent
-                                            ${themeColor === color.name ? "border-primary bg-accent" : "border-transparent"}
-                                        `}
-                                    >
-                                        <div className="flex h-10 w-full overflow-hidden rounded-md border shadow-sm">
-                                            {color.previewColors.map((c, i) => (
-                                                <div key={i} style={{ backgroundColor: c }} className="flex-1" />
-                                            ))}
-                                        </div>
-                                        <span className="text-xs font-medium">{color.label}</span>
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
                     </div>
                 </CardContent>
             </Card>

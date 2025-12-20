@@ -93,81 +93,79 @@
 
 :root {
   /* ============================================
-     THEME COLOR SYSTEM
-     3 Main Colors with Auto-Generated Shades
+     THEME COLOR SYSTEM - VIBRANT & HIGH CONTRAST (v2)
      ============================================ */
 
-  /* Default Hues (Blue) */
-  --brand-hue: 260;
-  --accent-hue: 326.541;
-  --neutral-hue: 260;
+  /* Brand Hue: Electric Indigo (270) */
+  --brand-hue: 270;
+  /* Accent Hue: Hot Pink (330) */
+  --accent-hue: 330;
+  /* Neutral Hue: Cool Zinc (240) */
+  --neutral-hue: 240;
 
-  /* Main Theme Colors (Base) */
-  --theme-brand: oklch(0.55 0.25 var(--brand-hue));
-  --theme-accent: oklch(52.842% 0.24521 var(--accent-hue));
-  --theme-neutral: oklch(0.50 0.02 var(--neutral-hue));
+  /* Brand Color Shades - Higher Chroma */
+  --brand-50: oklch(0.97 0.05 var(--brand-hue));
+  --brand-100: oklch(0.93 0.10 var(--brand-hue));
+  --brand-200: oklch(0.85 0.15 var(--brand-hue));
+  --brand-300: oklch(0.75 0.20 var(--brand-hue));
+  --brand-400: oklch(0.65 0.25 var(--brand-hue));
+  --brand-500: oklch(0.55 0.30 var(--brand-hue));
+  /* Super Vibrant */
+  --brand-600: oklch(0.45 0.30 var(--brand-hue));
+  --brand-700: oklch(0.35 0.25 var(--brand-hue));
+  --brand-800: oklch(0.25 0.20 var(--brand-hue));
+  --brand-900: oklch(0.15 0.15 var(--brand-hue));
+  --brand-950: oklch(0.10 0.10 var(--brand-hue));
 
-  /* Brand Color Shades (Auto-generated via JS) */
-  --brand-50: oklch(0.970 0.050 var(--brand-hue));
-  --brand-100: oklch(0.920 0.080 var(--brand-hue));
-  --brand-200: oklch(0.850 0.120 var(--brand-hue));
-  --brand-300: oklch(0.750 0.180 var(--brand-hue));
-  --brand-400: oklch(0.650 0.220 var(--brand-hue));
-  --brand-500: oklch(0.550 0.250 var(--brand-hue));
-  --brand-600: oklch(0.450 0.250 var(--brand-hue));
-  --brand-700: oklch(0.350 0.220 var(--brand-hue));
-  --brand-800: oklch(0.250 0.180 var(--brand-hue));
-  --brand-900: oklch(0.150 0.120 var(--brand-hue));
-  --brand-950: oklch(0.100 0.100 var(--brand-hue));
+  /* Accent Color Shades - Higher Chroma */
+  --accent-50: oklch(0.97 0.05 var(--accent-hue));
+  --accent-100: oklch(0.93 0.10 var(--accent-hue));
+  --accent-200: oklch(0.85 0.15 var(--accent-hue));
+  --accent-300: oklch(0.75 0.20 var(--accent-hue));
+  --accent-400: oklch(0.65 0.25 var(--accent-hue));
+  --accent-500: oklch(0.55 0.30 var(--accent-hue));
+  /* Super Vibrant */
+  --accent-600: oklch(0.45 0.30 var(--accent-hue));
+  --accent-700: oklch(0.35 0.25 var(--accent-hue));
+  --accent-800: oklch(0.25 0.20 var(--accent-hue));
+  --accent-900: oklch(0.15 0.15 var(--accent-hue));
+  --accent-950: oklch(0.10 0.10 var(--accent-hue));
 
-  /* Accent Color Shades (Auto-generated via JS) */
-  --accent-50: oklch(0.970 0.050 var(--accent-hue));
-  --accent-100: oklch(0.920 0.080 var(--accent-hue));
-  --accent-200: oklch(0.850 0.120 var(--accent-hue));
-  --accent-300: oklch(0.750 0.180 var(--accent-hue));
-  --accent-400: oklch(0.650 0.220 var(--accent-hue));
-  --accent-500: oklch(0.550 0.250 var(--accent-hue));
-  --accent-600: oklch(0.450 0.250 var(--accent-hue));
-  --accent-700: oklch(0.350 0.220 var(--accent-hue));
-  --accent-800: oklch(0.250 0.180 var(--accent-hue));
-  --accent-900: oklch(0.150 0.120 var(--accent-hue));
-  --accent-950: oklch(0.100 0.100 var(--accent-hue));
-
-  /* Neutral Color Shades (Light Mode - Clean Grey) */
-  --neutral-50: oklch(0.985 0.002 var(--neutral-hue));
-  --neutral-100: oklch(0.950 0.005 var(--neutral-hue));
-  --neutral-200: oklch(0.900 0.010 var(--neutral-hue));
-  --neutral-300: oklch(0.820 0.015 var(--neutral-hue));
-  --neutral-400: oklch(0.700 0.020 var(--neutral-hue));
-  --neutral-500: oklch(0.550 0.025 var(--neutral-hue));
-  --neutral-600: oklch(0.450 0.025 var(--neutral-hue));
-  --neutral-700: oklch(0.350 0.025 var(--neutral-hue));
-  --neutral-800: oklch(0.250 0.025 var(--neutral-hue));
-  --neutral-900: oklch(0.150 0.025 var(--neutral-hue));
-  --neutral-950: oklch(0.100 0.025 var(--neutral-hue));
+  /* Neutral Color Shades (Light Mode - Clean Cool Grey) */
+  --neutral-50: oklch(0.99 0.002 var(--neutral-hue));
+  --neutral-100: oklch(0.97 0.005 var(--neutral-hue));
+  --neutral-200: oklch(0.92 0.01 var(--neutral-hue));
+  --neutral-300: oklch(0.87 0.015 var(--neutral-hue));
+  --neutral-400: oklch(0.75 0.02 var(--neutral-hue));
+  --neutral-500: oklch(0.60 0.025 var(--neutral-hue));
+  --neutral-600: oklch(0.45 0.03 var(--neutral-hue));
+  --neutral-700: oklch(0.35 0.03 var(--neutral-hue));
+  --neutral-800: oklch(0.25 0.03 var(--neutral-hue));
+  --neutral-900: oklch(0.15 0.03 var(--neutral-hue));
+  --neutral-950: oklch(0.10 0.03 var(--neutral-hue));
 
   /* ============================================
      SEMANTIC COLOR MAPPINGS - Light Mode
-     Maps to theme colors above
      ============================================ */
 
   --radius: 0.625rem;
 
-  /* Base colors */
-  --background: var(--neutral-50);
+  /* Base colors - High Contrast */
+  --background: oklch(0.99 0.002 var(--neutral-hue));
+  /* Almost pure white */
   --foreground: var(--neutral-950);
 
-  /* Card colors */
-  --card: oklch(0.995 0.002 var(--neutral-hue));
-  --card-foreground: var(--neutral-900);
+  /* Card colors - Pure White for Pop */
+  --card: oklch(1 0 0);
+  --card-foreground: var(--neutral-950);
 
   /* Popover colors */
-  --popover: oklch(0.995 0.002 var(--neutral-hue));
-  --popover-foreground: var(--neutral-900);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--neutral-950);
 
-  /* Primary colors (Brand) */
+  /* Primary colors (Brand) - Vibrant */
   --primary: var(--brand-600);
-  --primary-foreground: var(--brand-50);
+  --primary-foreground: oklch(1 0 0);
 
   /* Secondary colors (Neutral) */
   --secondary: var(--neutral-100);
@@ -178,16 +176,17 @@
   --muted-foreground: var(--neutral-600);
 
   /* Accent colors */
-  --accent: var(--accent-500);
-  --accent-foreground: var(--accent-50);
+  --accent: var(--accent-100);
+  --accent-foreground: var(--accent-900);
 
   /* Destructive colors */
   --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
 
   /* Border and input */
   --border: var(--neutral-200);
   --input: var(--neutral-200);
-  --ring: var(--brand-400);
+  --ring: var(--brand-500);
 
   /* Chart colors */
   --chart-1: var(--brand-500);
@@ -197,96 +196,69 @@
   --chart-5: oklch(0.769 0.188 70.08);
 
   /* Sidebar colors */
-  --sidebar: var(--neutral-50);
+  --sidebar: oklch(1 0 0);
   --sidebar-foreground: var(--neutral-900);
   --sidebar-primary: var(--brand-600);
-  --sidebar-primary-foreground: var(--brand-50);
+  --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: var(--neutral-100);
   --sidebar-accent-foreground: var(--neutral-900);
   --sidebar-border: var(--neutral-200);
-  --sidebar-ring: var(--brand-400);
+  --sidebar-ring: var(--brand-500);
 }
 
 .dark {
   /* ============================================
      THEME COLOR SYSTEM - Dark Mode
-     Reduced chroma for reduced eye strain
+     High Contrast & Vibrant
      ============================================ */
 
-  /* Brand Color Shades (Auto-generated via JS - Dark Mode) */
-  --brand-50: oklch(0.950 0.100 var(--brand-hue));
-  --brand-100: oklch(0.900 0.120 var(--brand-hue));
-  --brand-200: oklch(0.800 0.150 var(--brand-hue));
-  --brand-300: oklch(0.700 0.180 var(--brand-hue));
-  --brand-400: oklch(0.600 0.200 var(--brand-hue));
-  --brand-500: oklch(0.500 0.200 var(--brand-hue));
-  --brand-600: oklch(0.400 0.200 var(--brand-hue));
-  --brand-700: oklch(0.300 0.180 var(--brand-hue));
-  --brand-800: oklch(0.200 0.150 var(--brand-hue));
-  --brand-900: oklch(0.150 0.120 var(--brand-hue));
-  --brand-950: oklch(0.100 0.100 var(--brand-hue));
+  /* Neutral Color Shades (Dark Mode - Deep Blue-Grey) */
+  --neutral-50: oklch(0.98 0.005 var(--neutral-hue));
+  --neutral-100: oklch(0.92 0.01 var(--neutral-hue));
+  --neutral-200: oklch(0.80 0.02 var(--neutral-hue));
+  --neutral-300: oklch(0.70 0.03 var(--neutral-hue));
+  --neutral-400: oklch(0.60 0.04 var(--neutral-hue));
+  --neutral-500: oklch(0.50 0.05 var(--neutral-hue));
+  --neutral-600: oklch(0.40 0.05 var(--neutral-hue));
+  --neutral-700: oklch(0.30 0.05 var(--neutral-hue));
+  --neutral-800: oklch(0.20 0.05 var(--neutral-hue));
+  --neutral-900: oklch(0.15 0.04 var(--neutral-hue));
+  --neutral-950: oklch(0.10 0.04 var(--neutral-hue));
 
-  /* Accent Color Shades (Auto-generated via JS - Dark Mode) */
-  --accent-50: oklch(0.950 0.100 var(--accent-hue));
-  --accent-100: oklch(0.900 0.120 var(--accent-hue));
-  --accent-200: oklch(0.800 0.150 var(--accent-hue));
-  --accent-300: oklch(0.700 0.180 var(--accent-hue));
-  --accent-400: oklch(0.600 0.200 var(--accent-hue));
-  --accent-500: oklch(0.500 0.200 var(--accent-hue));
-  --accent-600: oklch(0.400 0.200 var(--accent-hue));
-  --accent-700: oklch(0.300 0.180 var(--accent-hue));
-  --accent-800: oklch(0.200 0.150 var(--accent-hue));
-  --accent-900: oklch(0.150 0.120 var(--accent-hue));
-  --accent-950: oklch(0.100 0.100 var(--accent-hue));
+  /* Base colors - Deep Dark (Almost Black) */
+  --background: oklch(0.05 0.01 var(--neutral-hue));
+  /* Deepest dark */
+  --foreground: oklch(0.98 0.005 var(--neutral-hue));
 
-  /* Neutral Color Shades (Dark Mode - Clean Dark Grey) */
-  --neutral-50: oklch(0.980 0.005 var(--neutral-hue));
-  --neutral-100: oklch(0.920 0.010 var(--neutral-hue));
-  --neutral-200: oklch(0.800 0.015 var(--neutral-hue));
-  --neutral-300: oklch(0.700 0.020 var(--neutral-hue));
-  --neutral-400: oklch(0.600 0.025 var(--neutral-hue));
-  --neutral-500: oklch(0.500 0.025 var(--neutral-hue));
-  --neutral-600: oklch(0.400 0.025 var(--neutral-hue));
-  --neutral-700: oklch(0.300 0.025 var(--neutral-hue));
-  --neutral-800: oklch(0.200 0.025 var(--neutral-hue));
-  --neutral-900: oklch(0.140 0.020 var(--neutral-hue));
-  --neutral-950: oklch(0.100 0.020 var(--neutral-hue));
-
-  /* ============================================
-     SEMANTIC COLOR MAPPINGS - Dark Mode
-     Maps to theme colors above
-     ============================================ */
-
-  /* Base colors */
-  --background: var(--neutral-950);
-  --foreground: var(--neutral-50);
-
-  /* Card colors */
-  --card: var(--neutral-900);
-  --card-foreground: var(--neutral-50);
+  /* Card colors - Distinct from background */
+  --card: oklch(0.12 0.03 var(--neutral-hue));
+  /* Slightly lighter than bg */
+  --card-foreground: oklch(0.98 0.005 var(--neutral-hue));
 
   /* Popover colors */
-  --popover: var(--neutral-900);
-  --popover-foreground: var(--neutral-50);
+  --popover: oklch(0.12 0.03 var(--neutral-hue));
+  --popover-foreground: oklch(0.98 0.005 var(--neutral-hue));
 
-  /* Primary colors (Brand) */
-  --primary: var(--brand-400);
-  --primary-foreground: var(--brand-950);
+  /* Primary colors (Brand) - Vibrant */
+  --primary: var(--brand-500);
+  --primary-foreground: oklch(1 0 0);
 
   /* Secondary colors (Neutral) */
   --secondary: var(--neutral-800);
   --secondary-foreground: var(--neutral-100);
 
   /* Muted colors */
-  --muted: var(--neutral-800);
+  --muted: var(--neutral-900);
   --muted-foreground: var(--neutral-400);
 
   /* Accent colors */
-  --accent: var(--accent-400);
-  --accent-foreground: var(--accent-950);
+  --accent: var(--accent-500);
+  --accent-foreground: oklch(1 0 0);
 
   /* Destructive colors */
-  --destructive: oklch(0.704 0.191 22.216);
+  --destructive: oklch(0.6 0.25 25);
+  /* More vibrant red */
+  --destructive-foreground: oklch(1 0 0);
 
   /* Border and input */
   --border: var(--neutral-800);
@@ -294,17 +266,18 @@
   --ring: var(--brand-500);
 
   /* Chart colors */
-  --chart-1: var(--brand-400);
-  --chart-2: var(--accent-400);
+  --chart-1: var(--brand-500);
+  --chart-2: var(--accent-500);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
 
   /* Sidebar colors */
-  --sidebar: var(--neutral-900);
-  --sidebar-foreground: var(--neutral-50);
-  --sidebar-primary: var(--brand-400);
-  --sidebar-primary-foreground: var(--brand-950);
+  --sidebar: oklch(0.05 0.01 var(--neutral-hue));
+  /* Match bg */
+  --sidebar-foreground: var(--neutral-100);
+  --sidebar-primary: var(--brand-500);
+  --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: var(--neutral-800);
   --sidebar-accent-foreground: var(--neutral-100);
   --sidebar-border: var(--neutral-800);
