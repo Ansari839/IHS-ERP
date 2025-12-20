@@ -1,4 +1,3 @@
-import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Package,
@@ -89,7 +88,7 @@ export default async function Home() {
   }))
 
   return (
-    <DashboardLayout title="Dashboard" user={user}>
+    <>
       {/* Stats Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-6">
         {stats.map((stat) => (
@@ -196,7 +195,7 @@ export default async function Home() {
           </div>
         </CardContent>
       </Card>
-    </DashboardLayout>
+    </>
   )
 }
 
