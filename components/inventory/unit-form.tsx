@@ -34,9 +34,7 @@ const formSchema = z.object({
     symbol: z.string().min(1, {
         message: "Symbol must be at least 1 character.",
     }),
-    unitType: z.enum(["WEIGHT", "LENGTH", "COUNT", "VOLUME", "AREA"], {
-        required_error: "Please select a unit type.",
-    }),
+    unitType: z.enum(["WEIGHT", "LENGTH", "COUNT", "VOLUME", "AREA"]),
     isBase: z.boolean().default(false),
 })
 
@@ -55,7 +53,7 @@ export function UnitForm({ unit, setOpen }: UnitFormProps) {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: unit?.name || "",

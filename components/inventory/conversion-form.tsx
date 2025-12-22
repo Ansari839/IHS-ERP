@@ -55,7 +55,7 @@ export function ConversionForm({ conversion, units, setOpen }: ConversionFormPro
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             fromUnitId: conversion?.fromUnitId || 0,
@@ -166,10 +166,10 @@ export function ConversionForm({ conversion, units, setOpen }: ConversionFormPro
                                 <FormItem>
                                     <FormLabel>Conversion Rate</FormLabel>
                                     <FormControl>
-                                        <Input type="number" step="0.000001" {...field} />
+                                        <Input type="number" step="0.000001" {...field} value={field.value as string | number} />
                                     </FormControl>
                                     <FormDescription>
-                                        1 {selectedFromUnit?.symbol || 'Unit'} = {field.value} Target Unit
+                                        1 {selectedFromUnit?.symbol || 'Unit'} = {field.value as string | number} Target Unit
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
