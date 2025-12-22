@@ -141,3 +141,29 @@ model UserWarehouse {
 
   @@id([userId, warehouseId])
 }
+model Unit {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  symbol    String   @unique
+  unitType  String   // e.g., "WEIGHT", "LENGTH", "COUNT"
+  isBase    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conversionsFrom UnitConversion[] @relation("FromUnit")
+  conversionsTo   UnitConversion[] @relation("ToUnit")
+}
+
+model UnitConversion {
+  id             Int      @id @default(autoincrement())
+  fromUnitId     Int
+  toUnitId       Int
+  conversionRate Float
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  fromUnit Unit @relation("FromUnit", fields: [fromUnitId], references: [id], onDelete: Restrict)
+  toUnit   Unit @relation("ToUnit", fields: [toUnitId], references: [id], onDelete: Restrict)
+
+  @@unique([fromUnitId, toUnitId])
+}

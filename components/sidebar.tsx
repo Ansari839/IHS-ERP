@@ -17,6 +17,8 @@ import {
     ChevronDown,
     ScrollText,
     LucideIcon,
+    Scale,
+    ArrowLeftRight,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -48,6 +50,8 @@ const navigation: NavigationItem[] = [
         icon: Warehouse,
         children: [
             { name: "Warehouses", href: "/dashboard/inventory/warehouses", icon: Warehouse, permission: "read:warehouses" },
+            { name: "Units", href: "/dashboard/inventory/units", icon: Scale, permission: "read:inventory" },
+            { name: "Conversions", href: "/dashboard/inventory/conversions", icon: ArrowLeftRight, permission: "read:inventory" },
         ]
     },
     { name: "Orders", href: "/orders", icon: ShoppingCart },

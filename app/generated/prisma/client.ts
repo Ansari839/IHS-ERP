@@ -94,3 +94,13 @@ export type Warehouse = Prisma.WarehouseModel
  * 
  */
 export type UserWarehouse = Prisma.UserWarehouseModel
+/**
+ * Model Unit
+ * 
+ */
+export type Unit = Prisma.UnitModel
+/**
+ * Model UnitConversion
+ * 
+ */
+export type UnitConversion = Prisma.UnitConversionModel
