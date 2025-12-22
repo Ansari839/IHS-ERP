@@ -59,7 +59,14 @@ const navigation: NavigationItem[] = [
     { name: "Reports", href: "/reports", icon: BarChart3 },
     { name: "Users", href: "/users", icon: Users, permission: "read:users" },
     { name: "Audit Logs", href: "/admin/audit-logs", icon: ScrollText, permission: "read:audit_logs" },
-    { name: "Settings", href: "/settings", icon: Settings, permission: "read:settings" },
+    {
+        name: "Settings",
+        icon: Settings,
+        children: [
+            { name: "General Settings", href: "/dashboard/settings/global", icon: Settings, permission: "read:settings" },
+            { name: "Roles & Permissions", href: "/settings/roles", icon: Users, permission: "read:roles" },
+        ]
+    },
 ]
 
 interface SidebarProps {

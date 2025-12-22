@@ -167,3 +167,55 @@ model UnitConversion {
 
   @@unique([fromUnitId, toUnitId])
 }
+
+// --- Global Settings Models ---
+
+model Company {
+  id         Int      @id @default(autoincrement())
+  legalName  String
+  tradeName  String?
+  address    String?
+  country    String?
+  phone      String?
+  email      String?
+  taxId      String?
+  logoUrl    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model FiscalYear {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique // e.g., "FY 2024-25"
+  startDate DateTime
+  endDate   DateTime
+  isActive  Boolean  @default(false)
+  isLocked  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Currency {
+  id            Int      @id @default(autoincrement())
+  code          String   @unique // e.g., "USD", "PKR"
+  symbol        String   // e.g., "$", "Rs"
+  isBase        Boolean  @default(false)
+  exchangeRate  Float    @default(1.0) // Rate relative to Base Currency
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model SystemConfig {
+  id                Int      @id @default(autoincrement())
+  quantityDecimals  Int      @default(2)
+  amountDecimals    Int      @default(2)
+  rateDecimals      Int      @default(4)
+  updatedAt         DateTime @updatedAt
+}
+
+model SystemSetting {
+  key         String   @id // e.g., "allow_negative_inventory"
+  value       String   // e.g., "true" or "false"
+  description String?
+  updatedAt   DateTime @updatedAt
+}

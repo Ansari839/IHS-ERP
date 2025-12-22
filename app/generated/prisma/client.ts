@@ -104,3 +104,28 @@ export type Unit = Prisma.UnitModel
  * 
  */
 export type UnitConversion = Prisma.UnitConversionModel
+/**
+ * Model Company
+ * 
+ */
+export type Company = Prisma.CompanyModel
+/**
+ * Model FiscalYear
+ * 
+ */
+export type FiscalYear = Prisma.FiscalYearModel
+/**
+ * Model Currency
+ * 
+ */
+export type Currency = Prisma.CurrencyModel
+/**
+ * Model SystemConfig
+ * 
+ */
+export type SystemConfig = Prisma.SystemConfigModel
+/**
+ * Model SystemSetting
+ * 
+ */
+export type SystemSetting = Prisma.SystemSettingModel
