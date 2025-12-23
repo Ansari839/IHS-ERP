@@ -84,6 +84,29 @@ export function ProfileForm({ user }: ProfileFormProps) {
                                 onChange={handleImageChange}
                                 disabled={isPending}
                             />
+                            {preview && (
+                                <button
+                                    type="button"
+                                    onClick={async () => {
+                                        setPreview(null);
+                                        const { removeProfileImage } = await import('@/app/actions/profile');
+                                        startTransition(async () => {
+                                            const result = await removeProfileImage();
+                                            if (result.success) {
+                                                toast.success('Profile picture removed');
+                                                router.refresh();
+                                            } else {
+                                                toast.error('Failed to remove picture');
+                                                setPreview(user.image || null);
+                                            }
+                                        });
+                                    }}
+                                    className="text-sm font-medium text-destructive hover:underline"
+                                    disabled={isPending}
+                                >
+                                    Remove
+                                </button>
+                            )}
                         </div>
                     </div>
 
@@ -128,7 +151,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
                         </Button>
                     </div>
                 </form>
-            </CardContent>
-        </Card>
+            </CardContent >
+        </Card >
     )
 }

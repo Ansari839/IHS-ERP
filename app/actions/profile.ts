@@ -97,3 +97,44 @@ export async function updateProfile(formData: FormData) {
         return { success: false, error: 'Failed to update profile' }
     }
 }
+
+export async function removeProfileImage() {
+    const user = await getCurrentUser()
+
+    if (!user) {
+        return { success: false, error: 'Unauthorized' }
+    }
+
+    try {
+        // Update user to remove image
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { image: null }
+        })
+
+        // Refresh the session to update the token with new user data
+        const cookieStore = await cookies()
+        const refreshToken = cookieStore.get('refreshToken')?.value
+
+        if (refreshToken) {
+            const { refresh } = await import('@/controllers/authController')
+            const refreshResult = await refresh(refreshToken)
+
+            if (refreshResult.success && refreshResult.data.accessToken) {
+                cookieStore.set('accessToken', refreshResult.data.accessToken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    sameSite: 'lax',
+                    maxAge: 60 * 15, // 15 minutes
+                    path: '/',
+                })
+            }
+        }
+
+        revalidatePath('/profile')
+        return { success: true }
+    } catch (error) {
+        console.error('Error removing profile image:', error)
+        return { success: false, error: 'Failed to remove profile image' }
+    }
+}

@@ -45,6 +45,7 @@ export default async function Home() {
     },
   })
 
+  /* eslint-disable react/jsx-key */
   const stats = [
     {
       title: "Total Users",
@@ -53,6 +54,8 @@ export default async function Home() {
       trend: "up" as const,
       icon: Users,
       description: "Registered users",
+      className: "bg-gradient-to-br from-blue-200 to-white dark:from-blue-900/50 dark:to-blue-950/30 border-blue-300 dark:border-blue-700",
+      iconClassName: "text-blue-700 dark:text-blue-300",
     },
     {
       title: "Total Posts",
@@ -61,6 +64,8 @@ export default async function Home() {
       trend: "up" as const,
       icon: ShoppingCart,
       description: "Posts created",
+      className: "bg-gradient-to-br from-violet-200 to-white dark:from-violet-900/50 dark:to-violet-950/30 border-violet-300 dark:border-violet-700",
+      iconClassName: "text-violet-700 dark:text-violet-300",
     },
     {
       title: "Published Posts",
@@ -69,6 +74,8 @@ export default async function Home() {
       trend: "up" as const,
       icon: Package,
       description: "Published content",
+      className: "bg-gradient-to-br from-emerald-200 to-white dark:from-emerald-900/50 dark:to-emerald-950/30 border-emerald-300 dark:border-emerald-700",
+      iconClassName: "text-emerald-700 dark:text-emerald-300",
     },
     {
       title: "All Posts",
@@ -77,6 +84,8 @@ export default async function Home() {
       trend: "down" as const,
       icon: DollarSign,
       description: "Total posts in system",
+      className: "bg-gradient-to-br from-amber-200 to-white dark:from-amber-900/50 dark:to-amber-950/30 border-amber-300 dark:border-amber-700",
+      iconClassName: "text-amber-700 dark:text-amber-300",
     },
   ]
 
@@ -92,12 +101,12 @@ export default async function Home() {
       {/* Stats Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-6">
         {stats.map((stat) => (
-          <Card key={stat.title} className="relative overflow-hidden">
+          <Card key={stat.title} className={`relative overflow-hidden transition-all hover:shadow-md ${stat.className}`}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
               </CardTitle>
-              <stat.icon className="h-4 w-4 text-muted-foreground" />
+              <stat.icon className={`h-4 w-4 ${stat.iconClassName}`} />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stat.value}</div>
