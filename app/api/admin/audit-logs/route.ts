@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
         // 2. Parse Query Parameters
         const searchParams = req.nextUrl.searchParams
         const page = parseInt(searchParams.get('page') || '1')
-        const limit = parseInt(searchParams.get('limit') || '20')
+        const limit = parseInt(searchParams.get('limit') || '10')
         const userId = searchParams.get('userId') ? parseInt(searchParams.get('userId')!) : undefined
         const module = searchParams.get('module') || undefined
         const action = searchParams.get('action') || undefined

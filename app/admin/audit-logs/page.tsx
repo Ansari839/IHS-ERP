@@ -67,7 +67,7 @@ export default function AuditLogsPage() {
         try {
             const params = new URLSearchParams({
                 page: page.toString(),
-                limit: '20',
+                limit: '10',
             })
             if (moduleFilter && moduleFilter !== 'ALL') params.append('module', moduleFilter)
             if (actionFilter && actionFilter !== 'ALL') params.append('action', actionFilter)

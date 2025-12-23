@@ -51,7 +51,7 @@ export async function getAuditLogs(params: {
     startDate?: Date
     endDate?: Date
 }) {
-    const { page = 1, limit = 20, userId, module, action, startDate, endDate } = params
+    const { page = 1, limit = 10, userId, module, action, startDate, endDate } = params
     const skip = (page - 1) * limit
 
     const where = {
