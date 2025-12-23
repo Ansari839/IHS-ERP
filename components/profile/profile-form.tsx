@@ -14,12 +14,23 @@ interface ProfileFormProps {
     user: {
         name: string | null
         email: string
+        image?: string | null
     }
 }
 
 export function ProfileForm({ user }: ProfileFormProps) {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
+
+    const [preview, setPreview] = useState<string | null>(user.image || null)
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+            const objectUrl = URL.createObjectURL(file)
+            setPreview(objectUrl)
+        }
+    }
 
     const handleSubmit = async (formData: FormData) => {
         startTransition(async () => {
@@ -44,6 +55,38 @@ export function ProfileForm({ user }: ProfileFormProps) {
             </CardHeader>
             <CardContent>
                 <form action={handleSubmit} className="space-y-6">
+                    <div className="flex flex-col items-center gap-4">
+                        <div className="relative h-24 w-24">
+                            <div className="h-24 w-24 rounded-full overflow-hidden bg-muted border-2 border-muted">
+                                {preview ? (
+                                    <img
+                                        src={preview}
+                                        alt="Profile preview"
+                                        className="h-full w-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="flex h-full w-full items-center justify-center text-muted-foreground text-2xl font-bold bg-secondary">
+                                        {user.name?.charAt(0).toUpperCase() || 'U'}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Label htmlFor="image" className="cursor-pointer text-sm font-medium text-primary hover:underline">
+                                Change Picture
+                            </Label>
+                            <Input
+                                id="image"
+                                name="image"
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={handleImageChange}
+                                disabled={isPending}
+                            />
+                        </div>
+                    </div>
+
                     <div className="space-y-2">
                         <Label htmlFor="name">Full Name</Label>
                         <Input

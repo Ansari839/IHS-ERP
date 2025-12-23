@@ -9,6 +9,7 @@ export interface User {
     id: number;
     email: string;
     name: string | null;
+    image?: string | null; // Profile picture URL
     roles?: string[]; // Simplified list of role names
     permissions?: string[]; // Simplified list of permission strings "action:resource"
 }
@@ -24,6 +25,7 @@ export interface TokenPayload {
     id: number;
     email: string;
     name: string | null;
+    image?: string | null;
     roles?: string[];
     permissions?: string[];
     type: 'access' | 'refresh';

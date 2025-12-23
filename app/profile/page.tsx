@@ -19,6 +19,7 @@ export default async function ProfilePage() {
         select: {
             name: true,
             email: true,
+            image: true,
         }
     })
 
@@ -26,8 +27,14 @@ export default async function ProfilePage() {
         redirect('/login')
     }
 
+    // Merge currentUser (token) with db user to get the latest image
+    const userForLayout = currentUser ? {
+        ...currentUser,
+        image: user.image
+    } : null
+
     return (
-        <DashboardLayout title="My Profile" user={currentUser}>
+        <DashboardLayout title="My Profile" user={userForLayout}>
             <div className="space-y-6 max-w-2xl mx-auto">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">My Profile</h1>

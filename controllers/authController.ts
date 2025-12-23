@@ -148,6 +148,7 @@ export async function login(
             id: user.id,
             email: user.email,
             name: user.name,
+            image: user.image,
             roles,
             permissions,
         };
@@ -174,6 +175,7 @@ export async function login(
                     id: user.id,
                     email: user.email,
                     name: user.name,
+                    image: user.image,
                     roles,
                     permissions,
                 },
@@ -285,6 +287,7 @@ export async function refresh(
             id: user.id,
             email: user.email,
             name: user.name,
+            image: user.image,
             roles,
             permissions,
         });
@@ -411,6 +414,7 @@ export async function changePassword(
             id: user.id,
             email: user.email,
             name: user.name,
+            image: user.image,
             roles,
             permissions,
         };
@@ -454,6 +458,7 @@ export async function changePassword(
                     id: user.id,
                     email: user.email,
                     name: user.name,
+                    image: user.image,
                     roles,
                     permissions,
                 },

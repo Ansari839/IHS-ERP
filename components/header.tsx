@@ -65,9 +65,17 @@ export function Header({ title = "Dashboard", user }: HeaderProps) {
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                             <Avatar>
-                                <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                                    {initials}
-                                </AvatarFallback>
+                                {user?.image ? (
+                                    <img
+                                        src={user.image}
+                                        alt={user.name || 'User'}
+                                        className="h-full w-full object-cover"
+                                    />
+                                ) : (
+                                    <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                                        {initials}
+                                    </AvatarFallback>
+                                )}
                             </Avatar>
                         </Button>
                     </DropdownMenuTrigger>
