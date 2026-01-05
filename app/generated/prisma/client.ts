@@ -129,3 +129,18 @@ export type SystemConfig = Prisma.SystemConfigModel
  * 
  */
 export type SystemSetting = Prisma.SystemSettingModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
+/**
+ * Model Variant
+ * 
+ */
+export type Variant = Prisma.VariantModel

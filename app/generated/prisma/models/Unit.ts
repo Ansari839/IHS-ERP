@@ -234,6 +234,7 @@ export type UnitWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
   conversionsFrom?: Prisma.UnitConversionListRelationFilter
   conversionsTo?: Prisma.UnitConversionListRelationFilter
+  products?: Prisma.ProductListRelationFilter
 }
 
 export type UnitOrderByWithRelationInput = {
@@ -246,6 +247,7 @@ export type UnitOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   conversionsFrom?: Prisma.UnitConversionOrderByRelationAggregateInput
   conversionsTo?: Prisma.UnitConversionOrderByRelationAggregateInput
+  products?: Prisma.ProductOrderByRelationAggregateInput
 }
 
 export type UnitWhereUniqueInput = Prisma.AtLeast<{
@@ -261,6 +263,7 @@ export type UnitWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
   conversionsFrom?: Prisma.UnitConversionListRelationFilter
   conversionsTo?: Prisma.UnitConversionListRelationFilter
+  products?: Prisma.ProductListRelationFilter
 }, "id" | "name" | "symbol">
 
 export type UnitOrderByWithAggregationInput = {
@@ -300,6 +303,7 @@ export type UnitCreateInput = {
   updatedAt?: Date | string
   conversionsFrom?: Prisma.UnitConversionCreateNestedManyWithoutFromUnitInput
   conversionsTo?: Prisma.UnitConversionCreateNestedManyWithoutToUnitInput
+  products?: Prisma.ProductCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUncheckedCreateInput = {
@@ -312,6 +316,7 @@ export type UnitUncheckedCreateInput = {
   updatedAt?: Date | string
   conversionsFrom?: Prisma.UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput
   conversionsTo?: Prisma.UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUpdateInput = {
@@ -323,6 +328,7 @@ export type UnitUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversionsFrom?: Prisma.UnitConversionUpdateManyWithoutFromUnitNestedInput
   conversionsTo?: Prisma.UnitConversionUpdateManyWithoutToUnitNestedInput
+  products?: Prisma.ProductUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateInput = {
@@ -335,6 +341,7 @@ export type UnitUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversionsFrom?: Prisma.UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput
   conversionsTo?: Prisma.UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitCreateManyInput = {
@@ -437,6 +444,20 @@ export type UnitUpdateOneRequiredWithoutConversionsToNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UnitUpdateToOneWithWhereWithoutConversionsToInput, Prisma.UnitUpdateWithoutConversionsToInput>, Prisma.UnitUncheckedUpdateWithoutConversionsToInput>
 }
 
+export type UnitCreateNestedOneWithoutProductsInput = {
+  create?: Prisma.XOR<Prisma.UnitCreateWithoutProductsInput, Prisma.UnitUncheckedCreateWithoutProductsInput>
+  connectOrCreate?: Prisma.UnitCreateOrConnectWithoutProductsInput
+  connect?: Prisma.UnitWhereUniqueInput
+}
+
+export type UnitUpdateOneRequiredWithoutProductsNestedInput = {
+  create?: Prisma.XOR<Prisma.UnitCreateWithoutProductsInput, Prisma.UnitUncheckedCreateWithoutProductsInput>
+  connectOrCreate?: Prisma.UnitCreateOrConnectWithoutProductsInput
+  upsert?: Prisma.UnitUpsertWithoutProductsInput
+  connect?: Prisma.UnitWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UnitUpdateToOneWithWhereWithoutProductsInput, Prisma.UnitUpdateWithoutProductsInput>, Prisma.UnitUncheckedUpdateWithoutProductsInput>
+}
+
 export type UnitCreateWithoutConversionsFromInput = {
   name: string
   symbol: string
@@ -445,6 +466,7 @@ export type UnitCreateWithoutConversionsFromInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   conversionsTo?: Prisma.UnitConversionCreateNestedManyWithoutToUnitInput
+  products?: Prisma.ProductCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUncheckedCreateWithoutConversionsFromInput = {
@@ -456,6 +478,7 @@ export type UnitUncheckedCreateWithoutConversionsFromInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   conversionsTo?: Prisma.UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitCreateOrConnectWithoutConversionsFromInput = {
@@ -471,6 +494,7 @@ export type UnitCreateWithoutConversionsToInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   conversionsFrom?: Prisma.UnitConversionCreateNestedManyWithoutFromUnitInput
+  products?: Prisma.ProductCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUncheckedCreateWithoutConversionsToInput = {
@@ -482,6 +506,7 @@ export type UnitUncheckedCreateWithoutConversionsToInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   conversionsFrom?: Prisma.UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitCreateOrConnectWithoutConversionsToInput = {
@@ -508,6 +533,7 @@ export type UnitUpdateWithoutConversionsFromInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversionsTo?: Prisma.UnitConversionUpdateManyWithoutToUnitNestedInput
+  products?: Prisma.ProductUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateWithoutConversionsFromInput = {
@@ -519,6 +545,7 @@ export type UnitUncheckedUpdateWithoutConversionsFromInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversionsTo?: Prisma.UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUpsertWithoutConversionsToInput = {
@@ -540,6 +567,7 @@ export type UnitUpdateWithoutConversionsToInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversionsFrom?: Prisma.UnitConversionUpdateManyWithoutFromUnitNestedInput
+  products?: Prisma.ProductUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateWithoutConversionsToInput = {
@@ -551,6 +579,69 @@ export type UnitUncheckedUpdateWithoutConversionsToInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversionsFrom?: Prisma.UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutUnitNestedInput
+}
+
+export type UnitCreateWithoutProductsInput = {
+  name: string
+  symbol: string
+  unitType: string
+  isBase?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  conversionsFrom?: Prisma.UnitConversionCreateNestedManyWithoutFromUnitInput
+  conversionsTo?: Prisma.UnitConversionCreateNestedManyWithoutToUnitInput
+}
+
+export type UnitUncheckedCreateWithoutProductsInput = {
+  id?: number
+  name: string
+  symbol: string
+  unitType: string
+  isBase?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  conversionsFrom?: Prisma.UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput
+  conversionsTo?: Prisma.UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
+}
+
+export type UnitCreateOrConnectWithoutProductsInput = {
+  where: Prisma.UnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.UnitCreateWithoutProductsInput, Prisma.UnitUncheckedCreateWithoutProductsInput>
+}
+
+export type UnitUpsertWithoutProductsInput = {
+  update: Prisma.XOR<Prisma.UnitUpdateWithoutProductsInput, Prisma.UnitUncheckedUpdateWithoutProductsInput>
+  create: Prisma.XOR<Prisma.UnitCreateWithoutProductsInput, Prisma.UnitUncheckedCreateWithoutProductsInput>
+  where?: Prisma.UnitWhereInput
+}
+
+export type UnitUpdateToOneWithWhereWithoutProductsInput = {
+  where?: Prisma.UnitWhereInput
+  data: Prisma.XOR<Prisma.UnitUpdateWithoutProductsInput, Prisma.UnitUncheckedUpdateWithoutProductsInput>
+}
+
+export type UnitUpdateWithoutProductsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  symbol?: Prisma.StringFieldUpdateOperationsInput | string
+  unitType?: Prisma.StringFieldUpdateOperationsInput | string
+  isBase?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conversionsFrom?: Prisma.UnitConversionUpdateManyWithoutFromUnitNestedInput
+  conversionsTo?: Prisma.UnitConversionUpdateManyWithoutToUnitNestedInput
+}
+
+export type UnitUncheckedUpdateWithoutProductsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  symbol?: Prisma.StringFieldUpdateOperationsInput | string
+  unitType?: Prisma.StringFieldUpdateOperationsInput | string
+  isBase?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conversionsFrom?: Prisma.UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput
+  conversionsTo?: Prisma.UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
 }
 
 
@@ -561,11 +652,13 @@ export type UnitUncheckedUpdateWithoutConversionsToInput = {
 export type UnitCountOutputType = {
   conversionsFrom: number
   conversionsTo: number
+  products: number
 }
 
 export type UnitCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conversionsFrom?: boolean | UnitCountOutputTypeCountConversionsFromArgs
   conversionsTo?: boolean | UnitCountOutputTypeCountConversionsToArgs
+  products?: boolean | UnitCountOutputTypeCountProductsArgs
 }
 
 /**
@@ -592,6 +685,13 @@ export type UnitCountOutputTypeCountConversionsToArgs<ExtArgs extends runtime.Ty
   where?: Prisma.UnitConversionWhereInput
 }
 
+/**
+ * UnitCountOutputType without action
+ */
+export type UnitCountOutputTypeCountProductsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductWhereInput
+}
+
 
 export type UnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -603,6 +703,7 @@ export type UnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   conversionsFrom?: boolean | Prisma.Unit$conversionsFromArgs<ExtArgs>
   conversionsTo?: boolean | Prisma.Unit$conversionsToArgs<ExtArgs>
+  products?: boolean | Prisma.Unit$productsArgs<ExtArgs>
   _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unit"]>
 
@@ -640,6 +741,7 @@ export type UnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conversionsFrom?: boolean | Prisma.Unit$conversionsFromArgs<ExtArgs>
   conversionsTo?: boolean | Prisma.Unit$conversionsToArgs<ExtArgs>
+  products?: boolean | Prisma.Unit$productsArgs<ExtArgs>
   _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UnitIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -650,6 +752,7 @@ export type $UnitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     conversionsFrom: Prisma.$UnitConversionPayload<ExtArgs>[]
     conversionsTo: Prisma.$UnitConversionPayload<ExtArgs>[]
+    products: Prisma.$ProductPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1055,6 +1158,7 @@ export interface Prisma__UnitClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   conversionsFrom<T extends Prisma.Unit$conversionsFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unit$conversionsFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UnitConversionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversionsTo<T extends Prisma.Unit$conversionsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unit$conversionsToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UnitConversionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  products<T extends Prisma.Unit$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unit$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1524,6 +1628,30 @@ export type Unit$conversionsToArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.UnitConversionScalarFieldEnum | Prisma.UnitConversionScalarFieldEnum[]
+}
+
+/**
+ * Unit.products
+ */
+export type Unit$productsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Product
+   */
+  select?: Prisma.ProductSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Product
+   */
+  omit?: Prisma.ProductOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductInclude<ExtArgs> | null
+  where?: Prisma.ProductWhereInput
+  orderBy?: Prisma.ProductOrderByWithRelationInput | Prisma.ProductOrderByWithRelationInput[]
+  cursor?: Prisma.ProductWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
 }
 
 /**

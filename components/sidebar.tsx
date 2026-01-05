@@ -35,16 +35,36 @@ type NavigationItem = {
     icon: LucideIcon
     children?: {
         name: string
-        href: string
+        href?: string
         icon?: LucideIcon
         permission?: string
+        children?: {
+            name: string
+            href: string
+            icon?: LucideIcon
+            permission?: string
+        }[]
     }[]
     permission?: string
 }
 
 const navigation: NavigationItem[] = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Products", href: "/products", icon: Package },
+    {
+        name: "Production",
+        icon: Package,
+        children: [
+            {
+                name: "Product",
+                icon: Package,
+                children: [
+                    { name: "Categories", href: "/dashboard/production/categories", icon: Settings, permission: "read:inventory" },
+                    { name: "Products", href: "/dashboard/production/products", icon: Package, permission: "read:inventory" },
+                    { name: "Specifications", href: "/dashboard/production/variants", icon: Settings, permission: "read:inventory" },
+                ]
+            }
+        ]
+    },
     {
         name: "Inventory",
         icon: Warehouse,
@@ -54,9 +74,9 @@ const navigation: NavigationItem[] = [
             { name: "Conversions", href: "/dashboard/inventory/conversions", icon: ArrowLeftRight, permission: "read:inventory" },
         ]
     },
-    { name: "Orders", href: "/orders", icon: ShoppingCart },
-    { name: "Customers", href: "/customers", icon: Users },
-    { name: "Reports", href: "/reports", icon: BarChart3 },
+    // { name: "Orders", href: "/orders", icon: ShoppingCart },
+    // { name: "Customers", href: "/customers", icon: Users },
+    // { name: "Reports", href: "/reports", icon: BarChart3 },
     { name: "Users", href: "/users", icon: Users, permission: "read:users" },
     { name: "Audit Logs", href: "/admin/audit-logs", icon: ScrollText, permission: "read:audit_logs" },
     {
@@ -78,7 +98,7 @@ interface SidebarProps {
 
 export function Sidebar({ className, user, isCollapsed = false, onCollapse }: SidebarProps) {
     const pathname = usePathname()
-    const [expandedItems, setExpandedItems] = React.useState<string[]>(["Inventory"])
+    const [expandedItems, setExpandedItems] = React.useState<string[]>([])
 
     const toggleExpand = (name: string) => {
         setExpandedItems(prev =>
@@ -167,11 +187,54 @@ export function Sidebar({ className, user, isCollapsed = false, onCollapse }: Si
                                         {!isCollapsed && isExpanded && (
                                             <div className="mt-1 space-y-1 pl-10">
                                                 {item.children!.map((child) => {
+                                                    const isChildExpanded = expandedItems.includes(child.name)
+                                                    const hasSubChildren = child.children && child.children.length > 0
+
+                                                    if (hasSubChildren) {
+                                                        return (
+                                                            <div key={child.name}>
+                                                                <button
+                                                                    onClick={() => toggleExpand(child.name)}
+                                                                    className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                                                                >
+                                                                    <span>{child.name}</span>
+                                                                    <ChevronDown
+                                                                        className={cn(
+                                                                            "h-4 w-4 transition-transform",
+                                                                            isChildExpanded && "rotate-180"
+                                                                        )}
+                                                                    />
+                                                                </button>
+                                                                {isChildExpanded && (
+                                                                    <div className="mt-1 space-y-1 pl-4">
+                                                                        {child.children!.map((subChild) => {
+                                                                            const isSubChildActive = pathname === subChild.href
+                                                                            return (
+                                                                                <Link
+                                                                                    key={subChild.name}
+                                                                                    href={subChild.href}
+                                                                                    className={cn(
+                                                                                        "block rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                                                                                        isSubChildActive
+                                                                                            ? "bg-primary/10 text-primary"
+                                                                                            : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                                                                                    )}
+                                                                                >
+                                                                                    {subChild.name}
+                                                                                </Link>
+                                                                            )
+                                                                        })}
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        )
+                                                    }
+
                                                     const isChildActive = pathname === child.href
                                                     return (
                                                         <Link
                                                             key={child.name}
-                                                            href={child.href}
+                                                            href={child.href!}
                                                             className={cn(
                                                                 "block rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                                                                 isChildActive
@@ -242,7 +305,7 @@ export function Sidebar({ className, user, isCollapsed = false, onCollapse }: Si
 export function MobileSidebar() {
     const [open, setOpen] = React.useState(false)
     const pathname = usePathname()
-    const [expandedItems, setExpandedItems] = React.useState<string[]>(["Inventory"])
+    const [expandedItems, setExpandedItems] = React.useState<string[]>([])
 
     const toggleExpand = (name: string) => {
         setExpandedItems(prev =>
@@ -299,11 +362,55 @@ export function MobileSidebar() {
                                             {isExpanded && (
                                                 <div className="mt-1 space-y-1 pl-10">
                                                     {item.children!.map((child) => {
+                                                        const isChildExpanded = expandedItems.includes(child.name)
+                                                        const hasSubChildren = child.children && child.children.length > 0
+
+                                                        if (hasSubChildren) {
+                                                            return (
+                                                                <div key={child.name}>
+                                                                    <button
+                                                                        onClick={() => toggleExpand(child.name)}
+                                                                        className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                                                                    >
+                                                                        <span>{child.name}</span>
+                                                                        <ChevronDown
+                                                                            className={cn(
+                                                                                "h-4 w-4 transition-transform",
+                                                                                isChildExpanded && "rotate-180"
+                                                                            )}
+                                                                        />
+                                                                    </button>
+                                                                    {isChildExpanded && (
+                                                                        <div className="mt-1 space-y-1 pl-4">
+                                                                            {child.children!.map((subChild) => {
+                                                                                const isSubChildActive = pathname === subChild.href
+                                                                                return (
+                                                                                    <Link
+                                                                                        key={subChild.name}
+                                                                                        href={subChild.href}
+                                                                                        onClick={() => setOpen(false)}
+                                                                                        className={cn(
+                                                                                            "block rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                                                                                            isSubChildActive
+                                                                                                ? "bg-primary/10 text-primary"
+                                                                                                : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                                                                                        )}
+                                                                                    >
+                                                                                        {subChild.name}
+                                                                                    </Link>
+                                                                                )
+                                                                            })}
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            )
+                                                        }
+
                                                         const isChildActive = pathname === child.href
                                                         return (
                                                             <Link
                                                                 key={child.name}
-                                                                href={child.href}
+                                                                href={child.href!}
                                                                 onClick={() => setOpen(false)}
                                                                 className={cn(
                                                                     "block rounded-lg px-3 py-2 text-sm font-medium transition-colors",
