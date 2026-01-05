@@ -20,8 +20,9 @@ export async function createUser(formData: FormData) {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
 
-    // Get all selected roles
+    // Get all selected roles and subordinates
     const roleIds = formData.getAll('roles').map(id => parseInt(id as string))
+    const subordinateIds = formData.getAll('subordinates').map(id => parseInt(id as string))
 
     // Validation
     if (!name || !email || !password) {
@@ -76,6 +77,11 @@ export async function createUser(formData: FormData) {
                     create: roleIds.map(roleId => ({
                         roleId
                     }))
+                },
+                auditLogPermissions: {
+                    create: subordinateIds.map(juniorId => ({
+                        juniorId
+                    }))
                 }
             },
         })
@@ -100,8 +106,9 @@ export async function updateUser(id: number, formData: FormData) {
     const name = formData.get('name') as string
     const email = formData.get('email') as string
 
-    // Get all selected roles
+    // Get all selected roles and subordinates
     const roleIds = formData.getAll('roles').map(id => parseInt(id as string))
+    const subordinateIds = formData.getAll('subordinates').map(id => parseInt(id as string))
 
     // Validation
     if (!name || !email) {
@@ -146,6 +153,20 @@ export async function updateUser(id: number, formData: FormData) {
                 where: { id },
                 data: { name, email }
             })
+
+            // Update Audit Access (Delete existing, Create new)
+            await tx.auditAccess.deleteMany({
+                where: { seniorId: id }
+            })
+
+            if (subordinateIds.length > 0) {
+                await tx.auditAccess.createMany({
+                    data: subordinateIds.map(juniorId => ({
+                        seniorId: id,
+                        juniorId
+                    }))
+                })
+            }
 
             // Delete existing roles
             await tx.userRole.deleteMany({

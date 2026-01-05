@@ -45,6 +45,11 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model AuditAccess
+ * 
+ */
+export type AuditAccess = Prisma.AuditAccessModel
+/**
  * Model Department
  * 
  */

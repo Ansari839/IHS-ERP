@@ -77,8 +77,14 @@ const navigation: NavigationItem[] = [
     // { name: "Orders", href: "/orders", icon: ShoppingCart },
     // { name: "Customers", href: "/customers", icon: Users },
     // { name: "Reports", href: "/reports", icon: BarChart3 },
-    { name: "Users", href: "/users", icon: Users, permission: "read:users" },
-    { name: "Audit Logs", href: "/admin/audit-logs", icon: ScrollText, permission: "read:audit_logs" },
+    {
+        name: "Users",
+        icon: Users,
+        children: [
+            { name: "All Users", href: "/users", icon: Users, permission: "read:users" },
+            { name: "Audit Logs", href: "/admin/audit-logs", icon: ScrollText, permission: "read:audit_logs" },
+        ]
+    },
     {
         name: "Settings",
         icon: Settings,

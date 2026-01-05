@@ -45,23 +45,26 @@ export async function logAudit(entry: AuditLogEntry) {
 export async function getAuditLogs(params: {
     page?: number
     limit?: number
-    userId?: number
+    userIds?: number[] // Support multiple IDs for hierarchy
     module?: string
     action?: string
     startDate?: Date
     endDate?: Date
 }) {
-    const { page = 1, limit = 10, userId, module, action, startDate, endDate } = params
+    const { page = 1, limit = 10, userIds, module, action, startDate, endDate } = params
     const skip = (page - 1) * limit
 
-    const where = {
-        userId,
+    const where: any = {
         module,
         action,
         timestamp: {
             gte: startDate,
             lte: endDate,
         },
+    }
+
+    if (userIds && userIds.length > 0) {
+        where.userId = { in: userIds }
     }
 
     const [data, total] = await Promise.all([

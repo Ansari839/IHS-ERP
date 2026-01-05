@@ -39,7 +39,7 @@ async function main() {
     await new Promise(r => setTimeout(r, 1000))
 
     const logs = await getAuditLogs({
-        userId: user.id,
+        userIds: [user.id],
         module: 'TEST_SCRIPT'
     })
 

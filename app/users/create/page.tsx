@@ -12,6 +12,21 @@ export default async function CreateUserPage() {
         orderBy: { name: 'asc' },
     })
 
+    const allUsers = await prisma.user.findMany({
+        where: {
+            isActive: true,
+            userRoles: {
+                none: {
+                    role: {
+                        name: 'SUPER_ADMIN'
+                    }
+                }
+            }
+        },
+        select: { id: true, name: true, email: true },
+        orderBy: { name: 'asc' }
+    })
+
     return (
         <div className="space-y-6">
             <div className="flex items-center gap-4">
@@ -31,7 +46,7 @@ export default async function CreateUserPage() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <UserForm roles={roles} />
+                    <UserForm roles={roles} allUsers={allUsers} />
                 </CardContent>
             </Card>
         </div>

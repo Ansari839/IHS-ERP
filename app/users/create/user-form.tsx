@@ -7,6 +7,15 @@ import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
+import { ChevronDown } from 'lucide-react'
+import {
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 interface Role {
     id: number
@@ -16,11 +25,19 @@ interface Role {
 
 interface UserFormProps {
     roles: Role[]
+    allUsers: { id: number; name: string | null; email: string }[]
 }
 
-export function UserForm({ roles }: UserFormProps) {
+export function UserForm({ roles, allUsers }: UserFormProps) {
     const [isPending, startTransition] = useTransition()
     const [error, setError] = useState<string>('')
+    const [selectedSubordinates, setSelectedSubordinates] = useState<number[]>([])
+
+    const toggleSubordinate = (id: number) => {
+        setSelectedSubordinates(prev =>
+            prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+        )
+    }
 
     async function handleSubmit(formData: FormData) {
         setError('')
@@ -89,6 +106,48 @@ export function UserForm({ roles }: UserFormProps) {
                         ))}
                     </div>
                 </div>
+            </div>
+
+            <div className="space-y-2">
+                <Label className="text-base font-semibold">Audit Log Access</Label>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button
+                            variant="outline"
+                            className="w-full justify-between"
+                            disabled={isPending}
+                            type="button"
+                        >
+                            {selectedSubordinates.length === 0
+                                ? "Select users to monitor..."
+                                : `${selectedSubordinates.length} users selected`}
+                            <ChevronDown className="h-4 w-4 opacity-50" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)] max-h-64 overflow-y-auto">
+                        <DropdownMenuLabel>Monitorable Users</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        {allUsers.map((u) => (
+                            <DropdownMenuCheckboxItem
+                                key={u.id}
+                                checked={selectedSubordinates.includes(u.id)}
+                                onCheckedChange={() => toggleSubordinate(u.id)}
+                                onSelect={(e) => e.preventDefault()}
+                            >
+                                {u.name || u.email}
+                            </DropdownMenuCheckboxItem>
+                        ))}
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Hidden inputs to send data to server action */}
+                {selectedSubordinates.map(id => (
+                    <input key={id} type="hidden" name="subordinates" value={id} />
+                ))}
+
+                <p className="text-sm text-muted-foreground">
+                    Super Admin: Grant this user permission to view logs of the selected subordinates. (Super Admins are protected).
+                </p>
             </div>
 
             {error && (

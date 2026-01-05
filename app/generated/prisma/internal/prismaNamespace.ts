@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  AuditAccess: 'AuditAccess',
   Department: 'Department',
   Role: 'Role',
   Permission: 'Permission',
@@ -420,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "department" | "role" | "permission" | "rolePermission" | "userRole" | "post" | "refreshToken" | "auditLog" | "warehouse" | "userWarehouse" | "unit" | "unitConversion" | "company" | "fiscalYear" | "currency" | "systemConfig" | "systemSetting" | "category" | "product" | "variant"
+    modelProps: "user" | "auditAccess" | "department" | "role" | "permission" | "rolePermission" | "userRole" | "post" | "refreshToken" | "auditLog" | "warehouse" | "userWarehouse" | "unit" | "unitConversion" | "company" | "fiscalYear" | "currency" | "systemConfig" | "systemSetting" | "category" | "product" | "variant"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -495,6 +496,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    AuditAccess: {
+      payload: Prisma.$AuditAccessPayload<ExtArgs>
+      fields: Prisma.AuditAccessFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AuditAccessFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AuditAccessFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>
+        }
+        findFirst: {
+          args: Prisma.AuditAccessFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AuditAccessFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>
+        }
+        findMany: {
+          args: Prisma.AuditAccessFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>[]
+        }
+        create: {
+          args: Prisma.AuditAccessCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>
+        }
+        createMany: {
+          args: Prisma.AuditAccessCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AuditAccessCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>[]
+        }
+        delete: {
+          args: Prisma.AuditAccessDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>
+        }
+        update: {
+          args: Prisma.AuditAccessUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>
+        }
+        deleteMany: {
+          args: Prisma.AuditAccessDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AuditAccessUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AuditAccessUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>[]
+        }
+        upsert: {
+          args: Prisma.AuditAccessUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditAccessPayload>
+        }
+        aggregate: {
+          args: Prisma.AuditAccessAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAuditAccess>
+        }
+        groupBy: {
+          args: Prisma.AuditAccessGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AuditAccessGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AuditAccessCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AuditAccessCountAggregateOutputType> | number
         }
       }
     }
@@ -2034,6 +2109,15 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const AuditAccessScalarFieldEnum = {
+  id: 'id',
+  seniorId: 'seniorId',
+  juniorId: 'juniorId'
+} as const
+
+export type AuditAccessScalarFieldEnum = (typeof AuditAccessScalarFieldEnum)[keyof typeof AuditAccessScalarFieldEnum]
+
+
 export const DepartmentScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -2516,6 +2600,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  auditAccess?: Prisma.AuditAccessOmit
   department?: Prisma.DepartmentOmit
   role?: Prisma.RoleOmit
   permission?: Prisma.PermissionOmit

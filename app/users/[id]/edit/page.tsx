@@ -24,6 +24,7 @@ export default async function EditUserPage({ params }: EditUserPageProps) {
         where: { id: userId },
         include: {
             userRoles: true,
+            auditLogPermissions: true,
             userWarehouses: {
                 include: {
                     warehouse: true
@@ -45,6 +46,22 @@ export default async function EditUserPage({ params }: EditUserPageProps) {
         select: { id: true, name: true }
     })
 
+    const allUsers = await prisma.user.findMany({
+        where: {
+            id: { not: userId },
+            isActive: true,
+            userRoles: {
+                none: {
+                    role: {
+                        name: 'SUPER_ADMIN'
+                    }
+                }
+            }
+        },
+        select: { id: true, name: true, email: true },
+        orderBy: { name: 'asc' }
+    })
+
     return (
         <Protect permission="update:users" fallback={<div>Unauthorized</div>}>
             <div className="space-y-6">
@@ -62,8 +79,7 @@ export default async function EditUserPage({ params }: EditUserPageProps) {
                         <CardTitle>User Details</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <EditUserForm user={user} roles={roles} />
-
+                        <EditUserForm user={user as any} roles={roles} allUsers={allUsers} />
                     </CardContent>
                 </Card>
 

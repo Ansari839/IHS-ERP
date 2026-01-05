@@ -29,8 +29,22 @@ model User {
   // RBAC & Organization
   departmentId  Int?
   department    Department?    @relation(fields: [departmentId], references: [id])
+  
+  auditLogPermissions  AuditAccess[] @relation("SeniorAccess")
+  visibleToAudit       AuditAccess[] @relation("JuniorAccess")
+  
   userRoles     UserRole[]
   userWarehouses UserWarehouse[]
+}
+
+model AuditAccess {
+  id        Int      @id @default(autoincrement())
+  seniorId  Int
+  juniorId  Int
+  senior    User     @relation("SeniorAccess", fields: [seniorId], references: [id], onDelete: Cascade)
+  junior    User     @relation("JuniorAccess", fields: [juniorId], references: [id], onDelete: Cascade)
+
+  @@unique([seniorId, juniorId])
 }
 
 model Department {

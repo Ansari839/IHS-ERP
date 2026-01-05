@@ -60,7 +60,20 @@ export default function AuditLogsPage() {
     const [page, setPage] = useState(1)
     const [moduleFilter, setModuleFilter] = useState('')
     const [actionFilter, setActionFilter] = useState('')
-    const [userIdFilter, setUserIdFilter] = useState('')
+    const [userIdFilter, setUserIdFilter] = useState('ALL')
+    const [monitorableUsers, setMonitorableUsers] = useState<{ id: number; name: string | null; email: string }[]>([])
+
+    const fetchUsers = async () => {
+        try {
+            const res = await fetch('/api/admin/audit-logs/users')
+            const data = await res.json()
+            if (Array.isArray(data)) {
+                setMonitorableUsers(data)
+            }
+        } catch (error) {
+            console.error('Failed to fetch monitorable users:', error)
+        }
+    }
 
     const fetchLogs = async () => {
         setLoading(true)
@@ -71,7 +84,7 @@ export default function AuditLogsPage() {
             })
             if (moduleFilter && moduleFilter !== 'ALL') params.append('module', moduleFilter)
             if (actionFilter && actionFilter !== 'ALL') params.append('action', actionFilter)
-            if (userIdFilter) params.append('userId', userIdFilter)
+            if (userIdFilter && userIdFilter !== 'ALL') params.append('userId', userIdFilter)
 
             const res = await fetch(`/api/admin/audit-logs?${params}`)
             const data = await res.json()
@@ -88,8 +101,12 @@ export default function AuditLogsPage() {
     }
 
     useEffect(() => {
+        fetchUsers()
+    }, [])
+
+    useEffect(() => {
         fetchLogs()
-    }, [page, moduleFilter, actionFilter])
+    }, [page, moduleFilter, actionFilter, userIdFilter])
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()
@@ -110,18 +127,19 @@ export default function AuditLogsPage() {
                 <CardContent>
                     {/* Filters */}
                     <div className="flex flex-wrap gap-4 mb-6">
-                        <div className="flex-1 min-w-[200px]">
-                            <form onSubmit={handleSearch} className="flex gap-2">
-                                <Input
-                                    placeholder="Filter by User ID..."
-                                    value={userIdFilter}
-                                    onChange={(e) => setUserIdFilter(e.target.value)}
-                                />
-                                <Button type="submit" variant="secondary">
-                                    <Search className="h-4 w-4" />
-                                </Button>
-                            </form>
-                        </div>
+                        <Select value={userIdFilter} onValueChange={setUserIdFilter}>
+                            <SelectTrigger className="flex-1 min-w-[200px]">
+                                <SelectValue placeholder="Filter by User..." />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="ALL">All Authorized Users</SelectItem>
+                                {monitorableUsers.map((u) => (
+                                    <SelectItem key={u.id} value={u.id.toString()}>
+                                        {u.name || u.email}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
 
                         <Select value={moduleFilter} onValueChange={setModuleFilter}>
                             <SelectTrigger className="w-[180px]">

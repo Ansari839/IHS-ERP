@@ -272,6 +272,8 @@ export type UserWhereInput = {
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
+  auditLogPermissions?: Prisma.AuditAccessListRelationFilter
+  visibleToAudit?: Prisma.AuditAccessListRelationFilter
   userRoles?: Prisma.UserRoleListRelationFilter
   userWarehouses?: Prisma.UserWarehouseListRelationFilter
 }
@@ -292,6 +294,8 @@ export type UserOrderByWithRelationInput = {
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   department?: Prisma.DepartmentOrderByWithRelationInput
+  auditLogPermissions?: Prisma.AuditAccessOrderByRelationAggregateInput
+  visibleToAudit?: Prisma.AuditAccessOrderByRelationAggregateInput
   userRoles?: Prisma.UserRoleOrderByRelationAggregateInput
   userWarehouses?: Prisma.UserWarehouseOrderByRelationAggregateInput
 }
@@ -315,6 +319,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
+  auditLogPermissions?: Prisma.AuditAccessListRelationFilter
+  visibleToAudit?: Prisma.AuditAccessListRelationFilter
   userRoles?: Prisma.UserRoleListRelationFilter
   userWarehouses?: Prisma.UserWarehouseListRelationFilter
 }, "id" | "email">
@@ -369,6 +375,8 @@ export type UserCreateInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   department?: Prisma.DepartmentCreateNestedOneWithoutUsersInput
+  auditLogPermissions?: Prisma.AuditAccessCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseCreateNestedManyWithoutUserInput
 }
@@ -388,6 +396,8 @@ export type UserUncheckedCreateInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseUncheckedCreateNestedManyWithoutUserInput
 }
@@ -406,6 +416,8 @@ export type UserUpdateInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   department?: Prisma.DepartmentUpdateOneWithoutUsersNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUpdateManyWithoutUserNestedInput
 }
@@ -425,6 +437,8 @@ export type UserUncheckedUpdateInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -521,6 +535,11 @@ export type UserSumOrderByAggregateInput = {
   departmentId?: Prisma.SortOrder
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
 export type UserListRelationFilter = {
   every?: Prisma.UserWhereInput
   some?: Prisma.UserWhereInput
@@ -529,11 +548,6 @@ export type UserListRelationFilter = {
 
 export type UserOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -566,6 +580,34 @@ export type NullableIntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type UserCreateNestedOneWithoutAuditLogPermissionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuditLogPermissionsInput, Prisma.UserUncheckedCreateWithoutAuditLogPermissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditLogPermissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutVisibleToAuditInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVisibleToAuditInput, Prisma.UserUncheckedCreateWithoutVisibleToAuditInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVisibleToAuditInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAuditLogPermissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuditLogPermissionsInput, Prisma.UserUncheckedCreateWithoutAuditLogPermissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditLogPermissionsInput
+  upsert?: Prisma.UserUpsertWithoutAuditLogPermissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditLogPermissionsInput, Prisma.UserUpdateWithoutAuditLogPermissionsInput>, Prisma.UserUncheckedUpdateWithoutAuditLogPermissionsInput>
+}
+
+export type UserUpdateOneRequiredWithoutVisibleToAuditNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVisibleToAuditInput, Prisma.UserUncheckedCreateWithoutVisibleToAuditInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVisibleToAuditInput
+  upsert?: Prisma.UserUpsertWithoutVisibleToAuditInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVisibleToAuditInput, Prisma.UserUpdateWithoutVisibleToAuditInput>, Prisma.UserUncheckedUpdateWithoutVisibleToAuditInput>
 }
 
 export type UserCreateNestedManyWithoutDepartmentInput = {
@@ -680,6 +722,194 @@ export type UserUpdateOneRequiredWithoutUserWarehousesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserWarehousesInput, Prisma.UserUpdateWithoutUserWarehousesInput>, Prisma.UserUncheckedUpdateWithoutUserWarehousesInput>
 }
 
+export type UserCreateWithoutAuditLogPermissionsInput = {
+  email: string
+  name?: string | null
+  image?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  firstLogin?: boolean
+  forcePasswordChange?: boolean
+  isActive?: boolean
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  department?: Prisma.DepartmentCreateNestedOneWithoutUsersInput
+  visibleToAudit?: Prisma.AuditAccessCreateNestedManyWithoutJuniorInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  userWarehouses?: Prisma.UserWarehouseCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuditLogPermissionsInput = {
+  id?: number
+  email: string
+  name?: string | null
+  image?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  firstLogin?: boolean
+  forcePasswordChange?: boolean
+  isActive?: boolean
+  departmentId?: number | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutJuniorInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  userWarehouses?: Prisma.UserWarehouseUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAuditLogPermissionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuditLogPermissionsInput, Prisma.UserUncheckedCreateWithoutAuditLogPermissionsInput>
+}
+
+export type UserCreateWithoutVisibleToAuditInput = {
+  email: string
+  name?: string | null
+  image?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  firstLogin?: boolean
+  forcePasswordChange?: boolean
+  isActive?: boolean
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  department?: Prisma.DepartmentCreateNestedOneWithoutUsersInput
+  auditLogPermissions?: Prisma.AuditAccessCreateNestedManyWithoutSeniorInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  userWarehouses?: Prisma.UserWarehouseCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutVisibleToAuditInput = {
+  id?: number
+  email: string
+  name?: string | null
+  image?: string | null
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  firstLogin?: boolean
+  forcePasswordChange?: boolean
+  isActive?: boolean
+  departmentId?: number | null
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutSeniorInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  userWarehouses?: Prisma.UserWarehouseUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutVisibleToAuditInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutVisibleToAuditInput, Prisma.UserUncheckedCreateWithoutVisibleToAuditInput>
+}
+
+export type UserUpsertWithoutAuditLogPermissionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuditLogPermissionsInput, Prisma.UserUncheckedUpdateWithoutAuditLogPermissionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuditLogPermissionsInput, Prisma.UserUncheckedCreateWithoutAuditLogPermissionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuditLogPermissionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuditLogPermissionsInput, Prisma.UserUncheckedUpdateWithoutAuditLogPermissionsInput>
+}
+
+export type UserUpdateWithoutAuditLogPermissionsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  firstLogin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  forcePasswordChange?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  department?: Prisma.DepartmentUpdateOneWithoutUsersNestedInput
+  visibleToAudit?: Prisma.AuditAccessUpdateManyWithoutJuniorNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  userWarehouses?: Prisma.UserWarehouseUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuditLogPermissionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  firstLogin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  forcePasswordChange?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedUpdateManyWithoutJuniorNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  userWarehouses?: Prisma.UserWarehouseUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutVisibleToAuditInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutVisibleToAuditInput, Prisma.UserUncheckedUpdateWithoutVisibleToAuditInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutVisibleToAuditInput, Prisma.UserUncheckedCreateWithoutVisibleToAuditInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutVisibleToAuditInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutVisibleToAuditInput, Prisma.UserUncheckedUpdateWithoutVisibleToAuditInput>
+}
+
+export type UserUpdateWithoutVisibleToAuditInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  firstLogin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  forcePasswordChange?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  department?: Prisma.DepartmentUpdateOneWithoutUsersNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUpdateManyWithoutSeniorNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  userWarehouses?: Prisma.UserWarehouseUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutVisibleToAuditInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  firstLogin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  forcePasswordChange?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedUpdateManyWithoutSeniorNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  userWarehouses?: Prisma.UserWarehouseUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutDepartmentInput = {
   email: string
   name?: string | null
@@ -693,6 +923,8 @@ export type UserCreateWithoutDepartmentInput = {
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseCreateNestedManyWithoutUserInput
 }
@@ -711,6 +943,8 @@ export type UserUncheckedCreateWithoutDepartmentInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseUncheckedCreateNestedManyWithoutUserInput
 }
@@ -772,6 +1006,8 @@ export type UserCreateWithoutUserRolesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   department?: Prisma.DepartmentCreateNestedOneWithoutUsersInput
+  auditLogPermissions?: Prisma.AuditAccessCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessCreateNestedManyWithoutJuniorInput
   userWarehouses?: Prisma.UserWarehouseCreateNestedManyWithoutUserInput
 }
 
@@ -790,6 +1026,8 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutJuniorInput
   userWarehouses?: Prisma.UserWarehouseUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -823,6 +1061,8 @@ export type UserUpdateWithoutUserRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   department?: Prisma.DepartmentUpdateOneWithoutUsersNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUpdateManyWithoutJuniorNestedInput
   userWarehouses?: Prisma.UserWarehouseUpdateManyWithoutUserNestedInput
 }
 
@@ -841,6 +1081,8 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedUpdateManyWithoutJuniorNestedInput
   userWarehouses?: Prisma.UserWarehouseUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -857,6 +1099,8 @@ export type UserCreateWithoutPostsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   department?: Prisma.DepartmentCreateNestedOneWithoutUsersInput
+  auditLogPermissions?: Prisma.AuditAccessCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseCreateNestedManyWithoutUserInput
 }
@@ -875,6 +1119,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   departmentId?: number | null
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseUncheckedCreateNestedManyWithoutUserInput
 }
@@ -908,6 +1154,8 @@ export type UserUpdateWithoutPostsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   department?: Prisma.DepartmentUpdateOneWithoutUsersNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUpdateManyWithoutUserNestedInput
 }
@@ -926,6 +1174,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -943,6 +1193,8 @@ export type UserCreateWithoutRefreshTokensInput = {
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   department?: Prisma.DepartmentCreateNestedOneWithoutUsersInput
+  auditLogPermissions?: Prisma.AuditAccessCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseCreateNestedManyWithoutUserInput
 }
@@ -961,6 +1213,8 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   departmentId?: number | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseUncheckedCreateNestedManyWithoutUserInput
 }
@@ -994,6 +1248,8 @@ export type UserUpdateWithoutRefreshTokensInput = {
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   department?: Prisma.DepartmentUpdateOneWithoutUsersNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUpdateManyWithoutUserNestedInput
 }
@@ -1012,6 +1268,8 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1029,6 +1287,8 @@ export type UserCreateWithoutAuditLogsInput = {
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   department?: Prisma.DepartmentCreateNestedOneWithoutUsersInput
+  auditLogPermissions?: Prisma.AuditAccessCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseCreateNestedManyWithoutUserInput
 }
@@ -1047,6 +1307,8 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   departmentId?: number | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   userWarehouses?: Prisma.UserWarehouseUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1080,6 +1342,8 @@ export type UserUpdateWithoutAuditLogsInput = {
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   department?: Prisma.DepartmentUpdateOneWithoutUsersNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUpdateManyWithoutUserNestedInput
 }
@@ -1098,6 +1362,8 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1116,6 +1382,8 @@ export type UserCreateWithoutUserWarehousesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   department?: Prisma.DepartmentCreateNestedOneWithoutUsersInput
+  auditLogPermissions?: Prisma.AuditAccessCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
 }
 
@@ -1134,6 +1402,8 @@ export type UserUncheckedCreateWithoutUserWarehousesInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutSeniorInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedCreateNestedManyWithoutJuniorInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -1167,6 +1437,8 @@ export type UserUpdateWithoutUserWarehousesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   department?: Prisma.DepartmentUpdateOneWithoutUsersNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
 }
 
@@ -1185,6 +1457,8 @@ export type UserUncheckedUpdateWithoutUserWarehousesInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1214,6 +1488,8 @@ export type UserUpdateWithoutDepartmentInput = {
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUpdateManyWithoutUserNestedInput
 }
@@ -1232,6 +1508,8 @@ export type UserUncheckedUpdateWithoutDepartmentInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogPermissions?: Prisma.AuditAccessUncheckedUpdateManyWithoutSeniorNestedInput
+  visibleToAudit?: Prisma.AuditAccessUncheckedUpdateManyWithoutJuniorNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   userWarehouses?: Prisma.UserWarehouseUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1258,6 +1536,8 @@ export type UserCountOutputType = {
   posts: number
   refreshTokens: number
   auditLogs: number
+  auditLogPermissions: number
+  visibleToAudit: number
   userRoles: number
   userWarehouses: number
 }
@@ -1266,6 +1546,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   posts?: boolean | UserCountOutputTypeCountPostsArgs
   refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
+  auditLogPermissions?: boolean | UserCountOutputTypeCountAuditLogPermissionsArgs
+  visibleToAudit?: boolean | UserCountOutputTypeCountVisibleToAuditArgs
   userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs
   userWarehouses?: boolean | UserCountOutputTypeCountUserWarehousesArgs
 }
@@ -1304,6 +1586,20 @@ export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountAuditLogPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuditAccessWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountVisibleToAuditArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuditAccessWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountUserRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserRoleWhereInput
 }
@@ -1332,6 +1628,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   department?: boolean | Prisma.User$departmentArgs<ExtArgs>
+  auditLogPermissions?: boolean | Prisma.User$auditLogPermissionsArgs<ExtArgs>
+  visibleToAudit?: boolean | Prisma.User$visibleToAuditArgs<ExtArgs>
   userRoles?: boolean | Prisma.User$userRolesArgs<ExtArgs>
   userWarehouses?: boolean | Prisma.User$userWarehousesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1387,6 +1685,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   department?: boolean | Prisma.User$departmentArgs<ExtArgs>
+  auditLogPermissions?: boolean | Prisma.User$auditLogPermissionsArgs<ExtArgs>
+  visibleToAudit?: boolean | Prisma.User$visibleToAuditArgs<ExtArgs>
   userRoles?: boolean | Prisma.User$userRolesArgs<ExtArgs>
   userWarehouses?: boolean | Prisma.User$userWarehousesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1405,6 +1705,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     department: Prisma.$DepartmentPayload<ExtArgs> | null
+    auditLogPermissions: Prisma.$AuditAccessPayload<ExtArgs>[]
+    visibleToAudit: Prisma.$AuditAccessPayload<ExtArgs>[]
     userRoles: Prisma.$UserRolePayload<ExtArgs>[]
     userWarehouses: Prisma.$UserWarehousePayload<ExtArgs>[]
   }
@@ -1818,6 +2120,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   department<T extends Prisma.User$departmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$departmentArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  auditLogPermissions<T extends Prisma.User$auditLogPermissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogPermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  visibleToAudit<T extends Prisma.User$visibleToAuditArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$visibleToAuditArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userRoles<T extends Prisma.User$userRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userWarehouses<T extends Prisma.User$userWarehousesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userWarehousesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserWarehousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2344,6 +2648,54 @@ export type User$departmentArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.DepartmentInclude<ExtArgs> | null
   where?: Prisma.DepartmentWhereInput
+}
+
+/**
+ * User.auditLogPermissions
+ */
+export type User$auditLogPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuditAccess
+   */
+  select?: Prisma.AuditAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuditAccess
+   */
+  omit?: Prisma.AuditAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuditAccessInclude<ExtArgs> | null
+  where?: Prisma.AuditAccessWhereInput
+  orderBy?: Prisma.AuditAccessOrderByWithRelationInput | Prisma.AuditAccessOrderByWithRelationInput[]
+  cursor?: Prisma.AuditAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuditAccessScalarFieldEnum | Prisma.AuditAccessScalarFieldEnum[]
+}
+
+/**
+ * User.visibleToAudit
+ */
+export type User$visibleToAuditArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuditAccess
+   */
+  select?: Prisma.AuditAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuditAccess
+   */
+  omit?: Prisma.AuditAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuditAccessInclude<ExtArgs> | null
+  where?: Prisma.AuditAccessWhereInput
+  orderBy?: Prisma.AuditAccessOrderByWithRelationInput | Prisma.AuditAccessOrderByWithRelationInput[]
+  cursor?: Prisma.AuditAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuditAccessScalarFieldEnum | Prisma.AuditAccessScalarFieldEnum[]
 }
 
 /**
