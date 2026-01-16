@@ -147,3 +147,23 @@ export type Operator = Prisma.OperatorModel
  * 
  */
 export type Machine = Prisma.MachineModel
+/**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model JournalEntry
+ * 
+ */
+export type JournalEntry = Prisma.JournalEntryModel
+/**
+ * Model JournalLine
+ * 
+ */
+export type JournalLine = Prisma.JournalLineModel
+/**
+ * Model VoucherSequence
+ * 
+ */
+export type VoucherSequence = Prisma.VoucherSequenceModel

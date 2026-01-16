@@ -240,6 +240,7 @@ export type FiscalYearWhereInput = {
   isLocked?: Prisma.BoolFilter<"FiscalYear"> | boolean
   createdAt?: Prisma.DateTimeFilter<"FiscalYear"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FiscalYear"> | Date | string
+  journalEntries?: Prisma.JournalEntryListRelationFilter
 }
 
 export type FiscalYearOrderByWithRelationInput = {
@@ -251,6 +252,7 @@ export type FiscalYearOrderByWithRelationInput = {
   isLocked?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  journalEntries?: Prisma.JournalEntryOrderByRelationAggregateInput
 }
 
 export type FiscalYearWhereUniqueInput = Prisma.AtLeast<{
@@ -265,6 +267,7 @@ export type FiscalYearWhereUniqueInput = Prisma.AtLeast<{
   isLocked?: Prisma.BoolFilter<"FiscalYear"> | boolean
   createdAt?: Prisma.DateTimeFilter<"FiscalYear"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FiscalYear"> | Date | string
+  journalEntries?: Prisma.JournalEntryListRelationFilter
 }, "id" | "name">
 
 export type FiscalYearOrderByWithAggregationInput = {
@@ -305,6 +308,7 @@ export type FiscalYearCreateInput = {
   isLocked?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  journalEntries?: Prisma.JournalEntryCreateNestedManyWithoutFiscalYearInput
 }
 
 export type FiscalYearUncheckedCreateInput = {
@@ -316,6 +320,7 @@ export type FiscalYearUncheckedCreateInput = {
   isLocked?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  journalEntries?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutFiscalYearInput
 }
 
 export type FiscalYearUpdateInput = {
@@ -326,6 +331,7 @@ export type FiscalYearUpdateInput = {
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  journalEntries?: Prisma.JournalEntryUpdateManyWithoutFiscalYearNestedInput
 }
 
 export type FiscalYearUncheckedUpdateInput = {
@@ -337,6 +343,7 @@ export type FiscalYearUncheckedUpdateInput = {
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  journalEntries?: Prisma.JournalEntryUncheckedUpdateManyWithoutFiscalYearNestedInput
 }
 
 export type FiscalYearCreateManyInput = {
@@ -412,6 +419,114 @@ export type FiscalYearSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type FiscalYearNullableScalarRelationFilter = {
+  is?: Prisma.FiscalYearWhereInput | null
+  isNot?: Prisma.FiscalYearWhereInput | null
+}
+
+export type FiscalYearCreateNestedOneWithoutJournalEntriesInput = {
+  create?: Prisma.XOR<Prisma.FiscalYearCreateWithoutJournalEntriesInput, Prisma.FiscalYearUncheckedCreateWithoutJournalEntriesInput>
+  connectOrCreate?: Prisma.FiscalYearCreateOrConnectWithoutJournalEntriesInput
+  connect?: Prisma.FiscalYearWhereUniqueInput
+}
+
+export type FiscalYearUpdateOneWithoutJournalEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.FiscalYearCreateWithoutJournalEntriesInput, Prisma.FiscalYearUncheckedCreateWithoutJournalEntriesInput>
+  connectOrCreate?: Prisma.FiscalYearCreateOrConnectWithoutJournalEntriesInput
+  upsert?: Prisma.FiscalYearUpsertWithoutJournalEntriesInput
+  disconnect?: Prisma.FiscalYearWhereInput | boolean
+  delete?: Prisma.FiscalYearWhereInput | boolean
+  connect?: Prisma.FiscalYearWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FiscalYearUpdateToOneWithWhereWithoutJournalEntriesInput, Prisma.FiscalYearUpdateWithoutJournalEntriesInput>, Prisma.FiscalYearUncheckedUpdateWithoutJournalEntriesInput>
+}
+
+export type FiscalYearCreateWithoutJournalEntriesInput = {
+  name: string
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  isLocked?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type FiscalYearUncheckedCreateWithoutJournalEntriesInput = {
+  id?: number
+  name: string
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  isLocked?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type FiscalYearCreateOrConnectWithoutJournalEntriesInput = {
+  where: Prisma.FiscalYearWhereUniqueInput
+  create: Prisma.XOR<Prisma.FiscalYearCreateWithoutJournalEntriesInput, Prisma.FiscalYearUncheckedCreateWithoutJournalEntriesInput>
+}
+
+export type FiscalYearUpsertWithoutJournalEntriesInput = {
+  update: Prisma.XOR<Prisma.FiscalYearUpdateWithoutJournalEntriesInput, Prisma.FiscalYearUncheckedUpdateWithoutJournalEntriesInput>
+  create: Prisma.XOR<Prisma.FiscalYearCreateWithoutJournalEntriesInput, Prisma.FiscalYearUncheckedCreateWithoutJournalEntriesInput>
+  where?: Prisma.FiscalYearWhereInput
+}
+
+export type FiscalYearUpdateToOneWithWhereWithoutJournalEntriesInput = {
+  where?: Prisma.FiscalYearWhereInput
+  data: Prisma.XOR<Prisma.FiscalYearUpdateWithoutJournalEntriesInput, Prisma.FiscalYearUncheckedUpdateWithoutJournalEntriesInput>
+}
+
+export type FiscalYearUpdateWithoutJournalEntriesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type FiscalYearUncheckedUpdateWithoutJournalEntriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type FiscalYearCountOutputType
+ */
+
+export type FiscalYearCountOutputType = {
+  journalEntries: number
+}
+
+export type FiscalYearCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  journalEntries?: boolean | FiscalYearCountOutputTypeCountJournalEntriesArgs
+}
+
+/**
+ * FiscalYearCountOutputType without action
+ */
+export type FiscalYearCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FiscalYearCountOutputType
+   */
+  select?: Prisma.FiscalYearCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * FiscalYearCountOutputType without action
+ */
+export type FiscalYearCountOutputTypeCountJournalEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JournalEntryWhereInput
+}
 
 
 export type FiscalYearSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -423,6 +538,8 @@ export type FiscalYearSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   isLocked?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  journalEntries?: boolean | Prisma.FiscalYear$journalEntriesArgs<ExtArgs>
+  _count?: boolean | Prisma.FiscalYearCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fiscalYear"]>
 
 export type FiscalYearSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -459,10 +576,18 @@ export type FiscalYearSelectScalar = {
 }
 
 export type FiscalYearOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "startDate" | "endDate" | "isActive" | "isLocked" | "createdAt" | "updatedAt", ExtArgs["result"]["fiscalYear"]>
+export type FiscalYearInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  journalEntries?: boolean | Prisma.FiscalYear$journalEntriesArgs<ExtArgs>
+  _count?: boolean | Prisma.FiscalYearCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type FiscalYearIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type FiscalYearIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $FiscalYearPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FiscalYear"
-  objects: {}
+  objects: {
+    journalEntries: Prisma.$JournalEntryPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
@@ -866,6 +991,7 @@ readonly fields: FiscalYearFieldRefs;
  */
 export interface Prisma__FiscalYearClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  journalEntries<T extends Prisma.FiscalYear$journalEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FiscalYear$journalEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JournalEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -920,6 +1046,10 @@ export type FiscalYearFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
+  /**
    * Filter, which FiscalYear to fetch.
    */
   where: Prisma.FiscalYearWhereUniqueInput
@@ -938,6 +1068,10 @@ export type FiscalYearFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
+  /**
    * Filter, which FiscalYear to fetch.
    */
   where: Prisma.FiscalYearWhereUniqueInput
@@ -955,6 +1089,10 @@ export type FiscalYearFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the FiscalYear
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
   /**
    * Filter, which FiscalYear to fetch.
    */
@@ -1004,6 +1142,10 @@ export type FiscalYearFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensi
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
+  /**
    * Filter, which FiscalYear to fetch.
    */
   where?: Prisma.FiscalYearWhereInput
@@ -1052,6 +1194,10 @@ export type FiscalYearFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
+  /**
    * Filter, which FiscalYears to fetch.
    */
   where?: Prisma.FiscalYearWhereInput
@@ -1094,6 +1240,10 @@ export type FiscalYearCreateArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the FiscalYear
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
   /**
    * The data needed to create a FiscalYear.
    */
@@ -1142,6 +1292,10 @@ export type FiscalYearUpdateArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the FiscalYear
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
   /**
    * The data needed to update a FiscalYear.
    */
@@ -1209,6 +1363,10 @@ export type FiscalYearUpsertArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
+  /**
    * The filter to search for the FiscalYear to update in case it exists.
    */
   where: Prisma.FiscalYearWhereUniqueInput
@@ -1235,6 +1393,10 @@ export type FiscalYearDeleteArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
+  /**
    * Filter which FiscalYear to delete.
    */
   where: Prisma.FiscalYearWhereUniqueInput
@@ -1255,6 +1417,30 @@ export type FiscalYearDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
+ * FiscalYear.journalEntries
+ */
+export type FiscalYear$journalEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JournalEntry
+   */
+  select?: Prisma.JournalEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JournalEntry
+   */
+  omit?: Prisma.JournalEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JournalEntryInclude<ExtArgs> | null
+  where?: Prisma.JournalEntryWhereInput
+  orderBy?: Prisma.JournalEntryOrderByWithRelationInput | Prisma.JournalEntryOrderByWithRelationInput[]
+  cursor?: Prisma.JournalEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JournalEntryScalarFieldEnum | Prisma.JournalEntryScalarFieldEnum[]
+}
+
+/**
  * FiscalYear without action
  */
 export type FiscalYearDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1266,4 +1452,8 @@ export type FiscalYearDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the FiscalYear
    */
   omit?: Prisma.FiscalYearOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FiscalYearInclude<ExtArgs> | null
 }

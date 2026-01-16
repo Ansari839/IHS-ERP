@@ -16,3 +16,38 @@ export const ProductType = {
 } as const
 
 export type ProductType = (typeof ProductType)[keyof typeof ProductType]
+
+
+export const AccountType = {
+  ASSET: 'ASSET',
+  LIABILITY: 'LIABILITY',
+  EQUITY: 'EQUITY',
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE'
+} as const
+
+export type AccountType = (typeof AccountType)[keyof typeof AccountType]
+
+
+export const BalanceType = {
+  DR: 'DR',
+  CR: 'CR'
+} as const
+
+export type BalanceType = (typeof BalanceType)[keyof typeof BalanceType]
+
+
+export const VoucherType = {
+  JOURNAL: 'JOURNAL',
+  PAYMENT: 'PAYMENT',
+  RECEIPT: 'RECEIPT',
+  PURCHASE: 'PURCHASE',
+  SALES: 'SALES',
+  CONTRA: 'CONTRA',
+  PURCHASE_RETURN: 'PURCHASE_RETURN',
+  SALES_RETURN: 'SALES_RETURN',
+  OPENING: 'OPENING',
+  CLOSING: 'CLOSING'
+} as const
+
+export type VoucherType = (typeof VoucherType)[keyof typeof VoucherType]

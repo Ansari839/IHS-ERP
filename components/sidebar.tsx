@@ -20,6 +20,8 @@ import {
     Scale,
     ArrowLeftRight,
     Clock,
+    Wallet,
+    Receipt,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -97,6 +99,14 @@ const navigation: NavigationItem[] = [
             { name: "Warehouses", href: "/dashboard/inventory/warehouses", icon: Warehouse, permission: "read:warehouses" },
             { name: "Units", href: "/dashboard/inventory/units", icon: Scale, permission: "read:inventory" },
             { name: "Conversions", href: "/dashboard/inventory/conversions", icon: ArrowLeftRight, permission: "read:inventory" },
+        ]
+    },
+    {
+        name: "Finance",
+        icon: Wallet,
+        children: [
+            { name: "Chart of Accounts", href: "/dashboard/finance/coa", icon: Wallet, permission: "read:inventory" },
+            { name: "Vouchers", href: "/dashboard/finance/vouchers", icon: Receipt, permission: "read:inventory" },
         ]
     },
     // { name: "Orders", href: "/orders", icon: ShoppingCart },
