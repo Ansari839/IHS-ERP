@@ -54,15 +54,10 @@ const navigation: NavigationItem[] = [
         name: "Production",
         icon: Package,
         children: [
-            {
-                name: "Product",
-                icon: Package,
-                children: [
-                    { name: "Categories", href: "/dashboard/production/categories", icon: Settings, permission: "read:inventory" },
-                    { name: "Products", href: "/dashboard/production/products", icon: Package, permission: "read:inventory" },
-                    { name: "Specifications", href: "/dashboard/production/variants", icon: Settings, permission: "read:inventory" },
-                ]
-            }
+            { name: "Categories", href: "/dashboard/production/categories", icon: Settings, permission: "read:inventory" },
+            { name: "Products", href: "/dashboard/production/products", icon: Package, permission: "read:inventory" },
+            { name: "Specifications", href: "/dashboard/production/variants", icon: Settings, permission: "read:inventory" },
+            { name: "Locations", href: "/dashboard/production/locations", icon: Warehouse, permission: "read:inventory" },
         ]
     },
     {

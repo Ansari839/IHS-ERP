@@ -149,3 +149,8 @@ export type Product = Prisma.ProductModel
  * 
  */
 export type Variant = Prisma.VariantModel
+/**
+ * Model Location
+ * 
+ */
+export type Location = Prisma.LocationModel
