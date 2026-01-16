@@ -32,7 +32,8 @@ export default function COAPage() {
             if (Array.isArray(result)) {
                 setData(result);
             }
-        } catch {
+        } catch (error) {
+            console.error("[UI] Failed to load Chart of Accounts:", error);
             toast.error("Failed to load Chart of Accounts");
         } finally {
             setLoading(false);
