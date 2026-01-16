@@ -19,6 +19,7 @@ import {
     LucideIcon,
     Scale,
     ArrowLeftRight,
+    Clock,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -54,9 +55,38 @@ const navigation: NavigationItem[] = [
         name: "Production",
         icon: Package,
         children: [
-            { name: "Categories", href: "/dashboard/production/categories", icon: Settings, permission: "read:inventory" },
-            { name: "Products", href: "/dashboard/production/products", icon: Package, permission: "read:inventory" },
-            { name: "Specifications", href: "/dashboard/production/variants", icon: Settings, permission: "read:inventory" },
+            {
+                name: "In-House Production",
+                icon: Package,
+                children: [
+                    { name: "Shifts", href: "/dashboard/production/in-house/shifts", icon: Clock, permission: "read:inventory" },
+                    { name: "Operators", href: "/dashboard/production/in-house/operators", icon: Users, permission: "read:inventory" },
+                    { name: "Machines", href: "/dashboard/production/in-house/machines", icon: Settings, permission: "read:inventory" },
+                ]
+            },
+            {
+                name: "Out-House Production",
+                icon: Package,
+                children: [
+                    { name: "Outsource Orders", href: "/dashboard/production/out-house/orders", icon: Package, permission: "read:inventory" },
+                ]
+            },
+            {
+                name: "Sample Production",
+                icon: Package,
+                children: [
+                    { name: "Sample Requests", href: "/dashboard/production/samples/requests", icon: Package, permission: "read:inventory" },
+                ]
+            },
+            {
+                name: "Products",
+                icon: Package,
+                children: [
+                    { name: "Products", href: "/dashboard/production/products", icon: Package, permission: "read:inventory" },
+                    { name: "Categories", href: "/dashboard/production/categories", icon: Settings, permission: "read:inventory" },
+                    { name: "Specifications", href: "/dashboard/production/variants", icon: Settings, permission: "read:inventory" },
+                ]
+            },
             { name: "Locations", href: "/dashboard/production/locations", icon: Warehouse, permission: "read:inventory" },
         ]
     },

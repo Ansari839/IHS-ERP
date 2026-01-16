@@ -295,10 +295,42 @@ model Variant {
 }
 
 model Location {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
   description String?
-  status      String   @default("ACTIVE") // ACTIVE, INACTIVE
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  status      String    @default("ACTIVE") // ACTIVE, INACTIVE
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  machines    Machine[]
+}
+
+model Shift {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  startTime String   // e.g., "08:00"
+  endTime   String   // e.g., "16:00"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Operator {
+  id        Int      @id @default(autoincrement())
+  name      String
+  code      String   @unique
+  contact   String?
+  status    String   @default("ACTIVE") // ACTIVE, INACTIVE
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Machine {
+  id          Int       @id @default(autoincrement())
+  name        String
+  code        String    @unique
+  type        String?
+  status      String    @default("ACTIVE") // ACTIVE, INACTIVE, MAINTENANCE
+  locationId  Int?
+  location    Location? @relation(fields: [locationId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }

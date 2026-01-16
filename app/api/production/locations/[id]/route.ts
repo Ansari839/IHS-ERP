@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function GET(
-    req: NextRequest,
+    request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id: idParam } = await params;
-        const id = parseInt(idParam);
+        const { id: idStr } = await params;
+        const id = parseInt(idStr);
         const location = await prisma.location.findUnique({
             where: { id },
         });
@@ -24,13 +24,13 @@ export async function GET(
 }
 
 export async function PUT(
-    req: NextRequest,
+    request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id: idParam } = await params;
-        const id = parseInt(idParam);
-        const body = await req.json();
+        const { id: idStr } = await params;
+        const id = parseInt(idStr);
+        const body = await request.json();
         const { name, description, status } = body;
 
         const location = await prisma.location.update({
@@ -49,12 +49,12 @@ export async function PUT(
 }
 
 export async function DELETE(
-    req: NextRequest,
+    request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id: idParam } = await params;
-        const id = parseInt(idParam);
+        const { id: idStr } = await params;
+        const id = parseInt(idStr);
 
         // In a real scenario, you might want to check for references in other tables
         // (e.g., are there any batches or machines linked to this location?)

@@ -224,6 +224,7 @@ export type LocationWhereInput = {
   status?: Prisma.StringFilter<"Location"> | string
   createdAt?: Prisma.DateTimeFilter<"Location"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Location"> | Date | string
+  machines?: Prisma.MachineListRelationFilter
 }
 
 export type LocationOrderByWithRelationInput = {
@@ -233,6 +234,7 @@ export type LocationOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  machines?: Prisma.MachineOrderByRelationAggregateInput
 }
 
 export type LocationWhereUniqueInput = Prisma.AtLeast<{
@@ -245,6 +247,7 @@ export type LocationWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"Location"> | string
   createdAt?: Prisma.DateTimeFilter<"Location"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Location"> | Date | string
+  machines?: Prisma.MachineListRelationFilter
 }, "id" | "name">
 
 export type LocationOrderByWithAggregationInput = {
@@ -279,6 +282,7 @@ export type LocationCreateInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  machines?: Prisma.MachineCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateInput = {
@@ -288,6 +292,7 @@ export type LocationUncheckedCreateInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  machines?: Prisma.MachineUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUpdateInput = {
@@ -296,6 +301,7 @@ export type LocationUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  machines?: Prisma.MachineUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateInput = {
@@ -305,6 +311,7 @@ export type LocationUncheckedUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  machines?: Prisma.MachineUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateManyInput = {
@@ -368,6 +375,106 @@ export type LocationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type LocationNullableScalarRelationFilter = {
+  is?: Prisma.LocationWhereInput | null
+  isNot?: Prisma.LocationWhereInput | null
+}
+
+export type LocationCreateNestedOneWithoutMachinesInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutMachinesInput, Prisma.LocationUncheckedCreateWithoutMachinesInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutMachinesInput
+  connect?: Prisma.LocationWhereUniqueInput
+}
+
+export type LocationUpdateOneWithoutMachinesNestedInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutMachinesInput, Prisma.LocationUncheckedCreateWithoutMachinesInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutMachinesInput
+  upsert?: Prisma.LocationUpsertWithoutMachinesInput
+  disconnect?: Prisma.LocationWhereInput | boolean
+  delete?: Prisma.LocationWhereInput | boolean
+  connect?: Prisma.LocationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LocationUpdateToOneWithWhereWithoutMachinesInput, Prisma.LocationUpdateWithoutMachinesInput>, Prisma.LocationUncheckedUpdateWithoutMachinesInput>
+}
+
+export type LocationCreateWithoutMachinesInput = {
+  name: string
+  description?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type LocationUncheckedCreateWithoutMachinesInput = {
+  id?: number
+  name: string
+  description?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type LocationCreateOrConnectWithoutMachinesInput = {
+  where: Prisma.LocationWhereUniqueInput
+  create: Prisma.XOR<Prisma.LocationCreateWithoutMachinesInput, Prisma.LocationUncheckedCreateWithoutMachinesInput>
+}
+
+export type LocationUpsertWithoutMachinesInput = {
+  update: Prisma.XOR<Prisma.LocationUpdateWithoutMachinesInput, Prisma.LocationUncheckedUpdateWithoutMachinesInput>
+  create: Prisma.XOR<Prisma.LocationCreateWithoutMachinesInput, Prisma.LocationUncheckedCreateWithoutMachinesInput>
+  where?: Prisma.LocationWhereInput
+}
+
+export type LocationUpdateToOneWithWhereWithoutMachinesInput = {
+  where?: Prisma.LocationWhereInput
+  data: Prisma.XOR<Prisma.LocationUpdateWithoutMachinesInput, Prisma.LocationUncheckedUpdateWithoutMachinesInput>
+}
+
+export type LocationUpdateWithoutMachinesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LocationUncheckedUpdateWithoutMachinesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type LocationCountOutputType
+ */
+
+export type LocationCountOutputType = {
+  machines: number
+}
+
+export type LocationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  machines?: boolean | LocationCountOutputTypeCountMachinesArgs
+}
+
+/**
+ * LocationCountOutputType without action
+ */
+export type LocationCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LocationCountOutputType
+   */
+  select?: Prisma.LocationCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * LocationCountOutputType without action
+ */
+export type LocationCountOutputTypeCountMachinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MachineWhereInput
+}
 
 
 export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -377,6 +484,8 @@ export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  machines?: boolean | Prisma.Location$machinesArgs<ExtArgs>
+  _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["location"]>
 
 export type LocationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -407,10 +516,18 @@ export type LocationSelectScalar = {
 }
 
 export type LocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["location"]>
+export type LocationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  machines?: boolean | Prisma.Location$machinesArgs<ExtArgs>
+  _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type LocationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type LocationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $LocationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Location"
-  objects: {}
+  objects: {
+    machines: Prisma.$MachinePayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
@@ -812,6 +929,7 @@ readonly fields: LocationFieldRefs;
  */
 export interface Prisma__LocationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  machines<T extends Prisma.Location$machinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$machinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MachinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -864,6 +982,10 @@ export type LocationFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
+  /**
    * Filter, which Location to fetch.
    */
   where: Prisma.LocationWhereUniqueInput
@@ -882,6 +1004,10 @@ export type LocationFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
+  /**
    * Filter, which Location to fetch.
    */
   where: Prisma.LocationWhereUniqueInput
@@ -899,6 +1025,10 @@ export type LocationFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Location
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
   /**
    * Filter, which Location to fetch.
    */
@@ -948,6 +1078,10 @@ export type LocationFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
+  /**
    * Filter, which Location to fetch.
    */
   where?: Prisma.LocationWhereInput
@@ -996,6 +1130,10 @@ export type LocationFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
+  /**
    * Filter, which Locations to fetch.
    */
   where?: Prisma.LocationWhereInput
@@ -1038,6 +1176,10 @@ export type LocationCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Location
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
   /**
    * The data needed to create a Location.
    */
@@ -1086,6 +1228,10 @@ export type LocationUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Location
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
   /**
    * The data needed to update a Location.
    */
@@ -1153,6 +1299,10 @@ export type LocationUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
+  /**
    * The filter to search for the Location to update in case it exists.
    */
   where: Prisma.LocationWhereUniqueInput
@@ -1179,6 +1329,10 @@ export type LocationDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
+  /**
    * Filter which Location to delete.
    */
   where: Prisma.LocationWhereUniqueInput
@@ -1199,6 +1353,30 @@ export type LocationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * Location.machines
+ */
+export type Location$machinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Machine
+   */
+  select?: Prisma.MachineSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Machine
+   */
+  omit?: Prisma.MachineOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MachineInclude<ExtArgs> | null
+  where?: Prisma.MachineWhereInput
+  orderBy?: Prisma.MachineOrderByWithRelationInput | Prisma.MachineOrderByWithRelationInput[]
+  cursor?: Prisma.MachineWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MachineScalarFieldEnum | Prisma.MachineScalarFieldEnum[]
+}
+
+/**
  * Location without action
  */
 export type LocationDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1210,4 +1388,8 @@ export type LocationDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Location
    */
   omit?: Prisma.LocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LocationInclude<ExtArgs> | null
 }

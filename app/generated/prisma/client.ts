@@ -154,3 +154,18 @@ export type Variant = Prisma.VariantModel
  * 
  */
 export type Location = Prisma.LocationModel
+/**
+ * Model Shift
+ * 
+ */
+export type Shift = Prisma.ShiftModel
+/**
+ * Model Operator
+ * 
+ */
+export type Operator = Prisma.OperatorModel
+/**
+ * Model Machine
+ * 
+ */
+export type Machine = Prisma.MachineModel
