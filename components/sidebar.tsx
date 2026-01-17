@@ -141,12 +141,29 @@ export function Sidebar({ className, user, isCollapsed = false, onCollapse }: Si
     const pathname = usePathname()
     const [expandedItems, setExpandedItems] = React.useState<string[]>([])
 
-    const toggleExpand = (name: string) => {
-        setExpandedItems(prev =>
-            prev.includes(name)
-                ? prev.filter(item => item !== name)
-                : [...prev, name]
-        )
+    const toggleExpand = (name: string, levelItems?: any[]) => {
+        setExpandedItems(prev => {
+            const isCurrentlyExpanded = prev.includes(name);
+
+            // If we are collapsing, just remove it
+            if (isCurrentlyExpanded) {
+                return prev.filter(item => item !== name);
+            }
+
+            // If we are expanding, we need to handle accordion behavior
+            // 1. Keep all items that are NOT siblings of the current item (i.e. keep parents, keep unrelated submenus)
+            // But since 'levelItems' tells us exactly what the siblings are, we can just remove all siblings from 'prev'
+            // and then add the new one.
+
+            let newExpanded = [...prev];
+
+            if (levelItems) {
+                const siblingNames = levelItems.map(i => i.name);
+                newExpanded = newExpanded.filter(item => !siblingNames.includes(item));
+            }
+
+            return [...newExpanded, name];
+        })
     }
 
     const filteredNavigation = navigation.filter(item => {
@@ -205,7 +222,7 @@ export function Sidebar({ className, user, isCollapsed = false, onCollapse }: Si
                                 return (
                                     <div key={item.name}>
                                         <button
-                                            onClick={() => !isCollapsed && toggleExpand(item.name)}
+                                            onClick={() => !isCollapsed && toggleExpand(item.name, filteredNavigation)}
                                             className={cn(
                                                 "flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
                                                 isCollapsed && "justify-center"
@@ -235,7 +252,7 @@ export function Sidebar({ className, user, isCollapsed = false, onCollapse }: Si
                                                         return (
                                                             <div key={child.name}>
                                                                 <button
-                                                                    onClick={() => toggleExpand(child.name)}
+                                                                    onClick={() => toggleExpand(child.name, item.children)}
                                                                     className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                                                                 >
                                                                     <span>{child.name}</span>
@@ -348,12 +365,19 @@ export function MobileSidebar() {
     const pathname = usePathname()
     const [expandedItems, setExpandedItems] = React.useState<string[]>([])
 
-    const toggleExpand = (name: string) => {
-        setExpandedItems(prev =>
-            prev.includes(name)
-                ? prev.filter(item => item !== name)
-                : [...prev, name]
-        )
+    const toggleExpand = (name: string, levelItems?: any[]) => {
+        setExpandedItems(prev => {
+            const isCurrentlyExpanded = prev.includes(name);
+            if (isCurrentlyExpanded) {
+                return prev.filter(item => item !== name);
+            }
+            let newExpanded = [...prev];
+            if (levelItems) {
+                const siblingNames = levelItems.map(i => i.name);
+                newExpanded = newExpanded.filter(item => !siblingNames.includes(item));
+            }
+            return [...newExpanded, name];
+        })
     }
 
     return (
@@ -386,7 +410,7 @@ export function MobileSidebar() {
                                     return (
                                         <div key={item.name}>
                                             <button
-                                                onClick={() => toggleExpand(item.name)}
+                                                onClick={() => toggleExpand(item.name, navigation)}
                                                 className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                                             >
                                                 <div className="flex items-center gap-3">
@@ -410,7 +434,7 @@ export function MobileSidebar() {
                                                             return (
                                                                 <div key={child.name}>
                                                                     <button
-                                                                        onClick={() => toggleExpand(child.name)}
+                                                                        onClick={() => toggleExpand(child.name, item.children)}
                                                                         className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                                                                     >
                                                                         <span>{child.name}</span>
