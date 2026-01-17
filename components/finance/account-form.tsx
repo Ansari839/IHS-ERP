@@ -79,6 +79,17 @@ export function AccountForm({ initialData, parentId, onSuccess }: AccountFormPro
         fetchSummaryAccounts();
     }, []);
 
+    // Watch for parentId changes to update account type
+    const watchedParentId = form.watch("parentId");
+    useEffect(() => {
+        if (watchedParentId && watchedParentId !== "none" && summaryAccounts.length > 0) {
+            const parentAccount = summaryAccounts.find(acc => acc.id.toString() === watchedParentId);
+            if (parentAccount) {
+                form.setValue("type", parentAccount.type);
+            }
+        }
+    }, [watchedParentId, summaryAccounts, form]);
+
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true);
         try {
@@ -136,7 +147,7 @@ export function AccountForm({ initialData, parentId, onSuccess }: AccountFormPro
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Account Type</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <Select onValueChange={field.onChange} value={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select type" />
@@ -161,7 +172,7 @@ export function AccountForm({ initialData, parentId, onSuccess }: AccountFormPro
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Parent Account</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value || "none"}>
+                                <Select onValueChange={field.onChange} value={field.value || "none"}>
                                     <FormControl>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Root" />
