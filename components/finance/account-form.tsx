@@ -127,7 +127,7 @@ export function AccountForm({ initialData, parentId, onSuccess }: AccountFormPro
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pb-10">
 
                 {/* --- Main Account Details --- */}
                 <Card className="border-none shadow-sm bg-card/40 backdrop-blur-sm overflow-hidden">
