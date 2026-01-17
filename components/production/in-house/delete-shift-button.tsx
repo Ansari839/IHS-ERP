@@ -14,7 +14,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Trash2, Loader2 } from "lucide-react"
+import { Trash2, Settings } from "lucide-react"
 import { toast } from "sonner"
 
 interface DeleteShiftButtonProps {
@@ -74,7 +74,7 @@ export function DeleteShiftButton({ shiftId, shiftName }: DeleteShiftButtonProps
                         className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                         disabled={isLoading}
                     >
-                        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        {isLoading && <Settings className="mr-2 h-4 w-4 animate-spin" />}
                         Delete
                     </AlertDialogAction>
                 </AlertDialogFooter>

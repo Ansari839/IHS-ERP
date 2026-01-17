@@ -293,6 +293,7 @@ exports.Prisma.SystemSettingScalarFieldEnum = {
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  code: 'code',
   description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

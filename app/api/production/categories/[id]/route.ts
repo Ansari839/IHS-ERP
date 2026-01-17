@@ -31,11 +31,11 @@ export async function PUT(
         const { id: idParam } = await params;
         const id = parseInt(idParam);
         const body = await req.json();
-        const { name, description } = body;
+        const { name, code, description } = body;
 
         const category = await prisma.category.update({
             where: { id },
-            data: { name, description },
+            data: { name, code, description },
         });
 
         return NextResponse.json(category);

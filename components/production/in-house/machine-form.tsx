@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/select"
 import { toast } from "sonner"
 import { Card, CardContent } from "@/components/ui/card"
-import { Cpu, Barcode, Factory, Settings2, Calendar, MapPin, Activity, Loader2 } from "lucide-react"
+import { Cpu, Barcode, Factory, Settings2, Calendar, MapPin, Activity, Settings } from "lucide-react"
 
 const formSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters."),
@@ -351,7 +351,7 @@ export function MachineForm({ machine, onSuccess }: MachineFormProps) {
                         disabled={isLoading}
                         className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.02]"
                     >
-                        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        {isLoading && <Settings className="mr-2 h-4 w-4 animate-spin" />}
                         {machine ? "Update Machine" : "Create Machine"}
                     </Button>
                 </div>

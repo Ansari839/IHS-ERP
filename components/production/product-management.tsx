@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { ProductModel as Product } from "@/app/generated/prisma/models"
+import { Product } from "@/app/generated/prisma"
 import { Button } from "@/components/ui/button"
 import {
     Table,
