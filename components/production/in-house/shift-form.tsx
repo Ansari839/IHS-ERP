@@ -86,7 +86,7 @@ export function ShiftForm({ shift, onSuccess }: ShiftFormProps) {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pb-10">
                 <Card className="bg-card/40 backdrop-blur-sm border-primary/10 shadow-lg">
                     <CardContent className="pt-6 space-y-4">
                         <FormField

@@ -87,7 +87,7 @@ export function CategoryForm({ category, onSuccess }: CategoryFormProps) {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pb-10">
                 <Card className="border-none shadow-sm bg-card/40 backdrop-blur-sm overflow-hidden">
                     <CardContent className="p-6 space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

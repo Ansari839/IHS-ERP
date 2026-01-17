@@ -122,7 +122,7 @@ export function MachineForm({ machine, onSuccess }: MachineFormProps) {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pb-10">
                 <div className="grid gap-6 md:grid-cols-2">
                     {/* Machine Identity & Status */}
                     <div className="md:col-span-2 space-y-4">

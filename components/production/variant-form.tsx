@@ -130,7 +130,7 @@ export function VariantForm({ variant, onSuccess }: VariantFormProps) {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pb-10">
 
                 {/* --- Parent Product & Basics --- */}
                 <Card className="border-none shadow-sm bg-card/40 backdrop-blur-sm overflow-hidden">
