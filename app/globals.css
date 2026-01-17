@@ -96,10 +96,10 @@
      THEME COLOR SYSTEM - VIBRANT & HIGH CONTRAST (v2)
      ============================================ */
 
-  /* Brand Hue: Electric Indigo (270) */
-  --brand-hue: 270;
-  /* Accent Hue: Hot Pink (330) */
-  --accent-hue: 330;
+  /* Brand Hue: Professional Royal Blue (220) */
+  --brand-hue: 220;
+  /* Accent Hue: Growth Emerald (160) */
+  --accent-hue: 160;
   /* Neutral Hue: Cool Zinc (240) */
   --neutral-hue: 240;
 
@@ -209,79 +209,84 @@
 .dark {
   /* ============================================
      THEME COLOR SYSTEM - Dark Mode
-     High Contrast & Vibrant
+     "Premium Slate" - High Visibility Content
      ============================================ */
 
-  /* Neutral Color Shades (Dark Mode - Deep Blue-Grey) */
-  --neutral-50: oklch(0.98 0.005 var(--neutral-hue));
-  --neutral-100: oklch(0.92 0.01 var(--neutral-hue));
-  --neutral-200: oklch(0.80 0.02 var(--neutral-hue));
-  --neutral-300: oklch(0.70 0.03 var(--neutral-hue));
-  --neutral-400: oklch(0.60 0.04 var(--neutral-hue));
-  --neutral-500: oklch(0.50 0.05 var(--neutral-hue));
-  --neutral-600: oklch(0.40 0.05 var(--neutral-hue));
-  --neutral-700: oklch(0.30 0.05 var(--neutral-hue));
-  --neutral-800: oklch(0.20 0.05 var(--neutral-hue));
-  --neutral-900: oklch(0.15 0.04 var(--neutral-hue));
-  --neutral-950: oklch(0.10 0.04 var(--neutral-hue));
+  /* Neutral Color Shades (Dark Mode - Slate/Gunmetal) */
+  --neutral-50: oklch(0.98 0.01 240);
+  --neutral-100: oklch(0.92 0.015 240);
+  --neutral-200: oklch(0.80 0.02 240);
+  --neutral-300: oklch(0.70 0.03 240);
+  --neutral-400: oklch(0.55 0.04 240);
+  --neutral-500: oklch(0.45 0.05 240);
+  /* Lighter Borders */
+  --neutral-600: oklch(0.35 0.05 240);
+  --neutral-700: oklch(0.30 0.05 240);
+  --neutral-800: oklch(0.25 0.05 240);
+  /* Card BG Match */
+  --neutral-900: oklch(0.15 0.05 240);
+  /* Main BG Match */
+  --neutral-950: oklch(0.10 0.05 240);
 
-  /* Base colors - Deep Dark (Almost Black) */
-  --background: oklch(0.05 0.01 var(--neutral-hue));
-  /* Deepest dark */
-  --foreground: oklch(0.98 0.005 var(--neutral-hue));
+  /* Base colors - Deep Gunmetal */
+  --background: oklch(0.10 0.03 240);
+  /* Deep Slate */
+  --foreground: oklch(0.98 0.01 240);
 
-  /* Card colors - Distinct from background */
-  --card: oklch(0.12 0.03 var(--neutral-hue));
-  /* Slightly lighter than bg */
-  --card-foreground: oklch(0.98 0.005 var(--neutral-hue));
+  /* Card colors - TRUE MEDIUM SLATE (High Visibility) */
+  --card: oklch(0.25 0.04 240);
+  /* Significantly lighter (Grey-Blue) */
+  --card-foreground: oklch(0.98 0.01 240);
 
   /* Popover colors */
-  --popover: oklch(0.12 0.03 var(--neutral-hue));
-  --popover-foreground: oklch(0.98 0.005 var(--neutral-hue));
+  --popover: oklch(0.25 0.04 240);
+  --popover-foreground: oklch(0.98 0.01 240);
 
-  /* Primary colors (Brand) - Vibrant */
-  --primary: var(--brand-500);
+  /* Primary colors (Brand) - Vibrant Ocean */
+  --primary: oklch(0.65 0.20 250);
+  /* Brighter for contrast */
   --primary-foreground: oklch(1 0 0);
 
   /* Secondary colors (Neutral) */
-  --secondary: var(--neutral-800);
-  --secondary-foreground: var(--neutral-100);
+  --secondary: oklch(0.30 0.04 240);
+  /* Lighter than card */
+  --secondary-foreground: oklch(0.98 0.01 240);
 
   /* Muted colors */
-  --muted: var(--neutral-900);
-  --muted-foreground: var(--neutral-400);
+  --muted: oklch(0.30 0.04 240);
+  --muted-foreground: oklch(0.70 0.03 240);
 
-  /* Accent colors */
-  --accent: var(--accent-500);
+  /* Accent colors - Subtle Glow */
+  --accent: oklch(0.30 0.04 240);
   --accent-foreground: oklch(1 0 0);
 
   /* Destructive colors */
-  --destructive: oklch(0.6 0.25 25);
-  /* More vibrant red */
+  --destructive: oklch(0.6 0.20 25);
   --destructive-foreground: oklch(1 0 0);
 
   /* Border and input */
-  --border: var(--neutral-800);
-  --input: var(--neutral-800);
-  --ring: var(--brand-500);
+  --border: oklch(0.30 0.05 240);
+  /* Lighter border to define edges */
+  --input: oklch(0.30 0.05 240);
+  --ring: oklch(0.65 0.20 250);
 
-  /* Chart colors */
-  --chart-1: var(--brand-500);
-  --chart-2: var(--accent-500);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  /* Chart colors - Harmonized */
+  --chart-1: oklch(0.65 0.20 250);
+  --chart-2: oklch(0.65 0.20 180);
+  --chart-3: oklch(0.70 0.15 300);
+  --chart-4: oklch(0.80 0.15 90);
+  --chart-5: oklch(0.65 0.20 30);
 
   /* Sidebar colors */
-  --sidebar: oklch(0.05 0.01 var(--neutral-hue));
-  /* Match bg */
-  --sidebar-foreground: var(--neutral-100);
-  --sidebar-primary: var(--brand-500);
+  --sidebar: oklch(0.13 0.03 240);
+  /* Darker than card, distinct from Bg */
+  --sidebar-foreground: oklch(0.95 0.01 240);
+  --sidebar-primary: oklch(0.65 0.20 250);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: var(--neutral-800);
-  --sidebar-accent-foreground: var(--neutral-100);
-  --sidebar-border: var(--neutral-800);
-  --sidebar-ring: var(--brand-500);
+  --sidebar-accent: oklch(0.25 0.04 240);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.20 0.05 240);
+  --sidebar-ring: oklch(0.65 0.20 250);
 }
 
 @layer base {

@@ -14,7 +14,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Trash2, Loader2 } from "lucide-react"
+import { Trash2, Settings } from "lucide-react"
 import { toast } from "sonner"
 
 interface DeleteOperatorButtonProps {
@@ -52,8 +52,12 @@ export function DeleteOperatorButton({ operatorId, operatorName }: DeleteOperato
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
             <AlertDialogTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive hover:bg-destructive/10">
-                    <Trash2 className="h-4 w-4" />
+                <Button variant="destructive" size="icon" disabled={isLoading}>
+                    {isLoading ? (
+                        <Settings className="h-4 w-4 animate-spin" />
+                    ) : (
+                        <Trash2 className="h-4 w-4" />
+                    )}
                 </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
@@ -74,7 +78,7 @@ export function DeleteOperatorButton({ operatorId, operatorName }: DeleteOperato
                         className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                         disabled={isLoading}
                     >
-                        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        {isLoading && <Settings className="mr-2 h-4 w-4 animate-spin" />}
                         Delete
                     </AlertDialogAction>
                 </AlertDialogFooter>

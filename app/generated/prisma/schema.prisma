@@ -1,0 +1,418 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  image     String? // Profile picture URL
+  password  String // Bcrypt-hashed password
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Auth Flags
+  firstLogin          Boolean @default(true)
+  forcePasswordChange Boolean @default(true)
+  isActive            Boolean @default(true)
+
+  // Relations
+  posts         Post[]
+  refreshTokens RefreshToken[]
+  auditLogs     AuditLog[]
+
+  // RBAC & Organization
+  departmentId Int?
+  department   Department? @relation(fields: [departmentId], references: [id])
+
+  auditLogPermissions AuditAccess[] @relation("SeniorAccess")
+  visibleToAudit      AuditAccess[] @relation("JuniorAccess")
+
+  userRoles      UserRole[]
+  userWarehouses UserWarehouse[]
+}
+
+model AuditAccess {
+  id       Int  @id @default(autoincrement())
+  seniorId Int
+  juniorId Int
+  senior   User @relation("SeniorAccess", fields: [seniorId], references: [id], onDelete: Cascade)
+  junior   User @relation("JuniorAccess", fields: [juniorId], references: [id], onDelete: Cascade)
+
+  @@unique([seniorId, juniorId])
+}
+
+model Department {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  users       User[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Role {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique // e.g., "SUPER_ADMIN", "HR_MANAGER"
+  description String?
+  userRoles   UserRole[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Permission {
+  id          Int              @id @default(autoincrement())
+  action      String // e.g., "create", "read", "update", "delete"
+  resource    String // e.g., "users", "reports", "inventory"
+  description String?
+  roles       RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@unique([action, resource]) // Prevent duplicate permissions
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  assignedAt   DateTime   @default(now())
+
+  @@id([roleId, permissionId])
+}
+
+model UserRole {
+  userId     Int
+  roleId     Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  assignedAt DateTime @default(now())
+
+  @@id([userId, roleId])
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  authorId  Int
+  author    User    @relation(fields: [authorId], references: [id])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  isRevoked Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  action     String // e.g. "CREATE", "UPDATE", "DELETE"
+  module     String // e.g. "ROLES", "USERS"
+  resourceId String? // ID of the affected resource
+  before     Json? // State before action
+  after      Json? // State after action
+  metadata   Json? // IP, User Agent, etc.
+  timestamp  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([timestamp])
+}
+
+model Warehouse {
+  id             Int             @id @default(autoincrement())
+  name           String          @unique
+  location       String?
+  status         String          @default("ACTIVE") // ACTIVE, INACTIVE
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  userWarehouses UserWarehouse[]
+}
+
+model UserWarehouse {
+  userId      Int
+  warehouseId Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  assignedAt  DateTime  @default(now())
+
+  @@id([userId, warehouseId])
+}
+
+model Unit {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  symbol    String   @unique
+  unitType  String // e.g., "WEIGHT", "LENGTH", "COUNT"
+  isBase    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conversionsFrom UnitConversion[] @relation("FromUnit")
+  conversionsTo   UnitConversion[] @relation("ToUnit")
+  products        Product[]
+}
+
+model UnitConversion {
+  id             Int      @id @default(autoincrement())
+  fromUnitId     Int
+  toUnitId       Int
+  conversionRate Float
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  fromUnit Unit @relation("FromUnit", fields: [fromUnitId], references: [id], onDelete: Restrict)
+  toUnit   Unit @relation("ToUnit", fields: [toUnitId], references: [id], onDelete: Restrict)
+
+  @@unique([fromUnitId, toUnitId])
+}
+
+// --- Global Settings Models ---
+
+model Company {
+  id        Int      @id @default(autoincrement())
+  legalName String
+  tradeName String?
+  address   String?
+  country   String?
+  phone     String?
+  email     String?
+  taxId     String?
+  logoUrl   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FiscalYear {
+  id             Int            @id @default(autoincrement())
+  name           String         @unique // e.g., "FY 2024-25"
+  startDate      DateTime
+  endDate        DateTime
+  isActive       Boolean        @default(false)
+  isLocked       Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  journalEntries JournalEntry[]
+}
+
+model Currency {
+  id           Int      @id @default(autoincrement())
+  code         String   @unique // e.g., "USD", "PKR"
+  symbol       String // e.g., "$", "Rs"
+  isBase       Boolean  @default(false)
+  exchangeRate Float    @default(1.0) // Rate relative to Base Currency
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SystemConfig {
+  id               Int      @id @default(autoincrement())
+  quantityDecimals Int      @default(2)
+  amountDecimals   Int      @default(2)
+  rateDecimals     Int      @default(4)
+  updatedAt        DateTime @updatedAt
+}
+
+model SystemSetting {
+  key         String   @id // e.g., "allow_negative_inventory"
+  value       String // e.g., "true" or "false"
+  description String?
+  updatedAt   DateTime @updatedAt
+}
+
+enum ProductType {
+  YARN
+  FABRIC
+  PACKING_MATERIAL
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  code        String    @unique
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id          Int         @id @default(autoincrement())
+  name        String
+  code        String      @unique
+  description String?
+  type        ProductType
+  categoryId  Int
+  category    Category    @relation(fields: [categoryId], references: [id])
+  unitId      Int
+  unit        Unit        @relation(fields: [unitId], references: [id])
+  variants    Variant[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([categoryId])
+  @@index([unitId])
+}
+
+model Variant {
+  id        Int     @id @default(autoincrement())
+  name      String // e.g., "Cotton Yarn 20s Raw"
+  sku       String  @unique // Acts as Lot/Batch Number
+  productId Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  // Textile Attributes
+  color  String?
+  count  String? // Yarn count (e.g., 20s, 30s)
+  gsm    String? // Fabric GSM
+  width  String? // Fabric width
+  shade  String?
+  weave  String?
+  finish String?
+  type   String? // Yarn type (Carded/Combed)
+
+  price     Float?   @default(0.0)
+  stock     Float?   @default(0.0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model Location {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  status      String    @default("ACTIVE") // ACTIVE, INACTIVE
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  machines    Machine[]
+}
+
+model Shift {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  startTime String // e.g., "08:00"
+  endTime   String // e.g., "16:00"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Operator {
+  id        Int      @id @default(autoincrement())
+  name      String
+  code      String   @unique
+  contact   String?
+  status    String   @default("ACTIVE") // ACTIVE, INACTIVE
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Machine {
+  id         Int       @id @default(autoincrement())
+  name       String
+  code       String    @unique
+  type       String?
+  status     String    @default("ACTIVE") // ACTIVE, INACTIVE, MAINTENANCE
+  locationId Int?
+  location   Location? @relation(fields: [locationId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+enum AccountType {
+  ASSET
+  LIABILITY
+  EQUITY
+  INCOME
+  EXPENSE
+}
+
+enum BalanceType {
+  DR
+  CR
+}
+
+enum VoucherType {
+  JOURNAL
+  PAYMENT
+  RECEIPT
+  PURCHASE
+  SALES
+  CONTRA
+  PURCHASE_RETURN
+  SALES_RETURN
+  OPENING
+  CLOSING
+}
+
+model Account {
+  id                 Int         @id @default(autoincrement())
+  code               String      @unique
+  name               String
+  type               AccountType
+  parentId           Int?
+  level              Int         @default(0)
+  isPosting          Boolean     @default(true)
+  description        String?
+  openingBalance     Float       @default(0.0)
+  openingBalanceType BalanceType @default(DR)
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  parent       Account?      @relation("AccountHierarchy", fields: [parentId], references: [id])
+  children     Account[]     @relation("AccountHierarchy")
+  journalLines JournalLine[]
+}
+
+model JournalEntry {
+  id           Int           @id @default(autoincrement())
+  number       String        @unique
+  date         DateTime
+  type         VoucherType
+  reference    String?
+  narration    String?
+  status       Boolean       @default(true)
+  fiscalYearId Int?
+  fiscalYear   FiscalYear?   @relation(fields: [fiscalYearId], references: [id])
+  lines        JournalLine[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model JournalLine {
+  id        Int          @id @default(autoincrement())
+  entryId   Int
+  accountId Int
+  debit     Float        @default(0.0)
+  credit    Float        @default(0.0)
+  narration String?
+  account   Account      @relation(fields: [accountId], references: [id])
+  entry     JournalEntry @relation(fields: [entryId], references: [id])
+}
+
+model VoucherSequence {
+  id        Int         @id @default(autoincrement())
+  type      VoucherType @unique
+  prefix    String
+  nextValue Int         @default(1)
+  updatedAt DateTime    @updatedAt
+}

@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../app/generated/prisma"
 }
 
@@ -209,6 +209,7 @@ model FiscalYear {
   isLocked  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  journalEntries JournalEntry[]
 }
 
 model Currency {
@@ -245,6 +246,7 @@ enum ProductType {
 model Category {
   id          Int       @id @default(autoincrement())
   name        String    @unique
+  code        String    @unique
   description String?
   products    Product[]
   createdAt   DateTime  @default(now())
@@ -333,4 +335,83 @@ model Machine {
   location    Location? @relation(fields: [locationId], references: [id])
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+enum AccountType {
+  ASSET
+  LIABILITY
+  EQUITY
+  INCOME
+  EXPENSE
+}
+
+enum BalanceType {
+  DR
+  CR
+}
+
+enum VoucherType {
+  JOURNAL
+  PAYMENT
+  RECEIPT
+  PURCHASE
+  SALES
+  CONTRA
+  PURCHASE_RETURN
+  SALES_RETURN
+  OPENING
+  CLOSING
+}
+
+model Account {
+  id                 Int           @id @default(autoincrement())
+  code               String        @unique
+  name               String
+  type               AccountType
+  parentId           Int?
+  level              Int           @default(0)
+  isPosting          Boolean       @default(true)
+  description        String?
+  openingBalance     Float         @default(0.0)
+  openingBalanceType BalanceType   @default(DR)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  
+  parent             Account?      @relation("AccountHierarchy", fields: [parentId], references: [id])
+  children           Account[]     @relation("AccountHierarchy")
+  journalLines       JournalLine[]
+}
+
+model JournalEntry {
+  id              Int           @id @default(autoincrement())
+  number          String        @unique
+  date            DateTime
+  type            VoucherType
+  reference       String?
+  narration       String?
+  status          Boolean       @default(true)
+  fiscalYearId    Int?
+  fiscalYear      FiscalYear?   @relation(fields: [fiscalYearId], references: [id])
+  lines           JournalLine[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model JournalLine {
+  id        Int          @id @default(autoincrement())
+  entryId   Int
+  accountId Int
+  debit     Float        @default(0.0)
+  credit    Float        @default(0.0)
+  narration String?
+  account   Account      @relation(fields: [accountId], references: [id])
+  entry     JournalEntry @relation(fields: [entryId], references: [id])
+}
+
+model VoucherSequence {
+  id        Int         @id @default(autoincrement())
+  type      VoucherType @unique
+  prefix    String
+  nextValue Int         @default(1)
+  updatedAt DateTime    @updatedAt
 }

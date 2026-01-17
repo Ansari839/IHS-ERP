@@ -16,14 +16,14 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { name, description } = body;
+        const { name, code, description } = body;
 
-        if (!name) {
-            return NextResponse.json({ error: "Name is required" }, { status: 400 });
+        if (!name || !code) {
+            return NextResponse.json({ error: "Name and Code are required" }, { status: 400 });
         }
 
         const category = await prisma.category.create({
-            data: { name, description },
+            data: { name, code, description },
         });
 
         return NextResponse.json(category);
