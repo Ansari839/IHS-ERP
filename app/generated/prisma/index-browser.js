@@ -414,6 +414,18 @@ exports.Prisma.VoucherSequenceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ItemGroupScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  status: 'status',
+  parentId: 'parentId',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -501,7 +513,8 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   JournalEntry: 'JournalEntry',
   JournalLine: 'JournalLine',
-  VoucherSequence: 'VoucherSequence'
+  VoucherSequence: 'VoucherSequence',
+  ItemGroup: 'ItemGroup'
 };
 
 /**
