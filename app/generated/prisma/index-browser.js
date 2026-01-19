@@ -426,6 +426,17 @@ exports.Prisma.ItemGroupScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ColorScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  pictureUrl: 'pictureUrl',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -514,7 +525,8 @@ exports.Prisma.ModelName = {
   JournalEntry: 'JournalEntry',
   JournalLine: 'JournalLine',
   VoucherSequence: 'VoucherSequence',
-  ItemGroup: 'ItemGroup'
+  ItemGroup: 'ItemGroup',
+  Color: 'Color'
 };
 
 /**

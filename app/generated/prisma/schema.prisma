@@ -200,6 +200,7 @@ model Company {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   itemGroups ItemGroup[]
+  colors     Color[]
 }
 
 model FiscalYear {
@@ -428,6 +429,20 @@ model ItemGroup {
   parentId String?
   parent   ItemGroup?  @relation("GroupHierarchy", fields: [parentId], references: [id])
   children ItemGroup[] @relation("GroupHierarchy")
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Color {
+  id         String  @id @default(uuid())
+  code       String  @unique
+  name       String
+  pictureUrl String?
+  status     String  @default("ACTIVE") // ACTIVE, INACTIVE
 
   companyId Int
   company   Company @relation(fields: [companyId], references: [id])
