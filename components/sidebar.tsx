@@ -22,6 +22,9 @@ import {
     Clock,
     Wallet,
     Receipt,
+    Factory,
+    Shirt,
+    Banknote,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -53,6 +56,15 @@ type NavigationItem = {
 
 const navigation: NavigationItem[] = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+    {
+        name: "FAB TEX",
+        icon: Factory,
+        children: [
+            { name: "Product", href: "/dashboard/fab-tex/products", icon: Shirt, permission: "read:inventory" },
+            { name: "Purchase", href: "/dashboard/fab-tex/purchase", icon: ShoppingCart, permission: "read:inventory" },
+            { name: "Sale", href: "/dashboard/fab-tex/sales", icon: Banknote, permission: "read:inventory" },
+        ]
+    },
     {
         name: "Production",
         icon: Package,
