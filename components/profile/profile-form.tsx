@@ -18,7 +18,7 @@ interface ProfileFormProps {
     }
 }
 
-export function ProfileForm({ user }: ProfileFormProps) {
+export function ProfileForm({ user, onCancel }: ProfileFormProps & { onCancel?: () => void }) {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
 
@@ -38,7 +38,8 @@ export function ProfileForm({ user }: ProfileFormProps) {
 
             if (result.success) {
                 toast.success('Profile updated successfully')
-                router.refresh() // Refresh to update navbar
+                router.refresh()
+                if (onCancel) onCancel()
             } else {
                 toast.error(result.error || 'Failed to update profile')
             }
@@ -46,18 +47,18 @@ export function ProfileForm({ user }: ProfileFormProps) {
     }
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Profile Details</CardTitle>
+        <Card className="border-none shadow-none">
+            <CardHeader className="p-0 pb-6 text-center">
+                <CardTitle className="text-xl">Edit Profile</CardTitle>
                 <CardDescription>
-                    Update your personal information.
+                    Update your photo and personal details.
                 </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
                 <form action={handleSubmit} className="space-y-6">
                     <div className="flex flex-col items-center gap-4">
-                        <div className="relative h-24 w-24">
-                            <div className="h-24 w-24 rounded-full overflow-hidden bg-muted border-2 border-muted">
+                        <div className="relative h-24 w-24 group">
+                            <div className="h-24 w-24 rounded-full overflow-hidden bg-muted border-2 border-muted relative">
                                 {preview ? (
                                     <img
                                         src={preview}
@@ -69,12 +70,15 @@ export function ProfileForm({ user }: ProfileFormProps) {
                                         {user.name?.charAt(0).toUpperCase() || 'U'}
                                     </div>
                                 )}
+                                {/* Overlay for Edit Hint */}
+                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer pointer-events-none">
+                                    <Loader2 className="w-6 h-6 text-white" />
+                                </div>
                             </div>
+                            <Label htmlFor="image" className="absolute inset-0 cursor-pointer rounded-full" />
                         </div>
+
                         <div className="flex items-center gap-2">
-                            <Label htmlFor="image" className="cursor-pointer text-sm font-medium text-primary hover:underline">
-                                Change Picture
-                            </Label>
                             <Input
                                 id="image"
                                 name="image"
@@ -84,6 +88,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
                                 onChange={handleImageChange}
                                 disabled={isPending}
                             />
+                            <Label htmlFor="image" className="text-sm font-medium text-primary hover:underline cursor-pointer">
+                                Upload New Picture
+                            </Label>
                             {preview && (
                                 <button
                                     type="button"
@@ -101,7 +108,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
                                             }
                                         });
                                     }}
-                                    className="text-sm font-medium text-destructive hover:underline"
+                                    className="text-xs text-destructive hover:underline ml-2"
                                     disabled={isPending}
                                 >
                                     Remove
@@ -135,7 +142,12 @@ export function ProfileForm({ user }: ProfileFormProps) {
                         />
                     </div>
 
-                    <div className="flex justify-end">
+                    <div className="flex justify-end gap-2 pt-2">
+                        {onCancel && (
+                            <Button type="button" variant="outline" onClick={onCancel} disabled={isPending}>
+                                Cancel
+                            </Button>
+                        )}
                         <Button type="submit" disabled={isPending}>
                             {isPending ? (
                                 <>
