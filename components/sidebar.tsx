@@ -25,6 +25,10 @@ import {
     Factory,
     Shirt,
     Banknote,
+    Palette,
+    Tag,
+    Box,
+    Award,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -60,7 +64,19 @@ const navigation: NavigationItem[] = [
         name: "FAB TEX",
         icon: Factory,
         children: [
-            { name: "Product", href: "/dashboard/fab-tex/products", icon: Shirt, permission: "read:inventory" },
+            {
+                name: "Product",
+                icon: Shirt,
+                children: [
+                    { name: "Item Master", href: "/dashboard/fab-tex/products/item-master", icon: Package, permission: "read:inventory" },
+                    { name: "Item Group", href: "/dashboard/fab-tex/products/item-group", icon: Package, permission: "read:inventory" },
+                    { name: "Colors", href: "/dashboard/fab-tex/products/colors", icon: Palette, permission: "read:inventory" },
+                    { name: "Brand", href: "/dashboard/fab-tex/products/brand", icon: Tag, permission: "read:inventory" },
+                    { name: "Unit Of Measurement", href: "/dashboard/fab-tex/products/uom", icon: Scale, permission: "read:inventory" },
+                    { name: "Item Packing", href: "/dashboard/fab-tex/products/item-packing", icon: Box, permission: "read:inventory" },
+                    { name: "Item Grade", href: "/dashboard/fab-tex/products/item-grade", icon: Award, permission: "read:inventory" },
+                ]
+            },
             { name: "Purchase", href: "/dashboard/fab-tex/purchase", icon: ShoppingCart, permission: "read:inventory" },
             { name: "Sale", href: "/dashboard/fab-tex/sales", icon: Banknote, permission: "read:inventory" },
         ]
