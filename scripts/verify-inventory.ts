@@ -17,8 +17,8 @@ async function main() {
         // For this test script, we'll try to delete what we create.
 
         // Find existing test units
-        const existingKg = await prisma.unit.findUnique({ where: { name: 'Kilogram' } })
-        const existingGram = await prisma.unit.findUnique({ where: { name: 'Gram' } })
+        const existingKg = await prisma.unit.findFirst({ where: { name: 'Kilogram' } })
+        const existingGram = await prisma.unit.findFirst({ where: { name: 'Gram' } })
 
         if (existingKg) {
             await prisma.unitConversion.deleteMany({
@@ -36,13 +36,31 @@ async function main() {
         console.log("Cleaned up old test data.")
 
         // 2. Create Units
+        // Fetch default company first
+        const company = await prisma.company.findFirst()
+        if (!company) throw new Error("No company found for testing")
+
         const kg = await prisma.unit.create({
-            data: { name: 'Kilogram', symbol: 'kg', unitType: 'WEIGHT', isBase: true }
+            data: {
+                name: 'Kilogram',
+                symbol: 'kg',
+                unitType: 'WEIGHT',
+                isBase: true,
+                code: 'UOM-TEST-001',
+                companyId: company.id
+            }
         })
         console.log("Created Base Unit:", kg.name)
 
         const gram = await prisma.unit.create({
-            data: { name: 'Gram', symbol: 'g', unitType: 'WEIGHT', isBase: false }
+            data: {
+                name: 'Gram',
+                symbol: 'g',
+                unitType: 'WEIGHT',
+                isBase: false,
+                code: 'UOM-TEST-002',
+                companyId: company.id
+            }
         })
         console.log("Created Unit:", gram.name)
 

@@ -4109,12 +4109,14 @@ export namespace Prisma {
     itemGroups: number
     colors: number
     brands: number
+    units: number
   }
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     itemGroups?: boolean | CompanyCountOutputTypeCountItemGroupsArgs
     colors?: boolean | CompanyCountOutputTypeCountColorsArgs
     brands?: boolean | CompanyCountOutputTypeCountBrandsArgs
+    units?: boolean | CompanyCountOutputTypeCountUnitsArgs
   }
 
   // Custom InputTypes
@@ -4147,6 +4149,13 @@ export namespace Prisma {
    */
   export type CompanyCountOutputTypeCountBrandsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BrandWhereInput
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountUnitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UnitWhereInput
   }
 
 
@@ -17904,38 +17913,49 @@ export namespace Prisma {
 
   export type UnitAvgAggregateOutputType = {
     id: number | null
+    companyId: number | null
   }
 
   export type UnitSumAggregateOutputType = {
     id: number | null
+    companyId: number | null
   }
 
   export type UnitMinAggregateOutputType = {
     id: number | null
+    code: string | null
     name: string | null
     symbol: string | null
     unitType: string | null
     isBase: boolean | null
+    status: string | null
+    companyId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type UnitMaxAggregateOutputType = {
     id: number | null
+    code: string | null
     name: string | null
     symbol: string | null
     unitType: string | null
     isBase: boolean | null
+    status: string | null
+    companyId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type UnitCountAggregateOutputType = {
     id: number
+    code: number
     name: number
     symbol: number
     unitType: number
     isBase: number
+    status: number
+    companyId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -17944,38 +17964,49 @@ export namespace Prisma {
 
   export type UnitAvgAggregateInputType = {
     id?: true
+    companyId?: true
   }
 
   export type UnitSumAggregateInputType = {
     id?: true
+    companyId?: true
   }
 
   export type UnitMinAggregateInputType = {
     id?: true
+    code?: true
     name?: true
     symbol?: true
     unitType?: true
     isBase?: true
+    status?: true
+    companyId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type UnitMaxAggregateInputType = {
     id?: true
+    code?: true
     name?: true
     symbol?: true
     unitType?: true
     isBase?: true
+    status?: true
+    companyId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type UnitCountAggregateInputType = {
     id?: true
+    code?: true
     name?: true
     symbol?: true
     unitType?: true
     isBase?: true
+    status?: true
+    companyId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -18069,10 +18100,13 @@ export namespace Prisma {
 
   export type UnitGroupByOutputType = {
     id: number
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase: boolean
+    status: string
+    companyId: number
     createdAt: Date
     updatedAt: Date
     _count: UnitCountAggregateOutputType | null
@@ -18098,12 +18132,16 @@ export namespace Prisma {
 
   export type UnitSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    code?: boolean
     name?: boolean
     symbol?: boolean
     unitType?: boolean
     isBase?: boolean
+    status?: boolean
+    companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
     conversionsFrom?: boolean | Unit$conversionsFromArgs<ExtArgs>
     conversionsTo?: boolean | Unit$conversionsToArgs<ExtArgs>
     products?: boolean | Unit$productsArgs<ExtArgs>
@@ -18112,57 +18150,77 @@ export namespace Prisma {
 
   export type UnitSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    code?: boolean
     name?: boolean
     symbol?: boolean
     unitType?: boolean
     isBase?: boolean
+    status?: boolean
+    companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["unit"]>
 
   export type UnitSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    code?: boolean
     name?: boolean
     symbol?: boolean
     unitType?: boolean
     isBase?: boolean
+    status?: boolean
+    companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["unit"]>
 
   export type UnitSelectScalar = {
     id?: boolean
+    code?: boolean
     name?: boolean
     symbol?: boolean
     unitType?: boolean
     isBase?: boolean
+    status?: boolean
+    companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UnitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "symbol" | "unitType" | "isBase" | "createdAt" | "updatedAt", ExtArgs["result"]["unit"]>
+  export type UnitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "symbol" | "unitType" | "isBase" | "status" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["unit"]>
   export type UnitInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
     conversionsFrom?: boolean | Unit$conversionsFromArgs<ExtArgs>
     conversionsTo?: boolean | Unit$conversionsToArgs<ExtArgs>
     products?: boolean | Unit$productsArgs<ExtArgs>
     _count?: boolean | UnitCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UnitIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UnitIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UnitIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type UnitIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
 
   export type $UnitPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Unit"
     objects: {
+      company: Prisma.$CompanyPayload<ExtArgs>
       conversionsFrom: Prisma.$UnitConversionPayload<ExtArgs>[]
       conversionsTo: Prisma.$UnitConversionPayload<ExtArgs>[]
       products: Prisma.$ProductPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      code: string
       name: string
       symbol: string
       unitType: string
       isBase: boolean
+      status: string
+      companyId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["unit"]>
@@ -18559,6 +18617,7 @@ export namespace Prisma {
    */
   export interface Prisma__UnitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     conversionsFrom<T extends Unit$conversionsFromArgs<ExtArgs> = {}>(args?: Subset<T, Unit$conversionsFromArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnitConversionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conversionsTo<T extends Unit$conversionsToArgs<ExtArgs> = {}>(args?: Subset<T, Unit$conversionsToArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnitConversionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends Unit$productsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -18592,10 +18651,13 @@ export namespace Prisma {
    */
   interface UnitFieldRefs {
     readonly id: FieldRef<"Unit", 'Int'>
+    readonly code: FieldRef<"Unit", 'String'>
     readonly name: FieldRef<"Unit", 'String'>
     readonly symbol: FieldRef<"Unit", 'String'>
     readonly unitType: FieldRef<"Unit", 'String'>
     readonly isBase: FieldRef<"Unit", 'Boolean'>
+    readonly status: FieldRef<"Unit", 'String'>
+    readonly companyId: FieldRef<"Unit", 'Int'>
     readonly createdAt: FieldRef<"Unit", 'DateTime'>
     readonly updatedAt: FieldRef<"Unit", 'DateTime'>
   }
@@ -18847,6 +18909,10 @@ export namespace Prisma {
      */
     data: UnitCreateManyInput | UnitCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnitIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -18917,6 +18983,10 @@ export namespace Prisma {
      * Limit how many Units to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnitIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -20450,6 +20520,7 @@ export namespace Prisma {
     itemGroups?: boolean | Company$itemGroupsArgs<ExtArgs>
     colors?: boolean | Company$colorsArgs<ExtArgs>
     brands?: boolean | Company$brandsArgs<ExtArgs>
+    units?: boolean | Company$unitsArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -20500,6 +20571,7 @@ export namespace Prisma {
     itemGroups?: boolean | Company$itemGroupsArgs<ExtArgs>
     colors?: boolean | Company$colorsArgs<ExtArgs>
     brands?: boolean | Company$brandsArgs<ExtArgs>
+    units?: boolean | Company$unitsArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -20511,6 +20583,7 @@ export namespace Prisma {
       itemGroups: Prisma.$ItemGroupPayload<ExtArgs>[]
       colors: Prisma.$ColorPayload<ExtArgs>[]
       brands: Prisma.$BrandPayload<ExtArgs>[]
+      units: Prisma.$UnitPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -20921,6 +20994,7 @@ export namespace Prisma {
     itemGroups<T extends Company$itemGroupsArgs<ExtArgs> = {}>(args?: Subset<T, Company$itemGroupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     colors<T extends Company$colorsArgs<ExtArgs> = {}>(args?: Subset<T, Company$colorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ColorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     brands<T extends Company$brandsArgs<ExtArgs> = {}>(args?: Subset<T, Company$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    units<T extends Company$unitsArgs<ExtArgs> = {}>(args?: Subset<T, Company$unitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21418,6 +21492,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BrandScalarFieldEnum | BrandScalarFieldEnum[]
+  }
+
+  /**
+   * Company.units
+   */
+  export type Company$unitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Unit
+     */
+    select?: UnitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Unit
+     */
+    omit?: UnitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnitInclude<ExtArgs> | null
+    where?: UnitWhereInput
+    orderBy?: UnitOrderByWithRelationInput | UnitOrderByWithRelationInput[]
+    cursor?: UnitWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UnitScalarFieldEnum | UnitScalarFieldEnum[]
   }
 
   /**
@@ -41833,10 +41931,13 @@ export namespace Prisma {
 
   export const UnitScalarFieldEnum: {
     id: 'id',
+    code: 'code',
     name: 'name',
     symbol: 'symbol',
     unitType: 'unitType',
     isBase: 'isBase',
+    status: 'status',
+    companyId: 'companyId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -43057,12 +43158,16 @@ export namespace Prisma {
     OR?: UnitWhereInput[]
     NOT?: UnitWhereInput | UnitWhereInput[]
     id?: IntFilter<"Unit"> | number
+    code?: StringFilter<"Unit"> | string
     name?: StringFilter<"Unit"> | string
     symbol?: StringFilter<"Unit"> | string
     unitType?: StringFilter<"Unit"> | string
     isBase?: BoolFilter<"Unit"> | boolean
+    status?: StringFilter<"Unit"> | string
+    companyId?: IntFilter<"Unit"> | number
     createdAt?: DateTimeFilter<"Unit"> | Date | string
     updatedAt?: DateTimeFilter<"Unit"> | Date | string
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     conversionsFrom?: UnitConversionListRelationFilter
     conversionsTo?: UnitConversionListRelationFilter
     products?: ProductListRelationFilter
@@ -43070,12 +43175,16 @@ export namespace Prisma {
 
   export type UnitOrderByWithRelationInput = {
     id?: SortOrder
+    code?: SortOrder
     name?: SortOrder
     symbol?: SortOrder
     unitType?: SortOrder
     isBase?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    company?: CompanyOrderByWithRelationInput
     conversionsFrom?: UnitConversionOrderByRelationAggregateInput
     conversionsTo?: UnitConversionOrderByRelationAggregateInput
     products?: ProductOrderByRelationAggregateInput
@@ -43083,26 +43192,33 @@ export namespace Prisma {
 
   export type UnitWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    name?: string
-    symbol?: string
+    code?: string
     AND?: UnitWhereInput | UnitWhereInput[]
     OR?: UnitWhereInput[]
     NOT?: UnitWhereInput | UnitWhereInput[]
+    name?: StringFilter<"Unit"> | string
+    symbol?: StringFilter<"Unit"> | string
     unitType?: StringFilter<"Unit"> | string
     isBase?: BoolFilter<"Unit"> | boolean
+    status?: StringFilter<"Unit"> | string
+    companyId?: IntFilter<"Unit"> | number
     createdAt?: DateTimeFilter<"Unit"> | Date | string
     updatedAt?: DateTimeFilter<"Unit"> | Date | string
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     conversionsFrom?: UnitConversionListRelationFilter
     conversionsTo?: UnitConversionListRelationFilter
     products?: ProductListRelationFilter
-  }, "id" | "name" | "symbol">
+  }, "id" | "code">
 
   export type UnitOrderByWithAggregationInput = {
     id?: SortOrder
+    code?: SortOrder
     name?: SortOrder
     symbol?: SortOrder
     unitType?: SortOrder
     isBase?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UnitCountOrderByAggregateInput
@@ -43117,10 +43233,13 @@ export namespace Prisma {
     OR?: UnitScalarWhereWithAggregatesInput[]
     NOT?: UnitScalarWhereWithAggregatesInput | UnitScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Unit"> | number
+    code?: StringWithAggregatesFilter<"Unit"> | string
     name?: StringWithAggregatesFilter<"Unit"> | string
     symbol?: StringWithAggregatesFilter<"Unit"> | string
     unitType?: StringWithAggregatesFilter<"Unit"> | string
     isBase?: BoolWithAggregatesFilter<"Unit"> | boolean
+    status?: StringWithAggregatesFilter<"Unit"> | string
+    companyId?: IntWithAggregatesFilter<"Unit"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Unit"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Unit"> | Date | string
   }
@@ -43209,6 +43328,7 @@ export namespace Prisma {
     itemGroups?: ItemGroupListRelationFilter
     colors?: ColorListRelationFilter
     brands?: BrandListRelationFilter
+    units?: UnitListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -43226,6 +43346,7 @@ export namespace Prisma {
     itemGroups?: ItemGroupOrderByRelationAggregateInput
     colors?: ColorOrderByRelationAggregateInput
     brands?: BrandOrderByRelationAggregateInput
+    units?: UnitOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -43246,6 +43367,7 @@ export namespace Prisma {
     itemGroups?: ItemGroupListRelationFilter
     colors?: ColorListRelationFilter
     brands?: BrandListRelationFilter
+    units?: UnitListRelationFilter
   }, "id">
 
   export type CompanyOrderByWithAggregationInput = {
@@ -45283,12 +45405,15 @@ export namespace Prisma {
   }
 
   export type UnitCreateInput = {
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutUnitsInput
     conversionsFrom?: UnitConversionCreateNestedManyWithoutFromUnitInput
     conversionsTo?: UnitConversionCreateNestedManyWithoutToUnitInput
     products?: ProductCreateNestedManyWithoutUnitInput
@@ -45296,10 +45421,13 @@ export namespace Prisma {
 
   export type UnitUncheckedCreateInput = {
     id?: number
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
+    companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     conversionsFrom?: UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput
@@ -45308,12 +45436,15 @@ export namespace Prisma {
   }
 
   export type UnitUpdateInput = {
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutUnitsNestedInput
     conversionsFrom?: UnitConversionUpdateManyWithoutFromUnitNestedInput
     conversionsTo?: UnitConversionUpdateManyWithoutToUnitNestedInput
     products?: ProductUpdateManyWithoutUnitNestedInput
@@ -45321,10 +45452,13 @@ export namespace Prisma {
 
   export type UnitUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversionsFrom?: UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput
@@ -45334,29 +45468,37 @@ export namespace Prisma {
 
   export type UnitCreateManyInput = {
     id?: number
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
+    companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type UnitUpdateManyMutationInput = {
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UnitUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45433,6 +45575,7 @@ export namespace Prisma {
     itemGroups?: ItemGroupCreateNestedManyWithoutCompanyInput
     colors?: ColorCreateNestedManyWithoutCompanyInput
     brands?: BrandCreateNestedManyWithoutCompanyInput
+    units?: UnitCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -45450,6 +45593,7 @@ export namespace Prisma {
     itemGroups?: ItemGroupUncheckedCreateNestedManyWithoutCompanyInput
     colors?: ColorUncheckedCreateNestedManyWithoutCompanyInput
     brands?: BrandUncheckedCreateNestedManyWithoutCompanyInput
+    units?: UnitUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -45466,6 +45610,7 @@ export namespace Prisma {
     itemGroups?: ItemGroupUpdateManyWithoutCompanyNestedInput
     colors?: ColorUpdateManyWithoutCompanyNestedInput
     brands?: BrandUpdateManyWithoutCompanyNestedInput
+    units?: UnitUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -45483,6 +45628,7 @@ export namespace Prisma {
     itemGroups?: ItemGroupUncheckedUpdateManyWithoutCompanyNestedInput
     colors?: ColorUncheckedUpdateManyWithoutCompanyNestedInput
     brands?: BrandUncheckedUpdateManyWithoutCompanyNestedInput
+    units?: UnitUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -47604,6 +47750,11 @@ export namespace Prisma {
     warehouseId?: SortOrder
   }
 
+  export type CompanyScalarRelationFilter = {
+    is?: CompanyWhereInput
+    isNot?: CompanyWhereInput
+  }
+
   export type UnitConversionListRelationFilter = {
     every?: UnitConversionWhereInput
     some?: UnitConversionWhereInput
@@ -47626,40 +47777,51 @@ export namespace Prisma {
 
   export type UnitCountOrderByAggregateInput = {
     id?: SortOrder
+    code?: SortOrder
     name?: SortOrder
     symbol?: SortOrder
     unitType?: SortOrder
     isBase?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UnitAvgOrderByAggregateInput = {
     id?: SortOrder
+    companyId?: SortOrder
   }
 
   export type UnitMaxOrderByAggregateInput = {
     id?: SortOrder
+    code?: SortOrder
     name?: SortOrder
     symbol?: SortOrder
     unitType?: SortOrder
     isBase?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UnitMinOrderByAggregateInput = {
     id?: SortOrder
+    code?: SortOrder
     name?: SortOrder
     symbol?: SortOrder
     unitType?: SortOrder
     isBase?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UnitSumOrderByAggregateInput = {
     id?: SortOrder
+    companyId?: SortOrder
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -47758,6 +47920,12 @@ export namespace Prisma {
     none?: BrandWhereInput
   }
 
+  export type UnitListRelationFilter = {
+    every?: UnitWhereInput
+    some?: UnitWhereInput
+    none?: UnitWhereInput
+  }
+
   export type ItemGroupOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -47767,6 +47935,10 @@ export namespace Prisma {
   }
 
   export type BrandOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UnitOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -48635,11 +48807,6 @@ export namespace Prisma {
     isNot?: ItemGroupWhereInput | null
   }
 
-  export type CompanyScalarRelationFilter = {
-    is?: CompanyWhereInput
-    isNot?: CompanyWhereInput
-  }
-
   export type ItemGroupCountOrderByAggregateInput = {
     id?: SortOrder
     code?: SortOrder
@@ -49469,6 +49636,12 @@ export namespace Prisma {
     update?: XOR<XOR<WarehouseUpdateToOneWithWhereWithoutUserWarehousesInput, WarehouseUpdateWithoutUserWarehousesInput>, WarehouseUncheckedUpdateWithoutUserWarehousesInput>
   }
 
+  export type CompanyCreateNestedOneWithoutUnitsInput = {
+    create?: XOR<CompanyCreateWithoutUnitsInput, CompanyUncheckedCreateWithoutUnitsInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUnitsInput
+    connect?: CompanyWhereUniqueInput
+  }
+
   export type UnitConversionCreateNestedManyWithoutFromUnitInput = {
     create?: XOR<UnitConversionCreateWithoutFromUnitInput, UnitConversionUncheckedCreateWithoutFromUnitInput> | UnitConversionCreateWithoutFromUnitInput[] | UnitConversionUncheckedCreateWithoutFromUnitInput[]
     connectOrCreate?: UnitConversionCreateOrConnectWithoutFromUnitInput | UnitConversionCreateOrConnectWithoutFromUnitInput[]
@@ -49509,6 +49682,14 @@ export namespace Prisma {
     connectOrCreate?: ProductCreateOrConnectWithoutUnitInput | ProductCreateOrConnectWithoutUnitInput[]
     createMany?: ProductCreateManyUnitInputEnvelope
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type CompanyUpdateOneRequiredWithoutUnitsNestedInput = {
+    create?: XOR<CompanyCreateWithoutUnitsInput, CompanyUncheckedCreateWithoutUnitsInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUnitsInput
+    upsert?: CompanyUpsertWithoutUnitsInput
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutUnitsInput, CompanyUpdateWithoutUnitsInput>, CompanyUncheckedUpdateWithoutUnitsInput>
   }
 
   export type UnitConversionUpdateManyWithoutFromUnitNestedInput = {
@@ -49652,6 +49833,13 @@ export namespace Prisma {
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
   }
 
+  export type UnitCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<UnitCreateWithoutCompanyInput, UnitUncheckedCreateWithoutCompanyInput> | UnitCreateWithoutCompanyInput[] | UnitUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UnitCreateOrConnectWithoutCompanyInput | UnitCreateOrConnectWithoutCompanyInput[]
+    createMany?: UnitCreateManyCompanyInputEnvelope
+    connect?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+  }
+
   export type ItemGroupUncheckedCreateNestedManyWithoutCompanyInput = {
     create?: XOR<ItemGroupCreateWithoutCompanyInput, ItemGroupUncheckedCreateWithoutCompanyInput> | ItemGroupCreateWithoutCompanyInput[] | ItemGroupUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: ItemGroupCreateOrConnectWithoutCompanyInput | ItemGroupCreateOrConnectWithoutCompanyInput[]
@@ -49671,6 +49859,13 @@ export namespace Prisma {
     connectOrCreate?: BrandCreateOrConnectWithoutCompanyInput | BrandCreateOrConnectWithoutCompanyInput[]
     createMany?: BrandCreateManyCompanyInputEnvelope
     connect?: BrandWhereUniqueInput | BrandWhereUniqueInput[]
+  }
+
+  export type UnitUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<UnitCreateWithoutCompanyInput, UnitUncheckedCreateWithoutCompanyInput> | UnitCreateWithoutCompanyInput[] | UnitUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UnitCreateOrConnectWithoutCompanyInput | UnitCreateOrConnectWithoutCompanyInput[]
+    createMany?: UnitCreateManyCompanyInputEnvelope
+    connect?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
   }
 
   export type ItemGroupUpdateManyWithoutCompanyNestedInput = {
@@ -49715,6 +49910,20 @@ export namespace Prisma {
     deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
   }
 
+  export type UnitUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<UnitCreateWithoutCompanyInput, UnitUncheckedCreateWithoutCompanyInput> | UnitCreateWithoutCompanyInput[] | UnitUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UnitCreateOrConnectWithoutCompanyInput | UnitCreateOrConnectWithoutCompanyInput[]
+    upsert?: UnitUpsertWithWhereUniqueWithoutCompanyInput | UnitUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: UnitCreateManyCompanyInputEnvelope
+    set?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+    disconnect?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+    delete?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+    connect?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+    update?: UnitUpdateWithWhereUniqueWithoutCompanyInput | UnitUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: UnitUpdateManyWithWhereWithoutCompanyInput | UnitUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: UnitScalarWhereInput | UnitScalarWhereInput[]
+  }
+
   export type ItemGroupUncheckedUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<ItemGroupCreateWithoutCompanyInput, ItemGroupUncheckedCreateWithoutCompanyInput> | ItemGroupCreateWithoutCompanyInput[] | ItemGroupUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: ItemGroupCreateOrConnectWithoutCompanyInput | ItemGroupCreateOrConnectWithoutCompanyInput[]
@@ -49755,6 +49964,20 @@ export namespace Prisma {
     update?: BrandUpdateWithWhereUniqueWithoutCompanyInput | BrandUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: BrandUpdateManyWithWhereWithoutCompanyInput | BrandUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: BrandScalarWhereInput | BrandScalarWhereInput[]
+  }
+
+  export type UnitUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<UnitCreateWithoutCompanyInput, UnitUncheckedCreateWithoutCompanyInput> | UnitCreateWithoutCompanyInput[] | UnitUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UnitCreateOrConnectWithoutCompanyInput | UnitCreateOrConnectWithoutCompanyInput[]
+    upsert?: UnitUpsertWithWhereUniqueWithoutCompanyInput | UnitUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: UnitCreateManyCompanyInputEnvelope
+    set?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+    disconnect?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+    delete?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+    connect?: UnitWhereUniqueInput | UnitWhereUniqueInput[]
+    update?: UnitUpdateWithWhereUniqueWithoutCompanyInput | UnitUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: UnitUpdateManyWithWhereWithoutCompanyInput | UnitUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: UnitScalarWhereInput | UnitScalarWhereInput[]
   }
 
   export type JournalEntryCreateNestedManyWithoutFiscalYearInput = {
@@ -52067,6 +52290,44 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CompanyCreateWithoutUnitsInput = {
+    legalName: string
+    tradeName?: string | null
+    address?: string | null
+    country?: string | null
+    phone?: string | null
+    email?: string | null
+    taxId?: string | null
+    logoUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemGroups?: ItemGroupCreateNestedManyWithoutCompanyInput
+    colors?: ColorCreateNestedManyWithoutCompanyInput
+    brands?: BrandCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutUnitsInput = {
+    id?: number
+    legalName: string
+    tradeName?: string | null
+    address?: string | null
+    country?: string | null
+    phone?: string | null
+    email?: string | null
+    taxId?: string | null
+    logoUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemGroups?: ItemGroupUncheckedCreateNestedManyWithoutCompanyInput
+    colors?: ColorUncheckedCreateNestedManyWithoutCompanyInput
+    brands?: BrandUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutUnitsInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutUnitsInput, CompanyUncheckedCreateWithoutUnitsInput>
+  }
+
   export type UnitConversionCreateWithoutFromUnitInput = {
     conversionRate: number
     createdAt?: Date | string
@@ -52150,6 +52411,50 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CompanyUpsertWithoutUnitsInput = {
+    update: XOR<CompanyUpdateWithoutUnitsInput, CompanyUncheckedUpdateWithoutUnitsInput>
+    create: XOR<CompanyCreateWithoutUnitsInput, CompanyUncheckedCreateWithoutUnitsInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutUnitsInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutUnitsInput, CompanyUncheckedUpdateWithoutUnitsInput>
+  }
+
+  export type CompanyUpdateWithoutUnitsInput = {
+    legalName?: StringFieldUpdateOperationsInput | string
+    tradeName?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemGroups?: ItemGroupUpdateManyWithoutCompanyNestedInput
+    colors?: ColorUpdateManyWithoutCompanyNestedInput
+    brands?: BrandUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutUnitsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    legalName?: StringFieldUpdateOperationsInput | string
+    tradeName?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemGroups?: ItemGroupUncheckedUpdateManyWithoutCompanyNestedInput
+    colors?: ColorUncheckedUpdateManyWithoutCompanyNestedInput
+    brands?: BrandUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
   export type UnitConversionUpsertWithWhereUniqueWithoutFromUnitInput = {
     where: UnitConversionWhereUniqueInput
     update: XOR<UnitConversionUpdateWithoutFromUnitInput, UnitConversionUncheckedUpdateWithoutFromUnitInput>
@@ -52226,22 +52531,28 @@ export namespace Prisma {
   }
 
   export type UnitCreateWithoutConversionsFromInput = {
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutUnitsInput
     conversionsTo?: UnitConversionCreateNestedManyWithoutToUnitInput
     products?: ProductCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutConversionsFromInput = {
     id?: number
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
+    companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     conversionsTo?: UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
@@ -52254,22 +52565,28 @@ export namespace Prisma {
   }
 
   export type UnitCreateWithoutConversionsToInput = {
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutUnitsInput
     conversionsFrom?: UnitConversionCreateNestedManyWithoutFromUnitInput
     products?: ProductCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutConversionsToInput = {
     id?: number
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
+    companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     conversionsFrom?: UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput
@@ -52293,22 +52610,28 @@ export namespace Prisma {
   }
 
   export type UnitUpdateWithoutConversionsFromInput = {
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutUnitsNestedInput
     conversionsTo?: UnitConversionUpdateManyWithoutToUnitNestedInput
     products?: ProductUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutConversionsFromInput = {
     id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversionsTo?: UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
@@ -52327,22 +52650,28 @@ export namespace Prisma {
   }
 
   export type UnitUpdateWithoutConversionsToInput = {
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutUnitsNestedInput
     conversionsFrom?: UnitConversionUpdateManyWithoutFromUnitNestedInput
     products?: ProductUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutConversionsToInput = {
     id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversionsFrom?: UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput
@@ -52441,6 +52770,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UnitCreateWithoutCompanyInput = {
+    code: string
+    name: string
+    symbol: string
+    unitType: string
+    isBase?: boolean
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversionsFrom?: UnitConversionCreateNestedManyWithoutFromUnitInput
+    conversionsTo?: UnitConversionCreateNestedManyWithoutToUnitInput
+    products?: ProductCreateNestedManyWithoutUnitInput
+  }
+
+  export type UnitUncheckedCreateWithoutCompanyInput = {
+    id?: number
+    code: string
+    name: string
+    symbol: string
+    unitType: string
+    isBase?: boolean
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversionsFrom?: UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput
+    conversionsTo?: UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
+    products?: ProductUncheckedCreateNestedManyWithoutUnitInput
+  }
+
+  export type UnitCreateOrConnectWithoutCompanyInput = {
+    where: UnitWhereUniqueInput
+    create: XOR<UnitCreateWithoutCompanyInput, UnitUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type UnitCreateManyCompanyInputEnvelope = {
+    data: UnitCreateManyCompanyInput | UnitCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ItemGroupUpsertWithWhereUniqueWithoutCompanyInput = {
     where: ItemGroupWhereUniqueInput
     update: XOR<ItemGroupUpdateWithoutCompanyInput, ItemGroupUncheckedUpdateWithoutCompanyInput>
@@ -52529,6 +52897,38 @@ export namespace Prisma {
     companyId?: IntFilter<"Brand"> | number
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
+  }
+
+  export type UnitUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: UnitWhereUniqueInput
+    update: XOR<UnitUpdateWithoutCompanyInput, UnitUncheckedUpdateWithoutCompanyInput>
+    create: XOR<UnitCreateWithoutCompanyInput, UnitUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type UnitUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: UnitWhereUniqueInput
+    data: XOR<UnitUpdateWithoutCompanyInput, UnitUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type UnitUpdateManyWithWhereWithoutCompanyInput = {
+    where: UnitScalarWhereInput
+    data: XOR<UnitUpdateManyMutationInput, UnitUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type UnitScalarWhereInput = {
+    AND?: UnitScalarWhereInput | UnitScalarWhereInput[]
+    OR?: UnitScalarWhereInput[]
+    NOT?: UnitScalarWhereInput | UnitScalarWhereInput[]
+    id?: IntFilter<"Unit"> | number
+    code?: StringFilter<"Unit"> | string
+    name?: StringFilter<"Unit"> | string
+    symbol?: StringFilter<"Unit"> | string
+    unitType?: StringFilter<"Unit"> | string
+    isBase?: BoolFilter<"Unit"> | boolean
+    status?: StringFilter<"Unit"> | string
+    companyId?: IntFilter<"Unit"> | number
+    createdAt?: DateTimeFilter<"Unit"> | Date | string
+    updatedAt?: DateTimeFilter<"Unit"> | Date | string
   }
 
   export type JournalEntryCreateWithoutFiscalYearInput = {
@@ -52670,22 +53070,28 @@ export namespace Prisma {
   }
 
   export type UnitCreateWithoutProductsInput = {
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutUnitsInput
     conversionsFrom?: UnitConversionCreateNestedManyWithoutFromUnitInput
     conversionsTo?: UnitConversionCreateNestedManyWithoutToUnitInput
   }
 
   export type UnitUncheckedCreateWithoutProductsInput = {
     id?: number
+    code: string
     name: string
     symbol: string
     unitType: string
     isBase?: boolean
+    status?: string
+    companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     conversionsFrom?: UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput
@@ -52782,22 +53188,28 @@ export namespace Prisma {
   }
 
   export type UnitUpdateWithoutProductsInput = {
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutUnitsNestedInput
     conversionsFrom?: UnitConversionUpdateManyWithoutFromUnitNestedInput
     conversionsTo?: UnitConversionUpdateManyWithoutToUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutProductsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     symbol?: StringFieldUpdateOperationsInput | string
     unitType?: StringFieldUpdateOperationsInput | string
     isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversionsFrom?: UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput
@@ -53538,6 +53950,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     colors?: ColorCreateNestedManyWithoutCompanyInput
     brands?: BrandCreateNestedManyWithoutCompanyInput
+    units?: UnitCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutItemGroupsInput = {
@@ -53554,6 +53967,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     colors?: ColorUncheckedCreateNestedManyWithoutCompanyInput
     brands?: BrandUncheckedCreateNestedManyWithoutCompanyInput
+    units?: UnitUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutItemGroupsInput = {
@@ -53636,6 +54050,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     colors?: ColorUpdateManyWithoutCompanyNestedInput
     brands?: BrandUpdateManyWithoutCompanyNestedInput
+    units?: UnitUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutItemGroupsInput = {
@@ -53652,6 +54067,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     colors?: ColorUncheckedUpdateManyWithoutCompanyNestedInput
     brands?: BrandUncheckedUpdateManyWithoutCompanyNestedInput
+    units?: UnitUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutColorsInput = {
@@ -53667,6 +54083,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     itemGroups?: ItemGroupCreateNestedManyWithoutCompanyInput
     brands?: BrandCreateNestedManyWithoutCompanyInput
+    units?: UnitCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutColorsInput = {
@@ -53683,6 +54100,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     itemGroups?: ItemGroupUncheckedCreateNestedManyWithoutCompanyInput
     brands?: BrandUncheckedCreateNestedManyWithoutCompanyInput
+    units?: UnitUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutColorsInput = {
@@ -53714,6 +54132,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroups?: ItemGroupUpdateManyWithoutCompanyNestedInput
     brands?: BrandUpdateManyWithoutCompanyNestedInput
+    units?: UnitUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutColorsInput = {
@@ -53730,6 +54149,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroups?: ItemGroupUncheckedUpdateManyWithoutCompanyNestedInput
     brands?: BrandUncheckedUpdateManyWithoutCompanyNestedInput
+    units?: UnitUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutBrandsInput = {
@@ -53745,6 +54165,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     itemGroups?: ItemGroupCreateNestedManyWithoutCompanyInput
     colors?: ColorCreateNestedManyWithoutCompanyInput
+    units?: UnitCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBrandsInput = {
@@ -53761,6 +54182,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     itemGroups?: ItemGroupUncheckedCreateNestedManyWithoutCompanyInput
     colors?: ColorUncheckedCreateNestedManyWithoutCompanyInput
+    units?: UnitUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutBrandsInput = {
@@ -53792,6 +54214,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroups?: ItemGroupUpdateManyWithoutCompanyNestedInput
     colors?: ColorUpdateManyWithoutCompanyNestedInput
+    units?: UnitUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBrandsInput = {
@@ -53808,6 +54231,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroups?: ItemGroupUncheckedUpdateManyWithoutCompanyNestedInput
     colors?: ColorUncheckedUpdateManyWithoutCompanyNestedInput
+    units?: UnitUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type PostCreateManyAuthorInput = {
@@ -54273,6 +54697,18 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type UnitCreateManyCompanyInput = {
+    id?: number
+    code: string
+    name: string
+    symbol: string
+    unitType: string
+    isBase?: boolean
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ItemGroupUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
@@ -54360,6 +54796,47 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnitUpdateWithoutCompanyInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    unitType?: StringFieldUpdateOperationsInput | string
+    isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversionsFrom?: UnitConversionUpdateManyWithoutFromUnitNestedInput
+    conversionsTo?: UnitConversionUpdateManyWithoutToUnitNestedInput
+    products?: ProductUpdateManyWithoutUnitNestedInput
+  }
+
+  export type UnitUncheckedUpdateWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    unitType?: StringFieldUpdateOperationsInput | string
+    isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversionsFrom?: UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput
+    conversionsTo?: UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
+    products?: ProductUncheckedUpdateManyWithoutUnitNestedInput
+  }
+
+  export type UnitUncheckedUpdateManyWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    unitType?: StringFieldUpdateOperationsInput | string
+    isBase?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

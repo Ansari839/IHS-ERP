@@ -223,10 +223,13 @@ exports.Prisma.UserWarehouseScalarFieldEnum = {
 
 exports.Prisma.UnitScalarFieldEnum = {
   id: 'id',
+  code: 'code',
   name: 'name',
   symbol: 'symbol',
   unitType: 'unitType',
   isBase: 'isBase',
+  status: 'status',
+  companyId: 'companyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

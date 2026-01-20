@@ -158,10 +158,16 @@ model UserWarehouse {
 }
 model Unit {
   id        Int      @id @default(autoincrement())
-  name      String   @unique
-  symbol    String   @unique
+  code      String   @unique
+  name      String
+  symbol    String   
   unitType  String   // e.g., "WEIGHT", "LENGTH", "COUNT"
   isBase    Boolean  @default(false)
+  status    String   @default("ACTIVE") // ACTIVE, INACTIVE
+  
+  companyId Int
+  company   Company  @relation(fields: [companyId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -201,6 +207,7 @@ model Company {
   itemGroups ItemGroup[]
   colors     Color[]
   brands     Brand[]
+  units      Unit[]
 }
 
 model FiscalYear {
