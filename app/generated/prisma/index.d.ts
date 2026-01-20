@@ -15955,6 +15955,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     location: string | null
+    contactPerson: string | null
     status: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -15964,6 +15965,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     location: string | null
+    contactPerson: string | null
     status: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -15973,6 +15975,8 @@ export namespace Prisma {
     id: number
     name: number
     location: number
+    contactPerson: number
+    contactNumbers: number
     status: number
     createdAt: number
     updatedAt: number
@@ -15992,6 +15996,7 @@ export namespace Prisma {
     id?: true
     name?: true
     location?: true
+    contactPerson?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -16001,6 +16006,7 @@ export namespace Prisma {
     id?: true
     name?: true
     location?: true
+    contactPerson?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -16010,6 +16016,8 @@ export namespace Prisma {
     id?: true
     name?: true
     location?: true
+    contactPerson?: true
+    contactNumbers?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -16106,6 +16114,8 @@ export namespace Prisma {
     id: number
     name: string
     location: string | null
+    contactPerson: string | null
+    contactNumbers: string[]
     status: string
     createdAt: Date
     updatedAt: Date
@@ -16134,6 +16144,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     location?: boolean
+    contactPerson?: boolean
+    contactNumbers?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -16145,6 +16157,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     location?: boolean
+    contactPerson?: boolean
+    contactNumbers?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -16154,6 +16168,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     location?: boolean
+    contactPerson?: boolean
+    contactNumbers?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -16163,12 +16179,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     location?: boolean
+    contactPerson?: boolean
+    contactNumbers?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type WarehouseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "location" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["warehouse"]>
+  export type WarehouseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "location" | "contactPerson" | "contactNumbers" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["warehouse"]>
   export type WarehouseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userWarehouses?: boolean | Warehouse$userWarehousesArgs<ExtArgs>
     _count?: boolean | WarehouseCountOutputTypeDefaultArgs<ExtArgs>
@@ -16185,6 +16203,8 @@ export namespace Prisma {
       id: number
       name: string
       location: string | null
+      contactPerson: string | null
+      contactNumbers: string[]
       status: string
       createdAt: Date
       updatedAt: Date
@@ -16615,6 +16635,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Warehouse", 'Int'>
     readonly name: FieldRef<"Warehouse", 'String'>
     readonly location: FieldRef<"Warehouse", 'String'>
+    readonly contactPerson: FieldRef<"Warehouse", 'String'>
+    readonly contactNumbers: FieldRef<"Warehouse", 'String[]'>
     readonly status: FieldRef<"Warehouse", 'String'>
     readonly createdAt: FieldRef<"Warehouse", 'DateTime'>
     readonly updatedAt: FieldRef<"Warehouse", 'DateTime'>
@@ -44625,6 +44647,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     location: 'location',
+    contactPerson: 'contactPerson',
+    contactNumbers: 'contactNumbers',
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -45792,6 +45816,8 @@ export namespace Prisma {
     id?: IntFilter<"Warehouse"> | number
     name?: StringFilter<"Warehouse"> | string
     location?: StringNullableFilter<"Warehouse"> | string | null
+    contactPerson?: StringNullableFilter<"Warehouse"> | string | null
+    contactNumbers?: StringNullableListFilter<"Warehouse">
     status?: StringFilter<"Warehouse"> | string
     createdAt?: DateTimeFilter<"Warehouse"> | Date | string
     updatedAt?: DateTimeFilter<"Warehouse"> | Date | string
@@ -45802,6 +45828,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     location?: SortOrderInput | SortOrder
+    contactPerson?: SortOrderInput | SortOrder
+    contactNumbers?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -45815,6 +45843,8 @@ export namespace Prisma {
     OR?: WarehouseWhereInput[]
     NOT?: WarehouseWhereInput | WarehouseWhereInput[]
     location?: StringNullableFilter<"Warehouse"> | string | null
+    contactPerson?: StringNullableFilter<"Warehouse"> | string | null
+    contactNumbers?: StringNullableListFilter<"Warehouse">
     status?: StringFilter<"Warehouse"> | string
     createdAt?: DateTimeFilter<"Warehouse"> | Date | string
     updatedAt?: DateTimeFilter<"Warehouse"> | Date | string
@@ -45825,6 +45855,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     location?: SortOrderInput | SortOrder
+    contactPerson?: SortOrderInput | SortOrder
+    contactNumbers?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -45842,6 +45874,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Warehouse"> | number
     name?: StringWithAggregatesFilter<"Warehouse"> | string
     location?: StringNullableWithAggregatesFilter<"Warehouse"> | string | null
+    contactPerson?: StringNullableWithAggregatesFilter<"Warehouse"> | string | null
+    contactNumbers?: StringNullableListFilter<"Warehouse">
     status?: StringWithAggregatesFilter<"Warehouse"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Warehouse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Warehouse"> | Date | string
@@ -48236,6 +48270,8 @@ export namespace Prisma {
   export type WarehouseCreateInput = {
     name: string
     location?: string | null
+    contactPerson?: string | null
+    contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48246,6 +48282,8 @@ export namespace Prisma {
     id?: number
     name: string
     location?: string | null
+    contactPerson?: string | null
+    contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48255,6 +48293,8 @@ export namespace Prisma {
   export type WarehouseUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48265,6 +48305,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48275,6 +48317,8 @@ export namespace Prisma {
     id?: number
     name: string
     location?: string | null
+    contactPerson?: string | null
+    contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48283,6 +48327,8 @@ export namespace Prisma {
   export type WarehouseUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48292,6 +48338,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50807,10 +50855,20 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type WarehouseCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     location?: SortOrder
+    contactPerson?: SortOrder
+    contactNumbers?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -50824,6 +50882,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     location?: SortOrder
+    contactPerson?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -50833,6 +50892,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     location?: SortOrder
+    contactPerson?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -52819,6 +52879,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuditLogsInput, UserUpdateWithoutAuditLogsInput>, UserUncheckedUpdateWithoutAuditLogsInput>
   }
 
+  export type WarehouseCreatecontactNumbersInput = {
+    set: string[]
+  }
+
   export type UserWarehouseCreateNestedManyWithoutWarehouseInput = {
     create?: XOR<UserWarehouseCreateWithoutWarehouseInput, UserWarehouseUncheckedCreateWithoutWarehouseInput> | UserWarehouseCreateWithoutWarehouseInput[] | UserWarehouseUncheckedCreateWithoutWarehouseInput[]
     connectOrCreate?: UserWarehouseCreateOrConnectWithoutWarehouseInput | UserWarehouseCreateOrConnectWithoutWarehouseInput[]
@@ -52831,6 +52895,11 @@ export namespace Prisma {
     connectOrCreate?: UserWarehouseCreateOrConnectWithoutWarehouseInput | UserWarehouseCreateOrConnectWithoutWarehouseInput[]
     createMany?: UserWarehouseCreateManyWarehouseInputEnvelope
     connect?: UserWarehouseWhereUniqueInput | UserWarehouseWhereUniqueInput[]
+  }
+
+  export type WarehouseUpdatecontactNumbersInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserWarehouseUpdateManyWithoutWarehouseNestedInput = {
@@ -55726,6 +55795,8 @@ export namespace Prisma {
   export type WarehouseCreateWithoutUserWarehousesInput = {
     name: string
     location?: string | null
+    contactPerson?: string | null
+    contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -55735,6 +55806,8 @@ export namespace Prisma {
     id?: number
     name: string
     location?: string | null
+    contactPerson?: string | null
+    contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -55809,6 +55882,8 @@ export namespace Prisma {
   export type WarehouseUpdateWithoutUserWarehousesInput = {
     name?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55818,6 +55893,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

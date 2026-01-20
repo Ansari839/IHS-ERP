@@ -210,6 +210,8 @@ exports.Prisma.WarehouseScalarFieldEnum = {
   id: 'id',
   name: 'name',
   location: 'location',
+  contactPerson: 'contactPerson',
+  contactNumbers: 'contactNumbers',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
