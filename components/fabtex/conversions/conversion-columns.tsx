@@ -33,6 +33,7 @@ export const conversionColumns: ColumnDef<Conversion>[] = [
     },
     {
         accessorKey: "toUnit.name",
+        id: "toUnitName",
         header: "To Unit",
         cell: ({ row }) => {
             const unit = row.original.toUnit;

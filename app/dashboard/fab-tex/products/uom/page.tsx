@@ -54,7 +54,7 @@ async function UomContent() {
                 <DataTable
                     columns={conversionColumns}
                     data={conversions}
-                    searchKey="toUnit.name" // Not ideal searching but DataTable expects string accessor. Better to support custom filter or just use 'toUnit' if flattened. 
+                    searchKey="toUnitName" // Not ideal searching but DataTable expects string accessor. Better to support custom filter or just use 'toUnit' if flattened. 
                 // Actually 'toUnit.name' works if accessorKey is set correctly in column def or if data is nested. 
                 // My column def uses accessorKey: "toUnit.name" which TanStack table supports.
                 />
