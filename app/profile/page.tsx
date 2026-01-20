@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import prisma from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
-import { ProfileForm } from '@/components/profile/profile-form'
+import { ProfileView } from '@/components/profile/profile-view'
 import { ThemeSettings } from '@/components/settings/theme-settings'
 import { DashboardLayout } from '@/components/dashboard-layout'
 
@@ -16,10 +16,13 @@ export default async function ProfilePage() {
 
     const user = await prisma.user.findUnique({
         where: { id: currentUser.id },
-        select: {
-            name: true,
-            email: true,
-            image: true,
+        include: {
+            department: true,
+            userRoles: {
+                include: {
+                    role: true
+                }
+            }
         }
     })
 
@@ -27,28 +30,30 @@ export default async function ProfilePage() {
         redirect('/login')
     }
 
-    // Merge currentUser (token) with db user to get the latest image
-    const userForLayout = currentUser ? {
+    // Fetch Company Info (Default to first record)
+    const company = await prisma.company.findFirst()
+    const companyName = company?.legalName || company?.tradeName || "IHS Textile ERP"
+
+    // Determine primary role
+    const primaryRole = user.userRoles[0]?.role?.name || "N/A"
+    const departmentName = user.department?.name || "Unassigned"
+    const employeeId = `EMP-${user.id.toString().padStart(4, '0')}`
+
+    const userForLayout = {
         ...currentUser,
         image: user.image
-    } : null
+    }
 
     return (
         <DashboardLayout title="My Profile" user={userForLayout}>
-            <div className="space-y-6 max-w-2xl mx-auto">
-                <div>
-                    <h1 className="text-3xl font-bold tracking-tight">My Profile</h1>
-                    <p className="text-muted-foreground">
-                        Manage your account settings and preferences.
-                    </p>
-                </div>
-
-                <ProfileForm user={user} />
-
-                <div className="pt-6">
-                    <ThemeSettings />
-                </div>
-            </div>
+            <ProfileView
+                user={user}
+                primaryRole={primaryRole}
+                departmentName={departmentName}
+                employeeId={employeeId}
+                companyName={companyName}
+                themeSettings={<ThemeSettings />}
+            />
         </DashboardLayout>
     )
 }

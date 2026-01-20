@@ -7,13 +7,13 @@ import { v2 as cloudinary } from 'cloudinary';
  * @returns The secure URL of the uploaded image.
  */
 export async function uploadToCloudinary(file: File, folder: string = 'erp-profiles'): Promise<string> {
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
     const apiKey = process.env.CLOUDINARY_API_KEY;
     const apiSecret = process.env.CLOUDINARY_API_SECRET;
 
     if (!cloudName || !apiKey || !apiSecret) {
         throw new Error(`Cloudinary credentials missing. 
-            NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${cloudName ? 'Set' : 'Missing'}, 
+            CLOUDINARY_CLOUD_NAME: ${cloudName ? 'Set' : 'Missing'}, 
             CLOUDINARY_API_KEY: ${apiKey ? 'Set' : 'Missing'}, 
             CLOUDINARY_API_SECRET: ${apiSecret ? 'Set' : 'Missing'}`);
     }
@@ -24,27 +24,35 @@ export async function uploadToCloudinary(file: File, folder: string = 'erp-profi
         api_secret: apiSecret,
     });
 
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    try {
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        console.log('📦 File converted to buffer, size:', buffer.length);
 
-    return new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-            {
-                folder: folder,
-                resource_type: 'auto',
-            },
-            (error, result) => {
-                if (error) {
-                    console.error('Cloudinary upload error:', error);
-                    reject(error);
-                    return;
+        return new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_stream(
+                {
+                    folder: folder,
+                    resource_type: 'auto',
+                },
+                (error, result) => {
+                    if (error) {
+                        console.error('❌ Cloudinary stream upload error:', error);
+                        reject(error);
+                        return;
+                    }
+                    if (result) {
+                        console.log('✅ Cloudinary upload success! URL:', result.secure_url);
+                        resolve(result.secure_url);
+                    } else {
+                        console.error('❌ Cloudinary upload returned no result and no error');
+                        reject(new Error('Cloudinary upload failed: No result returned'));
+                    }
                 }
-                if (result) {
-                    resolve(result.secure_url);
-                } else {
-                    reject(new Error('Cloudinary upload failed: No result returned'));
-                }
-            }
-        ).end(buffer);
-    });
+            ).end(buffer);
+        });
+    } catch (e) {
+        console.error('❌ Error during file processing or Cloudinary upload setup:', e);
+        throw e;
+    }
 }

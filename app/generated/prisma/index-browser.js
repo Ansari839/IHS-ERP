@@ -223,10 +223,13 @@ exports.Prisma.UserWarehouseScalarFieldEnum = {
 
 exports.Prisma.UnitScalarFieldEnum = {
   id: 'id',
+  code: 'code',
   name: 'name',
   symbol: 'symbol',
   unitType: 'unitType',
   isBase: 'isBase',
+  status: 'status',
+  companyId: 'companyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -236,6 +239,7 @@ exports.Prisma.UnitConversionScalarFieldEnum = {
   fromUnitId: 'fromUnitId',
   toUnitId: 'toUnitId',
   conversionRate: 'conversionRate',
+  companyId: 'companyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -414,6 +418,64 @@ exports.Prisma.VoucherSequenceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ItemGroupScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  status: 'status',
+  parentId: 'parentId',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ColorScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  pictureUrl: 'pictureUrl',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BrandScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ItemGradeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ItemMasterScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  shortDescription: 'shortDescription',
+  status: 'status',
+  hsCode: 'hsCode',
+  imageUrl: 'imageUrl',
+  itemGroupId: 'itemGroupId',
+  baseUnitId: 'baseUnitId',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -501,7 +563,12 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   JournalEntry: 'JournalEntry',
   JournalLine: 'JournalLine',
-  VoucherSequence: 'VoucherSequence'
+  VoucherSequence: 'VoucherSequence',
+  ItemGroup: 'ItemGroup',
+  Color: 'Color',
+  Brand: 'Brand',
+  ItemGrade: 'ItemGrade',
+  ItemMaster: 'ItemMaster'
 };
 
 /**

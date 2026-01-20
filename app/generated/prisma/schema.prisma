@@ -158,26 +158,37 @@ model UserWarehouse {
 }
 
 model Unit {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  symbol    String   @unique
-  unitType  String // e.g., "WEIGHT", "LENGTH", "COUNT"
-  isBase    Boolean  @default(false)
+  id       Int     @id @default(autoincrement())
+  code     String  @unique
+  name     String
+  symbol   String
+  unitType String // e.g., "WEIGHT", "LENGTH", "COUNT"
+  isBase   Boolean @default(false)
+  status   String  @default("ACTIVE") // ACTIVE, INACTIVE
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   conversionsFrom UnitConversion[] @relation("FromUnit")
   conversionsTo   UnitConversion[] @relation("ToUnit")
   products        Product[]
+  itemMasters     ItemMaster[]
 }
 
 model UnitConversion {
-  id             Int      @id @default(autoincrement())
+  id             Int   @id @default(autoincrement())
   fromUnitId     Int
   toUnitId       Int
   conversionRate Float
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   fromUnit Unit @relation("FromUnit", fields: [fromUnitId], references: [id], onDelete: Restrict)
   toUnit   Unit @relation("ToUnit", fields: [toUnitId], references: [id], onDelete: Restrict)
@@ -188,17 +199,24 @@ model UnitConversion {
 // --- Global Settings Models ---
 
 model Company {
-  id        Int      @id @default(autoincrement())
-  legalName String
-  tradeName String?
-  address   String?
-  country   String?
-  phone     String?
-  email     String?
-  taxId     String?
-  logoUrl   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int              @id @default(autoincrement())
+  legalName       String
+  tradeName       String?
+  address         String?
+  country         String?
+  phone           String?
+  email           String?
+  taxId           String?
+  logoUrl         String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  itemGroups      ItemGroup[]
+  colors          Color[]
+  brands          Brand[]
+  units           Unit[]
+  itemGrades      ItemGrade[]
+  unitConversions UnitConversion[]
+  itemMasters     ItemMaster[]
 }
 
 model FiscalYear {
@@ -415,4 +433,85 @@ model VoucherSequence {
   prefix    String
   nextValue Int         @default(1)
   updatedAt DateTime    @updatedAt
+}
+
+model ItemGroup {
+  id          String  @id @default(uuid())
+  code        String  @unique
+  name        String
+  description String?
+  status      String  @default("ACTIVE") // ACTIVE, INACTIVE
+
+  parentId String?
+  parent   ItemGroup?  @relation("GroupHierarchy", fields: [parentId], references: [id])
+  children ItemGroup[] @relation("GroupHierarchy")
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  itemMasters ItemMaster[]
+}
+
+model Color {
+  id         String  @id @default(uuid())
+  code       String  @unique
+  name       String
+  pictureUrl String?
+  status     String  @default("ACTIVE") // ACTIVE, INACTIVE
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Brand {
+  id     String @id @default(uuid())
+  code   String @unique
+  name   String
+  status String @default("ACTIVE") // ACTIVE, INACTIVE
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ItemGrade {
+  id     String @id @default(uuid())
+  code   String @unique
+  name   String
+  status String @default("ACTIVE") // ACTIVE, INACTIVE
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ItemMaster {
+  id               String  @id @default(uuid())
+  code             String  @unique
+  name             String
+  shortDescription String?
+  status           String  @default("ACTIVE") // ACTIVE, INACTIVE
+  hsCode           String?
+  imageUrl         String?
+
+  itemGroupId String
+  itemGroup   ItemGroup @relation(fields: [itemGroupId], references: [id])
+
+  baseUnitId Int
+  baseUnit   Unit @relation(fields: [baseUnitId], references: [id])
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

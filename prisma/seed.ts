@@ -34,7 +34,27 @@ async function main() {
 
     console.log('✅ Departments created');
 
-    // 2. Create Permissions
+    // 2. Create Default Company
+    const defaultCompany = await prisma.company.upsert({
+        where: { id: 1 },
+        update: {
+            legalName: 'ISMAIL HAMED & SONS',
+            tradeName: 'IHS',
+        },
+        create: {
+            legalName: 'ISMAIL HAMED & SONS',
+            tradeName: 'IHS',
+            address: 'To be updated',
+            country: 'Pakistan',
+            phone: '',
+            email: '',
+            taxId: '',
+        },
+    });
+
+    console.log('✅ Default Company created');
+
+    // 3. Create Permissions
     const resources = ['users', 'products', 'orders', 'reports', 'settings', 'audit_logs', 'warehouses'];
     const actions = ['create', 'read', 'update', 'delete'];
 
@@ -62,7 +82,7 @@ async function main() {
 
     console.log('✅ Permissions created');
 
-    // 3. Create Roles
+    // 4. Create Roles
     const superAdminRole = await prisma.role.upsert({
         where: { name: 'SUPER_ADMIN' },
         update: {},
@@ -83,7 +103,7 @@ async function main() {
 
     console.log('✅ Roles created');
 
-    // 4. Assign Permissions to Roles
+    // 5. Assign Permissions to Roles
 
     // Super Admin gets ALL permissions
     const allPermissions = await prisma.permission.findMany();
@@ -123,7 +143,7 @@ async function main() {
 
     console.log('✅ Permissions assigned to roles');
 
-    // 5. Create Users
+    // 6. Create Users
     const adminPassword = await bcrypt.hash('Admin@123', 12);
     const testPassword = await bcrypt.hash('password123', 12);
 
