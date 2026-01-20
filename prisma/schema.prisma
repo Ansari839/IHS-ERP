@@ -200,6 +200,7 @@ model Company {
   updatedAt  DateTime @updatedAt
   itemGroups ItemGroup[]
   colors     Color[]
+  brands     Brand[]
 }
 
 model FiscalYear {
@@ -449,4 +450,19 @@ model Color {
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
 }
+
+model Brand {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  status      String   @default("ACTIVE") // ACTIVE, INACTIVE
+  
+  companyId   Int
+  company     Company  @relation(fields: [companyId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
