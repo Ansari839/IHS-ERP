@@ -29,6 +29,7 @@ import {
     Tag,
     Box,
     Award,
+    Layers,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -69,7 +70,7 @@ const navigation: NavigationItem[] = [
                 icon: Shirt,
                 children: [
                     { name: "Item Master", href: "/dashboard/fab-tex/products/item-master", icon: Package, permission: "read:inventory" },
-                    { name: "Item Group", href: "/dashboard/fab-tex/products/item-group", icon: Package, permission: "read:inventory" },
+                    { name: "Item Group", href: "/dashboard/fab-tex/products/item-group", icon: Layers, permission: "read:inventory" },
                     { name: "Colors", href: "/dashboard/fab-tex/products/colors", icon: Palette, permission: "read:inventory" },
                     { name: "Brands", href: "/dashboard/fab-tex/products/brands", icon: Tag, permission: "read:inventory" },
                     { name: "Units & Conversions", href: "/dashboard/fab-tex/products/uom", icon: Scale, permission: "read:inventory" },

@@ -461,6 +461,21 @@ exports.Prisma.ItemGradeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ItemMasterScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  shortDescription: 'shortDescription',
+  status: 'status',
+  hsCode: 'hsCode',
+  imageUrl: 'imageUrl',
+  itemGroupId: 'itemGroupId',
+  baseUnitId: 'baseUnitId',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -552,7 +567,8 @@ exports.Prisma.ModelName = {
   ItemGroup: 'ItemGroup',
   Color: 'Color',
   Brand: 'Brand',
-  ItemGrade: 'ItemGrade'
+  ItemGrade: 'ItemGrade',
+  ItemMaster: 'ItemMaster'
 };
 
 /**
