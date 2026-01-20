@@ -69,7 +69,8 @@ async function main() {
             data: {
                 fromUnitId: kg.id,
                 toUnitId: gram.id,
-                conversionRate: 1000
+                conversionRate: 1000,
+                companyId: company.id
             }
         })
         console.log(`Created Conversion: 1 ${kg.symbol} = ${conversion.conversionRate} ${gram.symbol}`)

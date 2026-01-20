@@ -181,6 +181,10 @@ model UnitConversion {
   fromUnitId     Int
   toUnitId       Int
   conversionRate Float
+  
+  companyId      Int
+  company        Company @relation(fields: [companyId], references: [id])
+
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
@@ -208,6 +212,8 @@ model Company {
   colors     Color[]
   brands     Brand[]
   units      Unit[]
+  itemGrades ItemGrade[]
+  unitConversions UnitConversion[]
 }
 
 model FiscalYear {
@@ -461,6 +467,20 @@ model Color {
 }
 
 model Brand {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  status      String   @default("ACTIVE") // ACTIVE, INACTIVE
+  
+  companyId   Int
+  company     Company  @relation(fields: [companyId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
+model ItemGrade {
   id          String   @id @default(uuid())
   code        String   @unique
   name        String

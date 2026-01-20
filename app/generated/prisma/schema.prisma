@@ -178,12 +178,16 @@ model Unit {
 }
 
 model UnitConversion {
-  id             Int      @id @default(autoincrement())
+  id             Int   @id @default(autoincrement())
   fromUnitId     Int
   toUnitId       Int
   conversionRate Float
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   fromUnit Unit @relation("FromUnit", fields: [fromUnitId], references: [id], onDelete: Restrict)
   toUnit   Unit @relation("ToUnit", fields: [toUnitId], references: [id], onDelete: Restrict)
@@ -194,21 +198,23 @@ model UnitConversion {
 // --- Global Settings Models ---
 
 model Company {
-  id         Int         @id @default(autoincrement())
-  legalName  String
-  tradeName  String?
-  address    String?
-  country    String?
-  phone      String?
-  email      String?
-  taxId      String?
-  logoUrl    String?
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  itemGroups ItemGroup[]
-  colors     Color[]
-  brands     Brand[]
-  units      Unit[]
+  id              Int              @id @default(autoincrement())
+  legalName       String
+  tradeName       String?
+  address         String?
+  country         String?
+  phone           String?
+  email           String?
+  taxId           String?
+  logoUrl         String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  itemGroups      ItemGroup[]
+  colors          Color[]
+  brands          Brand[]
+  units           Unit[]
+  itemGrades      ItemGrade[]
+  unitConversions UnitConversion[]
 }
 
 model FiscalYear {
@@ -460,6 +466,19 @@ model Color {
 }
 
 model Brand {
+  id     String @id @default(uuid())
+  code   String @unique
+  name   String
+  status String @default("ACTIVE") // ACTIVE, INACTIVE
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ItemGrade {
   id     String @id @default(uuid())
   code   String @unique
   name   String

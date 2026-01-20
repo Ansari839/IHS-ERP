@@ -239,6 +239,7 @@ exports.Prisma.UnitConversionScalarFieldEnum = {
   fromUnitId: 'fromUnitId',
   toUnitId: 'toUnitId',
   conversionRate: 'conversionRate',
+  companyId: 'companyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -450,6 +451,16 @@ exports.Prisma.BrandScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ItemGradeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -540,7 +551,8 @@ exports.Prisma.ModelName = {
   VoucherSequence: 'VoucherSequence',
   ItemGroup: 'ItemGroup',
   Color: 'Color',
-  Brand: 'Brand'
+  Brand: 'Brand',
+  ItemGrade: 'ItemGrade'
 };
 
 /**
