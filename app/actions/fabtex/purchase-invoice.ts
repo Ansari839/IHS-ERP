@@ -81,6 +81,58 @@ export async function createPurchaseInvoice(prevState: InvoiceState, formData: F
     }
 }
 
+export async function updatePurchaseInvoice(invoiceId: string, prevState: InvoiceState, formData: FormData): Promise<InvoiceState> {
+    try {
+        const user = await getCurrentUser()
+        if (!user) return { success: false, error: 'Unauthorized' }
+
+        const invoiceNumber = formData.get('invoiceNumber') as string
+        const date = formData.get('date') as string
+        const status = formData.get('status') as string || 'UNPAID'
+        const itemsJson = formData.get('items') as string
+        const items = JSON.parse(itemsJson)
+
+        if (!invoiceId || !items || items.length === 0) {
+            return { success: false, error: 'Invalid Invoice data' }
+        }
+
+        const totalAmount = items.reduce((sum: number, it: any) => sum + parseFloat(it.amount), 0)
+
+        await prisma.$transaction(async (tx) => {
+            // Delete existing items
+            await tx.purchaseInvoiceItem.deleteMany({
+                where: { invoiceId }
+            })
+
+            // Update main invoice record
+            await tx.purchaseInvoice.update({
+                where: { id: invoiceId },
+                data: {
+                    invoiceNumber,
+                    date: new Date(date),
+                    totalAmount,
+                    status,
+                    items: {
+                        create: items.map((item: any) => ({
+                            purchaseOrderItemId: item.purchaseOrderItemId,
+                            grnItemId: item.grnItemId || null,
+                            invoicedQty: parseFloat(item.invoicedQty),
+                            rate: parseFloat(item.rate),
+                            amount: parseFloat(item.amount)
+                        }))
+                    }
+                }
+            })
+        })
+
+        revalidatePath('/dashboard/fab-tex/purchase/invoice')
+        return { success: true, message: 'Purchase Invoice updated successfully' }
+    } catch (error: any) {
+        console.error('INVOICE_UPDATE_ERROR:', error)
+        return { success: false, error: error.message || 'Failed to update Invoice' }
+    }
+}
+
 export async function getPurchaseInvoices() {
     return await prisma.purchaseInvoice.findMany({
         include: {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
@@ -11,19 +11,33 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
-import { createPurchaseInvoice } from '@/app/actions/fabtex/purchase-invoice'
+import { createPurchaseInvoice, updatePurchaseInvoice } from '@/app/actions/fabtex/purchase-invoice'
 
 interface InvoiceFormProps {
     purchaseOrders: any[]
+    initialData?: any
+    invoiceId?: string
 }
 
-export function InvoiceForm({ purchaseOrders }: InvoiceFormProps) {
+export function InvoiceForm({ purchaseOrders, initialData, invoiceId }: InvoiceFormProps) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
-    const [selectedPO, setSelectedPO] = useState<any>(null)
-    const [invoiceNumber, setInvoiceNumber] = useState(`INV-${Date.now().toString().slice(-6)}`)
-    const [date, setDate] = useState(new Date().toISOString().split('T')[0])
-    const [items, setItems] = useState<any[]>([])
+    const [selectedPO, setSelectedPO] = useState<any>(initialData?.purchaseOrder || null)
+    const [invoiceNumber, setInvoiceNumber] = useState(initialData?.invoiceNumber || `INV-${Date.now().toString().slice(-6)}`)
+    const [date, setDate] = useState(initialData?.date ? new Date(initialData.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0])
+    const [items, setItems] = useState<any[]>(initialData?.items?.map((item: any) => ({
+        purchaseOrderItemId: item.purchaseOrderItemId,
+        itemMasterId: item.purchaseOrderItem?.itemMasterId,
+        itemName: item.purchaseOrderItem?.itemMaster?.name,
+        unitSymbol: item.purchaseOrderItem?.unit?.symbol,
+        orderedQty: item.purchaseOrderItem?.quantity || 0,
+        alreadyInvoiced: 0, // This is tricky in edit mode, but for display it's fine
+        remainingQty: item.purchaseOrderItem?.quantity || 0,
+        invoicedQty: item.invoicedQty,
+        rate: item.rate,
+        amount: item.amount,
+        grnItemId: item.grnItemId
+    })) || [])
 
     const onPOChange = (poId: string) => {
         const po = purchaseOrders.find(p => p.id === poId)
@@ -70,7 +84,13 @@ export function InvoiceForm({ purchaseOrders }: InvoiceFormProps) {
         formData.append('date', date)
         formData.append('items', JSON.stringify(validItems))
 
-        const result = await createPurchaseInvoice({ success: false }, formData)
+        let result
+        if (invoiceId) {
+            result = await updatePurchaseInvoice(invoiceId, { success: false }, formData)
+        } else {
+            result = await createPurchaseInvoice({ success: false }, formData)
+        }
+
         setLoading(false)
 
         if (result.success) {
@@ -85,13 +105,17 @@ export function InvoiceForm({ purchaseOrders }: InvoiceFormProps) {
         <form onSubmit={handleSubmit} className="space-y-6">
             <Card>
                 <CardHeader>
-                    <CardTitle>Generate Purchase Invoice</CardTitle>
+                    <CardTitle>{invoiceId ? 'Edit Purchase Invoice' : 'Generate Purchase Invoice'}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="space-y-2">
                             <Label>Select Purchase Order</Label>
-                            <Select onValueChange={onPOChange}>
+                            <Select
+                                onValueChange={onPOChange}
+                                defaultValue={selectedPO?.id}
+                                disabled={!!invoiceId}
+                            >
                                 <SelectTrigger>
                                     <SelectValue placeholder="Select PO" />
                                 </SelectTrigger>
@@ -101,6 +125,11 @@ export function InvoiceForm({ purchaseOrders }: InvoiceFormProps) {
                                             {po.poNumber} - {po.account?.name || po.partyName}
                                         </SelectItem>
                                     ))}
+                                    {invoiceId && selectedPO && (
+                                        <SelectItem key={selectedPO.id} value={selectedPO.id}>
+                                            {selectedPO.poNumber} - {selectedPO.account?.name || selectedPO.partyName}
+                                        </SelectItem>
+                                    )}
                                 </SelectContent>
                             </Select>
                         </div>
@@ -190,7 +219,7 @@ export function InvoiceForm({ purchaseOrders }: InvoiceFormProps) {
                     <div className="flex gap-2">
                         <Button type="button" variant="outline" onClick={() => router.back()}>Cancel</Button>
                         <Button type="submit" disabled={loading || !selectedPO}>
-                            {loading ? 'Processing...' : 'Post Invoice'}
+                            {loading ? 'Processing...' : (invoiceId ? 'Update Invoice' : 'Post Invoice')}
                         </Button>
                     </div>
                 </CardFooter>
