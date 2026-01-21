@@ -198,6 +198,26 @@ export type PurchaseOrder = $Result.DefaultSelection<Prisma.$PurchaseOrderPayloa
  * 
  */
 export type PurchaseOrderItem = $Result.DefaultSelection<Prisma.$PurchaseOrderItemPayload>
+/**
+ * Model GRN
+ * 
+ */
+export type GRN = $Result.DefaultSelection<Prisma.$GRNPayload>
+/**
+ * Model GRNItem
+ * 
+ */
+export type GRNItem = $Result.DefaultSelection<Prisma.$GRNItemPayload>
+/**
+ * Model PurchaseInvoice
+ * 
+ */
+export type PurchaseInvoice = $Result.DefaultSelection<Prisma.$PurchaseInvoicePayload>
+/**
+ * Model PurchaseInvoiceItem
+ * 
+ */
+export type PurchaseInvoiceItem = $Result.DefaultSelection<Prisma.$PurchaseInvoiceItemPayload>
 
 /**
  * Enums
@@ -789,6 +809,46 @@ export class PrismaClient<
     * ```
     */
   get purchaseOrderItem(): Prisma.PurchaseOrderItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.gRN`: Exposes CRUD operations for the **GRN** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GRNS
+    * const gRNS = await prisma.gRN.findMany()
+    * ```
+    */
+  get gRN(): Prisma.GRNDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.gRNItem`: Exposes CRUD operations for the **GRNItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GRNItems
+    * const gRNItems = await prisma.gRNItem.findMany()
+    * ```
+    */
+  get gRNItem(): Prisma.GRNItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.purchaseInvoice`: Exposes CRUD operations for the **PurchaseInvoice** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PurchaseInvoices
+    * const purchaseInvoices = await prisma.purchaseInvoice.findMany()
+    * ```
+    */
+  get purchaseInvoice(): Prisma.PurchaseInvoiceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.purchaseInvoiceItem`: Exposes CRUD operations for the **PurchaseInvoiceItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PurchaseInvoiceItems
+    * const purchaseInvoiceItems = await prisma.purchaseInvoiceItem.findMany()
+    * ```
+    */
+  get purchaseInvoiceItem(): Prisma.PurchaseInvoiceItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1259,7 +1319,11 @@ export namespace Prisma {
     ItemGrade: 'ItemGrade',
     ItemMaster: 'ItemMaster',
     PurchaseOrder: 'PurchaseOrder',
-    PurchaseOrderItem: 'PurchaseOrderItem'
+    PurchaseOrderItem: 'PurchaseOrderItem',
+    GRN: 'GRN',
+    GRNItem: 'GRNItem',
+    PurchaseInvoice: 'PurchaseInvoice',
+    PurchaseInvoiceItem: 'PurchaseInvoiceItem'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1275,7 +1339,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "auditAccess" | "department" | "role" | "permission" | "rolePermission" | "userRole" | "post" | "refreshToken" | "auditLog" | "warehouse" | "userWarehouse" | "unit" | "unitConversion" | "company" | "fiscalYear" | "currency" | "systemConfig" | "systemSetting" | "category" | "product" | "variant" | "location" | "shift" | "operator" | "machine" | "account" | "journalEntry" | "journalLine" | "voucherSequence" | "itemGroup" | "color" | "brand" | "itemGrade" | "itemMaster" | "purchaseOrder" | "purchaseOrderItem"
+      modelProps: "user" | "auditAccess" | "department" | "role" | "permission" | "rolePermission" | "userRole" | "post" | "refreshToken" | "auditLog" | "warehouse" | "userWarehouse" | "unit" | "unitConversion" | "company" | "fiscalYear" | "currency" | "systemConfig" | "systemSetting" | "category" | "product" | "variant" | "location" | "shift" | "operator" | "machine" | "account" | "journalEntry" | "journalLine" | "voucherSequence" | "itemGroup" | "color" | "brand" | "itemGrade" | "itemMaster" | "purchaseOrder" | "purchaseOrderItem" | "gRN" | "gRNItem" | "purchaseInvoice" | "purchaseInvoiceItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4017,6 +4081,302 @@ export namespace Prisma {
           }
         }
       }
+      GRN: {
+        payload: Prisma.$GRNPayload<ExtArgs>
+        fields: Prisma.GRNFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GRNFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GRNFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>
+          }
+          findFirst: {
+            args: Prisma.GRNFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GRNFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>
+          }
+          findMany: {
+            args: Prisma.GRNFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>[]
+          }
+          create: {
+            args: Prisma.GRNCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>
+          }
+          createMany: {
+            args: Prisma.GRNCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GRNCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>[]
+          }
+          delete: {
+            args: Prisma.GRNDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>
+          }
+          update: {
+            args: Prisma.GRNUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>
+          }
+          deleteMany: {
+            args: Prisma.GRNDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GRNUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GRNUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>[]
+          }
+          upsert: {
+            args: Prisma.GRNUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNPayload>
+          }
+          aggregate: {
+            args: Prisma.GRNAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGRN>
+          }
+          groupBy: {
+            args: Prisma.GRNGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GRNGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GRNCountArgs<ExtArgs>
+            result: $Utils.Optional<GRNCountAggregateOutputType> | number
+          }
+        }
+      }
+      GRNItem: {
+        payload: Prisma.$GRNItemPayload<ExtArgs>
+        fields: Prisma.GRNItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GRNItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GRNItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>
+          }
+          findFirst: {
+            args: Prisma.GRNItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GRNItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>
+          }
+          findMany: {
+            args: Prisma.GRNItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>[]
+          }
+          create: {
+            args: Prisma.GRNItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>
+          }
+          createMany: {
+            args: Prisma.GRNItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GRNItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>[]
+          }
+          delete: {
+            args: Prisma.GRNItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>
+          }
+          update: {
+            args: Prisma.GRNItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.GRNItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GRNItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GRNItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.GRNItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GRNItemPayload>
+          }
+          aggregate: {
+            args: Prisma.GRNItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGRNItem>
+          }
+          groupBy: {
+            args: Prisma.GRNItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GRNItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GRNItemCountArgs<ExtArgs>
+            result: $Utils.Optional<GRNItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      PurchaseInvoice: {
+        payload: Prisma.$PurchaseInvoicePayload<ExtArgs>
+        fields: Prisma.PurchaseInvoiceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PurchaseInvoiceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PurchaseInvoiceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>
+          }
+          findFirst: {
+            args: Prisma.PurchaseInvoiceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PurchaseInvoiceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>
+          }
+          findMany: {
+            args: Prisma.PurchaseInvoiceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>[]
+          }
+          create: {
+            args: Prisma.PurchaseInvoiceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>
+          }
+          createMany: {
+            args: Prisma.PurchaseInvoiceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PurchaseInvoiceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>[]
+          }
+          delete: {
+            args: Prisma.PurchaseInvoiceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>
+          }
+          update: {
+            args: Prisma.PurchaseInvoiceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>
+          }
+          deleteMany: {
+            args: Prisma.PurchaseInvoiceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PurchaseInvoiceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PurchaseInvoiceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>[]
+          }
+          upsert: {
+            args: Prisma.PurchaseInvoiceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoicePayload>
+          }
+          aggregate: {
+            args: Prisma.PurchaseInvoiceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePurchaseInvoice>
+          }
+          groupBy: {
+            args: Prisma.PurchaseInvoiceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PurchaseInvoiceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PurchaseInvoiceCountArgs<ExtArgs>
+            result: $Utils.Optional<PurchaseInvoiceCountAggregateOutputType> | number
+          }
+        }
+      }
+      PurchaseInvoiceItem: {
+        payload: Prisma.$PurchaseInvoiceItemPayload<ExtArgs>
+        fields: Prisma.PurchaseInvoiceItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PurchaseInvoiceItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PurchaseInvoiceItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>
+          }
+          findFirst: {
+            args: Prisma.PurchaseInvoiceItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PurchaseInvoiceItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>
+          }
+          findMany: {
+            args: Prisma.PurchaseInvoiceItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>[]
+          }
+          create: {
+            args: Prisma.PurchaseInvoiceItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>
+          }
+          createMany: {
+            args: Prisma.PurchaseInvoiceItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PurchaseInvoiceItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>[]
+          }
+          delete: {
+            args: Prisma.PurchaseInvoiceItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>
+          }
+          update: {
+            args: Prisma.PurchaseInvoiceItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.PurchaseInvoiceItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PurchaseInvoiceItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PurchaseInvoiceItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.PurchaseInvoiceItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PurchaseInvoiceItemPayload>
+          }
+          aggregate: {
+            args: Prisma.PurchaseInvoiceItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePurchaseInvoiceItem>
+          }
+          groupBy: {
+            args: Prisma.PurchaseInvoiceItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PurchaseInvoiceItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PurchaseInvoiceItemCountArgs<ExtArgs>
+            result: $Utils.Optional<PurchaseInvoiceItemCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -4162,6 +4522,10 @@ export namespace Prisma {
     itemMaster?: ItemMasterOmit
     purchaseOrder?: PurchaseOrderOmit
     purchaseOrderItem?: PurchaseOrderItemOmit
+    gRN?: GRNOmit
+    gRNItem?: GRNItemOmit
+    purchaseInvoice?: PurchaseInvoiceOmit
+    purchaseInvoiceItem?: PurchaseInvoiceItemOmit
   }
 
   /* Types for Logging */
@@ -4474,6 +4838,7 @@ export namespace Prisma {
     products: number
     itemMasters: number
     purchaseOrderItems: number
+    grnItems: number
   }
 
   export type UnitCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4482,6 +4847,7 @@ export namespace Prisma {
     products?: boolean | UnitCountOutputTypeCountProductsArgs
     itemMasters?: boolean | UnitCountOutputTypeCountItemMastersArgs
     purchaseOrderItems?: boolean | UnitCountOutputTypeCountPurchaseOrderItemsArgs
+    grnItems?: boolean | UnitCountOutputTypeCountGrnItemsArgs
   }
 
   // Custom InputTypes
@@ -4530,6 +4896,13 @@ export namespace Prisma {
     where?: PurchaseOrderItemWhereInput
   }
 
+  /**
+   * UnitCountOutputType without action
+   */
+  export type UnitCountOutputTypeCountGrnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNItemWhereInput
+  }
+
 
   /**
    * Count Type CompanyCountOutputType
@@ -4544,6 +4917,8 @@ export namespace Prisma {
     unitConversions: number
     itemMasters: number
     purchaseOrders: number
+    grns: number
+    purchaseInvoices: number
   }
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4555,6 +4930,8 @@ export namespace Prisma {
     unitConversions?: boolean | CompanyCountOutputTypeCountUnitConversionsArgs
     itemMasters?: boolean | CompanyCountOutputTypeCountItemMastersArgs
     purchaseOrders?: boolean | CompanyCountOutputTypeCountPurchaseOrdersArgs
+    grns?: boolean | CompanyCountOutputTypeCountGrnsArgs
+    purchaseInvoices?: boolean | CompanyCountOutputTypeCountPurchaseInvoicesArgs
   }
 
   // Custom InputTypes
@@ -4622,6 +4999,20 @@ export namespace Prisma {
    */
   export type CompanyCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PurchaseOrderWhereInput
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountGrnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNWhereInput
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountPurchaseInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PurchaseInvoiceWhereInput
   }
 
 
@@ -4906,10 +5297,12 @@ export namespace Prisma {
 
   export type ColorCountOutputType = {
     purchaseOrderItems: number
+    grnItems: number
   }
 
   export type ColorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseOrderItems?: boolean | ColorCountOutputTypeCountPurchaseOrderItemsArgs
+    grnItems?: boolean | ColorCountOutputTypeCountGrnItemsArgs
   }
 
   // Custom InputTypes
@@ -4930,6 +5323,13 @@ export namespace Prisma {
     where?: PurchaseOrderItemWhereInput
   }
 
+  /**
+   * ColorCountOutputType without action
+   */
+  export type ColorCountOutputTypeCountGrnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNItemWhereInput
+  }
+
 
   /**
    * Count Type BrandCountOutputType
@@ -4937,10 +5337,12 @@ export namespace Prisma {
 
   export type BrandCountOutputType = {
     purchaseOrderItems: number
+    grnItems: number
   }
 
   export type BrandCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseOrderItems?: boolean | BrandCountOutputTypeCountPurchaseOrderItemsArgs
+    grnItems?: boolean | BrandCountOutputTypeCountGrnItemsArgs
   }
 
   // Custom InputTypes
@@ -4961,6 +5363,13 @@ export namespace Prisma {
     where?: PurchaseOrderItemWhereInput
   }
 
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountGrnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNItemWhereInput
+  }
+
 
   /**
    * Count Type ItemGradeCountOutputType
@@ -4968,10 +5377,12 @@ export namespace Prisma {
 
   export type ItemGradeCountOutputType = {
     purchaseOrderItems: number
+    grnItems: number
   }
 
   export type ItemGradeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseOrderItems?: boolean | ItemGradeCountOutputTypeCountPurchaseOrderItemsArgs
+    grnItems?: boolean | ItemGradeCountOutputTypeCountGrnItemsArgs
   }
 
   // Custom InputTypes
@@ -4992,6 +5403,13 @@ export namespace Prisma {
     where?: PurchaseOrderItemWhereInput
   }
 
+  /**
+   * ItemGradeCountOutputType without action
+   */
+  export type ItemGradeCountOutputTypeCountGrnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNItemWhereInput
+  }
+
 
   /**
    * Count Type ItemMasterCountOutputType
@@ -4999,10 +5417,12 @@ export namespace Prisma {
 
   export type ItemMasterCountOutputType = {
     purchaseOrderItems: number
+    grnItems: number
   }
 
   export type ItemMasterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseOrderItems?: boolean | ItemMasterCountOutputTypeCountPurchaseOrderItemsArgs
+    grnItems?: boolean | ItemMasterCountOutputTypeCountGrnItemsArgs
   }
 
   // Custom InputTypes
@@ -5023,6 +5443,13 @@ export namespace Prisma {
     where?: PurchaseOrderItemWhereInput
   }
 
+  /**
+   * ItemMasterCountOutputType without action
+   */
+  export type ItemMasterCountOutputTypeCountGrnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNItemWhereInput
+  }
+
 
   /**
    * Count Type PurchaseOrderCountOutputType
@@ -5030,10 +5457,14 @@ export namespace Prisma {
 
   export type PurchaseOrderCountOutputType = {
     items: number
+    grns: number
+    invoices: number
   }
 
   export type PurchaseOrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | PurchaseOrderCountOutputTypeCountItemsArgs
+    grns?: boolean | PurchaseOrderCountOutputTypeCountGrnsArgs
+    invoices?: boolean | PurchaseOrderCountOutputTypeCountInvoicesArgs
   }
 
   // Custom InputTypes
@@ -5052,6 +5483,153 @@ export namespace Prisma {
    */
   export type PurchaseOrderCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PurchaseOrderItemWhereInput
+  }
+
+  /**
+   * PurchaseOrderCountOutputType without action
+   */
+  export type PurchaseOrderCountOutputTypeCountGrnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNWhereInput
+  }
+
+  /**
+   * PurchaseOrderCountOutputType without action
+   */
+  export type PurchaseOrderCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PurchaseInvoiceWhereInput
+  }
+
+
+  /**
+   * Count Type PurchaseOrderItemCountOutputType
+   */
+
+  export type PurchaseOrderItemCountOutputType = {
+    grnItems: number
+    invoiceItems: number
+  }
+
+  export type PurchaseOrderItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    grnItems?: boolean | PurchaseOrderItemCountOutputTypeCountGrnItemsArgs
+    invoiceItems?: boolean | PurchaseOrderItemCountOutputTypeCountInvoiceItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PurchaseOrderItemCountOutputType without action
+   */
+  export type PurchaseOrderItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseOrderItemCountOutputType
+     */
+    select?: PurchaseOrderItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PurchaseOrderItemCountOutputType without action
+   */
+  export type PurchaseOrderItemCountOutputTypeCountGrnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNItemWhereInput
+  }
+
+  /**
+   * PurchaseOrderItemCountOutputType without action
+   */
+  export type PurchaseOrderItemCountOutputTypeCountInvoiceItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PurchaseInvoiceItemWhereInput
+  }
+
+
+  /**
+   * Count Type GRNCountOutputType
+   */
+
+  export type GRNCountOutputType = {
+    items: number
+  }
+
+  export type GRNCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | GRNCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GRNCountOutputType without action
+   */
+  export type GRNCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNCountOutputType
+     */
+    select?: GRNCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GRNCountOutputType without action
+   */
+  export type GRNCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNItemWhereInput
+  }
+
+
+  /**
+   * Count Type GRNItemCountOutputType
+   */
+
+  export type GRNItemCountOutputType = {
+    invoiceItems: number
+  }
+
+  export type GRNItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoiceItems?: boolean | GRNItemCountOutputTypeCountInvoiceItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GRNItemCountOutputType without action
+   */
+  export type GRNItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItemCountOutputType
+     */
+    select?: GRNItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GRNItemCountOutputType without action
+   */
+  export type GRNItemCountOutputTypeCountInvoiceItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PurchaseInvoiceItemWhereInput
+  }
+
+
+  /**
+   * Count Type PurchaseInvoiceCountOutputType
+   */
+
+  export type PurchaseInvoiceCountOutputType = {
+    items: number
+  }
+
+  export type PurchaseInvoiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | PurchaseInvoiceCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PurchaseInvoiceCountOutputType without action
+   */
+  export type PurchaseInvoiceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceCountOutputType
+     */
+    select?: PurchaseInvoiceCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PurchaseInvoiceCountOutputType without action
+   */
+  export type PurchaseInvoiceCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PurchaseInvoiceItemWhereInput
   }
 
 
@@ -18867,6 +19445,7 @@ export namespace Prisma {
     products?: boolean | Unit$productsArgs<ExtArgs>
     itemMasters?: boolean | Unit$itemMastersArgs<ExtArgs>
     purchaseOrderItems?: boolean | Unit$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | Unit$grnItemsArgs<ExtArgs>
     _count?: boolean | UnitCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["unit"]>
 
@@ -18919,6 +19498,7 @@ export namespace Prisma {
     products?: boolean | Unit$productsArgs<ExtArgs>
     itemMasters?: boolean | Unit$itemMastersArgs<ExtArgs>
     purchaseOrderItems?: boolean | Unit$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | Unit$grnItemsArgs<ExtArgs>
     _count?: boolean | UnitCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UnitIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18937,6 +19517,7 @@ export namespace Prisma {
       products: Prisma.$ProductPayload<ExtArgs>[]
       itemMasters: Prisma.$ItemMasterPayload<ExtArgs>[]
       purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
+      grnItems: Prisma.$GRNItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -19349,6 +19930,7 @@ export namespace Prisma {
     products<T extends Unit$productsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     itemMasters<T extends Unit$itemMastersArgs<ExtArgs> = {}>(args?: Subset<T, Unit$itemMastersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     purchaseOrderItems<T extends Unit$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    grnItems<T extends Unit$grnItemsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19901,6 +20483,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PurchaseOrderItemScalarFieldEnum | PurchaseOrderItemScalarFieldEnum[]
+  }
+
+  /**
+   * Unit.grnItems
+   */
+  export type Unit$grnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    where?: GRNItemWhereInput
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    cursor?: GRNItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
   }
 
   /**
@@ -21326,6 +21932,8 @@ export namespace Prisma {
     unitConversions?: boolean | Company$unitConversionsArgs<ExtArgs>
     itemMasters?: boolean | Company$itemMastersArgs<ExtArgs>
     purchaseOrders?: boolean | Company$purchaseOrdersArgs<ExtArgs>
+    grns?: boolean | Company$grnsArgs<ExtArgs>
+    purchaseInvoices?: boolean | Company$purchaseInvoicesArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -21381,6 +21989,8 @@ export namespace Prisma {
     unitConversions?: boolean | Company$unitConversionsArgs<ExtArgs>
     itemMasters?: boolean | Company$itemMastersArgs<ExtArgs>
     purchaseOrders?: boolean | Company$purchaseOrdersArgs<ExtArgs>
+    grns?: boolean | Company$grnsArgs<ExtArgs>
+    purchaseInvoices?: boolean | Company$purchaseInvoicesArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -21397,6 +22007,8 @@ export namespace Prisma {
       unitConversions: Prisma.$UnitConversionPayload<ExtArgs>[]
       itemMasters: Prisma.$ItemMasterPayload<ExtArgs>[]
       purchaseOrders: Prisma.$PurchaseOrderPayload<ExtArgs>[]
+      grns: Prisma.$GRNPayload<ExtArgs>[]
+      purchaseInvoices: Prisma.$PurchaseInvoicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -21812,6 +22424,8 @@ export namespace Prisma {
     unitConversions<T extends Company$unitConversionsArgs<ExtArgs> = {}>(args?: Subset<T, Company$unitConversionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnitConversionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     itemMasters<T extends Company$itemMastersArgs<ExtArgs> = {}>(args?: Subset<T, Company$itemMastersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     purchaseOrders<T extends Company$purchaseOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Company$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    grns<T extends Company$grnsArgs<ExtArgs> = {}>(args?: Subset<T, Company$grnsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    purchaseInvoices<T extends Company$purchaseInvoicesArgs<ExtArgs> = {}>(args?: Subset<T, Company$purchaseInvoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22429,6 +23043,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PurchaseOrderScalarFieldEnum | PurchaseOrderScalarFieldEnum[]
+  }
+
+  /**
+   * Company.grns
+   */
+  export type Company$grnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    where?: GRNWhereInput
+    orderBy?: GRNOrderByWithRelationInput | GRNOrderByWithRelationInput[]
+    cursor?: GRNWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNScalarFieldEnum | GRNScalarFieldEnum[]
+  }
+
+  /**
+   * Company.purchaseInvoices
+   */
+  export type Company$purchaseInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    where?: PurchaseInvoiceWhereInput
+    orderBy?: PurchaseInvoiceOrderByWithRelationInput | PurchaseInvoiceOrderByWithRelationInput[]
+    cursor?: PurchaseInvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PurchaseInvoiceScalarFieldEnum | PurchaseInvoiceScalarFieldEnum[]
   }
 
   /**
@@ -40797,6 +41459,7 @@ export namespace Prisma {
     updatedAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     purchaseOrderItems?: boolean | Color$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | Color$grnItemsArgs<ExtArgs>
     _count?: boolean | ColorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["color"]>
 
@@ -40839,6 +41502,7 @@ export namespace Prisma {
   export type ColorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     purchaseOrderItems?: boolean | Color$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | Color$grnItemsArgs<ExtArgs>
     _count?: boolean | ColorCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ColorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -40853,6 +41517,7 @@ export namespace Prisma {
     objects: {
       company: Prisma.$CompanyPayload<ExtArgs>
       purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
+      grnItems: Prisma.$GRNItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -41259,6 +41924,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     purchaseOrderItems<T extends Color$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Subset<T, Color$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    grnItems<T extends Color$grnItemsArgs<ExtArgs> = {}>(args?: Subset<T, Color$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -41716,6 +42382,30 @@ export namespace Prisma {
   }
 
   /**
+   * Color.grnItems
+   */
+  export type Color$grnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    where?: GRNItemWhereInput
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    cursor?: GRNItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
    * Color without action
    */
   export type ColorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -41950,6 +42640,7 @@ export namespace Prisma {
     updatedAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     purchaseOrderItems?: boolean | Brand$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | Brand$grnItemsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["brand"]>
 
@@ -41989,6 +42680,7 @@ export namespace Prisma {
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     purchaseOrderItems?: boolean | Brand$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | Brand$grnItemsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type BrandIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -42003,6 +42695,7 @@ export namespace Prisma {
     objects: {
       company: Prisma.$CompanyPayload<ExtArgs>
       purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
+      grnItems: Prisma.$GRNItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -42408,6 +43101,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     purchaseOrderItems<T extends Brand$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    grnItems<T extends Brand$grnItemsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -42864,6 +43558,30 @@ export namespace Prisma {
   }
 
   /**
+   * Brand.grnItems
+   */
+  export type Brand$grnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    where?: GRNItemWhereInput
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    cursor?: GRNItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
    * Brand without action
    */
   export type BrandDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -43098,6 +43816,7 @@ export namespace Prisma {
     updatedAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     purchaseOrderItems?: boolean | ItemGrade$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | ItemGrade$grnItemsArgs<ExtArgs>
     _count?: boolean | ItemGradeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["itemGrade"]>
 
@@ -43137,6 +43856,7 @@ export namespace Prisma {
   export type ItemGradeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     purchaseOrderItems?: boolean | ItemGrade$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | ItemGrade$grnItemsArgs<ExtArgs>
     _count?: boolean | ItemGradeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ItemGradeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -43151,6 +43871,7 @@ export namespace Prisma {
     objects: {
       company: Prisma.$CompanyPayload<ExtArgs>
       purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
+      grnItems: Prisma.$GRNItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -43556,6 +44277,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     purchaseOrderItems<T extends ItemGrade$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Subset<T, ItemGrade$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    grnItems<T extends ItemGrade$grnItemsArgs<ExtArgs> = {}>(args?: Subset<T, ItemGrade$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -44012,6 +44734,30 @@ export namespace Prisma {
   }
 
   /**
+   * ItemGrade.grnItems
+   */
+  export type ItemGrade$grnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    where?: GRNItemWhereInput
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    cursor?: GRNItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
    * ItemGrade without action
    */
   export type ItemGradeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -44292,6 +45038,7 @@ export namespace Prisma {
     baseUnit?: boolean | UnitDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     purchaseOrderItems?: boolean | ItemMaster$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | ItemMaster$grnItemsArgs<ExtArgs>
     _count?: boolean | ItemMasterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["itemMaster"]>
 
@@ -44352,6 +45099,7 @@ export namespace Prisma {
     baseUnit?: boolean | UnitDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     purchaseOrderItems?: boolean | ItemMaster$purchaseOrderItemsArgs<ExtArgs>
+    grnItems?: boolean | ItemMaster$grnItemsArgs<ExtArgs>
     _count?: boolean | ItemMasterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ItemMasterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -44372,6 +45120,7 @@ export namespace Prisma {
       baseUnit: Prisma.$UnitPayload<ExtArgs>
       company: Prisma.$CompanyPayload<ExtArgs>
       purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
+      grnItems: Prisma.$GRNItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -44784,6 +45533,7 @@ export namespace Prisma {
     baseUnit<T extends UnitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UnitDefaultArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     purchaseOrderItems<T extends ItemMaster$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Subset<T, ItemMaster$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    grnItems<T extends ItemMaster$grnItemsArgs<ExtArgs> = {}>(args?: Subset<T, ItemMaster$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -45245,6 +45995,30 @@ export namespace Prisma {
   }
 
   /**
+   * ItemMaster.grnItems
+   */
+  export type ItemMaster$grnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    where?: GRNItemWhereInput
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    cursor?: GRNItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
    * ItemMaster without action
    */
   export type ItemMasterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -45590,6 +46364,8 @@ export namespace Prisma {
     currency?: boolean | PurchaseOrder$currencyArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     items?: boolean | PurchaseOrder$itemsArgs<ExtArgs>
+    grns?: boolean | PurchaseOrder$grnsArgs<ExtArgs>
+    invoices?: boolean | PurchaseOrder$invoicesArgs<ExtArgs>
     _count?: boolean | PurchaseOrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["purchaseOrder"]>
 
@@ -45671,6 +46447,8 @@ export namespace Prisma {
     currency?: boolean | PurchaseOrder$currencyArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     items?: boolean | PurchaseOrder$itemsArgs<ExtArgs>
+    grns?: boolean | PurchaseOrder$grnsArgs<ExtArgs>
+    invoices?: boolean | PurchaseOrder$invoicesArgs<ExtArgs>
     _count?: boolean | PurchaseOrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PurchaseOrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -45694,6 +46472,8 @@ export namespace Prisma {
       currency: Prisma.$CurrencyPayload<ExtArgs> | null
       company: Prisma.$CompanyPayload<ExtArgs>
       items: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
+      grns: Prisma.$GRNPayload<ExtArgs>[]
+      invoices: Prisma.$PurchaseInvoicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -46113,6 +46893,8 @@ export namespace Prisma {
     currency<T extends PurchaseOrder$currencyArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrder$currencyArgs<ExtArgs>>): Prisma__CurrencyClient<$Result.GetResult<Prisma.$CurrencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     items<T extends PurchaseOrder$itemsArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrder$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    grns<T extends PurchaseOrder$grnsArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrder$grnsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoices<T extends PurchaseOrder$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrder$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -46637,6 +47419,54 @@ export namespace Prisma {
   }
 
   /**
+   * PurchaseOrder.grns
+   */
+  export type PurchaseOrder$grnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    where?: GRNWhereInput
+    orderBy?: GRNOrderByWithRelationInput | GRNOrderByWithRelationInput[]
+    cursor?: GRNWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNScalarFieldEnum | GRNScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseOrder.invoices
+   */
+  export type PurchaseOrder$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    where?: PurchaseInvoiceWhereInput
+    orderBy?: PurchaseInvoiceOrderByWithRelationInput | PurchaseInvoiceOrderByWithRelationInput[]
+    cursor?: PurchaseInvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PurchaseInvoiceScalarFieldEnum | PurchaseInvoiceScalarFieldEnum[]
+  }
+
+  /**
    * PurchaseOrder without action
    */
   export type PurchaseOrderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -46967,6 +47797,9 @@ export namespace Prisma {
     brand?: boolean | PurchaseOrderItem$brandArgs<ExtArgs>
     itemGrade?: boolean | PurchaseOrderItem$itemGradeArgs<ExtArgs>
     unit?: boolean | PurchaseOrderItem$unitArgs<ExtArgs>
+    grnItems?: boolean | PurchaseOrderItem$grnItemsArgs<ExtArgs>
+    invoiceItems?: boolean | PurchaseOrderItem$invoiceItemsArgs<ExtArgs>
+    _count?: boolean | PurchaseOrderItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["purchaseOrderItem"]>
 
   export type PurchaseOrderItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -47046,6 +47879,9 @@ export namespace Prisma {
     brand?: boolean | PurchaseOrderItem$brandArgs<ExtArgs>
     itemGrade?: boolean | PurchaseOrderItem$itemGradeArgs<ExtArgs>
     unit?: boolean | PurchaseOrderItem$unitArgs<ExtArgs>
+    grnItems?: boolean | PurchaseOrderItem$grnItemsArgs<ExtArgs>
+    invoiceItems?: boolean | PurchaseOrderItem$invoiceItemsArgs<ExtArgs>
+    _count?: boolean | PurchaseOrderItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PurchaseOrderItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
@@ -47073,6 +47909,8 @@ export namespace Prisma {
       brand: Prisma.$BrandPayload<ExtArgs> | null
       itemGrade: Prisma.$ItemGradePayload<ExtArgs> | null
       unit: Prisma.$UnitPayload<ExtArgs> | null
+      grnItems: Prisma.$GRNItemPayload<ExtArgs>[]
+      invoiceItems: Prisma.$PurchaseInvoiceItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -47491,6 +48329,8 @@ export namespace Prisma {
     brand<T extends PurchaseOrderItem$brandArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderItem$brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     itemGrade<T extends PurchaseOrderItem$itemGradeArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderItem$itemGradeArgs<ExtArgs>>): Prisma__ItemGradeClient<$Result.GetResult<Prisma.$ItemGradePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     unit<T extends PurchaseOrderItem$unitArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderItem$unitArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    grnItems<T extends PurchaseOrderItem$grnItemsArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderItem$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoiceItems<T extends PurchaseOrderItem$invoiceItemsArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderItem$invoiceItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -48008,6 +48848,54 @@ export namespace Prisma {
   }
 
   /**
+   * PurchaseOrderItem.grnItems
+   */
+  export type PurchaseOrderItem$grnItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    where?: GRNItemWhereInput
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    cursor?: GRNItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseOrderItem.invoiceItems
+   */
+  export type PurchaseOrderItem$invoiceItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    where?: PurchaseInvoiceItemWhereInput
+    orderBy?: PurchaseInvoiceItemOrderByWithRelationInput | PurchaseInvoiceItemOrderByWithRelationInput[]
+    cursor?: PurchaseInvoiceItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PurchaseInvoiceItemScalarFieldEnum | PurchaseInvoiceItemScalarFieldEnum[]
+  }
+
+  /**
    * PurchaseOrderItem without action
    */
   export type PurchaseOrderItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -48023,6 +48911,4893 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PurchaseOrderItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GRN
+   */
+
+  export type AggregateGRN = {
+    _count: GRNCountAggregateOutputType | null
+    _avg: GRNAvgAggregateOutputType | null
+    _sum: GRNSumAggregateOutputType | null
+    _min: GRNMinAggregateOutputType | null
+    _max: GRNMaxAggregateOutputType | null
+  }
+
+  export type GRNAvgAggregateOutputType = {
+    companyId: number | null
+  }
+
+  export type GRNSumAggregateOutputType = {
+    companyId: number | null
+  }
+
+  export type GRNMinAggregateOutputType = {
+    id: string | null
+    grnNumber: string | null
+    date: Date | null
+    purchaseOrderId: string | null
+    remarks: string | null
+    companyId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GRNMaxAggregateOutputType = {
+    id: string | null
+    grnNumber: string | null
+    date: Date | null
+    purchaseOrderId: string | null
+    remarks: string | null
+    companyId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GRNCountAggregateOutputType = {
+    id: number
+    grnNumber: number
+    date: number
+    purchaseOrderId: number
+    remarks: number
+    companyId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GRNAvgAggregateInputType = {
+    companyId?: true
+  }
+
+  export type GRNSumAggregateInputType = {
+    companyId?: true
+  }
+
+  export type GRNMinAggregateInputType = {
+    id?: true
+    grnNumber?: true
+    date?: true
+    purchaseOrderId?: true
+    remarks?: true
+    companyId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GRNMaxAggregateInputType = {
+    id?: true
+    grnNumber?: true
+    date?: true
+    purchaseOrderId?: true
+    remarks?: true
+    companyId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GRNCountAggregateInputType = {
+    id?: true
+    grnNumber?: true
+    date?: true
+    purchaseOrderId?: true
+    remarks?: true
+    companyId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GRNAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GRN to aggregate.
+     */
+    where?: GRNWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GRNS to fetch.
+     */
+    orderBy?: GRNOrderByWithRelationInput | GRNOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GRNWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GRNS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GRNS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GRNS
+    **/
+    _count?: true | GRNCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GRNAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GRNSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GRNMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GRNMaxAggregateInputType
+  }
+
+  export type GetGRNAggregateType<T extends GRNAggregateArgs> = {
+        [P in keyof T & keyof AggregateGRN]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGRN[P]>
+      : GetScalarType<T[P], AggregateGRN[P]>
+  }
+
+
+
+
+  export type GRNGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNWhereInput
+    orderBy?: GRNOrderByWithAggregationInput | GRNOrderByWithAggregationInput[]
+    by: GRNScalarFieldEnum[] | GRNScalarFieldEnum
+    having?: GRNScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GRNCountAggregateInputType | true
+    _avg?: GRNAvgAggregateInputType
+    _sum?: GRNSumAggregateInputType
+    _min?: GRNMinAggregateInputType
+    _max?: GRNMaxAggregateInputType
+  }
+
+  export type GRNGroupByOutputType = {
+    id: string
+    grnNumber: string
+    date: Date
+    purchaseOrderId: string
+    remarks: string | null
+    companyId: number
+    createdAt: Date
+    updatedAt: Date
+    _count: GRNCountAggregateOutputType | null
+    _avg: GRNAvgAggregateOutputType | null
+    _sum: GRNSumAggregateOutputType | null
+    _min: GRNMinAggregateOutputType | null
+    _max: GRNMaxAggregateOutputType | null
+  }
+
+  type GetGRNGroupByPayload<T extends GRNGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GRNGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GRNGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GRNGroupByOutputType[P]>
+            : GetScalarType<T[P], GRNGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GRNSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    grnNumber?: boolean
+    date?: boolean
+    purchaseOrderId?: boolean
+    remarks?: boolean
+    companyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+    items?: boolean | GRN$itemsArgs<ExtArgs>
+    _count?: boolean | GRNCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gRN"]>
+
+  export type GRNSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    grnNumber?: boolean
+    date?: boolean
+    purchaseOrderId?: boolean
+    remarks?: boolean
+    companyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gRN"]>
+
+  export type GRNSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    grnNumber?: boolean
+    date?: boolean
+    purchaseOrderId?: boolean
+    remarks?: boolean
+    companyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gRN"]>
+
+  export type GRNSelectScalar = {
+    id?: boolean
+    grnNumber?: boolean
+    date?: boolean
+    purchaseOrderId?: boolean
+    remarks?: boolean
+    companyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GRNOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "grnNumber" | "date" | "purchaseOrderId" | "remarks" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["gRN"]>
+  export type GRNInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+    items?: boolean | GRN$itemsArgs<ExtArgs>
+    _count?: boolean | GRNCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GRNIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type GRNIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+
+  export type $GRNPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GRN"
+    objects: {
+      purchaseOrder: Prisma.$PurchaseOrderPayload<ExtArgs>
+      company: Prisma.$CompanyPayload<ExtArgs>
+      items: Prisma.$GRNItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      grnNumber: string
+      date: Date
+      purchaseOrderId: string
+      remarks: string | null
+      companyId: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["gRN"]>
+    composites: {}
+  }
+
+  type GRNGetPayload<S extends boolean | null | undefined | GRNDefaultArgs> = $Result.GetResult<Prisma.$GRNPayload, S>
+
+  type GRNCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GRNFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GRNCountAggregateInputType | true
+    }
+
+  export interface GRNDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GRN'], meta: { name: 'GRN' } }
+    /**
+     * Find zero or one GRN that matches the filter.
+     * @param {GRNFindUniqueArgs} args - Arguments to find a GRN
+     * @example
+     * // Get one GRN
+     * const gRN = await prisma.gRN.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GRNFindUniqueArgs>(args: SelectSubset<T, GRNFindUniqueArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GRN that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GRNFindUniqueOrThrowArgs} args - Arguments to find a GRN
+     * @example
+     * // Get one GRN
+     * const gRN = await prisma.gRN.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GRNFindUniqueOrThrowArgs>(args: SelectSubset<T, GRNFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GRN that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNFindFirstArgs} args - Arguments to find a GRN
+     * @example
+     * // Get one GRN
+     * const gRN = await prisma.gRN.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GRNFindFirstArgs>(args?: SelectSubset<T, GRNFindFirstArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GRN that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNFindFirstOrThrowArgs} args - Arguments to find a GRN
+     * @example
+     * // Get one GRN
+     * const gRN = await prisma.gRN.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GRNFindFirstOrThrowArgs>(args?: SelectSubset<T, GRNFindFirstOrThrowArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GRNS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GRNS
+     * const gRNS = await prisma.gRN.findMany()
+     * 
+     * // Get first 10 GRNS
+     * const gRNS = await prisma.gRN.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const gRNWithIdOnly = await prisma.gRN.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GRNFindManyArgs>(args?: SelectSubset<T, GRNFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GRN.
+     * @param {GRNCreateArgs} args - Arguments to create a GRN.
+     * @example
+     * // Create one GRN
+     * const GRN = await prisma.gRN.create({
+     *   data: {
+     *     // ... data to create a GRN
+     *   }
+     * })
+     * 
+     */
+    create<T extends GRNCreateArgs>(args: SelectSubset<T, GRNCreateArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GRNS.
+     * @param {GRNCreateManyArgs} args - Arguments to create many GRNS.
+     * @example
+     * // Create many GRNS
+     * const gRN = await prisma.gRN.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GRNCreateManyArgs>(args?: SelectSubset<T, GRNCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GRNS and returns the data saved in the database.
+     * @param {GRNCreateManyAndReturnArgs} args - Arguments to create many GRNS.
+     * @example
+     * // Create many GRNS
+     * const gRN = await prisma.gRN.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GRNS and only return the `id`
+     * const gRNWithIdOnly = await prisma.gRN.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GRNCreateManyAndReturnArgs>(args?: SelectSubset<T, GRNCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GRN.
+     * @param {GRNDeleteArgs} args - Arguments to delete one GRN.
+     * @example
+     * // Delete one GRN
+     * const GRN = await prisma.gRN.delete({
+     *   where: {
+     *     // ... filter to delete one GRN
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GRNDeleteArgs>(args: SelectSubset<T, GRNDeleteArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GRN.
+     * @param {GRNUpdateArgs} args - Arguments to update one GRN.
+     * @example
+     * // Update one GRN
+     * const gRN = await prisma.gRN.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GRNUpdateArgs>(args: SelectSubset<T, GRNUpdateArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GRNS.
+     * @param {GRNDeleteManyArgs} args - Arguments to filter GRNS to delete.
+     * @example
+     * // Delete a few GRNS
+     * const { count } = await prisma.gRN.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GRNDeleteManyArgs>(args?: SelectSubset<T, GRNDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GRNS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GRNS
+     * const gRN = await prisma.gRN.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GRNUpdateManyArgs>(args: SelectSubset<T, GRNUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GRNS and returns the data updated in the database.
+     * @param {GRNUpdateManyAndReturnArgs} args - Arguments to update many GRNS.
+     * @example
+     * // Update many GRNS
+     * const gRN = await prisma.gRN.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GRNS and only return the `id`
+     * const gRNWithIdOnly = await prisma.gRN.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GRNUpdateManyAndReturnArgs>(args: SelectSubset<T, GRNUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GRN.
+     * @param {GRNUpsertArgs} args - Arguments to update or create a GRN.
+     * @example
+     * // Update or create a GRN
+     * const gRN = await prisma.gRN.upsert({
+     *   create: {
+     *     // ... data to create a GRN
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GRN we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GRNUpsertArgs>(args: SelectSubset<T, GRNUpsertArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GRNS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNCountArgs} args - Arguments to filter GRNS to count.
+     * @example
+     * // Count the number of GRNS
+     * const count = await prisma.gRN.count({
+     *   where: {
+     *     // ... the filter for the GRNS we want to count
+     *   }
+     * })
+    **/
+    count<T extends GRNCountArgs>(
+      args?: Subset<T, GRNCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GRNCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GRN.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GRNAggregateArgs>(args: Subset<T, GRNAggregateArgs>): Prisma.PrismaPromise<GetGRNAggregateType<T>>
+
+    /**
+     * Group by GRN.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GRNGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GRNGroupByArgs['orderBy'] }
+        : { orderBy?: GRNGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GRNGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGRNGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GRN model
+   */
+  readonly fields: GRNFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GRN.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GRNClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    purchaseOrder<T extends PurchaseOrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderDefaultArgs<ExtArgs>>): Prisma__PurchaseOrderClient<$Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    items<T extends GRN$itemsArgs<ExtArgs> = {}>(args?: Subset<T, GRN$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GRN model
+   */
+  interface GRNFieldRefs {
+    readonly id: FieldRef<"GRN", 'String'>
+    readonly grnNumber: FieldRef<"GRN", 'String'>
+    readonly date: FieldRef<"GRN", 'DateTime'>
+    readonly purchaseOrderId: FieldRef<"GRN", 'String'>
+    readonly remarks: FieldRef<"GRN", 'String'>
+    readonly companyId: FieldRef<"GRN", 'Int'>
+    readonly createdAt: FieldRef<"GRN", 'DateTime'>
+    readonly updatedAt: FieldRef<"GRN", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GRN findUnique
+   */
+  export type GRNFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * Filter, which GRN to fetch.
+     */
+    where: GRNWhereUniqueInput
+  }
+
+  /**
+   * GRN findUniqueOrThrow
+   */
+  export type GRNFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * Filter, which GRN to fetch.
+     */
+    where: GRNWhereUniqueInput
+  }
+
+  /**
+   * GRN findFirst
+   */
+  export type GRNFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * Filter, which GRN to fetch.
+     */
+    where?: GRNWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GRNS to fetch.
+     */
+    orderBy?: GRNOrderByWithRelationInput | GRNOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GRNS.
+     */
+    cursor?: GRNWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GRNS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GRNS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GRNS.
+     */
+    distinct?: GRNScalarFieldEnum | GRNScalarFieldEnum[]
+  }
+
+  /**
+   * GRN findFirstOrThrow
+   */
+  export type GRNFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * Filter, which GRN to fetch.
+     */
+    where?: GRNWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GRNS to fetch.
+     */
+    orderBy?: GRNOrderByWithRelationInput | GRNOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GRNS.
+     */
+    cursor?: GRNWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GRNS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GRNS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GRNS.
+     */
+    distinct?: GRNScalarFieldEnum | GRNScalarFieldEnum[]
+  }
+
+  /**
+   * GRN findMany
+   */
+  export type GRNFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * Filter, which GRNS to fetch.
+     */
+    where?: GRNWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GRNS to fetch.
+     */
+    orderBy?: GRNOrderByWithRelationInput | GRNOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GRNS.
+     */
+    cursor?: GRNWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GRNS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GRNS.
+     */
+    skip?: number
+    distinct?: GRNScalarFieldEnum | GRNScalarFieldEnum[]
+  }
+
+  /**
+   * GRN create
+   */
+  export type GRNCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GRN.
+     */
+    data: XOR<GRNCreateInput, GRNUncheckedCreateInput>
+  }
+
+  /**
+   * GRN createMany
+   */
+  export type GRNCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GRNS.
+     */
+    data: GRNCreateManyInput | GRNCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GRN createManyAndReturn
+   */
+  export type GRNCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * The data used to create many GRNS.
+     */
+    data: GRNCreateManyInput | GRNCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GRN update
+   */
+  export type GRNUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GRN.
+     */
+    data: XOR<GRNUpdateInput, GRNUncheckedUpdateInput>
+    /**
+     * Choose, which GRN to update.
+     */
+    where: GRNWhereUniqueInput
+  }
+
+  /**
+   * GRN updateMany
+   */
+  export type GRNUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GRNS.
+     */
+    data: XOR<GRNUpdateManyMutationInput, GRNUncheckedUpdateManyInput>
+    /**
+     * Filter which GRNS to update
+     */
+    where?: GRNWhereInput
+    /**
+     * Limit how many GRNS to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GRN updateManyAndReturn
+   */
+  export type GRNUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * The data used to update GRNS.
+     */
+    data: XOR<GRNUpdateManyMutationInput, GRNUncheckedUpdateManyInput>
+    /**
+     * Filter which GRNS to update
+     */
+    where?: GRNWhereInput
+    /**
+     * Limit how many GRNS to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GRN upsert
+   */
+  export type GRNUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GRN to update in case it exists.
+     */
+    where: GRNWhereUniqueInput
+    /**
+     * In case the GRN found by the `where` argument doesn't exist, create a new GRN with this data.
+     */
+    create: XOR<GRNCreateInput, GRNUncheckedCreateInput>
+    /**
+     * In case the GRN was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GRNUpdateInput, GRNUncheckedUpdateInput>
+  }
+
+  /**
+   * GRN delete
+   */
+  export type GRNDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+    /**
+     * Filter which GRN to delete.
+     */
+    where: GRNWhereUniqueInput
+  }
+
+  /**
+   * GRN deleteMany
+   */
+  export type GRNDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GRNS to delete
+     */
+    where?: GRNWhereInput
+    /**
+     * Limit how many GRNS to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GRN.items
+   */
+  export type GRN$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    where?: GRNItemWhereInput
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    cursor?: GRNItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
+   * GRN without action
+   */
+  export type GRNDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRN
+     */
+    select?: GRNSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRN
+     */
+    omit?: GRNOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GRNItem
+   */
+
+  export type AggregateGRNItem = {
+    _count: GRNItemCountAggregateOutputType | null
+    _avg: GRNItemAvgAggregateOutputType | null
+    _sum: GRNItemSumAggregateOutputType | null
+    _min: GRNItemMinAggregateOutputType | null
+    _max: GRNItemMaxAggregateOutputType | null
+  }
+
+  export type GRNItemAvgAggregateOutputType = {
+    receivedQty: number | null
+    pcs: number | null
+    unitId: number | null
+  }
+
+  export type GRNItemSumAggregateOutputType = {
+    receivedQty: number | null
+    pcs: number | null
+    unitId: number | null
+  }
+
+  export type GRNItemMinAggregateOutputType = {
+    id: string | null
+    grnId: string | null
+    purchaseOrderItemId: string | null
+    itemMasterId: string | null
+    colorId: string | null
+    brandId: string | null
+    itemGradeId: string | null
+    receivedQty: number | null
+    pcs: number | null
+    unitId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GRNItemMaxAggregateOutputType = {
+    id: string | null
+    grnId: string | null
+    purchaseOrderItemId: string | null
+    itemMasterId: string | null
+    colorId: string | null
+    brandId: string | null
+    itemGradeId: string | null
+    receivedQty: number | null
+    pcs: number | null
+    unitId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GRNItemCountAggregateOutputType = {
+    id: number
+    grnId: number
+    purchaseOrderItemId: number
+    itemMasterId: number
+    colorId: number
+    brandId: number
+    itemGradeId: number
+    receivedQty: number
+    pcs: number
+    unitId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GRNItemAvgAggregateInputType = {
+    receivedQty?: true
+    pcs?: true
+    unitId?: true
+  }
+
+  export type GRNItemSumAggregateInputType = {
+    receivedQty?: true
+    pcs?: true
+    unitId?: true
+  }
+
+  export type GRNItemMinAggregateInputType = {
+    id?: true
+    grnId?: true
+    purchaseOrderItemId?: true
+    itemMasterId?: true
+    colorId?: true
+    brandId?: true
+    itemGradeId?: true
+    receivedQty?: true
+    pcs?: true
+    unitId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GRNItemMaxAggregateInputType = {
+    id?: true
+    grnId?: true
+    purchaseOrderItemId?: true
+    itemMasterId?: true
+    colorId?: true
+    brandId?: true
+    itemGradeId?: true
+    receivedQty?: true
+    pcs?: true
+    unitId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GRNItemCountAggregateInputType = {
+    id?: true
+    grnId?: true
+    purchaseOrderItemId?: true
+    itemMasterId?: true
+    colorId?: true
+    brandId?: true
+    itemGradeId?: true
+    receivedQty?: true
+    pcs?: true
+    unitId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GRNItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GRNItem to aggregate.
+     */
+    where?: GRNItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GRNItems to fetch.
+     */
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GRNItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GRNItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GRNItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GRNItems
+    **/
+    _count?: true | GRNItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GRNItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GRNItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GRNItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GRNItemMaxAggregateInputType
+  }
+
+  export type GetGRNItemAggregateType<T extends GRNItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateGRNItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGRNItem[P]>
+      : GetScalarType<T[P], AggregateGRNItem[P]>
+  }
+
+
+
+
+  export type GRNItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GRNItemWhereInput
+    orderBy?: GRNItemOrderByWithAggregationInput | GRNItemOrderByWithAggregationInput[]
+    by: GRNItemScalarFieldEnum[] | GRNItemScalarFieldEnum
+    having?: GRNItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GRNItemCountAggregateInputType | true
+    _avg?: GRNItemAvgAggregateInputType
+    _sum?: GRNItemSumAggregateInputType
+    _min?: GRNItemMinAggregateInputType
+    _max?: GRNItemMaxAggregateInputType
+  }
+
+  export type GRNItemGroupByOutputType = {
+    id: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId: string | null
+    brandId: string | null
+    itemGradeId: string | null
+    receivedQty: number
+    pcs: number | null
+    unitId: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: GRNItemCountAggregateOutputType | null
+    _avg: GRNItemAvgAggregateOutputType | null
+    _sum: GRNItemSumAggregateOutputType | null
+    _min: GRNItemMinAggregateOutputType | null
+    _max: GRNItemMaxAggregateOutputType | null
+  }
+
+  type GetGRNItemGroupByPayload<T extends GRNItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GRNItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GRNItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GRNItemGroupByOutputType[P]>
+            : GetScalarType<T[P], GRNItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GRNItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    grnId?: boolean
+    purchaseOrderItemId?: boolean
+    itemMasterId?: boolean
+    colorId?: boolean
+    brandId?: boolean
+    itemGradeId?: boolean
+    receivedQty?: boolean
+    pcs?: boolean
+    unitId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    grn?: boolean | GRNDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    itemMaster?: boolean | ItemMasterDefaultArgs<ExtArgs>
+    color?: boolean | GRNItem$colorArgs<ExtArgs>
+    brand?: boolean | GRNItem$brandArgs<ExtArgs>
+    itemGrade?: boolean | GRNItem$itemGradeArgs<ExtArgs>
+    unit?: boolean | GRNItem$unitArgs<ExtArgs>
+    invoiceItems?: boolean | GRNItem$invoiceItemsArgs<ExtArgs>
+    _count?: boolean | GRNItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gRNItem"]>
+
+  export type GRNItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    grnId?: boolean
+    purchaseOrderItemId?: boolean
+    itemMasterId?: boolean
+    colorId?: boolean
+    brandId?: boolean
+    itemGradeId?: boolean
+    receivedQty?: boolean
+    pcs?: boolean
+    unitId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    grn?: boolean | GRNDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    itemMaster?: boolean | ItemMasterDefaultArgs<ExtArgs>
+    color?: boolean | GRNItem$colorArgs<ExtArgs>
+    brand?: boolean | GRNItem$brandArgs<ExtArgs>
+    itemGrade?: boolean | GRNItem$itemGradeArgs<ExtArgs>
+    unit?: boolean | GRNItem$unitArgs<ExtArgs>
+  }, ExtArgs["result"]["gRNItem"]>
+
+  export type GRNItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    grnId?: boolean
+    purchaseOrderItemId?: boolean
+    itemMasterId?: boolean
+    colorId?: boolean
+    brandId?: boolean
+    itemGradeId?: boolean
+    receivedQty?: boolean
+    pcs?: boolean
+    unitId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    grn?: boolean | GRNDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    itemMaster?: boolean | ItemMasterDefaultArgs<ExtArgs>
+    color?: boolean | GRNItem$colorArgs<ExtArgs>
+    brand?: boolean | GRNItem$brandArgs<ExtArgs>
+    itemGrade?: boolean | GRNItem$itemGradeArgs<ExtArgs>
+    unit?: boolean | GRNItem$unitArgs<ExtArgs>
+  }, ExtArgs["result"]["gRNItem"]>
+
+  export type GRNItemSelectScalar = {
+    id?: boolean
+    grnId?: boolean
+    purchaseOrderItemId?: boolean
+    itemMasterId?: boolean
+    colorId?: boolean
+    brandId?: boolean
+    itemGradeId?: boolean
+    receivedQty?: boolean
+    pcs?: boolean
+    unitId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GRNItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "grnId" | "purchaseOrderItemId" | "itemMasterId" | "colorId" | "brandId" | "itemGradeId" | "receivedQty" | "pcs" | "unitId" | "createdAt" | "updatedAt", ExtArgs["result"]["gRNItem"]>
+  export type GRNItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    grn?: boolean | GRNDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    itemMaster?: boolean | ItemMasterDefaultArgs<ExtArgs>
+    color?: boolean | GRNItem$colorArgs<ExtArgs>
+    brand?: boolean | GRNItem$brandArgs<ExtArgs>
+    itemGrade?: boolean | GRNItem$itemGradeArgs<ExtArgs>
+    unit?: boolean | GRNItem$unitArgs<ExtArgs>
+    invoiceItems?: boolean | GRNItem$invoiceItemsArgs<ExtArgs>
+    _count?: boolean | GRNItemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GRNItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    grn?: boolean | GRNDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    itemMaster?: boolean | ItemMasterDefaultArgs<ExtArgs>
+    color?: boolean | GRNItem$colorArgs<ExtArgs>
+    brand?: boolean | GRNItem$brandArgs<ExtArgs>
+    itemGrade?: boolean | GRNItem$itemGradeArgs<ExtArgs>
+    unit?: boolean | GRNItem$unitArgs<ExtArgs>
+  }
+  export type GRNItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    grn?: boolean | GRNDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    itemMaster?: boolean | ItemMasterDefaultArgs<ExtArgs>
+    color?: boolean | GRNItem$colorArgs<ExtArgs>
+    brand?: boolean | GRNItem$brandArgs<ExtArgs>
+    itemGrade?: boolean | GRNItem$itemGradeArgs<ExtArgs>
+    unit?: boolean | GRNItem$unitArgs<ExtArgs>
+  }
+
+  export type $GRNItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GRNItem"
+    objects: {
+      grn: Prisma.$GRNPayload<ExtArgs>
+      purchaseOrderItem: Prisma.$PurchaseOrderItemPayload<ExtArgs>
+      itemMaster: Prisma.$ItemMasterPayload<ExtArgs>
+      color: Prisma.$ColorPayload<ExtArgs> | null
+      brand: Prisma.$BrandPayload<ExtArgs> | null
+      itemGrade: Prisma.$ItemGradePayload<ExtArgs> | null
+      unit: Prisma.$UnitPayload<ExtArgs> | null
+      invoiceItems: Prisma.$PurchaseInvoiceItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      grnId: string
+      purchaseOrderItemId: string
+      itemMasterId: string
+      colorId: string | null
+      brandId: string | null
+      itemGradeId: string | null
+      receivedQty: number
+      pcs: number | null
+      unitId: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["gRNItem"]>
+    composites: {}
+  }
+
+  type GRNItemGetPayload<S extends boolean | null | undefined | GRNItemDefaultArgs> = $Result.GetResult<Prisma.$GRNItemPayload, S>
+
+  type GRNItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GRNItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GRNItemCountAggregateInputType | true
+    }
+
+  export interface GRNItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GRNItem'], meta: { name: 'GRNItem' } }
+    /**
+     * Find zero or one GRNItem that matches the filter.
+     * @param {GRNItemFindUniqueArgs} args - Arguments to find a GRNItem
+     * @example
+     * // Get one GRNItem
+     * const gRNItem = await prisma.gRNItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GRNItemFindUniqueArgs>(args: SelectSubset<T, GRNItemFindUniqueArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GRNItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GRNItemFindUniqueOrThrowArgs} args - Arguments to find a GRNItem
+     * @example
+     * // Get one GRNItem
+     * const gRNItem = await prisma.gRNItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GRNItemFindUniqueOrThrowArgs>(args: SelectSubset<T, GRNItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GRNItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNItemFindFirstArgs} args - Arguments to find a GRNItem
+     * @example
+     * // Get one GRNItem
+     * const gRNItem = await prisma.gRNItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GRNItemFindFirstArgs>(args?: SelectSubset<T, GRNItemFindFirstArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GRNItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNItemFindFirstOrThrowArgs} args - Arguments to find a GRNItem
+     * @example
+     * // Get one GRNItem
+     * const gRNItem = await prisma.gRNItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GRNItemFindFirstOrThrowArgs>(args?: SelectSubset<T, GRNItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GRNItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GRNItems
+     * const gRNItems = await prisma.gRNItem.findMany()
+     * 
+     * // Get first 10 GRNItems
+     * const gRNItems = await prisma.gRNItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const gRNItemWithIdOnly = await prisma.gRNItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GRNItemFindManyArgs>(args?: SelectSubset<T, GRNItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GRNItem.
+     * @param {GRNItemCreateArgs} args - Arguments to create a GRNItem.
+     * @example
+     * // Create one GRNItem
+     * const GRNItem = await prisma.gRNItem.create({
+     *   data: {
+     *     // ... data to create a GRNItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends GRNItemCreateArgs>(args: SelectSubset<T, GRNItemCreateArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GRNItems.
+     * @param {GRNItemCreateManyArgs} args - Arguments to create many GRNItems.
+     * @example
+     * // Create many GRNItems
+     * const gRNItem = await prisma.gRNItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GRNItemCreateManyArgs>(args?: SelectSubset<T, GRNItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GRNItems and returns the data saved in the database.
+     * @param {GRNItemCreateManyAndReturnArgs} args - Arguments to create many GRNItems.
+     * @example
+     * // Create many GRNItems
+     * const gRNItem = await prisma.gRNItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GRNItems and only return the `id`
+     * const gRNItemWithIdOnly = await prisma.gRNItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GRNItemCreateManyAndReturnArgs>(args?: SelectSubset<T, GRNItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GRNItem.
+     * @param {GRNItemDeleteArgs} args - Arguments to delete one GRNItem.
+     * @example
+     * // Delete one GRNItem
+     * const GRNItem = await prisma.gRNItem.delete({
+     *   where: {
+     *     // ... filter to delete one GRNItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GRNItemDeleteArgs>(args: SelectSubset<T, GRNItemDeleteArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GRNItem.
+     * @param {GRNItemUpdateArgs} args - Arguments to update one GRNItem.
+     * @example
+     * // Update one GRNItem
+     * const gRNItem = await prisma.gRNItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GRNItemUpdateArgs>(args: SelectSubset<T, GRNItemUpdateArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GRNItems.
+     * @param {GRNItemDeleteManyArgs} args - Arguments to filter GRNItems to delete.
+     * @example
+     * // Delete a few GRNItems
+     * const { count } = await prisma.gRNItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GRNItemDeleteManyArgs>(args?: SelectSubset<T, GRNItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GRNItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GRNItems
+     * const gRNItem = await prisma.gRNItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GRNItemUpdateManyArgs>(args: SelectSubset<T, GRNItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GRNItems and returns the data updated in the database.
+     * @param {GRNItemUpdateManyAndReturnArgs} args - Arguments to update many GRNItems.
+     * @example
+     * // Update many GRNItems
+     * const gRNItem = await prisma.gRNItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GRNItems and only return the `id`
+     * const gRNItemWithIdOnly = await prisma.gRNItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GRNItemUpdateManyAndReturnArgs>(args: SelectSubset<T, GRNItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GRNItem.
+     * @param {GRNItemUpsertArgs} args - Arguments to update or create a GRNItem.
+     * @example
+     * // Update or create a GRNItem
+     * const gRNItem = await prisma.gRNItem.upsert({
+     *   create: {
+     *     // ... data to create a GRNItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GRNItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GRNItemUpsertArgs>(args: SelectSubset<T, GRNItemUpsertArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GRNItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNItemCountArgs} args - Arguments to filter GRNItems to count.
+     * @example
+     * // Count the number of GRNItems
+     * const count = await prisma.gRNItem.count({
+     *   where: {
+     *     // ... the filter for the GRNItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends GRNItemCountArgs>(
+      args?: Subset<T, GRNItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GRNItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GRNItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GRNItemAggregateArgs>(args: Subset<T, GRNItemAggregateArgs>): Prisma.PrismaPromise<GetGRNItemAggregateType<T>>
+
+    /**
+     * Group by GRNItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GRNItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GRNItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GRNItemGroupByArgs['orderBy'] }
+        : { orderBy?: GRNItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GRNItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGRNItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GRNItem model
+   */
+  readonly fields: GRNItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GRNItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GRNItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    grn<T extends GRNDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GRNDefaultArgs<ExtArgs>>): Prisma__GRNClient<$Result.GetResult<Prisma.$GRNPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    purchaseOrderItem<T extends PurchaseOrderItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderItemDefaultArgs<ExtArgs>>): Prisma__PurchaseOrderItemClient<$Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    itemMaster<T extends ItemMasterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemMasterDefaultArgs<ExtArgs>>): Prisma__ItemMasterClient<$Result.GetResult<Prisma.$ItemMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    color<T extends GRNItem$colorArgs<ExtArgs> = {}>(args?: Subset<T, GRNItem$colorArgs<ExtArgs>>): Prisma__ColorClient<$Result.GetResult<Prisma.$ColorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    brand<T extends GRNItem$brandArgs<ExtArgs> = {}>(args?: Subset<T, GRNItem$brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    itemGrade<T extends GRNItem$itemGradeArgs<ExtArgs> = {}>(args?: Subset<T, GRNItem$itemGradeArgs<ExtArgs>>): Prisma__ItemGradeClient<$Result.GetResult<Prisma.$ItemGradePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    unit<T extends GRNItem$unitArgs<ExtArgs> = {}>(args?: Subset<T, GRNItem$unitArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    invoiceItems<T extends GRNItem$invoiceItemsArgs<ExtArgs> = {}>(args?: Subset<T, GRNItem$invoiceItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GRNItem model
+   */
+  interface GRNItemFieldRefs {
+    readonly id: FieldRef<"GRNItem", 'String'>
+    readonly grnId: FieldRef<"GRNItem", 'String'>
+    readonly purchaseOrderItemId: FieldRef<"GRNItem", 'String'>
+    readonly itemMasterId: FieldRef<"GRNItem", 'String'>
+    readonly colorId: FieldRef<"GRNItem", 'String'>
+    readonly brandId: FieldRef<"GRNItem", 'String'>
+    readonly itemGradeId: FieldRef<"GRNItem", 'String'>
+    readonly receivedQty: FieldRef<"GRNItem", 'Float'>
+    readonly pcs: FieldRef<"GRNItem", 'Float'>
+    readonly unitId: FieldRef<"GRNItem", 'Int'>
+    readonly createdAt: FieldRef<"GRNItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"GRNItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GRNItem findUnique
+   */
+  export type GRNItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * Filter, which GRNItem to fetch.
+     */
+    where: GRNItemWhereUniqueInput
+  }
+
+  /**
+   * GRNItem findUniqueOrThrow
+   */
+  export type GRNItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * Filter, which GRNItem to fetch.
+     */
+    where: GRNItemWhereUniqueInput
+  }
+
+  /**
+   * GRNItem findFirst
+   */
+  export type GRNItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * Filter, which GRNItem to fetch.
+     */
+    where?: GRNItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GRNItems to fetch.
+     */
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GRNItems.
+     */
+    cursor?: GRNItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GRNItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GRNItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GRNItems.
+     */
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
+   * GRNItem findFirstOrThrow
+   */
+  export type GRNItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * Filter, which GRNItem to fetch.
+     */
+    where?: GRNItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GRNItems to fetch.
+     */
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GRNItems.
+     */
+    cursor?: GRNItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GRNItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GRNItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GRNItems.
+     */
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
+   * GRNItem findMany
+   */
+  export type GRNItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * Filter, which GRNItems to fetch.
+     */
+    where?: GRNItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GRNItems to fetch.
+     */
+    orderBy?: GRNItemOrderByWithRelationInput | GRNItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GRNItems.
+     */
+    cursor?: GRNItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GRNItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GRNItems.
+     */
+    skip?: number
+    distinct?: GRNItemScalarFieldEnum | GRNItemScalarFieldEnum[]
+  }
+
+  /**
+   * GRNItem create
+   */
+  export type GRNItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GRNItem.
+     */
+    data: XOR<GRNItemCreateInput, GRNItemUncheckedCreateInput>
+  }
+
+  /**
+   * GRNItem createMany
+   */
+  export type GRNItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GRNItems.
+     */
+    data: GRNItemCreateManyInput | GRNItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GRNItem createManyAndReturn
+   */
+  export type GRNItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many GRNItems.
+     */
+    data: GRNItemCreateManyInput | GRNItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GRNItem update
+   */
+  export type GRNItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GRNItem.
+     */
+    data: XOR<GRNItemUpdateInput, GRNItemUncheckedUpdateInput>
+    /**
+     * Choose, which GRNItem to update.
+     */
+    where: GRNItemWhereUniqueInput
+  }
+
+  /**
+   * GRNItem updateMany
+   */
+  export type GRNItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GRNItems.
+     */
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyInput>
+    /**
+     * Filter which GRNItems to update
+     */
+    where?: GRNItemWhereInput
+    /**
+     * Limit how many GRNItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GRNItem updateManyAndReturn
+   */
+  export type GRNItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * The data used to update GRNItems.
+     */
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyInput>
+    /**
+     * Filter which GRNItems to update
+     */
+    where?: GRNItemWhereInput
+    /**
+     * Limit how many GRNItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GRNItem upsert
+   */
+  export type GRNItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GRNItem to update in case it exists.
+     */
+    where: GRNItemWhereUniqueInput
+    /**
+     * In case the GRNItem found by the `where` argument doesn't exist, create a new GRNItem with this data.
+     */
+    create: XOR<GRNItemCreateInput, GRNItemUncheckedCreateInput>
+    /**
+     * In case the GRNItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GRNItemUpdateInput, GRNItemUncheckedUpdateInput>
+  }
+
+  /**
+   * GRNItem delete
+   */
+  export type GRNItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    /**
+     * Filter which GRNItem to delete.
+     */
+    where: GRNItemWhereUniqueInput
+  }
+
+  /**
+   * GRNItem deleteMany
+   */
+  export type GRNItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GRNItems to delete
+     */
+    where?: GRNItemWhereInput
+    /**
+     * Limit how many GRNItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GRNItem.color
+   */
+  export type GRNItem$colorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Color
+     */
+    select?: ColorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Color
+     */
+    omit?: ColorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ColorInclude<ExtArgs> | null
+    where?: ColorWhereInput
+  }
+
+  /**
+   * GRNItem.brand
+   */
+  export type GRNItem$brandArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Brand
+     */
+    select?: BrandSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Brand
+     */
+    omit?: BrandOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandInclude<ExtArgs> | null
+    where?: BrandWhereInput
+  }
+
+  /**
+   * GRNItem.itemGrade
+   */
+  export type GRNItem$itemGradeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemGrade
+     */
+    select?: ItemGradeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ItemGrade
+     */
+    omit?: ItemGradeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemGradeInclude<ExtArgs> | null
+    where?: ItemGradeWhereInput
+  }
+
+  /**
+   * GRNItem.unit
+   */
+  export type GRNItem$unitArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Unit
+     */
+    select?: UnitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Unit
+     */
+    omit?: UnitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnitInclude<ExtArgs> | null
+    where?: UnitWhereInput
+  }
+
+  /**
+   * GRNItem.invoiceItems
+   */
+  export type GRNItem$invoiceItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    where?: PurchaseInvoiceItemWhereInput
+    orderBy?: PurchaseInvoiceItemOrderByWithRelationInput | PurchaseInvoiceItemOrderByWithRelationInput[]
+    cursor?: PurchaseInvoiceItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PurchaseInvoiceItemScalarFieldEnum | PurchaseInvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * GRNItem without action
+   */
+  export type GRNItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PurchaseInvoice
+   */
+
+  export type AggregatePurchaseInvoice = {
+    _count: PurchaseInvoiceCountAggregateOutputType | null
+    _avg: PurchaseInvoiceAvgAggregateOutputType | null
+    _sum: PurchaseInvoiceSumAggregateOutputType | null
+    _min: PurchaseInvoiceMinAggregateOutputType | null
+    _max: PurchaseInvoiceMaxAggregateOutputType | null
+  }
+
+  export type PurchaseInvoiceAvgAggregateOutputType = {
+    totalAmount: number | null
+    companyId: number | null
+  }
+
+  export type PurchaseInvoiceSumAggregateOutputType = {
+    totalAmount: number | null
+    companyId: number | null
+  }
+
+  export type PurchaseInvoiceMinAggregateOutputType = {
+    id: string | null
+    invoiceNumber: string | null
+    date: Date | null
+    purchaseOrderId: string | null
+    totalAmount: number | null
+    status: string | null
+    companyId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PurchaseInvoiceMaxAggregateOutputType = {
+    id: string | null
+    invoiceNumber: string | null
+    date: Date | null
+    purchaseOrderId: string | null
+    totalAmount: number | null
+    status: string | null
+    companyId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PurchaseInvoiceCountAggregateOutputType = {
+    id: number
+    invoiceNumber: number
+    date: number
+    purchaseOrderId: number
+    totalAmount: number
+    status: number
+    companyId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PurchaseInvoiceAvgAggregateInputType = {
+    totalAmount?: true
+    companyId?: true
+  }
+
+  export type PurchaseInvoiceSumAggregateInputType = {
+    totalAmount?: true
+    companyId?: true
+  }
+
+  export type PurchaseInvoiceMinAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    date?: true
+    purchaseOrderId?: true
+    totalAmount?: true
+    status?: true
+    companyId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PurchaseInvoiceMaxAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    date?: true
+    purchaseOrderId?: true
+    totalAmount?: true
+    status?: true
+    companyId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PurchaseInvoiceCountAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    date?: true
+    purchaseOrderId?: true
+    totalAmount?: true
+    status?: true
+    companyId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PurchaseInvoiceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PurchaseInvoice to aggregate.
+     */
+    where?: PurchaseInvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PurchaseInvoices to fetch.
+     */
+    orderBy?: PurchaseInvoiceOrderByWithRelationInput | PurchaseInvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PurchaseInvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PurchaseInvoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PurchaseInvoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PurchaseInvoices
+    **/
+    _count?: true | PurchaseInvoiceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PurchaseInvoiceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PurchaseInvoiceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PurchaseInvoiceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PurchaseInvoiceMaxAggregateInputType
+  }
+
+  export type GetPurchaseInvoiceAggregateType<T extends PurchaseInvoiceAggregateArgs> = {
+        [P in keyof T & keyof AggregatePurchaseInvoice]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePurchaseInvoice[P]>
+      : GetScalarType<T[P], AggregatePurchaseInvoice[P]>
+  }
+
+
+
+
+  export type PurchaseInvoiceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PurchaseInvoiceWhereInput
+    orderBy?: PurchaseInvoiceOrderByWithAggregationInput | PurchaseInvoiceOrderByWithAggregationInput[]
+    by: PurchaseInvoiceScalarFieldEnum[] | PurchaseInvoiceScalarFieldEnum
+    having?: PurchaseInvoiceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PurchaseInvoiceCountAggregateInputType | true
+    _avg?: PurchaseInvoiceAvgAggregateInputType
+    _sum?: PurchaseInvoiceSumAggregateInputType
+    _min?: PurchaseInvoiceMinAggregateInputType
+    _max?: PurchaseInvoiceMaxAggregateInputType
+  }
+
+  export type PurchaseInvoiceGroupByOutputType = {
+    id: string
+    invoiceNumber: string
+    date: Date
+    purchaseOrderId: string
+    totalAmount: number
+    status: string
+    companyId: number
+    createdAt: Date
+    updatedAt: Date
+    _count: PurchaseInvoiceCountAggregateOutputType | null
+    _avg: PurchaseInvoiceAvgAggregateOutputType | null
+    _sum: PurchaseInvoiceSumAggregateOutputType | null
+    _min: PurchaseInvoiceMinAggregateOutputType | null
+    _max: PurchaseInvoiceMaxAggregateOutputType | null
+  }
+
+  type GetPurchaseInvoiceGroupByPayload<T extends PurchaseInvoiceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PurchaseInvoiceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PurchaseInvoiceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PurchaseInvoiceGroupByOutputType[P]>
+            : GetScalarType<T[P], PurchaseInvoiceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PurchaseInvoiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceNumber?: boolean
+    date?: boolean
+    purchaseOrderId?: boolean
+    totalAmount?: boolean
+    status?: boolean
+    companyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+    items?: boolean | PurchaseInvoice$itemsArgs<ExtArgs>
+    _count?: boolean | PurchaseInvoiceCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["purchaseInvoice"]>
+
+  export type PurchaseInvoiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceNumber?: boolean
+    date?: boolean
+    purchaseOrderId?: boolean
+    totalAmount?: boolean
+    status?: boolean
+    companyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["purchaseInvoice"]>
+
+  export type PurchaseInvoiceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceNumber?: boolean
+    date?: boolean
+    purchaseOrderId?: boolean
+    totalAmount?: boolean
+    status?: boolean
+    companyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["purchaseInvoice"]>
+
+  export type PurchaseInvoiceSelectScalar = {
+    id?: boolean
+    invoiceNumber?: boolean
+    date?: boolean
+    purchaseOrderId?: boolean
+    totalAmount?: boolean
+    status?: boolean
+    companyId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PurchaseInvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceNumber" | "date" | "purchaseOrderId" | "totalAmount" | "status" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["purchaseInvoice"]>
+  export type PurchaseInvoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+    items?: boolean | PurchaseInvoice$itemsArgs<ExtArgs>
+    _count?: boolean | PurchaseInvoiceCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PurchaseInvoiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type PurchaseInvoiceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+
+  export type $PurchaseInvoicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PurchaseInvoice"
+    objects: {
+      purchaseOrder: Prisma.$PurchaseOrderPayload<ExtArgs>
+      company: Prisma.$CompanyPayload<ExtArgs>
+      items: Prisma.$PurchaseInvoiceItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      invoiceNumber: string
+      date: Date
+      purchaseOrderId: string
+      totalAmount: number
+      status: string
+      companyId: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["purchaseInvoice"]>
+    composites: {}
+  }
+
+  type PurchaseInvoiceGetPayload<S extends boolean | null | undefined | PurchaseInvoiceDefaultArgs> = $Result.GetResult<Prisma.$PurchaseInvoicePayload, S>
+
+  type PurchaseInvoiceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PurchaseInvoiceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PurchaseInvoiceCountAggregateInputType | true
+    }
+
+  export interface PurchaseInvoiceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PurchaseInvoice'], meta: { name: 'PurchaseInvoice' } }
+    /**
+     * Find zero or one PurchaseInvoice that matches the filter.
+     * @param {PurchaseInvoiceFindUniqueArgs} args - Arguments to find a PurchaseInvoice
+     * @example
+     * // Get one PurchaseInvoice
+     * const purchaseInvoice = await prisma.purchaseInvoice.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PurchaseInvoiceFindUniqueArgs>(args: SelectSubset<T, PurchaseInvoiceFindUniqueArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PurchaseInvoice that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PurchaseInvoiceFindUniqueOrThrowArgs} args - Arguments to find a PurchaseInvoice
+     * @example
+     * // Get one PurchaseInvoice
+     * const purchaseInvoice = await prisma.purchaseInvoice.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PurchaseInvoiceFindUniqueOrThrowArgs>(args: SelectSubset<T, PurchaseInvoiceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PurchaseInvoice that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceFindFirstArgs} args - Arguments to find a PurchaseInvoice
+     * @example
+     * // Get one PurchaseInvoice
+     * const purchaseInvoice = await prisma.purchaseInvoice.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PurchaseInvoiceFindFirstArgs>(args?: SelectSubset<T, PurchaseInvoiceFindFirstArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PurchaseInvoice that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceFindFirstOrThrowArgs} args - Arguments to find a PurchaseInvoice
+     * @example
+     * // Get one PurchaseInvoice
+     * const purchaseInvoice = await prisma.purchaseInvoice.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PurchaseInvoiceFindFirstOrThrowArgs>(args?: SelectSubset<T, PurchaseInvoiceFindFirstOrThrowArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PurchaseInvoices that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PurchaseInvoices
+     * const purchaseInvoices = await prisma.purchaseInvoice.findMany()
+     * 
+     * // Get first 10 PurchaseInvoices
+     * const purchaseInvoices = await prisma.purchaseInvoice.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const purchaseInvoiceWithIdOnly = await prisma.purchaseInvoice.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PurchaseInvoiceFindManyArgs>(args?: SelectSubset<T, PurchaseInvoiceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PurchaseInvoice.
+     * @param {PurchaseInvoiceCreateArgs} args - Arguments to create a PurchaseInvoice.
+     * @example
+     * // Create one PurchaseInvoice
+     * const PurchaseInvoice = await prisma.purchaseInvoice.create({
+     *   data: {
+     *     // ... data to create a PurchaseInvoice
+     *   }
+     * })
+     * 
+     */
+    create<T extends PurchaseInvoiceCreateArgs>(args: SelectSubset<T, PurchaseInvoiceCreateArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PurchaseInvoices.
+     * @param {PurchaseInvoiceCreateManyArgs} args - Arguments to create many PurchaseInvoices.
+     * @example
+     * // Create many PurchaseInvoices
+     * const purchaseInvoice = await prisma.purchaseInvoice.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PurchaseInvoiceCreateManyArgs>(args?: SelectSubset<T, PurchaseInvoiceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PurchaseInvoices and returns the data saved in the database.
+     * @param {PurchaseInvoiceCreateManyAndReturnArgs} args - Arguments to create many PurchaseInvoices.
+     * @example
+     * // Create many PurchaseInvoices
+     * const purchaseInvoice = await prisma.purchaseInvoice.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PurchaseInvoices and only return the `id`
+     * const purchaseInvoiceWithIdOnly = await prisma.purchaseInvoice.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PurchaseInvoiceCreateManyAndReturnArgs>(args?: SelectSubset<T, PurchaseInvoiceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PurchaseInvoice.
+     * @param {PurchaseInvoiceDeleteArgs} args - Arguments to delete one PurchaseInvoice.
+     * @example
+     * // Delete one PurchaseInvoice
+     * const PurchaseInvoice = await prisma.purchaseInvoice.delete({
+     *   where: {
+     *     // ... filter to delete one PurchaseInvoice
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PurchaseInvoiceDeleteArgs>(args: SelectSubset<T, PurchaseInvoiceDeleteArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PurchaseInvoice.
+     * @param {PurchaseInvoiceUpdateArgs} args - Arguments to update one PurchaseInvoice.
+     * @example
+     * // Update one PurchaseInvoice
+     * const purchaseInvoice = await prisma.purchaseInvoice.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PurchaseInvoiceUpdateArgs>(args: SelectSubset<T, PurchaseInvoiceUpdateArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PurchaseInvoices.
+     * @param {PurchaseInvoiceDeleteManyArgs} args - Arguments to filter PurchaseInvoices to delete.
+     * @example
+     * // Delete a few PurchaseInvoices
+     * const { count } = await prisma.purchaseInvoice.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PurchaseInvoiceDeleteManyArgs>(args?: SelectSubset<T, PurchaseInvoiceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PurchaseInvoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PurchaseInvoices
+     * const purchaseInvoice = await prisma.purchaseInvoice.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PurchaseInvoiceUpdateManyArgs>(args: SelectSubset<T, PurchaseInvoiceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PurchaseInvoices and returns the data updated in the database.
+     * @param {PurchaseInvoiceUpdateManyAndReturnArgs} args - Arguments to update many PurchaseInvoices.
+     * @example
+     * // Update many PurchaseInvoices
+     * const purchaseInvoice = await prisma.purchaseInvoice.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PurchaseInvoices and only return the `id`
+     * const purchaseInvoiceWithIdOnly = await prisma.purchaseInvoice.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PurchaseInvoiceUpdateManyAndReturnArgs>(args: SelectSubset<T, PurchaseInvoiceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PurchaseInvoice.
+     * @param {PurchaseInvoiceUpsertArgs} args - Arguments to update or create a PurchaseInvoice.
+     * @example
+     * // Update or create a PurchaseInvoice
+     * const purchaseInvoice = await prisma.purchaseInvoice.upsert({
+     *   create: {
+     *     // ... data to create a PurchaseInvoice
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PurchaseInvoice we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PurchaseInvoiceUpsertArgs>(args: SelectSubset<T, PurchaseInvoiceUpsertArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PurchaseInvoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceCountArgs} args - Arguments to filter PurchaseInvoices to count.
+     * @example
+     * // Count the number of PurchaseInvoices
+     * const count = await prisma.purchaseInvoice.count({
+     *   where: {
+     *     // ... the filter for the PurchaseInvoices we want to count
+     *   }
+     * })
+    **/
+    count<T extends PurchaseInvoiceCountArgs>(
+      args?: Subset<T, PurchaseInvoiceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PurchaseInvoiceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PurchaseInvoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PurchaseInvoiceAggregateArgs>(args: Subset<T, PurchaseInvoiceAggregateArgs>): Prisma.PrismaPromise<GetPurchaseInvoiceAggregateType<T>>
+
+    /**
+     * Group by PurchaseInvoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PurchaseInvoiceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PurchaseInvoiceGroupByArgs['orderBy'] }
+        : { orderBy?: PurchaseInvoiceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PurchaseInvoiceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPurchaseInvoiceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PurchaseInvoice model
+   */
+  readonly fields: PurchaseInvoiceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PurchaseInvoice.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PurchaseInvoiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    purchaseOrder<T extends PurchaseOrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderDefaultArgs<ExtArgs>>): Prisma__PurchaseOrderClient<$Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    items<T extends PurchaseInvoice$itemsArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseInvoice$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PurchaseInvoice model
+   */
+  interface PurchaseInvoiceFieldRefs {
+    readonly id: FieldRef<"PurchaseInvoice", 'String'>
+    readonly invoiceNumber: FieldRef<"PurchaseInvoice", 'String'>
+    readonly date: FieldRef<"PurchaseInvoice", 'DateTime'>
+    readonly purchaseOrderId: FieldRef<"PurchaseInvoice", 'String'>
+    readonly totalAmount: FieldRef<"PurchaseInvoice", 'Float'>
+    readonly status: FieldRef<"PurchaseInvoice", 'String'>
+    readonly companyId: FieldRef<"PurchaseInvoice", 'Int'>
+    readonly createdAt: FieldRef<"PurchaseInvoice", 'DateTime'>
+    readonly updatedAt: FieldRef<"PurchaseInvoice", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PurchaseInvoice findUnique
+   */
+  export type PurchaseInvoiceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoice to fetch.
+     */
+    where: PurchaseInvoiceWhereUniqueInput
+  }
+
+  /**
+   * PurchaseInvoice findUniqueOrThrow
+   */
+  export type PurchaseInvoiceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoice to fetch.
+     */
+    where: PurchaseInvoiceWhereUniqueInput
+  }
+
+  /**
+   * PurchaseInvoice findFirst
+   */
+  export type PurchaseInvoiceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoice to fetch.
+     */
+    where?: PurchaseInvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PurchaseInvoices to fetch.
+     */
+    orderBy?: PurchaseInvoiceOrderByWithRelationInput | PurchaseInvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PurchaseInvoices.
+     */
+    cursor?: PurchaseInvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PurchaseInvoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PurchaseInvoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PurchaseInvoices.
+     */
+    distinct?: PurchaseInvoiceScalarFieldEnum | PurchaseInvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseInvoice findFirstOrThrow
+   */
+  export type PurchaseInvoiceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoice to fetch.
+     */
+    where?: PurchaseInvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PurchaseInvoices to fetch.
+     */
+    orderBy?: PurchaseInvoiceOrderByWithRelationInput | PurchaseInvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PurchaseInvoices.
+     */
+    cursor?: PurchaseInvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PurchaseInvoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PurchaseInvoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PurchaseInvoices.
+     */
+    distinct?: PurchaseInvoiceScalarFieldEnum | PurchaseInvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseInvoice findMany
+   */
+  export type PurchaseInvoiceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoices to fetch.
+     */
+    where?: PurchaseInvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PurchaseInvoices to fetch.
+     */
+    orderBy?: PurchaseInvoiceOrderByWithRelationInput | PurchaseInvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PurchaseInvoices.
+     */
+    cursor?: PurchaseInvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PurchaseInvoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PurchaseInvoices.
+     */
+    skip?: number
+    distinct?: PurchaseInvoiceScalarFieldEnum | PurchaseInvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseInvoice create
+   */
+  export type PurchaseInvoiceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PurchaseInvoice.
+     */
+    data: XOR<PurchaseInvoiceCreateInput, PurchaseInvoiceUncheckedCreateInput>
+  }
+
+  /**
+   * PurchaseInvoice createMany
+   */
+  export type PurchaseInvoiceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PurchaseInvoices.
+     */
+    data: PurchaseInvoiceCreateManyInput | PurchaseInvoiceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PurchaseInvoice createManyAndReturn
+   */
+  export type PurchaseInvoiceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * The data used to create many PurchaseInvoices.
+     */
+    data: PurchaseInvoiceCreateManyInput | PurchaseInvoiceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PurchaseInvoice update
+   */
+  export type PurchaseInvoiceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PurchaseInvoice.
+     */
+    data: XOR<PurchaseInvoiceUpdateInput, PurchaseInvoiceUncheckedUpdateInput>
+    /**
+     * Choose, which PurchaseInvoice to update.
+     */
+    where: PurchaseInvoiceWhereUniqueInput
+  }
+
+  /**
+   * PurchaseInvoice updateMany
+   */
+  export type PurchaseInvoiceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PurchaseInvoices.
+     */
+    data: XOR<PurchaseInvoiceUpdateManyMutationInput, PurchaseInvoiceUncheckedUpdateManyInput>
+    /**
+     * Filter which PurchaseInvoices to update
+     */
+    where?: PurchaseInvoiceWhereInput
+    /**
+     * Limit how many PurchaseInvoices to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PurchaseInvoice updateManyAndReturn
+   */
+  export type PurchaseInvoiceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * The data used to update PurchaseInvoices.
+     */
+    data: XOR<PurchaseInvoiceUpdateManyMutationInput, PurchaseInvoiceUncheckedUpdateManyInput>
+    /**
+     * Filter which PurchaseInvoices to update
+     */
+    where?: PurchaseInvoiceWhereInput
+    /**
+     * Limit how many PurchaseInvoices to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PurchaseInvoice upsert
+   */
+  export type PurchaseInvoiceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PurchaseInvoice to update in case it exists.
+     */
+    where: PurchaseInvoiceWhereUniqueInput
+    /**
+     * In case the PurchaseInvoice found by the `where` argument doesn't exist, create a new PurchaseInvoice with this data.
+     */
+    create: XOR<PurchaseInvoiceCreateInput, PurchaseInvoiceUncheckedCreateInput>
+    /**
+     * In case the PurchaseInvoice was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PurchaseInvoiceUpdateInput, PurchaseInvoiceUncheckedUpdateInput>
+  }
+
+  /**
+   * PurchaseInvoice delete
+   */
+  export type PurchaseInvoiceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter which PurchaseInvoice to delete.
+     */
+    where: PurchaseInvoiceWhereUniqueInput
+  }
+
+  /**
+   * PurchaseInvoice deleteMany
+   */
+  export type PurchaseInvoiceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PurchaseInvoices to delete
+     */
+    where?: PurchaseInvoiceWhereInput
+    /**
+     * Limit how many PurchaseInvoices to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PurchaseInvoice.items
+   */
+  export type PurchaseInvoice$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    where?: PurchaseInvoiceItemWhereInput
+    orderBy?: PurchaseInvoiceItemOrderByWithRelationInput | PurchaseInvoiceItemOrderByWithRelationInput[]
+    cursor?: PurchaseInvoiceItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PurchaseInvoiceItemScalarFieldEnum | PurchaseInvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseInvoice without action
+   */
+  export type PurchaseInvoiceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoice
+     */
+    select?: PurchaseInvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoice
+     */
+    omit?: PurchaseInvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PurchaseInvoiceItem
+   */
+
+  export type AggregatePurchaseInvoiceItem = {
+    _count: PurchaseInvoiceItemCountAggregateOutputType | null
+    _avg: PurchaseInvoiceItemAvgAggregateOutputType | null
+    _sum: PurchaseInvoiceItemSumAggregateOutputType | null
+    _min: PurchaseInvoiceItemMinAggregateOutputType | null
+    _max: PurchaseInvoiceItemMaxAggregateOutputType | null
+  }
+
+  export type PurchaseInvoiceItemAvgAggregateOutputType = {
+    invoicedQty: number | null
+    rate: number | null
+    amount: number | null
+  }
+
+  export type PurchaseInvoiceItemSumAggregateOutputType = {
+    invoicedQty: number | null
+    rate: number | null
+    amount: number | null
+  }
+
+  export type PurchaseInvoiceItemMinAggregateOutputType = {
+    id: string | null
+    invoiceId: string | null
+    purchaseOrderItemId: string | null
+    grnItemId: string | null
+    invoicedQty: number | null
+    rate: number | null
+    amount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PurchaseInvoiceItemMaxAggregateOutputType = {
+    id: string | null
+    invoiceId: string | null
+    purchaseOrderItemId: string | null
+    grnItemId: string | null
+    invoicedQty: number | null
+    rate: number | null
+    amount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PurchaseInvoiceItemCountAggregateOutputType = {
+    id: number
+    invoiceId: number
+    purchaseOrderItemId: number
+    grnItemId: number
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PurchaseInvoiceItemAvgAggregateInputType = {
+    invoicedQty?: true
+    rate?: true
+    amount?: true
+  }
+
+  export type PurchaseInvoiceItemSumAggregateInputType = {
+    invoicedQty?: true
+    rate?: true
+    amount?: true
+  }
+
+  export type PurchaseInvoiceItemMinAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    purchaseOrderItemId?: true
+    grnItemId?: true
+    invoicedQty?: true
+    rate?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PurchaseInvoiceItemMaxAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    purchaseOrderItemId?: true
+    grnItemId?: true
+    invoicedQty?: true
+    rate?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PurchaseInvoiceItemCountAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    purchaseOrderItemId?: true
+    grnItemId?: true
+    invoicedQty?: true
+    rate?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PurchaseInvoiceItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PurchaseInvoiceItem to aggregate.
+     */
+    where?: PurchaseInvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PurchaseInvoiceItems to fetch.
+     */
+    orderBy?: PurchaseInvoiceItemOrderByWithRelationInput | PurchaseInvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PurchaseInvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PurchaseInvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PurchaseInvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PurchaseInvoiceItems
+    **/
+    _count?: true | PurchaseInvoiceItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PurchaseInvoiceItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PurchaseInvoiceItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PurchaseInvoiceItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PurchaseInvoiceItemMaxAggregateInputType
+  }
+
+  export type GetPurchaseInvoiceItemAggregateType<T extends PurchaseInvoiceItemAggregateArgs> = {
+        [P in keyof T & keyof AggregatePurchaseInvoiceItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePurchaseInvoiceItem[P]>
+      : GetScalarType<T[P], AggregatePurchaseInvoiceItem[P]>
+  }
+
+
+
+
+  export type PurchaseInvoiceItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PurchaseInvoiceItemWhereInput
+    orderBy?: PurchaseInvoiceItemOrderByWithAggregationInput | PurchaseInvoiceItemOrderByWithAggregationInput[]
+    by: PurchaseInvoiceItemScalarFieldEnum[] | PurchaseInvoiceItemScalarFieldEnum
+    having?: PurchaseInvoiceItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PurchaseInvoiceItemCountAggregateInputType | true
+    _avg?: PurchaseInvoiceItemAvgAggregateInputType
+    _sum?: PurchaseInvoiceItemSumAggregateInputType
+    _min?: PurchaseInvoiceItemMinAggregateInputType
+    _max?: PurchaseInvoiceItemMaxAggregateInputType
+  }
+
+  export type PurchaseInvoiceItemGroupByOutputType = {
+    id: string
+    invoiceId: string
+    purchaseOrderItemId: string
+    grnItemId: string | null
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt: Date
+    updatedAt: Date
+    _count: PurchaseInvoiceItemCountAggregateOutputType | null
+    _avg: PurchaseInvoiceItemAvgAggregateOutputType | null
+    _sum: PurchaseInvoiceItemSumAggregateOutputType | null
+    _min: PurchaseInvoiceItemMinAggregateOutputType | null
+    _max: PurchaseInvoiceItemMaxAggregateOutputType | null
+  }
+
+  type GetPurchaseInvoiceItemGroupByPayload<T extends PurchaseInvoiceItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PurchaseInvoiceItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PurchaseInvoiceItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PurchaseInvoiceItemGroupByOutputType[P]>
+            : GetScalarType<T[P], PurchaseInvoiceItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PurchaseInvoiceItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceId?: boolean
+    purchaseOrderItemId?: boolean
+    grnItemId?: boolean
+    invoicedQty?: boolean
+    rate?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    invoice?: boolean | PurchaseInvoiceDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    grnItem?: boolean | PurchaseInvoiceItem$grnItemArgs<ExtArgs>
+  }, ExtArgs["result"]["purchaseInvoiceItem"]>
+
+  export type PurchaseInvoiceItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceId?: boolean
+    purchaseOrderItemId?: boolean
+    grnItemId?: boolean
+    invoicedQty?: boolean
+    rate?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    invoice?: boolean | PurchaseInvoiceDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    grnItem?: boolean | PurchaseInvoiceItem$grnItemArgs<ExtArgs>
+  }, ExtArgs["result"]["purchaseInvoiceItem"]>
+
+  export type PurchaseInvoiceItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceId?: boolean
+    purchaseOrderItemId?: boolean
+    grnItemId?: boolean
+    invoicedQty?: boolean
+    rate?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    invoice?: boolean | PurchaseInvoiceDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    grnItem?: boolean | PurchaseInvoiceItem$grnItemArgs<ExtArgs>
+  }, ExtArgs["result"]["purchaseInvoiceItem"]>
+
+  export type PurchaseInvoiceItemSelectScalar = {
+    id?: boolean
+    invoiceId?: boolean
+    purchaseOrderItemId?: boolean
+    grnItemId?: boolean
+    invoicedQty?: boolean
+    rate?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PurchaseInvoiceItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceId" | "purchaseOrderItemId" | "grnItemId" | "invoicedQty" | "rate" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["purchaseInvoiceItem"]>
+  export type PurchaseInvoiceItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoice?: boolean | PurchaseInvoiceDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    grnItem?: boolean | PurchaseInvoiceItem$grnItemArgs<ExtArgs>
+  }
+  export type PurchaseInvoiceItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoice?: boolean | PurchaseInvoiceDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    grnItem?: boolean | PurchaseInvoiceItem$grnItemArgs<ExtArgs>
+  }
+  export type PurchaseInvoiceItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoice?: boolean | PurchaseInvoiceDefaultArgs<ExtArgs>
+    purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
+    grnItem?: boolean | PurchaseInvoiceItem$grnItemArgs<ExtArgs>
+  }
+
+  export type $PurchaseInvoiceItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PurchaseInvoiceItem"
+    objects: {
+      invoice: Prisma.$PurchaseInvoicePayload<ExtArgs>
+      purchaseOrderItem: Prisma.$PurchaseOrderItemPayload<ExtArgs>
+      grnItem: Prisma.$GRNItemPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      invoiceId: string
+      purchaseOrderItemId: string
+      grnItemId: string | null
+      invoicedQty: number
+      rate: number
+      amount: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["purchaseInvoiceItem"]>
+    composites: {}
+  }
+
+  type PurchaseInvoiceItemGetPayload<S extends boolean | null | undefined | PurchaseInvoiceItemDefaultArgs> = $Result.GetResult<Prisma.$PurchaseInvoiceItemPayload, S>
+
+  type PurchaseInvoiceItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PurchaseInvoiceItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PurchaseInvoiceItemCountAggregateInputType | true
+    }
+
+  export interface PurchaseInvoiceItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PurchaseInvoiceItem'], meta: { name: 'PurchaseInvoiceItem' } }
+    /**
+     * Find zero or one PurchaseInvoiceItem that matches the filter.
+     * @param {PurchaseInvoiceItemFindUniqueArgs} args - Arguments to find a PurchaseInvoiceItem
+     * @example
+     * // Get one PurchaseInvoiceItem
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PurchaseInvoiceItemFindUniqueArgs>(args: SelectSubset<T, PurchaseInvoiceItemFindUniqueArgs<ExtArgs>>): Prisma__PurchaseInvoiceItemClient<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PurchaseInvoiceItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PurchaseInvoiceItemFindUniqueOrThrowArgs} args - Arguments to find a PurchaseInvoiceItem
+     * @example
+     * // Get one PurchaseInvoiceItem
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PurchaseInvoiceItemFindUniqueOrThrowArgs>(args: SelectSubset<T, PurchaseInvoiceItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PurchaseInvoiceItemClient<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PurchaseInvoiceItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceItemFindFirstArgs} args - Arguments to find a PurchaseInvoiceItem
+     * @example
+     * // Get one PurchaseInvoiceItem
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PurchaseInvoiceItemFindFirstArgs>(args?: SelectSubset<T, PurchaseInvoiceItemFindFirstArgs<ExtArgs>>): Prisma__PurchaseInvoiceItemClient<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PurchaseInvoiceItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceItemFindFirstOrThrowArgs} args - Arguments to find a PurchaseInvoiceItem
+     * @example
+     * // Get one PurchaseInvoiceItem
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PurchaseInvoiceItemFindFirstOrThrowArgs>(args?: SelectSubset<T, PurchaseInvoiceItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__PurchaseInvoiceItemClient<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PurchaseInvoiceItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PurchaseInvoiceItems
+     * const purchaseInvoiceItems = await prisma.purchaseInvoiceItem.findMany()
+     * 
+     * // Get first 10 PurchaseInvoiceItems
+     * const purchaseInvoiceItems = await prisma.purchaseInvoiceItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const purchaseInvoiceItemWithIdOnly = await prisma.purchaseInvoiceItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PurchaseInvoiceItemFindManyArgs>(args?: SelectSubset<T, PurchaseInvoiceItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PurchaseInvoiceItem.
+     * @param {PurchaseInvoiceItemCreateArgs} args - Arguments to create a PurchaseInvoiceItem.
+     * @example
+     * // Create one PurchaseInvoiceItem
+     * const PurchaseInvoiceItem = await prisma.purchaseInvoiceItem.create({
+     *   data: {
+     *     // ... data to create a PurchaseInvoiceItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends PurchaseInvoiceItemCreateArgs>(args: SelectSubset<T, PurchaseInvoiceItemCreateArgs<ExtArgs>>): Prisma__PurchaseInvoiceItemClient<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PurchaseInvoiceItems.
+     * @param {PurchaseInvoiceItemCreateManyArgs} args - Arguments to create many PurchaseInvoiceItems.
+     * @example
+     * // Create many PurchaseInvoiceItems
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PurchaseInvoiceItemCreateManyArgs>(args?: SelectSubset<T, PurchaseInvoiceItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PurchaseInvoiceItems and returns the data saved in the database.
+     * @param {PurchaseInvoiceItemCreateManyAndReturnArgs} args - Arguments to create many PurchaseInvoiceItems.
+     * @example
+     * // Create many PurchaseInvoiceItems
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PurchaseInvoiceItems and only return the `id`
+     * const purchaseInvoiceItemWithIdOnly = await prisma.purchaseInvoiceItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PurchaseInvoiceItemCreateManyAndReturnArgs>(args?: SelectSubset<T, PurchaseInvoiceItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PurchaseInvoiceItem.
+     * @param {PurchaseInvoiceItemDeleteArgs} args - Arguments to delete one PurchaseInvoiceItem.
+     * @example
+     * // Delete one PurchaseInvoiceItem
+     * const PurchaseInvoiceItem = await prisma.purchaseInvoiceItem.delete({
+     *   where: {
+     *     // ... filter to delete one PurchaseInvoiceItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PurchaseInvoiceItemDeleteArgs>(args: SelectSubset<T, PurchaseInvoiceItemDeleteArgs<ExtArgs>>): Prisma__PurchaseInvoiceItemClient<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PurchaseInvoiceItem.
+     * @param {PurchaseInvoiceItemUpdateArgs} args - Arguments to update one PurchaseInvoiceItem.
+     * @example
+     * // Update one PurchaseInvoiceItem
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PurchaseInvoiceItemUpdateArgs>(args: SelectSubset<T, PurchaseInvoiceItemUpdateArgs<ExtArgs>>): Prisma__PurchaseInvoiceItemClient<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PurchaseInvoiceItems.
+     * @param {PurchaseInvoiceItemDeleteManyArgs} args - Arguments to filter PurchaseInvoiceItems to delete.
+     * @example
+     * // Delete a few PurchaseInvoiceItems
+     * const { count } = await prisma.purchaseInvoiceItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PurchaseInvoiceItemDeleteManyArgs>(args?: SelectSubset<T, PurchaseInvoiceItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PurchaseInvoiceItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PurchaseInvoiceItems
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PurchaseInvoiceItemUpdateManyArgs>(args: SelectSubset<T, PurchaseInvoiceItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PurchaseInvoiceItems and returns the data updated in the database.
+     * @param {PurchaseInvoiceItemUpdateManyAndReturnArgs} args - Arguments to update many PurchaseInvoiceItems.
+     * @example
+     * // Update many PurchaseInvoiceItems
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PurchaseInvoiceItems and only return the `id`
+     * const purchaseInvoiceItemWithIdOnly = await prisma.purchaseInvoiceItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PurchaseInvoiceItemUpdateManyAndReturnArgs>(args: SelectSubset<T, PurchaseInvoiceItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PurchaseInvoiceItem.
+     * @param {PurchaseInvoiceItemUpsertArgs} args - Arguments to update or create a PurchaseInvoiceItem.
+     * @example
+     * // Update or create a PurchaseInvoiceItem
+     * const purchaseInvoiceItem = await prisma.purchaseInvoiceItem.upsert({
+     *   create: {
+     *     // ... data to create a PurchaseInvoiceItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PurchaseInvoiceItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PurchaseInvoiceItemUpsertArgs>(args: SelectSubset<T, PurchaseInvoiceItemUpsertArgs<ExtArgs>>): Prisma__PurchaseInvoiceItemClient<$Result.GetResult<Prisma.$PurchaseInvoiceItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PurchaseInvoiceItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceItemCountArgs} args - Arguments to filter PurchaseInvoiceItems to count.
+     * @example
+     * // Count the number of PurchaseInvoiceItems
+     * const count = await prisma.purchaseInvoiceItem.count({
+     *   where: {
+     *     // ... the filter for the PurchaseInvoiceItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends PurchaseInvoiceItemCountArgs>(
+      args?: Subset<T, PurchaseInvoiceItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PurchaseInvoiceItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PurchaseInvoiceItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PurchaseInvoiceItemAggregateArgs>(args: Subset<T, PurchaseInvoiceItemAggregateArgs>): Prisma.PrismaPromise<GetPurchaseInvoiceItemAggregateType<T>>
+
+    /**
+     * Group by PurchaseInvoiceItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PurchaseInvoiceItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PurchaseInvoiceItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PurchaseInvoiceItemGroupByArgs['orderBy'] }
+        : { orderBy?: PurchaseInvoiceItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PurchaseInvoiceItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPurchaseInvoiceItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PurchaseInvoiceItem model
+   */
+  readonly fields: PurchaseInvoiceItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PurchaseInvoiceItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PurchaseInvoiceItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    invoice<T extends PurchaseInvoiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseInvoiceDefaultArgs<ExtArgs>>): Prisma__PurchaseInvoiceClient<$Result.GetResult<Prisma.$PurchaseInvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    purchaseOrderItem<T extends PurchaseOrderItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseOrderItemDefaultArgs<ExtArgs>>): Prisma__PurchaseOrderItemClient<$Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    grnItem<T extends PurchaseInvoiceItem$grnItemArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseInvoiceItem$grnItemArgs<ExtArgs>>): Prisma__GRNItemClient<$Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PurchaseInvoiceItem model
+   */
+  interface PurchaseInvoiceItemFieldRefs {
+    readonly id: FieldRef<"PurchaseInvoiceItem", 'String'>
+    readonly invoiceId: FieldRef<"PurchaseInvoiceItem", 'String'>
+    readonly purchaseOrderItemId: FieldRef<"PurchaseInvoiceItem", 'String'>
+    readonly grnItemId: FieldRef<"PurchaseInvoiceItem", 'String'>
+    readonly invoicedQty: FieldRef<"PurchaseInvoiceItem", 'Float'>
+    readonly rate: FieldRef<"PurchaseInvoiceItem", 'Float'>
+    readonly amount: FieldRef<"PurchaseInvoiceItem", 'Float'>
+    readonly createdAt: FieldRef<"PurchaseInvoiceItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"PurchaseInvoiceItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PurchaseInvoiceItem findUnique
+   */
+  export type PurchaseInvoiceItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoiceItem to fetch.
+     */
+    where: PurchaseInvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * PurchaseInvoiceItem findUniqueOrThrow
+   */
+  export type PurchaseInvoiceItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoiceItem to fetch.
+     */
+    where: PurchaseInvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * PurchaseInvoiceItem findFirst
+   */
+  export type PurchaseInvoiceItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoiceItem to fetch.
+     */
+    where?: PurchaseInvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PurchaseInvoiceItems to fetch.
+     */
+    orderBy?: PurchaseInvoiceItemOrderByWithRelationInput | PurchaseInvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PurchaseInvoiceItems.
+     */
+    cursor?: PurchaseInvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PurchaseInvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PurchaseInvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PurchaseInvoiceItems.
+     */
+    distinct?: PurchaseInvoiceItemScalarFieldEnum | PurchaseInvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseInvoiceItem findFirstOrThrow
+   */
+  export type PurchaseInvoiceItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoiceItem to fetch.
+     */
+    where?: PurchaseInvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PurchaseInvoiceItems to fetch.
+     */
+    orderBy?: PurchaseInvoiceItemOrderByWithRelationInput | PurchaseInvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PurchaseInvoiceItems.
+     */
+    cursor?: PurchaseInvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PurchaseInvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PurchaseInvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PurchaseInvoiceItems.
+     */
+    distinct?: PurchaseInvoiceItemScalarFieldEnum | PurchaseInvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseInvoiceItem findMany
+   */
+  export type PurchaseInvoiceItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which PurchaseInvoiceItems to fetch.
+     */
+    where?: PurchaseInvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PurchaseInvoiceItems to fetch.
+     */
+    orderBy?: PurchaseInvoiceItemOrderByWithRelationInput | PurchaseInvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PurchaseInvoiceItems.
+     */
+    cursor?: PurchaseInvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PurchaseInvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PurchaseInvoiceItems.
+     */
+    skip?: number
+    distinct?: PurchaseInvoiceItemScalarFieldEnum | PurchaseInvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * PurchaseInvoiceItem create
+   */
+  export type PurchaseInvoiceItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PurchaseInvoiceItem.
+     */
+    data: XOR<PurchaseInvoiceItemCreateInput, PurchaseInvoiceItemUncheckedCreateInput>
+  }
+
+  /**
+   * PurchaseInvoiceItem createMany
+   */
+  export type PurchaseInvoiceItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PurchaseInvoiceItems.
+     */
+    data: PurchaseInvoiceItemCreateManyInput | PurchaseInvoiceItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PurchaseInvoiceItem createManyAndReturn
+   */
+  export type PurchaseInvoiceItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many PurchaseInvoiceItems.
+     */
+    data: PurchaseInvoiceItemCreateManyInput | PurchaseInvoiceItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PurchaseInvoiceItem update
+   */
+  export type PurchaseInvoiceItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PurchaseInvoiceItem.
+     */
+    data: XOR<PurchaseInvoiceItemUpdateInput, PurchaseInvoiceItemUncheckedUpdateInput>
+    /**
+     * Choose, which PurchaseInvoiceItem to update.
+     */
+    where: PurchaseInvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * PurchaseInvoiceItem updateMany
+   */
+  export type PurchaseInvoiceItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PurchaseInvoiceItems.
+     */
+    data: XOR<PurchaseInvoiceItemUpdateManyMutationInput, PurchaseInvoiceItemUncheckedUpdateManyInput>
+    /**
+     * Filter which PurchaseInvoiceItems to update
+     */
+    where?: PurchaseInvoiceItemWhereInput
+    /**
+     * Limit how many PurchaseInvoiceItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PurchaseInvoiceItem updateManyAndReturn
+   */
+  export type PurchaseInvoiceItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * The data used to update PurchaseInvoiceItems.
+     */
+    data: XOR<PurchaseInvoiceItemUpdateManyMutationInput, PurchaseInvoiceItemUncheckedUpdateManyInput>
+    /**
+     * Filter which PurchaseInvoiceItems to update
+     */
+    where?: PurchaseInvoiceItemWhereInput
+    /**
+     * Limit how many PurchaseInvoiceItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PurchaseInvoiceItem upsert
+   */
+  export type PurchaseInvoiceItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PurchaseInvoiceItem to update in case it exists.
+     */
+    where: PurchaseInvoiceItemWhereUniqueInput
+    /**
+     * In case the PurchaseInvoiceItem found by the `where` argument doesn't exist, create a new PurchaseInvoiceItem with this data.
+     */
+    create: XOR<PurchaseInvoiceItemCreateInput, PurchaseInvoiceItemUncheckedCreateInput>
+    /**
+     * In case the PurchaseInvoiceItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PurchaseInvoiceItemUpdateInput, PurchaseInvoiceItemUncheckedUpdateInput>
+  }
+
+  /**
+   * PurchaseInvoiceItem delete
+   */
+  export type PurchaseInvoiceItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter which PurchaseInvoiceItem to delete.
+     */
+    where: PurchaseInvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * PurchaseInvoiceItem deleteMany
+   */
+  export type PurchaseInvoiceItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PurchaseInvoiceItems to delete
+     */
+    where?: PurchaseInvoiceItemWhereInput
+    /**
+     * Limit how many PurchaseInvoiceItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PurchaseInvoiceItem.grnItem
+   */
+  export type PurchaseInvoiceItem$grnItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GRNItem
+     */
+    select?: GRNItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GRNItem
+     */
+    omit?: GRNItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GRNItemInclude<ExtArgs> | null
+    where?: GRNItemWhereInput
+  }
+
+  /**
+   * PurchaseInvoiceItem without action
+   */
+  export type PurchaseInvoiceItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PurchaseInvoiceItem
+     */
+    select?: PurchaseInvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PurchaseInvoiceItem
+     */
+    omit?: PurchaseInvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PurchaseInvoiceItemInclude<ExtArgs> | null
   }
 
 
@@ -48547,6 +54322,68 @@ export namespace Prisma {
   };
 
   export type PurchaseOrderItemScalarFieldEnum = (typeof PurchaseOrderItemScalarFieldEnum)[keyof typeof PurchaseOrderItemScalarFieldEnum]
+
+
+  export const GRNScalarFieldEnum: {
+    id: 'id',
+    grnNumber: 'grnNumber',
+    date: 'date',
+    purchaseOrderId: 'purchaseOrderId',
+    remarks: 'remarks',
+    companyId: 'companyId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GRNScalarFieldEnum = (typeof GRNScalarFieldEnum)[keyof typeof GRNScalarFieldEnum]
+
+
+  export const GRNItemScalarFieldEnum: {
+    id: 'id',
+    grnId: 'grnId',
+    purchaseOrderItemId: 'purchaseOrderItemId',
+    itemMasterId: 'itemMasterId',
+    colorId: 'colorId',
+    brandId: 'brandId',
+    itemGradeId: 'itemGradeId',
+    receivedQty: 'receivedQty',
+    pcs: 'pcs',
+    unitId: 'unitId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GRNItemScalarFieldEnum = (typeof GRNItemScalarFieldEnum)[keyof typeof GRNItemScalarFieldEnum]
+
+
+  export const PurchaseInvoiceScalarFieldEnum: {
+    id: 'id',
+    invoiceNumber: 'invoiceNumber',
+    date: 'date',
+    purchaseOrderId: 'purchaseOrderId',
+    totalAmount: 'totalAmount',
+    status: 'status',
+    companyId: 'companyId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PurchaseInvoiceScalarFieldEnum = (typeof PurchaseInvoiceScalarFieldEnum)[keyof typeof PurchaseInvoiceScalarFieldEnum]
+
+
+  export const PurchaseInvoiceItemScalarFieldEnum: {
+    id: 'id',
+    invoiceId: 'invoiceId',
+    purchaseOrderItemId: 'purchaseOrderItemId',
+    grnItemId: 'grnItemId',
+    invoicedQty: 'invoicedQty',
+    rate: 'rate',
+    amount: 'amount',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PurchaseInvoiceItemScalarFieldEnum = (typeof PurchaseInvoiceItemScalarFieldEnum)[keyof typeof PurchaseInvoiceItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -49556,6 +55393,7 @@ export namespace Prisma {
     products?: ProductListRelationFilter
     itemMasters?: ItemMasterListRelationFilter
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }
 
   export type UnitOrderByWithRelationInput = {
@@ -49575,6 +55413,7 @@ export namespace Prisma {
     products?: ProductOrderByRelationAggregateInput
     itemMasters?: ItemMasterOrderByRelationAggregateInput
     purchaseOrderItems?: PurchaseOrderItemOrderByRelationAggregateInput
+    grnItems?: GRNItemOrderByRelationAggregateInput
   }
 
   export type UnitWhereUniqueInput = Prisma.AtLeast<{
@@ -49597,6 +55436,7 @@ export namespace Prisma {
     products?: ProductListRelationFilter
     itemMasters?: ItemMasterListRelationFilter
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }, "id" | "code">
 
   export type UnitOrderByWithAggregationInput = {
@@ -49730,6 +55570,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionListRelationFilter
     itemMasters?: ItemMasterListRelationFilter
     purchaseOrders?: PurchaseOrderListRelationFilter
+    grns?: GRNListRelationFilter
+    purchaseInvoices?: PurchaseInvoiceListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -49752,6 +55594,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionOrderByRelationAggregateInput
     itemMasters?: ItemMasterOrderByRelationAggregateInput
     purchaseOrders?: PurchaseOrderOrderByRelationAggregateInput
+    grns?: GRNOrderByRelationAggregateInput
+    purchaseInvoices?: PurchaseInvoiceOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -49777,6 +55621,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionListRelationFilter
     itemMasters?: ItemMasterListRelationFilter
     purchaseOrders?: PurchaseOrderListRelationFilter
+    grns?: GRNListRelationFilter
+    purchaseInvoices?: PurchaseInvoiceListRelationFilter
   }, "id">
 
   export type CompanyOrderByWithAggregationInput = {
@@ -50974,6 +56820,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Color"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }
 
   export type ColorOrderByWithRelationInput = {
@@ -50987,6 +56834,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     company?: CompanyOrderByWithRelationInput
     purchaseOrderItems?: PurchaseOrderItemOrderByRelationAggregateInput
+    grnItems?: GRNItemOrderByRelationAggregateInput
   }
 
   export type ColorWhereUniqueInput = Prisma.AtLeast<{
@@ -51003,6 +56851,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Color"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }, "id" | "code">
 
   export type ColorOrderByWithAggregationInput = {
@@ -51048,6 +56897,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }
 
   export type BrandOrderByWithRelationInput = {
@@ -51060,6 +56910,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     company?: CompanyOrderByWithRelationInput
     purchaseOrderItems?: PurchaseOrderItemOrderByRelationAggregateInput
+    grnItems?: GRNItemOrderByRelationAggregateInput
   }
 
   export type BrandWhereUniqueInput = Prisma.AtLeast<{
@@ -51075,6 +56926,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }, "id" | "code">
 
   export type BrandOrderByWithAggregationInput = {
@@ -51118,6 +56970,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ItemGrade"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }
 
   export type ItemGradeOrderByWithRelationInput = {
@@ -51130,6 +56983,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     company?: CompanyOrderByWithRelationInput
     purchaseOrderItems?: PurchaseOrderItemOrderByRelationAggregateInput
+    grnItems?: GRNItemOrderByRelationAggregateInput
   }
 
   export type ItemGradeWhereUniqueInput = Prisma.AtLeast<{
@@ -51145,6 +56999,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ItemGrade"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }, "id" | "code">
 
   export type ItemGradeOrderByWithAggregationInput = {
@@ -51195,6 +57050,7 @@ export namespace Prisma {
     baseUnit?: XOR<UnitScalarRelationFilter, UnitWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }
 
   export type ItemMasterOrderByWithRelationInput = {
@@ -51214,6 +57070,7 @@ export namespace Prisma {
     baseUnit?: UnitOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
     purchaseOrderItems?: PurchaseOrderItemOrderByRelationAggregateInput
+    grnItems?: GRNItemOrderByRelationAggregateInput
   }
 
   export type ItemMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -51236,6 +57093,7 @@ export namespace Prisma {
     baseUnit?: XOR<UnitScalarRelationFilter, UnitWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     purchaseOrderItems?: PurchaseOrderItemListRelationFilter
+    grnItems?: GRNItemListRelationFilter
   }, "id" | "code">
 
   export type ItemMasterOrderByWithAggregationInput = {
@@ -51303,6 +57161,8 @@ export namespace Prisma {
     currency?: XOR<CurrencyNullableScalarRelationFilter, CurrencyWhereInput> | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     items?: PurchaseOrderItemListRelationFilter
+    grns?: GRNListRelationFilter
+    invoices?: PurchaseInvoiceListRelationFilter
   }
 
   export type PurchaseOrderOrderByWithRelationInput = {
@@ -51329,6 +57189,8 @@ export namespace Prisma {
     currency?: CurrencyOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
     items?: PurchaseOrderItemOrderByRelationAggregateInput
+    grns?: GRNOrderByRelationAggregateInput
+    invoices?: PurchaseInvoiceOrderByRelationAggregateInput
   }
 
   export type PurchaseOrderWhereUniqueInput = Prisma.AtLeast<{
@@ -51358,6 +57220,8 @@ export namespace Prisma {
     currency?: XOR<CurrencyNullableScalarRelationFilter, CurrencyWhereInput> | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     items?: PurchaseOrderItemListRelationFilter
+    grns?: GRNListRelationFilter
+    invoices?: PurchaseInvoiceListRelationFilter
   }, "id" | "poNumber">
 
   export type PurchaseOrderOrderByWithAggregationInput = {
@@ -51436,6 +57300,8 @@ export namespace Prisma {
     brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
     itemGrade?: XOR<ItemGradeNullableScalarRelationFilter, ItemGradeWhereInput> | null
     unit?: XOR<UnitNullableScalarRelationFilter, UnitWhereInput> | null
+    grnItems?: GRNItemListRelationFilter
+    invoiceItems?: PurchaseInvoiceItemListRelationFilter
   }
 
   export type PurchaseOrderItemOrderByWithRelationInput = {
@@ -51461,6 +57327,8 @@ export namespace Prisma {
     brand?: BrandOrderByWithRelationInput
     itemGrade?: ItemGradeOrderByWithRelationInput
     unit?: UnitOrderByWithRelationInput
+    grnItems?: GRNItemOrderByRelationAggregateInput
+    invoiceItems?: PurchaseInvoiceItemOrderByRelationAggregateInput
   }
 
   export type PurchaseOrderItemWhereUniqueInput = Prisma.AtLeast<{
@@ -51489,6 +57357,8 @@ export namespace Prisma {
     brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
     itemGrade?: XOR<ItemGradeNullableScalarRelationFilter, ItemGradeWhereInput> | null
     unit?: XOR<UnitNullableScalarRelationFilter, UnitWhereInput> | null
+    grnItems?: GRNItemListRelationFilter
+    invoiceItems?: PurchaseInvoiceItemListRelationFilter
   }, "id">
 
   export type PurchaseOrderItemOrderByWithAggregationInput = {
@@ -51535,6 +57405,363 @@ export namespace Prisma {
     remarks?: StringNullableWithAggregatesFilter<"PurchaseOrderItem"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"PurchaseOrderItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PurchaseOrderItem"> | Date | string
+  }
+
+  export type GRNWhereInput = {
+    AND?: GRNWhereInput | GRNWhereInput[]
+    OR?: GRNWhereInput[]
+    NOT?: GRNWhereInput | GRNWhereInput[]
+    id?: StringFilter<"GRN"> | string
+    grnNumber?: StringFilter<"GRN"> | string
+    date?: DateTimeFilter<"GRN"> | Date | string
+    purchaseOrderId?: StringFilter<"GRN"> | string
+    remarks?: StringNullableFilter<"GRN"> | string | null
+    companyId?: IntFilter<"GRN"> | number
+    createdAt?: DateTimeFilter<"GRN"> | Date | string
+    updatedAt?: DateTimeFilter<"GRN"> | Date | string
+    purchaseOrder?: XOR<PurchaseOrderScalarRelationFilter, PurchaseOrderWhereInput>
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+    items?: GRNItemListRelationFilter
+  }
+
+  export type GRNOrderByWithRelationInput = {
+    id?: SortOrder
+    grnNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    purchaseOrder?: PurchaseOrderOrderByWithRelationInput
+    company?: CompanyOrderByWithRelationInput
+    items?: GRNItemOrderByRelationAggregateInput
+  }
+
+  export type GRNWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    grnNumber?: string
+    AND?: GRNWhereInput | GRNWhereInput[]
+    OR?: GRNWhereInput[]
+    NOT?: GRNWhereInput | GRNWhereInput[]
+    date?: DateTimeFilter<"GRN"> | Date | string
+    purchaseOrderId?: StringFilter<"GRN"> | string
+    remarks?: StringNullableFilter<"GRN"> | string | null
+    companyId?: IntFilter<"GRN"> | number
+    createdAt?: DateTimeFilter<"GRN"> | Date | string
+    updatedAt?: DateTimeFilter<"GRN"> | Date | string
+    purchaseOrder?: XOR<PurchaseOrderScalarRelationFilter, PurchaseOrderWhereInput>
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+    items?: GRNItemListRelationFilter
+  }, "id" | "grnNumber">
+
+  export type GRNOrderByWithAggregationInput = {
+    id?: SortOrder
+    grnNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GRNCountOrderByAggregateInput
+    _avg?: GRNAvgOrderByAggregateInput
+    _max?: GRNMaxOrderByAggregateInput
+    _min?: GRNMinOrderByAggregateInput
+    _sum?: GRNSumOrderByAggregateInput
+  }
+
+  export type GRNScalarWhereWithAggregatesInput = {
+    AND?: GRNScalarWhereWithAggregatesInput | GRNScalarWhereWithAggregatesInput[]
+    OR?: GRNScalarWhereWithAggregatesInput[]
+    NOT?: GRNScalarWhereWithAggregatesInput | GRNScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GRN"> | string
+    grnNumber?: StringWithAggregatesFilter<"GRN"> | string
+    date?: DateTimeWithAggregatesFilter<"GRN"> | Date | string
+    purchaseOrderId?: StringWithAggregatesFilter<"GRN"> | string
+    remarks?: StringNullableWithAggregatesFilter<"GRN"> | string | null
+    companyId?: IntWithAggregatesFilter<"GRN"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"GRN"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GRN"> | Date | string
+  }
+
+  export type GRNItemWhereInput = {
+    AND?: GRNItemWhereInput | GRNItemWhereInput[]
+    OR?: GRNItemWhereInput[]
+    NOT?: GRNItemWhereInput | GRNItemWhereInput[]
+    id?: StringFilter<"GRNItem"> | string
+    grnId?: StringFilter<"GRNItem"> | string
+    purchaseOrderItemId?: StringFilter<"GRNItem"> | string
+    itemMasterId?: StringFilter<"GRNItem"> | string
+    colorId?: StringNullableFilter<"GRNItem"> | string | null
+    brandId?: StringNullableFilter<"GRNItem"> | string | null
+    itemGradeId?: StringNullableFilter<"GRNItem"> | string | null
+    receivedQty?: FloatFilter<"GRNItem"> | number
+    pcs?: FloatNullableFilter<"GRNItem"> | number | null
+    unitId?: IntNullableFilter<"GRNItem"> | number | null
+    createdAt?: DateTimeFilter<"GRNItem"> | Date | string
+    updatedAt?: DateTimeFilter<"GRNItem"> | Date | string
+    grn?: XOR<GRNScalarRelationFilter, GRNWhereInput>
+    purchaseOrderItem?: XOR<PurchaseOrderItemScalarRelationFilter, PurchaseOrderItemWhereInput>
+    itemMaster?: XOR<ItemMasterScalarRelationFilter, ItemMasterWhereInput>
+    color?: XOR<ColorNullableScalarRelationFilter, ColorWhereInput> | null
+    brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
+    itemGrade?: XOR<ItemGradeNullableScalarRelationFilter, ItemGradeWhereInput> | null
+    unit?: XOR<UnitNullableScalarRelationFilter, UnitWhereInput> | null
+    invoiceItems?: PurchaseInvoiceItemListRelationFilter
+  }
+
+  export type GRNItemOrderByWithRelationInput = {
+    id?: SortOrder
+    grnId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    itemMasterId?: SortOrder
+    colorId?: SortOrderInput | SortOrder
+    brandId?: SortOrderInput | SortOrder
+    itemGradeId?: SortOrderInput | SortOrder
+    receivedQty?: SortOrder
+    pcs?: SortOrderInput | SortOrder
+    unitId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    grn?: GRNOrderByWithRelationInput
+    purchaseOrderItem?: PurchaseOrderItemOrderByWithRelationInput
+    itemMaster?: ItemMasterOrderByWithRelationInput
+    color?: ColorOrderByWithRelationInput
+    brand?: BrandOrderByWithRelationInput
+    itemGrade?: ItemGradeOrderByWithRelationInput
+    unit?: UnitOrderByWithRelationInput
+    invoiceItems?: PurchaseInvoiceItemOrderByRelationAggregateInput
+  }
+
+  export type GRNItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GRNItemWhereInput | GRNItemWhereInput[]
+    OR?: GRNItemWhereInput[]
+    NOT?: GRNItemWhereInput | GRNItemWhereInput[]
+    grnId?: StringFilter<"GRNItem"> | string
+    purchaseOrderItemId?: StringFilter<"GRNItem"> | string
+    itemMasterId?: StringFilter<"GRNItem"> | string
+    colorId?: StringNullableFilter<"GRNItem"> | string | null
+    brandId?: StringNullableFilter<"GRNItem"> | string | null
+    itemGradeId?: StringNullableFilter<"GRNItem"> | string | null
+    receivedQty?: FloatFilter<"GRNItem"> | number
+    pcs?: FloatNullableFilter<"GRNItem"> | number | null
+    unitId?: IntNullableFilter<"GRNItem"> | number | null
+    createdAt?: DateTimeFilter<"GRNItem"> | Date | string
+    updatedAt?: DateTimeFilter<"GRNItem"> | Date | string
+    grn?: XOR<GRNScalarRelationFilter, GRNWhereInput>
+    purchaseOrderItem?: XOR<PurchaseOrderItemScalarRelationFilter, PurchaseOrderItemWhereInput>
+    itemMaster?: XOR<ItemMasterScalarRelationFilter, ItemMasterWhereInput>
+    color?: XOR<ColorNullableScalarRelationFilter, ColorWhereInput> | null
+    brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
+    itemGrade?: XOR<ItemGradeNullableScalarRelationFilter, ItemGradeWhereInput> | null
+    unit?: XOR<UnitNullableScalarRelationFilter, UnitWhereInput> | null
+    invoiceItems?: PurchaseInvoiceItemListRelationFilter
+  }, "id">
+
+  export type GRNItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    grnId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    itemMasterId?: SortOrder
+    colorId?: SortOrderInput | SortOrder
+    brandId?: SortOrderInput | SortOrder
+    itemGradeId?: SortOrderInput | SortOrder
+    receivedQty?: SortOrder
+    pcs?: SortOrderInput | SortOrder
+    unitId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GRNItemCountOrderByAggregateInput
+    _avg?: GRNItemAvgOrderByAggregateInput
+    _max?: GRNItemMaxOrderByAggregateInput
+    _min?: GRNItemMinOrderByAggregateInput
+    _sum?: GRNItemSumOrderByAggregateInput
+  }
+
+  export type GRNItemScalarWhereWithAggregatesInput = {
+    AND?: GRNItemScalarWhereWithAggregatesInput | GRNItemScalarWhereWithAggregatesInput[]
+    OR?: GRNItemScalarWhereWithAggregatesInput[]
+    NOT?: GRNItemScalarWhereWithAggregatesInput | GRNItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GRNItem"> | string
+    grnId?: StringWithAggregatesFilter<"GRNItem"> | string
+    purchaseOrderItemId?: StringWithAggregatesFilter<"GRNItem"> | string
+    itemMasterId?: StringWithAggregatesFilter<"GRNItem"> | string
+    colorId?: StringNullableWithAggregatesFilter<"GRNItem"> | string | null
+    brandId?: StringNullableWithAggregatesFilter<"GRNItem"> | string | null
+    itemGradeId?: StringNullableWithAggregatesFilter<"GRNItem"> | string | null
+    receivedQty?: FloatWithAggregatesFilter<"GRNItem"> | number
+    pcs?: FloatNullableWithAggregatesFilter<"GRNItem"> | number | null
+    unitId?: IntNullableWithAggregatesFilter<"GRNItem"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"GRNItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GRNItem"> | Date | string
+  }
+
+  export type PurchaseInvoiceWhereInput = {
+    AND?: PurchaseInvoiceWhereInput | PurchaseInvoiceWhereInput[]
+    OR?: PurchaseInvoiceWhereInput[]
+    NOT?: PurchaseInvoiceWhereInput | PurchaseInvoiceWhereInput[]
+    id?: StringFilter<"PurchaseInvoice"> | string
+    invoiceNumber?: StringFilter<"PurchaseInvoice"> | string
+    date?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+    purchaseOrderId?: StringFilter<"PurchaseInvoice"> | string
+    totalAmount?: FloatFilter<"PurchaseInvoice"> | number
+    status?: StringFilter<"PurchaseInvoice"> | string
+    companyId?: IntFilter<"PurchaseInvoice"> | number
+    createdAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+    updatedAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+    purchaseOrder?: XOR<PurchaseOrderScalarRelationFilter, PurchaseOrderWhereInput>
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+    items?: PurchaseInvoiceItemListRelationFilter
+  }
+
+  export type PurchaseInvoiceOrderByWithRelationInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    totalAmount?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    purchaseOrder?: PurchaseOrderOrderByWithRelationInput
+    company?: CompanyOrderByWithRelationInput
+    items?: PurchaseInvoiceItemOrderByRelationAggregateInput
+  }
+
+  export type PurchaseInvoiceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    invoiceNumber?: string
+    AND?: PurchaseInvoiceWhereInput | PurchaseInvoiceWhereInput[]
+    OR?: PurchaseInvoiceWhereInput[]
+    NOT?: PurchaseInvoiceWhereInput | PurchaseInvoiceWhereInput[]
+    date?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+    purchaseOrderId?: StringFilter<"PurchaseInvoice"> | string
+    totalAmount?: FloatFilter<"PurchaseInvoice"> | number
+    status?: StringFilter<"PurchaseInvoice"> | string
+    companyId?: IntFilter<"PurchaseInvoice"> | number
+    createdAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+    updatedAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+    purchaseOrder?: XOR<PurchaseOrderScalarRelationFilter, PurchaseOrderWhereInput>
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+    items?: PurchaseInvoiceItemListRelationFilter
+  }, "id" | "invoiceNumber">
+
+  export type PurchaseInvoiceOrderByWithAggregationInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    totalAmount?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PurchaseInvoiceCountOrderByAggregateInput
+    _avg?: PurchaseInvoiceAvgOrderByAggregateInput
+    _max?: PurchaseInvoiceMaxOrderByAggregateInput
+    _min?: PurchaseInvoiceMinOrderByAggregateInput
+    _sum?: PurchaseInvoiceSumOrderByAggregateInput
+  }
+
+  export type PurchaseInvoiceScalarWhereWithAggregatesInput = {
+    AND?: PurchaseInvoiceScalarWhereWithAggregatesInput | PurchaseInvoiceScalarWhereWithAggregatesInput[]
+    OR?: PurchaseInvoiceScalarWhereWithAggregatesInput[]
+    NOT?: PurchaseInvoiceScalarWhereWithAggregatesInput | PurchaseInvoiceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PurchaseInvoice"> | string
+    invoiceNumber?: StringWithAggregatesFilter<"PurchaseInvoice"> | string
+    date?: DateTimeWithAggregatesFilter<"PurchaseInvoice"> | Date | string
+    purchaseOrderId?: StringWithAggregatesFilter<"PurchaseInvoice"> | string
+    totalAmount?: FloatWithAggregatesFilter<"PurchaseInvoice"> | number
+    status?: StringWithAggregatesFilter<"PurchaseInvoice"> | string
+    companyId?: IntWithAggregatesFilter<"PurchaseInvoice"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"PurchaseInvoice"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PurchaseInvoice"> | Date | string
+  }
+
+  export type PurchaseInvoiceItemWhereInput = {
+    AND?: PurchaseInvoiceItemWhereInput | PurchaseInvoiceItemWhereInput[]
+    OR?: PurchaseInvoiceItemWhereInput[]
+    NOT?: PurchaseInvoiceItemWhereInput | PurchaseInvoiceItemWhereInput[]
+    id?: StringFilter<"PurchaseInvoiceItem"> | string
+    invoiceId?: StringFilter<"PurchaseInvoiceItem"> | string
+    purchaseOrderItemId?: StringFilter<"PurchaseInvoiceItem"> | string
+    grnItemId?: StringNullableFilter<"PurchaseInvoiceItem"> | string | null
+    invoicedQty?: FloatFilter<"PurchaseInvoiceItem"> | number
+    rate?: FloatFilter<"PurchaseInvoiceItem"> | number
+    amount?: FloatFilter<"PurchaseInvoiceItem"> | number
+    createdAt?: DateTimeFilter<"PurchaseInvoiceItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PurchaseInvoiceItem"> | Date | string
+    invoice?: XOR<PurchaseInvoiceScalarRelationFilter, PurchaseInvoiceWhereInput>
+    purchaseOrderItem?: XOR<PurchaseOrderItemScalarRelationFilter, PurchaseOrderItemWhereInput>
+    grnItem?: XOR<GRNItemNullableScalarRelationFilter, GRNItemWhereInput> | null
+  }
+
+  export type PurchaseInvoiceItemOrderByWithRelationInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    grnItemId?: SortOrderInput | SortOrder
+    invoicedQty?: SortOrder
+    rate?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    invoice?: PurchaseInvoiceOrderByWithRelationInput
+    purchaseOrderItem?: PurchaseOrderItemOrderByWithRelationInput
+    grnItem?: GRNItemOrderByWithRelationInput
+  }
+
+  export type PurchaseInvoiceItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PurchaseInvoiceItemWhereInput | PurchaseInvoiceItemWhereInput[]
+    OR?: PurchaseInvoiceItemWhereInput[]
+    NOT?: PurchaseInvoiceItemWhereInput | PurchaseInvoiceItemWhereInput[]
+    invoiceId?: StringFilter<"PurchaseInvoiceItem"> | string
+    purchaseOrderItemId?: StringFilter<"PurchaseInvoiceItem"> | string
+    grnItemId?: StringNullableFilter<"PurchaseInvoiceItem"> | string | null
+    invoicedQty?: FloatFilter<"PurchaseInvoiceItem"> | number
+    rate?: FloatFilter<"PurchaseInvoiceItem"> | number
+    amount?: FloatFilter<"PurchaseInvoiceItem"> | number
+    createdAt?: DateTimeFilter<"PurchaseInvoiceItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PurchaseInvoiceItem"> | Date | string
+    invoice?: XOR<PurchaseInvoiceScalarRelationFilter, PurchaseInvoiceWhereInput>
+    purchaseOrderItem?: XOR<PurchaseOrderItemScalarRelationFilter, PurchaseOrderItemWhereInput>
+    grnItem?: XOR<GRNItemNullableScalarRelationFilter, GRNItemWhereInput> | null
+  }, "id">
+
+  export type PurchaseInvoiceItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    grnItemId?: SortOrderInput | SortOrder
+    invoicedQty?: SortOrder
+    rate?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PurchaseInvoiceItemCountOrderByAggregateInput
+    _avg?: PurchaseInvoiceItemAvgOrderByAggregateInput
+    _max?: PurchaseInvoiceItemMaxOrderByAggregateInput
+    _min?: PurchaseInvoiceItemMinOrderByAggregateInput
+    _sum?: PurchaseInvoiceItemSumOrderByAggregateInput
+  }
+
+  export type PurchaseInvoiceItemScalarWhereWithAggregatesInput = {
+    AND?: PurchaseInvoiceItemScalarWhereWithAggregatesInput | PurchaseInvoiceItemScalarWhereWithAggregatesInput[]
+    OR?: PurchaseInvoiceItemScalarWhereWithAggregatesInput[]
+    NOT?: PurchaseInvoiceItemScalarWhereWithAggregatesInput | PurchaseInvoiceItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PurchaseInvoiceItem"> | string
+    invoiceId?: StringWithAggregatesFilter<"PurchaseInvoiceItem"> | string
+    purchaseOrderItemId?: StringWithAggregatesFilter<"PurchaseInvoiceItem"> | string
+    grnItemId?: StringNullableWithAggregatesFilter<"PurchaseInvoiceItem"> | string | null
+    invoicedQty?: FloatWithAggregatesFilter<"PurchaseInvoiceItem"> | number
+    rate?: FloatWithAggregatesFilter<"PurchaseInvoiceItem"> | number
+    amount?: FloatWithAggregatesFilter<"PurchaseInvoiceItem"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"PurchaseInvoiceItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PurchaseInvoiceItem"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -52293,6 +58520,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateInput = {
@@ -52311,6 +58539,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUpdateInput = {
@@ -52328,6 +58557,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateInput = {
@@ -52346,6 +58576,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitCreateManyInput = {
@@ -52468,6 +58699,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -52490,6 +58723,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -52511,6 +58746,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -52533,6 +58770,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -53782,6 +60021,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutColorsInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutColorInput
+    grnItems?: GRNItemCreateNestedManyWithoutColorInput
   }
 
   export type ColorUncheckedCreateInput = {
@@ -53794,6 +60034,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutColorInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutColorInput
   }
 
   export type ColorUpdateInput = {
@@ -53806,6 +60047,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutColorsNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutColorNestedInput
+    grnItems?: GRNItemUpdateManyWithoutColorNestedInput
   }
 
   export type ColorUncheckedUpdateInput = {
@@ -53818,6 +60060,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutColorNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutColorNestedInput
   }
 
   export type ColorCreateManyInput = {
@@ -53861,6 +60104,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutBrandsInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutBrandInput
+    grnItems?: GRNItemCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateInput = {
@@ -53872,6 +60116,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutBrandInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUpdateInput = {
@@ -53883,6 +60128,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutBrandsNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutBrandNestedInput
+    grnItems?: GRNItemUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateInput = {
@@ -53894,6 +60140,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutBrandNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandCreateManyInput = {
@@ -53934,6 +60181,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutItemGradesInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutItemGradeInput
+    grnItems?: GRNItemCreateNestedManyWithoutItemGradeInput
   }
 
   export type ItemGradeUncheckedCreateInput = {
@@ -53945,6 +60193,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemGradeInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemGradeInput
   }
 
   export type ItemGradeUpdateInput = {
@@ -53956,6 +60205,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutItemGradesNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutItemGradeNestedInput
+    grnItems?: GRNItemUpdateManyWithoutItemGradeNestedInput
   }
 
   export type ItemGradeUncheckedUpdateInput = {
@@ -53967,6 +60217,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemGradeNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutItemGradeNestedInput
   }
 
   export type ItemGradeCreateManyInput = {
@@ -54012,6 +60263,7 @@ export namespace Prisma {
     baseUnit: UnitCreateNestedOneWithoutItemMastersInput
     company: CompanyCreateNestedOneWithoutItemMastersInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutItemMasterInput
+    grnItems?: GRNItemCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterUncheckedCreateInput = {
@@ -54028,6 +60280,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterUpdateInput = {
@@ -54044,6 +60297,7 @@ export namespace Prisma {
     baseUnit?: UnitUpdateOneRequiredWithoutItemMastersNestedInput
     company?: CompanyUpdateOneRequiredWithoutItemMastersNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutItemMasterNestedInput
+    grnItems?: GRNItemUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterUncheckedUpdateInput = {
@@ -54060,6 +60314,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterCreateManyInput = {
@@ -54124,6 +60379,8 @@ export namespace Prisma {
     currency?: CurrencyCreateNestedOneWithoutPurchaseOrdersInput
     company: CompanyCreateNestedOneWithoutPurchaseOrdersInput
     items?: PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderUncheckedCreateInput = {
@@ -54146,6 +60403,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderUpdateInput = {
@@ -54168,6 +60427,8 @@ export namespace Prisma {
     currency?: CurrencyUpdateOneWithoutPurchaseOrdersNestedInput
     company?: CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
     items?: PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateInput = {
@@ -54190,6 +60451,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderCreateManyInput = {
@@ -54268,6 +60531,8 @@ export namespace Prisma {
     brand?: BrandCreateNestedOneWithoutPurchaseOrderItemsInput
     itemGrade?: ItemGradeCreateNestedOneWithoutPurchaseOrderItemsInput
     unit?: UnitCreateNestedOneWithoutPurchaseOrderItemsInput
+    grnItems?: GRNItemCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemUncheckedCreateInput = {
@@ -54287,6 +60552,8 @@ export namespace Prisma {
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemUpdateInput = {
@@ -54306,6 +60573,8 @@ export namespace Prisma {
     brand?: BrandUpdateOneWithoutPurchaseOrderItemsNestedInput
     itemGrade?: ItemGradeUpdateOneWithoutPurchaseOrderItemsNestedInput
     unit?: UnitUpdateOneWithoutPurchaseOrderItemsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateInput = {
@@ -54325,6 +60594,8 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemCreateManyInput = {
@@ -54374,6 +60645,354 @@ export namespace Prisma {
     rate?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNCreateInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrder: PurchaseOrderCreateNestedOneWithoutGrnsInput
+    company: CompanyCreateNestedOneWithoutGrnsInput
+    items?: GRNItemCreateNestedManyWithoutGrnInput
+  }
+
+  export type GRNUncheckedCreateInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    remarks?: string | null
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: GRNItemUncheckedCreateNestedManyWithoutGrnInput
+  }
+
+  export type GRNUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutGrnsNestedInput
+    company?: CompanyUpdateOneRequiredWithoutGrnsNestedInput
+    items?: GRNItemUpdateManyWithoutGrnNestedInput
+  }
+
+  export type GRNUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: GRNItemUncheckedUpdateManyWithoutGrnNestedInput
+  }
+
+  export type GRNCreateManyInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    remarks?: string | null
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GRNUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemCreateInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grn: GRNCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutGrnItemsInput
+    color?: ColorCreateNestedOneWithoutGrnItemsInput
+    brand?: BrandCreateNestedOneWithoutGrnItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutGrnItemsInput
+    unit?: UnitCreateNestedOneWithoutGrnItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUncheckedCreateInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput
+    color?: ColorUpdateOneWithoutGrnItemsNestedInput
+    brand?: BrandUpdateOneWithoutGrnItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutGrnItemsNestedInput
+    unit?: UnitUpdateOneWithoutGrnItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemCreateManyInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GRNItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceCreateInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    totalAmount?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrder: PurchaseOrderCreateNestedOneWithoutInvoicesInput
+    company: CompanyCreateNestedOneWithoutPurchaseInvoicesInput
+    items?: PurchaseInvoiceItemCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type PurchaseInvoiceUncheckedCreateInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    totalAmount?: number
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type PurchaseInvoiceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutInvoicesNestedInput
+    company?: CompanyUpdateOneRequiredWithoutPurchaseInvoicesNestedInput
+    items?: PurchaseInvoiceItemUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type PurchaseInvoiceCreateManyInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    totalAmount?: number
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemCreateInput = {
+    id?: string
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoice: PurchaseInvoiceCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutInvoiceItemsInput
+    grnItem?: GRNItemCreateNestedOneWithoutInvoiceItemsInput
+  }
+
+  export type PurchaseInvoiceItemUncheckedCreateInput = {
+    id?: string
+    invoiceId: string
+    purchaseOrderItemId: string
+    grnItemId?: string | null
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoice?: PurchaseInvoiceUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutInvoiceItemsNestedInput
+    grnItem?: GRNItemUpdateOneWithoutInvoiceItemsNestedInput
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    grnItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemCreateManyInput = {
+    id?: string
+    invoiceId: string
+    purchaseOrderItemId: string
+    grnItemId?: string | null
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    grnItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -55178,6 +61797,12 @@ export namespace Prisma {
     none?: PurchaseOrderItemWhereInput
   }
 
+  export type GRNItemListRelationFilter = {
+    every?: GRNItemWhereInput
+    some?: GRNItemWhereInput
+    none?: GRNItemWhereInput
+  }
+
   export type UnitConversionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -55191,6 +61816,10 @@ export namespace Prisma {
   }
 
   export type PurchaseOrderItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GRNItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -55356,6 +61985,18 @@ export namespace Prisma {
     none?: ItemGradeWhereInput
   }
 
+  export type GRNListRelationFilter = {
+    every?: GRNWhereInput
+    some?: GRNWhereInput
+    none?: GRNWhereInput
+  }
+
+  export type PurchaseInvoiceListRelationFilter = {
+    every?: PurchaseInvoiceWhereInput
+    some?: PurchaseInvoiceWhereInput
+    none?: PurchaseInvoiceWhereInput
+  }
+
   export type ItemGroupOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -55373,6 +62014,14 @@ export namespace Prisma {
   }
 
   export type ItemGradeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GRNOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PurchaseInvoiceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -56649,6 +63298,16 @@ export namespace Prisma {
     isNot?: UnitWhereInput | null
   }
 
+  export type PurchaseInvoiceItemListRelationFilter = {
+    every?: PurchaseInvoiceItemWhereInput
+    some?: PurchaseInvoiceItemWhereInput
+    none?: PurchaseInvoiceItemWhereInput
+  }
+
+  export type PurchaseInvoiceItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PurchaseOrderItemCountOrderByAggregateInput = {
     id?: SortOrder
     purchaseOrderId?: SortOrder
@@ -56732,6 +63391,218 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumPackingTypeNullableFilter<$PrismaModel>
     _max?: NestedEnumPackingTypeNullableFilter<$PrismaModel>
+  }
+
+  export type GRNCountOrderByAggregateInput = {
+    id?: SortOrder
+    grnNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    remarks?: SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GRNAvgOrderByAggregateInput = {
+    companyId?: SortOrder
+  }
+
+  export type GRNMaxOrderByAggregateInput = {
+    id?: SortOrder
+    grnNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    remarks?: SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GRNMinOrderByAggregateInput = {
+    id?: SortOrder
+    grnNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    remarks?: SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GRNSumOrderByAggregateInput = {
+    companyId?: SortOrder
+  }
+
+  export type GRNScalarRelationFilter = {
+    is?: GRNWhereInput
+    isNot?: GRNWhereInput
+  }
+
+  export type PurchaseOrderItemScalarRelationFilter = {
+    is?: PurchaseOrderItemWhereInput
+    isNot?: PurchaseOrderItemWhereInput
+  }
+
+  export type GRNItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    grnId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    itemMasterId?: SortOrder
+    colorId?: SortOrder
+    brandId?: SortOrder
+    itemGradeId?: SortOrder
+    receivedQty?: SortOrder
+    pcs?: SortOrder
+    unitId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GRNItemAvgOrderByAggregateInput = {
+    receivedQty?: SortOrder
+    pcs?: SortOrder
+    unitId?: SortOrder
+  }
+
+  export type GRNItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    grnId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    itemMasterId?: SortOrder
+    colorId?: SortOrder
+    brandId?: SortOrder
+    itemGradeId?: SortOrder
+    receivedQty?: SortOrder
+    pcs?: SortOrder
+    unitId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GRNItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    grnId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    itemMasterId?: SortOrder
+    colorId?: SortOrder
+    brandId?: SortOrder
+    itemGradeId?: SortOrder
+    receivedQty?: SortOrder
+    pcs?: SortOrder
+    unitId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GRNItemSumOrderByAggregateInput = {
+    receivedQty?: SortOrder
+    pcs?: SortOrder
+    unitId?: SortOrder
+  }
+
+  export type PurchaseInvoiceCountOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    totalAmount?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PurchaseInvoiceAvgOrderByAggregateInput = {
+    totalAmount?: SortOrder
+    companyId?: SortOrder
+  }
+
+  export type PurchaseInvoiceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    totalAmount?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PurchaseInvoiceMinOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    date?: SortOrder
+    purchaseOrderId?: SortOrder
+    totalAmount?: SortOrder
+    status?: SortOrder
+    companyId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PurchaseInvoiceSumOrderByAggregateInput = {
+    totalAmount?: SortOrder
+    companyId?: SortOrder
+  }
+
+  export type PurchaseInvoiceScalarRelationFilter = {
+    is?: PurchaseInvoiceWhereInput
+    isNot?: PurchaseInvoiceWhereInput
+  }
+
+  export type GRNItemNullableScalarRelationFilter = {
+    is?: GRNItemWhereInput | null
+    isNot?: GRNItemWhereInput | null
+  }
+
+  export type PurchaseInvoiceItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    grnItemId?: SortOrder
+    invoicedQty?: SortOrder
+    rate?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PurchaseInvoiceItemAvgOrderByAggregateInput = {
+    invoicedQty?: SortOrder
+    rate?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type PurchaseInvoiceItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    grnItemId?: SortOrder
+    invoicedQty?: SortOrder
+    rate?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PurchaseInvoiceItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    purchaseOrderItemId?: SortOrder
+    grnItemId?: SortOrder
+    invoicedQty?: SortOrder
+    rate?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PurchaseInvoiceItemSumOrderByAggregateInput = {
+    invoicedQty?: SortOrder
+    rate?: SortOrder
+    amount?: SortOrder
   }
 
   export type PostCreateNestedManyWithoutAuthorInput = {
@@ -57532,6 +64403,13 @@ export namespace Prisma {
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
   }
 
+  export type GRNItemCreateNestedManyWithoutUnitInput = {
+    create?: XOR<GRNItemCreateWithoutUnitInput, GRNItemUncheckedCreateWithoutUnitInput> | GRNItemCreateWithoutUnitInput[] | GRNItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutUnitInput | GRNItemCreateOrConnectWithoutUnitInput[]
+    createMany?: GRNItemCreateManyUnitInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
   export type UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput = {
     create?: XOR<UnitConversionCreateWithoutFromUnitInput, UnitConversionUncheckedCreateWithoutFromUnitInput> | UnitConversionCreateWithoutFromUnitInput[] | UnitConversionUncheckedCreateWithoutFromUnitInput[]
     connectOrCreate?: UnitConversionCreateOrConnectWithoutFromUnitInput | UnitConversionCreateOrConnectWithoutFromUnitInput[]
@@ -57565,6 +64443,13 @@ export namespace Prisma {
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutUnitInput | PurchaseOrderItemCreateOrConnectWithoutUnitInput[]
     createMany?: PurchaseOrderItemCreateManyUnitInputEnvelope
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
+  }
+
+  export type GRNItemUncheckedCreateNestedManyWithoutUnitInput = {
+    create?: XOR<GRNItemCreateWithoutUnitInput, GRNItemUncheckedCreateWithoutUnitInput> | GRNItemCreateWithoutUnitInput[] | GRNItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutUnitInput | GRNItemCreateOrConnectWithoutUnitInput[]
+    createMany?: GRNItemCreateManyUnitInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
   }
 
   export type CompanyUpdateOneRequiredWithoutUnitsNestedInput = {
@@ -57645,6 +64530,20 @@ export namespace Prisma {
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
   }
 
+  export type GRNItemUpdateManyWithoutUnitNestedInput = {
+    create?: XOR<GRNItemCreateWithoutUnitInput, GRNItemUncheckedCreateWithoutUnitInput> | GRNItemCreateWithoutUnitInput[] | GRNItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutUnitInput | GRNItemCreateOrConnectWithoutUnitInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutUnitInput | GRNItemUpsertWithWhereUniqueWithoutUnitInput[]
+    createMany?: GRNItemCreateManyUnitInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutUnitInput | GRNItemUpdateWithWhereUniqueWithoutUnitInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutUnitInput | GRNItemUpdateManyWithWhereWithoutUnitInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
   export type UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput = {
     create?: XOR<UnitConversionCreateWithoutFromUnitInput, UnitConversionUncheckedCreateWithoutFromUnitInput> | UnitConversionCreateWithoutFromUnitInput[] | UnitConversionUncheckedCreateWithoutFromUnitInput[]
     connectOrCreate?: UnitConversionCreateOrConnectWithoutFromUnitInput | UnitConversionCreateOrConnectWithoutFromUnitInput[]
@@ -57713,6 +64612,20 @@ export namespace Prisma {
     update?: PurchaseOrderItemUpdateWithWhereUniqueWithoutUnitInput | PurchaseOrderItemUpdateWithWhereUniqueWithoutUnitInput[]
     updateMany?: PurchaseOrderItemUpdateManyWithWhereWithoutUnitInput | PurchaseOrderItemUpdateManyWithWhereWithoutUnitInput[]
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutUnitNestedInput = {
+    create?: XOR<GRNItemCreateWithoutUnitInput, GRNItemUncheckedCreateWithoutUnitInput> | GRNItemCreateWithoutUnitInput[] | GRNItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutUnitInput | GRNItemCreateOrConnectWithoutUnitInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutUnitInput | GRNItemUpsertWithWhereUniqueWithoutUnitInput[]
+    createMany?: GRNItemCreateManyUnitInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutUnitInput | GRNItemUpdateWithWhereUniqueWithoutUnitInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutUnitInput | GRNItemUpdateManyWithWhereWithoutUnitInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
   }
 
   export type CompanyCreateNestedOneWithoutUnitConversionsInput = {
@@ -57821,6 +64734,20 @@ export namespace Prisma {
     connect?: PurchaseOrderWhereUniqueInput | PurchaseOrderWhereUniqueInput[]
   }
 
+  export type GRNCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<GRNCreateWithoutCompanyInput, GRNUncheckedCreateWithoutCompanyInput> | GRNCreateWithoutCompanyInput[] | GRNUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: GRNCreateOrConnectWithoutCompanyInput | GRNCreateOrConnectWithoutCompanyInput[]
+    createMany?: GRNCreateManyCompanyInputEnvelope
+    connect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+  }
+
+  export type PurchaseInvoiceCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutCompanyInput, PurchaseInvoiceUncheckedCreateWithoutCompanyInput> | PurchaseInvoiceCreateWithoutCompanyInput[] | PurchaseInvoiceUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutCompanyInput | PurchaseInvoiceCreateOrConnectWithoutCompanyInput[]
+    createMany?: PurchaseInvoiceCreateManyCompanyInputEnvelope
+    connect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+  }
+
   export type ItemGroupUncheckedCreateNestedManyWithoutCompanyInput = {
     create?: XOR<ItemGroupCreateWithoutCompanyInput, ItemGroupUncheckedCreateWithoutCompanyInput> | ItemGroupCreateWithoutCompanyInput[] | ItemGroupUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: ItemGroupCreateOrConnectWithoutCompanyInput | ItemGroupCreateOrConnectWithoutCompanyInput[]
@@ -57875,6 +64802,20 @@ export namespace Prisma {
     connectOrCreate?: PurchaseOrderCreateOrConnectWithoutCompanyInput | PurchaseOrderCreateOrConnectWithoutCompanyInput[]
     createMany?: PurchaseOrderCreateManyCompanyInputEnvelope
     connect?: PurchaseOrderWhereUniqueInput | PurchaseOrderWhereUniqueInput[]
+  }
+
+  export type GRNUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<GRNCreateWithoutCompanyInput, GRNUncheckedCreateWithoutCompanyInput> | GRNCreateWithoutCompanyInput[] | GRNUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: GRNCreateOrConnectWithoutCompanyInput | GRNCreateOrConnectWithoutCompanyInput[]
+    createMany?: GRNCreateManyCompanyInputEnvelope
+    connect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+  }
+
+  export type PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutCompanyInput, PurchaseInvoiceUncheckedCreateWithoutCompanyInput> | PurchaseInvoiceCreateWithoutCompanyInput[] | PurchaseInvoiceUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutCompanyInput | PurchaseInvoiceCreateOrConnectWithoutCompanyInput[]
+    createMany?: PurchaseInvoiceCreateManyCompanyInputEnvelope
+    connect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
   }
 
   export type ItemGroupUpdateManyWithoutCompanyNestedInput = {
@@ -57989,6 +64930,34 @@ export namespace Prisma {
     deleteMany?: PurchaseOrderScalarWhereInput | PurchaseOrderScalarWhereInput[]
   }
 
+  export type GRNUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<GRNCreateWithoutCompanyInput, GRNUncheckedCreateWithoutCompanyInput> | GRNCreateWithoutCompanyInput[] | GRNUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: GRNCreateOrConnectWithoutCompanyInput | GRNCreateOrConnectWithoutCompanyInput[]
+    upsert?: GRNUpsertWithWhereUniqueWithoutCompanyInput | GRNUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: GRNCreateManyCompanyInputEnvelope
+    set?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    disconnect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    delete?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    connect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    update?: GRNUpdateWithWhereUniqueWithoutCompanyInput | GRNUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: GRNUpdateManyWithWhereWithoutCompanyInput | GRNUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: GRNScalarWhereInput | GRNScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutCompanyInput, PurchaseInvoiceUncheckedCreateWithoutCompanyInput> | PurchaseInvoiceCreateWithoutCompanyInput[] | PurchaseInvoiceUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutCompanyInput | PurchaseInvoiceCreateOrConnectWithoutCompanyInput[]
+    upsert?: PurchaseInvoiceUpsertWithWhereUniqueWithoutCompanyInput | PurchaseInvoiceUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: PurchaseInvoiceCreateManyCompanyInputEnvelope
+    set?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    delete?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    connect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    update?: PurchaseInvoiceUpdateWithWhereUniqueWithoutCompanyInput | PurchaseInvoiceUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: PurchaseInvoiceUpdateManyWithWhereWithoutCompanyInput | PurchaseInvoiceUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: PurchaseInvoiceScalarWhereInput | PurchaseInvoiceScalarWhereInput[]
+  }
+
   export type ItemGroupUncheckedUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<ItemGroupCreateWithoutCompanyInput, ItemGroupUncheckedCreateWithoutCompanyInput> | ItemGroupCreateWithoutCompanyInput[] | ItemGroupUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: ItemGroupCreateOrConnectWithoutCompanyInput | ItemGroupCreateOrConnectWithoutCompanyInput[]
@@ -58099,6 +65068,34 @@ export namespace Prisma {
     update?: PurchaseOrderUpdateWithWhereUniqueWithoutCompanyInput | PurchaseOrderUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: PurchaseOrderUpdateManyWithWhereWithoutCompanyInput | PurchaseOrderUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: PurchaseOrderScalarWhereInput | PurchaseOrderScalarWhereInput[]
+  }
+
+  export type GRNUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<GRNCreateWithoutCompanyInput, GRNUncheckedCreateWithoutCompanyInput> | GRNCreateWithoutCompanyInput[] | GRNUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: GRNCreateOrConnectWithoutCompanyInput | GRNCreateOrConnectWithoutCompanyInput[]
+    upsert?: GRNUpsertWithWhereUniqueWithoutCompanyInput | GRNUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: GRNCreateManyCompanyInputEnvelope
+    set?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    disconnect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    delete?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    connect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    update?: GRNUpdateWithWhereUniqueWithoutCompanyInput | GRNUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: GRNUpdateManyWithWhereWithoutCompanyInput | GRNUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: GRNScalarWhereInput | GRNScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutCompanyInput, PurchaseInvoiceUncheckedCreateWithoutCompanyInput> | PurchaseInvoiceCreateWithoutCompanyInput[] | PurchaseInvoiceUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutCompanyInput | PurchaseInvoiceCreateOrConnectWithoutCompanyInput[]
+    upsert?: PurchaseInvoiceUpsertWithWhereUniqueWithoutCompanyInput | PurchaseInvoiceUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: PurchaseInvoiceCreateManyCompanyInputEnvelope
+    set?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    delete?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    connect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    update?: PurchaseInvoiceUpdateWithWhereUniqueWithoutCompanyInput | PurchaseInvoiceUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: PurchaseInvoiceUpdateManyWithWhereWithoutCompanyInput | PurchaseInvoiceUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: PurchaseInvoiceScalarWhereInput | PurchaseInvoiceScalarWhereInput[]
   }
 
   export type JournalEntryCreateNestedManyWithoutFiscalYearInput = {
@@ -58748,11 +65745,25 @@ export namespace Prisma {
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
   }
 
+  export type GRNItemCreateNestedManyWithoutColorInput = {
+    create?: XOR<GRNItemCreateWithoutColorInput, GRNItemUncheckedCreateWithoutColorInput> | GRNItemCreateWithoutColorInput[] | GRNItemUncheckedCreateWithoutColorInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutColorInput | GRNItemCreateOrConnectWithoutColorInput[]
+    createMany?: GRNItemCreateManyColorInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
   export type PurchaseOrderItemUncheckedCreateNestedManyWithoutColorInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutColorInput, PurchaseOrderItemUncheckedCreateWithoutColorInput> | PurchaseOrderItemCreateWithoutColorInput[] | PurchaseOrderItemUncheckedCreateWithoutColorInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutColorInput | PurchaseOrderItemCreateOrConnectWithoutColorInput[]
     createMany?: PurchaseOrderItemCreateManyColorInputEnvelope
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
+  }
+
+  export type GRNItemUncheckedCreateNestedManyWithoutColorInput = {
+    create?: XOR<GRNItemCreateWithoutColorInput, GRNItemUncheckedCreateWithoutColorInput> | GRNItemCreateWithoutColorInput[] | GRNItemUncheckedCreateWithoutColorInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutColorInput | GRNItemCreateOrConnectWithoutColorInput[]
+    createMany?: GRNItemCreateManyColorInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
   }
 
   export type CompanyUpdateOneRequiredWithoutColorsNestedInput = {
@@ -58777,6 +65788,20 @@ export namespace Prisma {
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
   }
 
+  export type GRNItemUpdateManyWithoutColorNestedInput = {
+    create?: XOR<GRNItemCreateWithoutColorInput, GRNItemUncheckedCreateWithoutColorInput> | GRNItemCreateWithoutColorInput[] | GRNItemUncheckedCreateWithoutColorInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutColorInput | GRNItemCreateOrConnectWithoutColorInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutColorInput | GRNItemUpsertWithWhereUniqueWithoutColorInput[]
+    createMany?: GRNItemCreateManyColorInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutColorInput | GRNItemUpdateWithWhereUniqueWithoutColorInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutColorInput | GRNItemUpdateManyWithWhereWithoutColorInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
   export type PurchaseOrderItemUncheckedUpdateManyWithoutColorNestedInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutColorInput, PurchaseOrderItemUncheckedCreateWithoutColorInput> | PurchaseOrderItemCreateWithoutColorInput[] | PurchaseOrderItemUncheckedCreateWithoutColorInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutColorInput | PurchaseOrderItemCreateOrConnectWithoutColorInput[]
@@ -58789,6 +65814,20 @@ export namespace Prisma {
     update?: PurchaseOrderItemUpdateWithWhereUniqueWithoutColorInput | PurchaseOrderItemUpdateWithWhereUniqueWithoutColorInput[]
     updateMany?: PurchaseOrderItemUpdateManyWithWhereWithoutColorInput | PurchaseOrderItemUpdateManyWithWhereWithoutColorInput[]
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutColorNestedInput = {
+    create?: XOR<GRNItemCreateWithoutColorInput, GRNItemUncheckedCreateWithoutColorInput> | GRNItemCreateWithoutColorInput[] | GRNItemUncheckedCreateWithoutColorInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutColorInput | GRNItemCreateOrConnectWithoutColorInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutColorInput | GRNItemUpsertWithWhereUniqueWithoutColorInput[]
+    createMany?: GRNItemCreateManyColorInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutColorInput | GRNItemUpdateWithWhereUniqueWithoutColorInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutColorInput | GRNItemUpdateManyWithWhereWithoutColorInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
   }
 
   export type CompanyCreateNestedOneWithoutBrandsInput = {
@@ -58804,11 +65843,25 @@ export namespace Prisma {
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
   }
 
+  export type GRNItemCreateNestedManyWithoutBrandInput = {
+    create?: XOR<GRNItemCreateWithoutBrandInput, GRNItemUncheckedCreateWithoutBrandInput> | GRNItemCreateWithoutBrandInput[] | GRNItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutBrandInput | GRNItemCreateOrConnectWithoutBrandInput[]
+    createMany?: GRNItemCreateManyBrandInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
   export type PurchaseOrderItemUncheckedCreateNestedManyWithoutBrandInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutBrandInput, PurchaseOrderItemUncheckedCreateWithoutBrandInput> | PurchaseOrderItemCreateWithoutBrandInput[] | PurchaseOrderItemUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutBrandInput | PurchaseOrderItemCreateOrConnectWithoutBrandInput[]
     createMany?: PurchaseOrderItemCreateManyBrandInputEnvelope
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
+  }
+
+  export type GRNItemUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<GRNItemCreateWithoutBrandInput, GRNItemUncheckedCreateWithoutBrandInput> | GRNItemCreateWithoutBrandInput[] | GRNItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutBrandInput | GRNItemCreateOrConnectWithoutBrandInput[]
+    createMany?: GRNItemCreateManyBrandInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
   }
 
   export type CompanyUpdateOneRequiredWithoutBrandsNestedInput = {
@@ -58833,6 +65886,20 @@ export namespace Prisma {
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
   }
 
+  export type GRNItemUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<GRNItemCreateWithoutBrandInput, GRNItemUncheckedCreateWithoutBrandInput> | GRNItemCreateWithoutBrandInput[] | GRNItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutBrandInput | GRNItemCreateOrConnectWithoutBrandInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutBrandInput | GRNItemUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: GRNItemCreateManyBrandInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutBrandInput | GRNItemUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutBrandInput | GRNItemUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
   export type PurchaseOrderItemUncheckedUpdateManyWithoutBrandNestedInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutBrandInput, PurchaseOrderItemUncheckedCreateWithoutBrandInput> | PurchaseOrderItemCreateWithoutBrandInput[] | PurchaseOrderItemUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutBrandInput | PurchaseOrderItemCreateOrConnectWithoutBrandInput[]
@@ -58845,6 +65912,20 @@ export namespace Prisma {
     update?: PurchaseOrderItemUpdateWithWhereUniqueWithoutBrandInput | PurchaseOrderItemUpdateWithWhereUniqueWithoutBrandInput[]
     updateMany?: PurchaseOrderItemUpdateManyWithWhereWithoutBrandInput | PurchaseOrderItemUpdateManyWithWhereWithoutBrandInput[]
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<GRNItemCreateWithoutBrandInput, GRNItemUncheckedCreateWithoutBrandInput> | GRNItemCreateWithoutBrandInput[] | GRNItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutBrandInput | GRNItemCreateOrConnectWithoutBrandInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutBrandInput | GRNItemUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: GRNItemCreateManyBrandInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutBrandInput | GRNItemUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutBrandInput | GRNItemUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
   }
 
   export type CompanyCreateNestedOneWithoutItemGradesInput = {
@@ -58860,11 +65941,25 @@ export namespace Prisma {
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
   }
 
+  export type GRNItemCreateNestedManyWithoutItemGradeInput = {
+    create?: XOR<GRNItemCreateWithoutItemGradeInput, GRNItemUncheckedCreateWithoutItemGradeInput> | GRNItemCreateWithoutItemGradeInput[] | GRNItemUncheckedCreateWithoutItemGradeInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutItemGradeInput | GRNItemCreateOrConnectWithoutItemGradeInput[]
+    createMany?: GRNItemCreateManyItemGradeInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
   export type PurchaseOrderItemUncheckedCreateNestedManyWithoutItemGradeInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutItemGradeInput, PurchaseOrderItemUncheckedCreateWithoutItemGradeInput> | PurchaseOrderItemCreateWithoutItemGradeInput[] | PurchaseOrderItemUncheckedCreateWithoutItemGradeInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutItemGradeInput | PurchaseOrderItemCreateOrConnectWithoutItemGradeInput[]
     createMany?: PurchaseOrderItemCreateManyItemGradeInputEnvelope
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
+  }
+
+  export type GRNItemUncheckedCreateNestedManyWithoutItemGradeInput = {
+    create?: XOR<GRNItemCreateWithoutItemGradeInput, GRNItemUncheckedCreateWithoutItemGradeInput> | GRNItemCreateWithoutItemGradeInput[] | GRNItemUncheckedCreateWithoutItemGradeInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutItemGradeInput | GRNItemCreateOrConnectWithoutItemGradeInput[]
+    createMany?: GRNItemCreateManyItemGradeInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
   }
 
   export type CompanyUpdateOneRequiredWithoutItemGradesNestedInput = {
@@ -58889,6 +65984,20 @@ export namespace Prisma {
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
   }
 
+  export type GRNItemUpdateManyWithoutItemGradeNestedInput = {
+    create?: XOR<GRNItemCreateWithoutItemGradeInput, GRNItemUncheckedCreateWithoutItemGradeInput> | GRNItemCreateWithoutItemGradeInput[] | GRNItemUncheckedCreateWithoutItemGradeInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutItemGradeInput | GRNItemCreateOrConnectWithoutItemGradeInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutItemGradeInput | GRNItemUpsertWithWhereUniqueWithoutItemGradeInput[]
+    createMany?: GRNItemCreateManyItemGradeInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutItemGradeInput | GRNItemUpdateWithWhereUniqueWithoutItemGradeInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutItemGradeInput | GRNItemUpdateManyWithWhereWithoutItemGradeInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
   export type PurchaseOrderItemUncheckedUpdateManyWithoutItemGradeNestedInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutItemGradeInput, PurchaseOrderItemUncheckedCreateWithoutItemGradeInput> | PurchaseOrderItemCreateWithoutItemGradeInput[] | PurchaseOrderItemUncheckedCreateWithoutItemGradeInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutItemGradeInput | PurchaseOrderItemCreateOrConnectWithoutItemGradeInput[]
@@ -58901,6 +66010,20 @@ export namespace Prisma {
     update?: PurchaseOrderItemUpdateWithWhereUniqueWithoutItemGradeInput | PurchaseOrderItemUpdateWithWhereUniqueWithoutItemGradeInput[]
     updateMany?: PurchaseOrderItemUpdateManyWithWhereWithoutItemGradeInput | PurchaseOrderItemUpdateManyWithWhereWithoutItemGradeInput[]
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutItemGradeNestedInput = {
+    create?: XOR<GRNItemCreateWithoutItemGradeInput, GRNItemUncheckedCreateWithoutItemGradeInput> | GRNItemCreateWithoutItemGradeInput[] | GRNItemUncheckedCreateWithoutItemGradeInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutItemGradeInput | GRNItemCreateOrConnectWithoutItemGradeInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutItemGradeInput | GRNItemUpsertWithWhereUniqueWithoutItemGradeInput[]
+    createMany?: GRNItemCreateManyItemGradeInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutItemGradeInput | GRNItemUpdateWithWhereUniqueWithoutItemGradeInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutItemGradeInput | GRNItemUpdateManyWithWhereWithoutItemGradeInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
   }
 
   export type ItemGroupCreateNestedOneWithoutItemMastersInput = {
@@ -58928,11 +66051,25 @@ export namespace Prisma {
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
   }
 
+  export type GRNItemCreateNestedManyWithoutItemMasterInput = {
+    create?: XOR<GRNItemCreateWithoutItemMasterInput, GRNItemUncheckedCreateWithoutItemMasterInput> | GRNItemCreateWithoutItemMasterInput[] | GRNItemUncheckedCreateWithoutItemMasterInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutItemMasterInput | GRNItemCreateOrConnectWithoutItemMasterInput[]
+    createMany?: GRNItemCreateManyItemMasterInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
   export type PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutItemMasterInput, PurchaseOrderItemUncheckedCreateWithoutItemMasterInput> | PurchaseOrderItemCreateWithoutItemMasterInput[] | PurchaseOrderItemUncheckedCreateWithoutItemMasterInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutItemMasterInput | PurchaseOrderItemCreateOrConnectWithoutItemMasterInput[]
     createMany?: PurchaseOrderItemCreateManyItemMasterInputEnvelope
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
+  }
+
+  export type GRNItemUncheckedCreateNestedManyWithoutItemMasterInput = {
+    create?: XOR<GRNItemCreateWithoutItemMasterInput, GRNItemUncheckedCreateWithoutItemMasterInput> | GRNItemCreateWithoutItemMasterInput[] | GRNItemUncheckedCreateWithoutItemMasterInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutItemMasterInput | GRNItemCreateOrConnectWithoutItemMasterInput[]
+    createMany?: GRNItemCreateManyItemMasterInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
   }
 
   export type ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput = {
@@ -58973,6 +66110,20 @@ export namespace Prisma {
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
   }
 
+  export type GRNItemUpdateManyWithoutItemMasterNestedInput = {
+    create?: XOR<GRNItemCreateWithoutItemMasterInput, GRNItemUncheckedCreateWithoutItemMasterInput> | GRNItemCreateWithoutItemMasterInput[] | GRNItemUncheckedCreateWithoutItemMasterInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutItemMasterInput | GRNItemCreateOrConnectWithoutItemMasterInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutItemMasterInput | GRNItemUpsertWithWhereUniqueWithoutItemMasterInput[]
+    createMany?: GRNItemCreateManyItemMasterInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutItemMasterInput | GRNItemUpdateWithWhereUniqueWithoutItemMasterInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutItemMasterInput | GRNItemUpdateManyWithWhereWithoutItemMasterInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
   export type PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutItemMasterInput, PurchaseOrderItemUncheckedCreateWithoutItemMasterInput> | PurchaseOrderItemCreateWithoutItemMasterInput[] | PurchaseOrderItemUncheckedCreateWithoutItemMasterInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutItemMasterInput | PurchaseOrderItemCreateOrConnectWithoutItemMasterInput[]
@@ -58985,6 +66136,20 @@ export namespace Prisma {
     update?: PurchaseOrderItemUpdateWithWhereUniqueWithoutItemMasterInput | PurchaseOrderItemUpdateWithWhereUniqueWithoutItemMasterInput[]
     updateMany?: PurchaseOrderItemUpdateManyWithWhereWithoutItemMasterInput | PurchaseOrderItemUpdateManyWithWhereWithoutItemMasterInput[]
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutItemMasterNestedInput = {
+    create?: XOR<GRNItemCreateWithoutItemMasterInput, GRNItemUncheckedCreateWithoutItemMasterInput> | GRNItemCreateWithoutItemMasterInput[] | GRNItemUncheckedCreateWithoutItemMasterInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutItemMasterInput | GRNItemCreateOrConnectWithoutItemMasterInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutItemMasterInput | GRNItemUpsertWithWhereUniqueWithoutItemMasterInput[]
+    createMany?: GRNItemCreateManyItemMasterInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutItemMasterInput | GRNItemUpdateWithWhereUniqueWithoutItemMasterInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutItemMasterInput | GRNItemUpdateManyWithWhereWithoutItemMasterInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
   }
 
   export type AccountCreateNestedOneWithoutPurchaseOrdersInput = {
@@ -59018,11 +66183,39 @@ export namespace Prisma {
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
   }
 
+  export type GRNCreateNestedManyWithoutPurchaseOrderInput = {
+    create?: XOR<GRNCreateWithoutPurchaseOrderInput, GRNUncheckedCreateWithoutPurchaseOrderInput> | GRNCreateWithoutPurchaseOrderInput[] | GRNUncheckedCreateWithoutPurchaseOrderInput[]
+    connectOrCreate?: GRNCreateOrConnectWithoutPurchaseOrderInput | GRNCreateOrConnectWithoutPurchaseOrderInput[]
+    createMany?: GRNCreateManyPurchaseOrderInputEnvelope
+    connect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+  }
+
+  export type PurchaseInvoiceCreateNestedManyWithoutPurchaseOrderInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutPurchaseOrderInput, PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput> | PurchaseInvoiceCreateWithoutPurchaseOrderInput[] | PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput[]
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput | PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput[]
+    createMany?: PurchaseInvoiceCreateManyPurchaseOrderInputEnvelope
+    connect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+  }
+
   export type PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutPurchaseOrderInput, PurchaseOrderItemUncheckedCreateWithoutPurchaseOrderInput> | PurchaseOrderItemCreateWithoutPurchaseOrderInput[] | PurchaseOrderItemUncheckedCreateWithoutPurchaseOrderInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutPurchaseOrderInput | PurchaseOrderItemCreateOrConnectWithoutPurchaseOrderInput[]
     createMany?: PurchaseOrderItemCreateManyPurchaseOrderInputEnvelope
     connect?: PurchaseOrderItemWhereUniqueInput | PurchaseOrderItemWhereUniqueInput[]
+  }
+
+  export type GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput = {
+    create?: XOR<GRNCreateWithoutPurchaseOrderInput, GRNUncheckedCreateWithoutPurchaseOrderInput> | GRNCreateWithoutPurchaseOrderInput[] | GRNUncheckedCreateWithoutPurchaseOrderInput[]
+    connectOrCreate?: GRNCreateOrConnectWithoutPurchaseOrderInput | GRNCreateOrConnectWithoutPurchaseOrderInput[]
+    createMany?: GRNCreateManyPurchaseOrderInputEnvelope
+    connect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+  }
+
+  export type PurchaseInvoiceUncheckedCreateNestedManyWithoutPurchaseOrderInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutPurchaseOrderInput, PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput> | PurchaseInvoiceCreateWithoutPurchaseOrderInput[] | PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput[]
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput | PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput[]
+    createMany?: PurchaseInvoiceCreateManyPurchaseOrderInputEnvelope
+    connect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
   }
 
   export type EnumPurchaseOrderTypeFieldUpdateOperationsInput = {
@@ -59089,6 +66282,34 @@ export namespace Prisma {
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
   }
 
+  export type GRNUpdateManyWithoutPurchaseOrderNestedInput = {
+    create?: XOR<GRNCreateWithoutPurchaseOrderInput, GRNUncheckedCreateWithoutPurchaseOrderInput> | GRNCreateWithoutPurchaseOrderInput[] | GRNUncheckedCreateWithoutPurchaseOrderInput[]
+    connectOrCreate?: GRNCreateOrConnectWithoutPurchaseOrderInput | GRNCreateOrConnectWithoutPurchaseOrderInput[]
+    upsert?: GRNUpsertWithWhereUniqueWithoutPurchaseOrderInput | GRNUpsertWithWhereUniqueWithoutPurchaseOrderInput[]
+    createMany?: GRNCreateManyPurchaseOrderInputEnvelope
+    set?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    disconnect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    delete?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    connect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    update?: GRNUpdateWithWhereUniqueWithoutPurchaseOrderInput | GRNUpdateWithWhereUniqueWithoutPurchaseOrderInput[]
+    updateMany?: GRNUpdateManyWithWhereWithoutPurchaseOrderInput | GRNUpdateManyWithWhereWithoutPurchaseOrderInput[]
+    deleteMany?: GRNScalarWhereInput | GRNScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceUpdateManyWithoutPurchaseOrderNestedInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutPurchaseOrderInput, PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput> | PurchaseInvoiceCreateWithoutPurchaseOrderInput[] | PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput[]
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput | PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput[]
+    upsert?: PurchaseInvoiceUpsertWithWhereUniqueWithoutPurchaseOrderInput | PurchaseInvoiceUpsertWithWhereUniqueWithoutPurchaseOrderInput[]
+    createMany?: PurchaseInvoiceCreateManyPurchaseOrderInputEnvelope
+    set?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    delete?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    connect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    update?: PurchaseInvoiceUpdateWithWhereUniqueWithoutPurchaseOrderInput | PurchaseInvoiceUpdateWithWhereUniqueWithoutPurchaseOrderInput[]
+    updateMany?: PurchaseInvoiceUpdateManyWithWhereWithoutPurchaseOrderInput | PurchaseInvoiceUpdateManyWithWhereWithoutPurchaseOrderInput[]
+    deleteMany?: PurchaseInvoiceScalarWhereInput | PurchaseInvoiceScalarWhereInput[]
+  }
+
   export type PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput = {
     create?: XOR<PurchaseOrderItemCreateWithoutPurchaseOrderInput, PurchaseOrderItemUncheckedCreateWithoutPurchaseOrderInput> | PurchaseOrderItemCreateWithoutPurchaseOrderInput[] | PurchaseOrderItemUncheckedCreateWithoutPurchaseOrderInput[]
     connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutPurchaseOrderInput | PurchaseOrderItemCreateOrConnectWithoutPurchaseOrderInput[]
@@ -59101,6 +66322,34 @@ export namespace Prisma {
     update?: PurchaseOrderItemUpdateWithWhereUniqueWithoutPurchaseOrderInput | PurchaseOrderItemUpdateWithWhereUniqueWithoutPurchaseOrderInput[]
     updateMany?: PurchaseOrderItemUpdateManyWithWhereWithoutPurchaseOrderInput | PurchaseOrderItemUpdateManyWithWhereWithoutPurchaseOrderInput[]
     deleteMany?: PurchaseOrderItemScalarWhereInput | PurchaseOrderItemScalarWhereInput[]
+  }
+
+  export type GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput = {
+    create?: XOR<GRNCreateWithoutPurchaseOrderInput, GRNUncheckedCreateWithoutPurchaseOrderInput> | GRNCreateWithoutPurchaseOrderInput[] | GRNUncheckedCreateWithoutPurchaseOrderInput[]
+    connectOrCreate?: GRNCreateOrConnectWithoutPurchaseOrderInput | GRNCreateOrConnectWithoutPurchaseOrderInput[]
+    upsert?: GRNUpsertWithWhereUniqueWithoutPurchaseOrderInput | GRNUpsertWithWhereUniqueWithoutPurchaseOrderInput[]
+    createMany?: GRNCreateManyPurchaseOrderInputEnvelope
+    set?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    disconnect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    delete?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    connect?: GRNWhereUniqueInput | GRNWhereUniqueInput[]
+    update?: GRNUpdateWithWhereUniqueWithoutPurchaseOrderInput | GRNUpdateWithWhereUniqueWithoutPurchaseOrderInput[]
+    updateMany?: GRNUpdateManyWithWhereWithoutPurchaseOrderInput | GRNUpdateManyWithWhereWithoutPurchaseOrderInput[]
+    deleteMany?: GRNScalarWhereInput | GRNScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderNestedInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutPurchaseOrderInput, PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput> | PurchaseInvoiceCreateWithoutPurchaseOrderInput[] | PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput[]
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput | PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput[]
+    upsert?: PurchaseInvoiceUpsertWithWhereUniqueWithoutPurchaseOrderInput | PurchaseInvoiceUpsertWithWhereUniqueWithoutPurchaseOrderInput[]
+    createMany?: PurchaseInvoiceCreateManyPurchaseOrderInputEnvelope
+    set?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    delete?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    connect?: PurchaseInvoiceWhereUniqueInput | PurchaseInvoiceWhereUniqueInput[]
+    update?: PurchaseInvoiceUpdateWithWhereUniqueWithoutPurchaseOrderInput | PurchaseInvoiceUpdateWithWhereUniqueWithoutPurchaseOrderInput[]
+    updateMany?: PurchaseInvoiceUpdateManyWithWhereWithoutPurchaseOrderInput | PurchaseInvoiceUpdateManyWithWhereWithoutPurchaseOrderInput[]
+    deleteMany?: PurchaseInvoiceScalarWhereInput | PurchaseInvoiceScalarWhereInput[]
   }
 
   export type PurchaseOrderCreateNestedOneWithoutItemsInput = {
@@ -59137,6 +66386,34 @@ export namespace Prisma {
     create?: XOR<UnitCreateWithoutPurchaseOrderItemsInput, UnitUncheckedCreateWithoutPurchaseOrderItemsInput>
     connectOrCreate?: UnitCreateOrConnectWithoutPurchaseOrderItemsInput
     connect?: UnitWhereUniqueInput
+  }
+
+  export type GRNItemCreateNestedManyWithoutPurchaseOrderItemInput = {
+    create?: XOR<GRNItemCreateWithoutPurchaseOrderItemInput, GRNItemUncheckedCreateWithoutPurchaseOrderItemInput> | GRNItemCreateWithoutPurchaseOrderItemInput[] | GRNItemUncheckedCreateWithoutPurchaseOrderItemInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutPurchaseOrderItemInput | GRNItemCreateOrConnectWithoutPurchaseOrderItemInput[]
+    createMany?: GRNItemCreateManyPurchaseOrderItemInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
+  export type PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput, PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput> | PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput[] | PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput | PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput[]
+    createMany?: PurchaseInvoiceItemCreateManyPurchaseOrderItemInputEnvelope
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+  }
+
+  export type GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput = {
+    create?: XOR<GRNItemCreateWithoutPurchaseOrderItemInput, GRNItemUncheckedCreateWithoutPurchaseOrderItemInput> | GRNItemCreateWithoutPurchaseOrderItemInput[] | GRNItemUncheckedCreateWithoutPurchaseOrderItemInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutPurchaseOrderItemInput | GRNItemCreateOrConnectWithoutPurchaseOrderItemInput[]
+    createMany?: GRNItemCreateManyPurchaseOrderItemInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
+  export type PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput, PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput> | PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput[] | PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput | PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput[]
+    createMany?: PurchaseInvoiceItemCreateManyPurchaseOrderItemInputEnvelope
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
   }
 
   export type NullableEnumPackingTypeFieldUpdateOperationsInput = {
@@ -59197,6 +66474,394 @@ export namespace Prisma {
     delete?: UnitWhereInput | boolean
     connect?: UnitWhereUniqueInput
     update?: XOR<XOR<UnitUpdateToOneWithWhereWithoutPurchaseOrderItemsInput, UnitUpdateWithoutPurchaseOrderItemsInput>, UnitUncheckedUpdateWithoutPurchaseOrderItemsInput>
+  }
+
+  export type GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput = {
+    create?: XOR<GRNItemCreateWithoutPurchaseOrderItemInput, GRNItemUncheckedCreateWithoutPurchaseOrderItemInput> | GRNItemCreateWithoutPurchaseOrderItemInput[] | GRNItemUncheckedCreateWithoutPurchaseOrderItemInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutPurchaseOrderItemInput | GRNItemCreateOrConnectWithoutPurchaseOrderItemInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput | GRNItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput[]
+    createMany?: GRNItemCreateManyPurchaseOrderItemInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput | GRNItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutPurchaseOrderItemInput | GRNItemUpdateManyWithWhereWithoutPurchaseOrderItemInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput, PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput> | PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput[] | PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput | PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput[]
+    upsert?: PurchaseInvoiceItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput | PurchaseInvoiceItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput[]
+    createMany?: PurchaseInvoiceItemCreateManyPurchaseOrderItemInputEnvelope
+    set?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    delete?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    update?: PurchaseInvoiceItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput | PurchaseInvoiceItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput[]
+    updateMany?: PurchaseInvoiceItemUpdateManyWithWhereWithoutPurchaseOrderItemInput | PurchaseInvoiceItemUpdateManyWithWhereWithoutPurchaseOrderItemInput[]
+    deleteMany?: PurchaseInvoiceItemScalarWhereInput | PurchaseInvoiceItemScalarWhereInput[]
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput = {
+    create?: XOR<GRNItemCreateWithoutPurchaseOrderItemInput, GRNItemUncheckedCreateWithoutPurchaseOrderItemInput> | GRNItemCreateWithoutPurchaseOrderItemInput[] | GRNItemUncheckedCreateWithoutPurchaseOrderItemInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutPurchaseOrderItemInput | GRNItemCreateOrConnectWithoutPurchaseOrderItemInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput | GRNItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput[]
+    createMany?: GRNItemCreateManyPurchaseOrderItemInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput | GRNItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutPurchaseOrderItemInput | GRNItemUpdateManyWithWhereWithoutPurchaseOrderItemInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput, PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput> | PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput[] | PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput | PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput[]
+    upsert?: PurchaseInvoiceItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput | PurchaseInvoiceItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput[]
+    createMany?: PurchaseInvoiceItemCreateManyPurchaseOrderItemInputEnvelope
+    set?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    delete?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    update?: PurchaseInvoiceItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput | PurchaseInvoiceItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput[]
+    updateMany?: PurchaseInvoiceItemUpdateManyWithWhereWithoutPurchaseOrderItemInput | PurchaseInvoiceItemUpdateManyWithWhereWithoutPurchaseOrderItemInput[]
+    deleteMany?: PurchaseInvoiceItemScalarWhereInput | PurchaseInvoiceItemScalarWhereInput[]
+  }
+
+  export type PurchaseOrderCreateNestedOneWithoutGrnsInput = {
+    create?: XOR<PurchaseOrderCreateWithoutGrnsInput, PurchaseOrderUncheckedCreateWithoutGrnsInput>
+    connectOrCreate?: PurchaseOrderCreateOrConnectWithoutGrnsInput
+    connect?: PurchaseOrderWhereUniqueInput
+  }
+
+  export type CompanyCreateNestedOneWithoutGrnsInput = {
+    create?: XOR<CompanyCreateWithoutGrnsInput, CompanyUncheckedCreateWithoutGrnsInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutGrnsInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type GRNItemCreateNestedManyWithoutGrnInput = {
+    create?: XOR<GRNItemCreateWithoutGrnInput, GRNItemUncheckedCreateWithoutGrnInput> | GRNItemCreateWithoutGrnInput[] | GRNItemUncheckedCreateWithoutGrnInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutGrnInput | GRNItemCreateOrConnectWithoutGrnInput[]
+    createMany?: GRNItemCreateManyGrnInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
+  export type GRNItemUncheckedCreateNestedManyWithoutGrnInput = {
+    create?: XOR<GRNItemCreateWithoutGrnInput, GRNItemUncheckedCreateWithoutGrnInput> | GRNItemCreateWithoutGrnInput[] | GRNItemUncheckedCreateWithoutGrnInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutGrnInput | GRNItemCreateOrConnectWithoutGrnInput[]
+    createMany?: GRNItemCreateManyGrnInputEnvelope
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+  }
+
+  export type PurchaseOrderUpdateOneRequiredWithoutGrnsNestedInput = {
+    create?: XOR<PurchaseOrderCreateWithoutGrnsInput, PurchaseOrderUncheckedCreateWithoutGrnsInput>
+    connectOrCreate?: PurchaseOrderCreateOrConnectWithoutGrnsInput
+    upsert?: PurchaseOrderUpsertWithoutGrnsInput
+    connect?: PurchaseOrderWhereUniqueInput
+    update?: XOR<XOR<PurchaseOrderUpdateToOneWithWhereWithoutGrnsInput, PurchaseOrderUpdateWithoutGrnsInput>, PurchaseOrderUncheckedUpdateWithoutGrnsInput>
+  }
+
+  export type CompanyUpdateOneRequiredWithoutGrnsNestedInput = {
+    create?: XOR<CompanyCreateWithoutGrnsInput, CompanyUncheckedCreateWithoutGrnsInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutGrnsInput
+    upsert?: CompanyUpsertWithoutGrnsInput
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutGrnsInput, CompanyUpdateWithoutGrnsInput>, CompanyUncheckedUpdateWithoutGrnsInput>
+  }
+
+  export type GRNItemUpdateManyWithoutGrnNestedInput = {
+    create?: XOR<GRNItemCreateWithoutGrnInput, GRNItemUncheckedCreateWithoutGrnInput> | GRNItemCreateWithoutGrnInput[] | GRNItemUncheckedCreateWithoutGrnInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutGrnInput | GRNItemCreateOrConnectWithoutGrnInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutGrnInput | GRNItemUpsertWithWhereUniqueWithoutGrnInput[]
+    createMany?: GRNItemCreateManyGrnInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutGrnInput | GRNItemUpdateWithWhereUniqueWithoutGrnInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutGrnInput | GRNItemUpdateManyWithWhereWithoutGrnInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutGrnNestedInput = {
+    create?: XOR<GRNItemCreateWithoutGrnInput, GRNItemUncheckedCreateWithoutGrnInput> | GRNItemCreateWithoutGrnInput[] | GRNItemUncheckedCreateWithoutGrnInput[]
+    connectOrCreate?: GRNItemCreateOrConnectWithoutGrnInput | GRNItemCreateOrConnectWithoutGrnInput[]
+    upsert?: GRNItemUpsertWithWhereUniqueWithoutGrnInput | GRNItemUpsertWithWhereUniqueWithoutGrnInput[]
+    createMany?: GRNItemCreateManyGrnInputEnvelope
+    set?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    disconnect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    delete?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    connect?: GRNItemWhereUniqueInput | GRNItemWhereUniqueInput[]
+    update?: GRNItemUpdateWithWhereUniqueWithoutGrnInput | GRNItemUpdateWithWhereUniqueWithoutGrnInput[]
+    updateMany?: GRNItemUpdateManyWithWhereWithoutGrnInput | GRNItemUpdateManyWithWhereWithoutGrnInput[]
+    deleteMany?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+  }
+
+  export type GRNCreateNestedOneWithoutItemsInput = {
+    create?: XOR<GRNCreateWithoutItemsInput, GRNUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: GRNCreateOrConnectWithoutItemsInput
+    connect?: GRNWhereUniqueInput
+  }
+
+  export type PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput = {
+    create?: XOR<PurchaseOrderItemCreateWithoutGrnItemsInput, PurchaseOrderItemUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutGrnItemsInput
+    connect?: PurchaseOrderItemWhereUniqueInput
+  }
+
+  export type ItemMasterCreateNestedOneWithoutGrnItemsInput = {
+    create?: XOR<ItemMasterCreateWithoutGrnItemsInput, ItemMasterUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: ItemMasterCreateOrConnectWithoutGrnItemsInput
+    connect?: ItemMasterWhereUniqueInput
+  }
+
+  export type ColorCreateNestedOneWithoutGrnItemsInput = {
+    create?: XOR<ColorCreateWithoutGrnItemsInput, ColorUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: ColorCreateOrConnectWithoutGrnItemsInput
+    connect?: ColorWhereUniqueInput
+  }
+
+  export type BrandCreateNestedOneWithoutGrnItemsInput = {
+    create?: XOR<BrandCreateWithoutGrnItemsInput, BrandUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutGrnItemsInput
+    connect?: BrandWhereUniqueInput
+  }
+
+  export type ItemGradeCreateNestedOneWithoutGrnItemsInput = {
+    create?: XOR<ItemGradeCreateWithoutGrnItemsInput, ItemGradeUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: ItemGradeCreateOrConnectWithoutGrnItemsInput
+    connect?: ItemGradeWhereUniqueInput
+  }
+
+  export type UnitCreateNestedOneWithoutGrnItemsInput = {
+    create?: XOR<UnitCreateWithoutGrnItemsInput, UnitUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: UnitCreateOrConnectWithoutGrnItemsInput
+    connect?: UnitWhereUniqueInput
+  }
+
+  export type PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutGrnItemInput, PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput> | PurchaseInvoiceItemCreateWithoutGrnItemInput[] | PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput | PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput[]
+    createMany?: PurchaseInvoiceItemCreateManyGrnItemInputEnvelope
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+  }
+
+  export type PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutGrnItemInput, PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput> | PurchaseInvoiceItemCreateWithoutGrnItemInput[] | PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput | PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput[]
+    createMany?: PurchaseInvoiceItemCreateManyGrnItemInputEnvelope
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+  }
+
+  export type GRNUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<GRNCreateWithoutItemsInput, GRNUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: GRNCreateOrConnectWithoutItemsInput
+    upsert?: GRNUpsertWithoutItemsInput
+    connect?: GRNWhereUniqueInput
+    update?: XOR<XOR<GRNUpdateToOneWithWhereWithoutItemsInput, GRNUpdateWithoutItemsInput>, GRNUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput = {
+    create?: XOR<PurchaseOrderItemCreateWithoutGrnItemsInput, PurchaseOrderItemUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutGrnItemsInput
+    upsert?: PurchaseOrderItemUpsertWithoutGrnItemsInput
+    connect?: PurchaseOrderItemWhereUniqueInput
+    update?: XOR<XOR<PurchaseOrderItemUpdateToOneWithWhereWithoutGrnItemsInput, PurchaseOrderItemUpdateWithoutGrnItemsInput>, PurchaseOrderItemUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput = {
+    create?: XOR<ItemMasterCreateWithoutGrnItemsInput, ItemMasterUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: ItemMasterCreateOrConnectWithoutGrnItemsInput
+    upsert?: ItemMasterUpsertWithoutGrnItemsInput
+    connect?: ItemMasterWhereUniqueInput
+    update?: XOR<XOR<ItemMasterUpdateToOneWithWhereWithoutGrnItemsInput, ItemMasterUpdateWithoutGrnItemsInput>, ItemMasterUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type ColorUpdateOneWithoutGrnItemsNestedInput = {
+    create?: XOR<ColorCreateWithoutGrnItemsInput, ColorUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: ColorCreateOrConnectWithoutGrnItemsInput
+    upsert?: ColorUpsertWithoutGrnItemsInput
+    disconnect?: ColorWhereInput | boolean
+    delete?: ColorWhereInput | boolean
+    connect?: ColorWhereUniqueInput
+    update?: XOR<XOR<ColorUpdateToOneWithWhereWithoutGrnItemsInput, ColorUpdateWithoutGrnItemsInput>, ColorUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type BrandUpdateOneWithoutGrnItemsNestedInput = {
+    create?: XOR<BrandCreateWithoutGrnItemsInput, BrandUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutGrnItemsInput
+    upsert?: BrandUpsertWithoutGrnItemsInput
+    disconnect?: BrandWhereInput | boolean
+    delete?: BrandWhereInput | boolean
+    connect?: BrandWhereUniqueInput
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutGrnItemsInput, BrandUpdateWithoutGrnItemsInput>, BrandUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type ItemGradeUpdateOneWithoutGrnItemsNestedInput = {
+    create?: XOR<ItemGradeCreateWithoutGrnItemsInput, ItemGradeUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: ItemGradeCreateOrConnectWithoutGrnItemsInput
+    upsert?: ItemGradeUpsertWithoutGrnItemsInput
+    disconnect?: ItemGradeWhereInput | boolean
+    delete?: ItemGradeWhereInput | boolean
+    connect?: ItemGradeWhereUniqueInput
+    update?: XOR<XOR<ItemGradeUpdateToOneWithWhereWithoutGrnItemsInput, ItemGradeUpdateWithoutGrnItemsInput>, ItemGradeUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type UnitUpdateOneWithoutGrnItemsNestedInput = {
+    create?: XOR<UnitCreateWithoutGrnItemsInput, UnitUncheckedCreateWithoutGrnItemsInput>
+    connectOrCreate?: UnitCreateOrConnectWithoutGrnItemsInput
+    upsert?: UnitUpsertWithoutGrnItemsInput
+    disconnect?: UnitWhereInput | boolean
+    delete?: UnitWhereInput | boolean
+    connect?: UnitWhereUniqueInput
+    update?: XOR<XOR<UnitUpdateToOneWithWhereWithoutGrnItemsInput, UnitUpdateWithoutGrnItemsInput>, UnitUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutGrnItemInput, PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput> | PurchaseInvoiceItemCreateWithoutGrnItemInput[] | PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput | PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput[]
+    upsert?: PurchaseInvoiceItemUpsertWithWhereUniqueWithoutGrnItemInput | PurchaseInvoiceItemUpsertWithWhereUniqueWithoutGrnItemInput[]
+    createMany?: PurchaseInvoiceItemCreateManyGrnItemInputEnvelope
+    set?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    delete?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    update?: PurchaseInvoiceItemUpdateWithWhereUniqueWithoutGrnItemInput | PurchaseInvoiceItemUpdateWithWhereUniqueWithoutGrnItemInput[]
+    updateMany?: PurchaseInvoiceItemUpdateManyWithWhereWithoutGrnItemInput | PurchaseInvoiceItemUpdateManyWithWhereWithoutGrnItemInput[]
+    deleteMany?: PurchaseInvoiceItemScalarWhereInput | PurchaseInvoiceItemScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutGrnItemInput, PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput> | PurchaseInvoiceItemCreateWithoutGrnItemInput[] | PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput | PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput[]
+    upsert?: PurchaseInvoiceItemUpsertWithWhereUniqueWithoutGrnItemInput | PurchaseInvoiceItemUpsertWithWhereUniqueWithoutGrnItemInput[]
+    createMany?: PurchaseInvoiceItemCreateManyGrnItemInputEnvelope
+    set?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    delete?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    update?: PurchaseInvoiceItemUpdateWithWhereUniqueWithoutGrnItemInput | PurchaseInvoiceItemUpdateWithWhereUniqueWithoutGrnItemInput[]
+    updateMany?: PurchaseInvoiceItemUpdateManyWithWhereWithoutGrnItemInput | PurchaseInvoiceItemUpdateManyWithWhereWithoutGrnItemInput[]
+    deleteMany?: PurchaseInvoiceItemScalarWhereInput | PurchaseInvoiceItemScalarWhereInput[]
+  }
+
+  export type PurchaseOrderCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<PurchaseOrderCreateWithoutInvoicesInput, PurchaseOrderUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: PurchaseOrderCreateOrConnectWithoutInvoicesInput
+    connect?: PurchaseOrderWhereUniqueInput
+  }
+
+  export type CompanyCreateNestedOneWithoutPurchaseInvoicesInput = {
+    create?: XOR<CompanyCreateWithoutPurchaseInvoicesInput, CompanyUncheckedCreateWithoutPurchaseInvoicesInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutPurchaseInvoicesInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type PurchaseInvoiceItemCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutInvoiceInput, PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput> | PurchaseInvoiceItemCreateWithoutInvoiceInput[] | PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput | PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    createMany?: PurchaseInvoiceItemCreateManyInvoiceInputEnvelope
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+  }
+
+  export type PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutInvoiceInput, PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput> | PurchaseInvoiceItemCreateWithoutInvoiceInput[] | PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput | PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    createMany?: PurchaseInvoiceItemCreateManyInvoiceInputEnvelope
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+  }
+
+  export type PurchaseOrderUpdateOneRequiredWithoutInvoicesNestedInput = {
+    create?: XOR<PurchaseOrderCreateWithoutInvoicesInput, PurchaseOrderUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: PurchaseOrderCreateOrConnectWithoutInvoicesInput
+    upsert?: PurchaseOrderUpsertWithoutInvoicesInput
+    connect?: PurchaseOrderWhereUniqueInput
+    update?: XOR<XOR<PurchaseOrderUpdateToOneWithWhereWithoutInvoicesInput, PurchaseOrderUpdateWithoutInvoicesInput>, PurchaseOrderUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type CompanyUpdateOneRequiredWithoutPurchaseInvoicesNestedInput = {
+    create?: XOR<CompanyCreateWithoutPurchaseInvoicesInput, CompanyUncheckedCreateWithoutPurchaseInvoicesInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutPurchaseInvoicesInput
+    upsert?: CompanyUpsertWithoutPurchaseInvoicesInput
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutPurchaseInvoicesInput, CompanyUpdateWithoutPurchaseInvoicesInput>, CompanyUncheckedUpdateWithoutPurchaseInvoicesInput>
+  }
+
+  export type PurchaseInvoiceItemUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutInvoiceInput, PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput> | PurchaseInvoiceItemCreateWithoutInvoiceInput[] | PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput | PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    upsert?: PurchaseInvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput | PurchaseInvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: PurchaseInvoiceItemCreateManyInvoiceInputEnvelope
+    set?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    delete?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    update?: PurchaseInvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput | PurchaseInvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: PurchaseInvoiceItemUpdateManyWithWhereWithoutInvoiceInput | PurchaseInvoiceItemUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: PurchaseInvoiceItemScalarWhereInput | PurchaseInvoiceItemScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<PurchaseInvoiceItemCreateWithoutInvoiceInput, PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput> | PurchaseInvoiceItemCreateWithoutInvoiceInput[] | PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput | PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    upsert?: PurchaseInvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput | PurchaseInvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: PurchaseInvoiceItemCreateManyInvoiceInputEnvelope
+    set?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    disconnect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    delete?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    connect?: PurchaseInvoiceItemWhereUniqueInput | PurchaseInvoiceItemWhereUniqueInput[]
+    update?: PurchaseInvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput | PurchaseInvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: PurchaseInvoiceItemUpdateManyWithWhereWithoutInvoiceInput | PurchaseInvoiceItemUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: PurchaseInvoiceItemScalarWhereInput | PurchaseInvoiceItemScalarWhereInput[]
+  }
+
+  export type PurchaseInvoiceCreateNestedOneWithoutItemsInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutItemsInput, PurchaseInvoiceUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutItemsInput
+    connect?: PurchaseInvoiceWhereUniqueInput
+  }
+
+  export type PurchaseOrderItemCreateNestedOneWithoutInvoiceItemsInput = {
+    create?: XOR<PurchaseOrderItemCreateWithoutInvoiceItemsInput, PurchaseOrderItemUncheckedCreateWithoutInvoiceItemsInput>
+    connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutInvoiceItemsInput
+    connect?: PurchaseOrderItemWhereUniqueInput
+  }
+
+  export type GRNItemCreateNestedOneWithoutInvoiceItemsInput = {
+    create?: XOR<GRNItemCreateWithoutInvoiceItemsInput, GRNItemUncheckedCreateWithoutInvoiceItemsInput>
+    connectOrCreate?: GRNItemCreateOrConnectWithoutInvoiceItemsInput
+    connect?: GRNItemWhereUniqueInput
+  }
+
+  export type PurchaseInvoiceUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<PurchaseInvoiceCreateWithoutItemsInput, PurchaseInvoiceUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PurchaseInvoiceCreateOrConnectWithoutItemsInput
+    upsert?: PurchaseInvoiceUpsertWithoutItemsInput
+    connect?: PurchaseInvoiceWhereUniqueInput
+    update?: XOR<XOR<PurchaseInvoiceUpdateToOneWithWhereWithoutItemsInput, PurchaseInvoiceUpdateWithoutItemsInput>, PurchaseInvoiceUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PurchaseOrderItemUpdateOneRequiredWithoutInvoiceItemsNestedInput = {
+    create?: XOR<PurchaseOrderItemCreateWithoutInvoiceItemsInput, PurchaseOrderItemUncheckedCreateWithoutInvoiceItemsInput>
+    connectOrCreate?: PurchaseOrderItemCreateOrConnectWithoutInvoiceItemsInput
+    upsert?: PurchaseOrderItemUpsertWithoutInvoiceItemsInput
+    connect?: PurchaseOrderItemWhereUniqueInput
+    update?: XOR<XOR<PurchaseOrderItemUpdateToOneWithWhereWithoutInvoiceItemsInput, PurchaseOrderItemUpdateWithoutInvoiceItemsInput>, PurchaseOrderItemUncheckedUpdateWithoutInvoiceItemsInput>
+  }
+
+  export type GRNItemUpdateOneWithoutInvoiceItemsNestedInput = {
+    create?: XOR<GRNItemCreateWithoutInvoiceItemsInput, GRNItemUncheckedCreateWithoutInvoiceItemsInput>
+    connectOrCreate?: GRNItemCreateOrConnectWithoutInvoiceItemsInput
+    upsert?: GRNItemUpsertWithoutInvoiceItemsInput
+    disconnect?: GRNItemWhereInput | boolean
+    delete?: GRNItemWhereInput | boolean
+    connect?: GRNItemWhereUniqueInput
+    update?: XOR<XOR<GRNItemUpdateToOneWithWhereWithoutInvoiceItemsInput, GRNItemUpdateWithoutInvoiceItemsInput>, GRNItemUncheckedUpdateWithoutInvoiceItemsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -60908,6 +68573,8 @@ export namespace Prisma {
     currency?: CurrencyCreateNestedOneWithoutPurchaseOrdersInput
     company: CompanyCreateNestedOneWithoutPurchaseOrdersInput
     items?: PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderUncheckedCreateWithoutWarehouseInput = {
@@ -60929,6 +68596,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderCreateOrConnectWithoutWarehouseInput = {
@@ -61171,6 +68840,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutUnitsInput = {
@@ -61192,6 +68863,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutUnitsInput = {
@@ -61299,6 +68972,7 @@ export namespace Prisma {
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
     company: CompanyCreateNestedOneWithoutItemMastersInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutItemMasterInput
+    grnItems?: GRNItemCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterUncheckedCreateWithoutBaseUnitInput = {
@@ -61314,6 +68988,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterCreateOrConnectWithoutBaseUnitInput = {
@@ -61342,6 +69017,8 @@ export namespace Prisma {
     color?: ColorCreateNestedOneWithoutPurchaseOrderItemsInput
     brand?: BrandCreateNestedOneWithoutPurchaseOrderItemsInput
     itemGrade?: ItemGradeCreateNestedOneWithoutPurchaseOrderItemsInput
+    grnItems?: GRNItemCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemUncheckedCreateWithoutUnitInput = {
@@ -61360,6 +69037,8 @@ export namespace Prisma {
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemCreateOrConnectWithoutUnitInput = {
@@ -61369,6 +69048,46 @@ export namespace Prisma {
 
   export type PurchaseOrderItemCreateManyUnitInputEnvelope = {
     data: PurchaseOrderItemCreateManyUnitInput | PurchaseOrderItemCreateManyUnitInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GRNItemCreateWithoutUnitInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grn: GRNCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutGrnItemsInput
+    color?: ColorCreateNestedOneWithoutGrnItemsInput
+    brand?: BrandCreateNestedOneWithoutGrnItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutGrnItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUncheckedCreateWithoutUnitInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemCreateOrConnectWithoutUnitInput = {
+    where: GRNItemWhereUniqueInput
+    create: XOR<GRNItemCreateWithoutUnitInput, GRNItemUncheckedCreateWithoutUnitInput>
+  }
+
+  export type GRNItemCreateManyUnitInputEnvelope = {
+    data: GRNItemCreateManyUnitInput | GRNItemCreateManyUnitInput[]
     skipDuplicates?: boolean
   }
 
@@ -61401,6 +69120,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutUnitsInput = {
@@ -61422,6 +69143,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UnitConversionUpsertWithWhereUniqueWithoutFromUnitInput = {
@@ -61572,6 +69295,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"PurchaseOrderItem"> | Date | string
   }
 
+  export type GRNItemUpsertWithWhereUniqueWithoutUnitInput = {
+    where: GRNItemWhereUniqueInput
+    update: XOR<GRNItemUpdateWithoutUnitInput, GRNItemUncheckedUpdateWithoutUnitInput>
+    create: XOR<GRNItemCreateWithoutUnitInput, GRNItemUncheckedCreateWithoutUnitInput>
+  }
+
+  export type GRNItemUpdateWithWhereUniqueWithoutUnitInput = {
+    where: GRNItemWhereUniqueInput
+    data: XOR<GRNItemUpdateWithoutUnitInput, GRNItemUncheckedUpdateWithoutUnitInput>
+  }
+
+  export type GRNItemUpdateManyWithWhereWithoutUnitInput = {
+    where: GRNItemScalarWhereInput
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyWithoutUnitInput>
+  }
+
+  export type GRNItemScalarWhereInput = {
+    AND?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+    OR?: GRNItemScalarWhereInput[]
+    NOT?: GRNItemScalarWhereInput | GRNItemScalarWhereInput[]
+    id?: StringFilter<"GRNItem"> | string
+    grnId?: StringFilter<"GRNItem"> | string
+    purchaseOrderItemId?: StringFilter<"GRNItem"> | string
+    itemMasterId?: StringFilter<"GRNItem"> | string
+    colorId?: StringNullableFilter<"GRNItem"> | string | null
+    brandId?: StringNullableFilter<"GRNItem"> | string | null
+    itemGradeId?: StringNullableFilter<"GRNItem"> | string | null
+    receivedQty?: FloatFilter<"GRNItem"> | number
+    pcs?: FloatNullableFilter<"GRNItem"> | number | null
+    unitId?: IntNullableFilter<"GRNItem"> | number | null
+    createdAt?: DateTimeFilter<"GRNItem"> | Date | string
+    updatedAt?: DateTimeFilter<"GRNItem"> | Date | string
+  }
+
   export type CompanyCreateWithoutUnitConversionsInput = {
     legalName: string
     tradeName?: string | null
@@ -61590,6 +69347,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutUnitConversionsInput = {
@@ -61611,6 +69370,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUncheckedCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutUnitConversionsInput = {
@@ -61632,6 +69393,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutConversionsFromInput = {
@@ -61649,6 +69411,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitCreateOrConnectWithoutConversionsFromInput = {
@@ -61670,6 +69433,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutConversionsToInput = {
@@ -61687,6 +69451,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitCreateOrConnectWithoutConversionsToInput = {
@@ -61723,6 +69488,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutUnitConversionsInput = {
@@ -61744,6 +69511,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUncheckedUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UnitUpsertWithoutConversionsFromInput = {
@@ -61771,6 +69540,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutConversionsFromInput = {
@@ -61788,6 +69558,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUpsertWithoutConversionsToInput = {
@@ -61815,6 +69586,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutConversionsToInput = {
@@ -61832,6 +69604,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type ItemGroupCreateWithoutCompanyInput = {
@@ -61879,6 +69652,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutColorInput
+    grnItems?: GRNItemCreateNestedManyWithoutColorInput
   }
 
   export type ColorUncheckedCreateWithoutCompanyInput = {
@@ -61890,6 +69664,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutColorInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutColorInput
   }
 
   export type ColorCreateOrConnectWithoutCompanyInput = {
@@ -61910,6 +69685,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutBrandInput
+    grnItems?: GRNItemCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateWithoutCompanyInput = {
@@ -61920,6 +69696,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutBrandInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandCreateOrConnectWithoutCompanyInput = {
@@ -61946,6 +69723,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutCompanyInput = {
@@ -61963,6 +69741,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitCreateOrConnectWithoutCompanyInput = {
@@ -61983,6 +69762,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutItemGradeInput
+    grnItems?: GRNItemCreateNestedManyWithoutItemGradeInput
   }
 
   export type ItemGradeUncheckedCreateWithoutCompanyInput = {
@@ -61993,6 +69773,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemGradeInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemGradeInput
   }
 
   export type ItemGradeCreateOrConnectWithoutCompanyInput = {
@@ -62045,6 +69826,7 @@ export namespace Prisma {
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
     baseUnit: UnitCreateNestedOneWithoutItemMastersInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutItemMasterInput
+    grnItems?: GRNItemCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterUncheckedCreateWithoutCompanyInput = {
@@ -62060,6 +69842,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterCreateOrConnectWithoutCompanyInput = {
@@ -62091,6 +69874,8 @@ export namespace Prisma {
     warehouse?: WarehouseCreateNestedOneWithoutPurchaseOrdersInput
     currency?: CurrencyCreateNestedOneWithoutPurchaseOrdersInput
     items?: PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderUncheckedCreateWithoutCompanyInput = {
@@ -62112,6 +69897,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderCreateOrConnectWithoutCompanyInput = {
@@ -62121,6 +69908,72 @@ export namespace Prisma {
 
   export type PurchaseOrderCreateManyCompanyInputEnvelope = {
     data: PurchaseOrderCreateManyCompanyInput | PurchaseOrderCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GRNCreateWithoutCompanyInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrder: PurchaseOrderCreateNestedOneWithoutGrnsInput
+    items?: GRNItemCreateNestedManyWithoutGrnInput
+  }
+
+  export type GRNUncheckedCreateWithoutCompanyInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: GRNItemUncheckedCreateNestedManyWithoutGrnInput
+  }
+
+  export type GRNCreateOrConnectWithoutCompanyInput = {
+    where: GRNWhereUniqueInput
+    create: XOR<GRNCreateWithoutCompanyInput, GRNUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type GRNCreateManyCompanyInputEnvelope = {
+    data: GRNCreateManyCompanyInput | GRNCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PurchaseInvoiceCreateWithoutCompanyInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    totalAmount?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrder: PurchaseOrderCreateNestedOneWithoutInvoicesInput
+    items?: PurchaseInvoiceItemCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type PurchaseInvoiceUncheckedCreateWithoutCompanyInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    totalAmount?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type PurchaseInvoiceCreateOrConnectWithoutCompanyInput = {
+    where: PurchaseInvoiceWhereUniqueInput
+    create: XOR<PurchaseInvoiceCreateWithoutCompanyInput, PurchaseInvoiceUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type PurchaseInvoiceCreateManyCompanyInputEnvelope = {
+    data: PurchaseInvoiceCreateManyCompanyInput | PurchaseInvoiceCreateManyCompanyInput[]
     skipDuplicates?: boolean
   }
 
@@ -62323,6 +70176,67 @@ export namespace Prisma {
     data: XOR<PurchaseOrderUpdateManyMutationInput, PurchaseOrderUncheckedUpdateManyWithoutCompanyInput>
   }
 
+  export type GRNUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: GRNWhereUniqueInput
+    update: XOR<GRNUpdateWithoutCompanyInput, GRNUncheckedUpdateWithoutCompanyInput>
+    create: XOR<GRNCreateWithoutCompanyInput, GRNUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type GRNUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: GRNWhereUniqueInput
+    data: XOR<GRNUpdateWithoutCompanyInput, GRNUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type GRNUpdateManyWithWhereWithoutCompanyInput = {
+    where: GRNScalarWhereInput
+    data: XOR<GRNUpdateManyMutationInput, GRNUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type GRNScalarWhereInput = {
+    AND?: GRNScalarWhereInput | GRNScalarWhereInput[]
+    OR?: GRNScalarWhereInput[]
+    NOT?: GRNScalarWhereInput | GRNScalarWhereInput[]
+    id?: StringFilter<"GRN"> | string
+    grnNumber?: StringFilter<"GRN"> | string
+    date?: DateTimeFilter<"GRN"> | Date | string
+    purchaseOrderId?: StringFilter<"GRN"> | string
+    remarks?: StringNullableFilter<"GRN"> | string | null
+    companyId?: IntFilter<"GRN"> | number
+    createdAt?: DateTimeFilter<"GRN"> | Date | string
+    updatedAt?: DateTimeFilter<"GRN"> | Date | string
+  }
+
+  export type PurchaseInvoiceUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: PurchaseInvoiceWhereUniqueInput
+    update: XOR<PurchaseInvoiceUpdateWithoutCompanyInput, PurchaseInvoiceUncheckedUpdateWithoutCompanyInput>
+    create: XOR<PurchaseInvoiceCreateWithoutCompanyInput, PurchaseInvoiceUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type PurchaseInvoiceUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: PurchaseInvoiceWhereUniqueInput
+    data: XOR<PurchaseInvoiceUpdateWithoutCompanyInput, PurchaseInvoiceUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type PurchaseInvoiceUpdateManyWithWhereWithoutCompanyInput = {
+    where: PurchaseInvoiceScalarWhereInput
+    data: XOR<PurchaseInvoiceUpdateManyMutationInput, PurchaseInvoiceUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type PurchaseInvoiceScalarWhereInput = {
+    AND?: PurchaseInvoiceScalarWhereInput | PurchaseInvoiceScalarWhereInput[]
+    OR?: PurchaseInvoiceScalarWhereInput[]
+    NOT?: PurchaseInvoiceScalarWhereInput | PurchaseInvoiceScalarWhereInput[]
+    id?: StringFilter<"PurchaseInvoice"> | string
+    invoiceNumber?: StringFilter<"PurchaseInvoice"> | string
+    date?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+    purchaseOrderId?: StringFilter<"PurchaseInvoice"> | string
+    totalAmount?: FloatFilter<"PurchaseInvoice"> | number
+    status?: StringFilter<"PurchaseInvoice"> | string
+    companyId?: IntFilter<"PurchaseInvoice"> | number
+    createdAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+    updatedAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
+  }
+
   export type JournalEntryCreateWithoutFiscalYearInput = {
     number: string
     date: Date | string
@@ -62409,6 +70323,8 @@ export namespace Prisma {
     warehouse?: WarehouseCreateNestedOneWithoutPurchaseOrdersInput
     company: CompanyCreateNestedOneWithoutPurchaseOrdersInput
     items?: PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderUncheckedCreateWithoutCurrencyInput = {
@@ -62430,6 +70346,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderCreateOrConnectWithoutCurrencyInput = {
@@ -62543,6 +70461,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionCreateNestedManyWithoutToUnitInput
     itemMasters?: ItemMasterCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutProductsInput = {
@@ -62560,6 +70479,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutBaseUnitInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitCreateOrConnectWithoutProductsInput = {
@@ -62665,6 +70585,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUpdateManyWithoutToUnitNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutProductsInput = {
@@ -62682,6 +70603,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type VariantUpsertWithWhereUniqueWithoutProductInput = {
@@ -63018,6 +70940,8 @@ export namespace Prisma {
     currency?: CurrencyCreateNestedOneWithoutPurchaseOrdersInput
     company: CompanyCreateNestedOneWithoutPurchaseOrdersInput
     items?: PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderUncheckedCreateWithoutAccountInput = {
@@ -63039,6 +70963,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderCreateOrConnectWithoutAccountInput = {
@@ -63505,6 +71431,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutItemGroupsInput = {
@@ -63526,6 +71454,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutItemGroupsInput = {
@@ -63546,6 +71476,7 @@ export namespace Prisma {
     baseUnit: UnitCreateNestedOneWithoutItemMastersInput
     company: CompanyCreateNestedOneWithoutItemMastersInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutItemMasterInput
+    grnItems?: GRNItemCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterUncheckedCreateWithoutItemGroupInput = {
@@ -63561,6 +71492,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterCreateOrConnectWithoutItemGroupInput = {
@@ -63655,6 +71587,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutItemGroupsInput = {
@@ -63676,6 +71610,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ItemMasterUpsertWithWhereUniqueWithoutItemGroupInput = {
@@ -63712,6 +71648,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutColorsInput = {
@@ -63733,6 +71671,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutColorsInput = {
@@ -63756,6 +71696,8 @@ export namespace Prisma {
     brand?: BrandCreateNestedOneWithoutPurchaseOrderItemsInput
     itemGrade?: ItemGradeCreateNestedOneWithoutPurchaseOrderItemsInput
     unit?: UnitCreateNestedOneWithoutPurchaseOrderItemsInput
+    grnItems?: GRNItemCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemUncheckedCreateWithoutColorInput = {
@@ -63774,6 +71716,8 @@ export namespace Prisma {
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemCreateOrConnectWithoutColorInput = {
@@ -63783,6 +71727,46 @@ export namespace Prisma {
 
   export type PurchaseOrderItemCreateManyColorInputEnvelope = {
     data: PurchaseOrderItemCreateManyColorInput | PurchaseOrderItemCreateManyColorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GRNItemCreateWithoutColorInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grn: GRNCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutGrnItemsInput
+    brand?: BrandCreateNestedOneWithoutGrnItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutGrnItemsInput
+    unit?: UnitCreateNestedOneWithoutGrnItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUncheckedCreateWithoutColorInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemCreateOrConnectWithoutColorInput = {
+    where: GRNItemWhereUniqueInput
+    create: XOR<GRNItemCreateWithoutColorInput, GRNItemUncheckedCreateWithoutColorInput>
+  }
+
+  export type GRNItemCreateManyColorInputEnvelope = {
+    data: GRNItemCreateManyColorInput | GRNItemCreateManyColorInput[]
     skipDuplicates?: boolean
   }
 
@@ -63815,6 +71799,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutColorsInput = {
@@ -63836,6 +71822,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type PurchaseOrderItemUpsertWithWhereUniqueWithoutColorInput = {
@@ -63852,6 +71840,22 @@ export namespace Prisma {
   export type PurchaseOrderItemUpdateManyWithWhereWithoutColorInput = {
     where: PurchaseOrderItemScalarWhereInput
     data: XOR<PurchaseOrderItemUpdateManyMutationInput, PurchaseOrderItemUncheckedUpdateManyWithoutColorInput>
+  }
+
+  export type GRNItemUpsertWithWhereUniqueWithoutColorInput = {
+    where: GRNItemWhereUniqueInput
+    update: XOR<GRNItemUpdateWithoutColorInput, GRNItemUncheckedUpdateWithoutColorInput>
+    create: XOR<GRNItemCreateWithoutColorInput, GRNItemUncheckedCreateWithoutColorInput>
+  }
+
+  export type GRNItemUpdateWithWhereUniqueWithoutColorInput = {
+    where: GRNItemWhereUniqueInput
+    data: XOR<GRNItemUpdateWithoutColorInput, GRNItemUncheckedUpdateWithoutColorInput>
+  }
+
+  export type GRNItemUpdateManyWithWhereWithoutColorInput = {
+    where: GRNItemScalarWhereInput
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyWithoutColorInput>
   }
 
   export type CompanyCreateWithoutBrandsInput = {
@@ -63872,6 +71876,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBrandsInput = {
@@ -63893,6 +71899,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutBrandsInput = {
@@ -63916,6 +71924,8 @@ export namespace Prisma {
     color?: ColorCreateNestedOneWithoutPurchaseOrderItemsInput
     itemGrade?: ItemGradeCreateNestedOneWithoutPurchaseOrderItemsInput
     unit?: UnitCreateNestedOneWithoutPurchaseOrderItemsInput
+    grnItems?: GRNItemCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemUncheckedCreateWithoutBrandInput = {
@@ -63934,6 +71944,8 @@ export namespace Prisma {
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemCreateOrConnectWithoutBrandInput = {
@@ -63943,6 +71955,46 @@ export namespace Prisma {
 
   export type PurchaseOrderItemCreateManyBrandInputEnvelope = {
     data: PurchaseOrderItemCreateManyBrandInput | PurchaseOrderItemCreateManyBrandInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GRNItemCreateWithoutBrandInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grn: GRNCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutGrnItemsInput
+    color?: ColorCreateNestedOneWithoutGrnItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutGrnItemsInput
+    unit?: UnitCreateNestedOneWithoutGrnItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUncheckedCreateWithoutBrandInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemCreateOrConnectWithoutBrandInput = {
+    where: GRNItemWhereUniqueInput
+    create: XOR<GRNItemCreateWithoutBrandInput, GRNItemUncheckedCreateWithoutBrandInput>
+  }
+
+  export type GRNItemCreateManyBrandInputEnvelope = {
+    data: GRNItemCreateManyBrandInput | GRNItemCreateManyBrandInput[]
     skipDuplicates?: boolean
   }
 
@@ -63975,6 +72027,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBrandsInput = {
@@ -63996,6 +72050,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type PurchaseOrderItemUpsertWithWhereUniqueWithoutBrandInput = {
@@ -64012,6 +72068,22 @@ export namespace Prisma {
   export type PurchaseOrderItemUpdateManyWithWhereWithoutBrandInput = {
     where: PurchaseOrderItemScalarWhereInput
     data: XOR<PurchaseOrderItemUpdateManyMutationInput, PurchaseOrderItemUncheckedUpdateManyWithoutBrandInput>
+  }
+
+  export type GRNItemUpsertWithWhereUniqueWithoutBrandInput = {
+    where: GRNItemWhereUniqueInput
+    update: XOR<GRNItemUpdateWithoutBrandInput, GRNItemUncheckedUpdateWithoutBrandInput>
+    create: XOR<GRNItemCreateWithoutBrandInput, GRNItemUncheckedCreateWithoutBrandInput>
+  }
+
+  export type GRNItemUpdateWithWhereUniqueWithoutBrandInput = {
+    where: GRNItemWhereUniqueInput
+    data: XOR<GRNItemUpdateWithoutBrandInput, GRNItemUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type GRNItemUpdateManyWithWhereWithoutBrandInput = {
+    where: GRNItemScalarWhereInput
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyWithoutBrandInput>
   }
 
   export type CompanyCreateWithoutItemGradesInput = {
@@ -64032,6 +72104,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutItemGradesInput = {
@@ -64053,6 +72127,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutItemGradesInput = {
@@ -64076,6 +72152,8 @@ export namespace Prisma {
     color?: ColorCreateNestedOneWithoutPurchaseOrderItemsInput
     brand?: BrandCreateNestedOneWithoutPurchaseOrderItemsInput
     unit?: UnitCreateNestedOneWithoutPurchaseOrderItemsInput
+    grnItems?: GRNItemCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemUncheckedCreateWithoutItemGradeInput = {
@@ -64094,6 +72172,8 @@ export namespace Prisma {
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemCreateOrConnectWithoutItemGradeInput = {
@@ -64103,6 +72183,46 @@ export namespace Prisma {
 
   export type PurchaseOrderItemCreateManyItemGradeInputEnvelope = {
     data: PurchaseOrderItemCreateManyItemGradeInput | PurchaseOrderItemCreateManyItemGradeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GRNItemCreateWithoutItemGradeInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grn: GRNCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutGrnItemsInput
+    color?: ColorCreateNestedOneWithoutGrnItemsInput
+    brand?: BrandCreateNestedOneWithoutGrnItemsInput
+    unit?: UnitCreateNestedOneWithoutGrnItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUncheckedCreateWithoutItemGradeInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemCreateOrConnectWithoutItemGradeInput = {
+    where: GRNItemWhereUniqueInput
+    create: XOR<GRNItemCreateWithoutItemGradeInput, GRNItemUncheckedCreateWithoutItemGradeInput>
+  }
+
+  export type GRNItemCreateManyItemGradeInputEnvelope = {
+    data: GRNItemCreateManyItemGradeInput | GRNItemCreateManyItemGradeInput[]
     skipDuplicates?: boolean
   }
 
@@ -64135,6 +72255,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutItemGradesInput = {
@@ -64156,6 +72278,8 @@ export namespace Prisma {
     unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type PurchaseOrderItemUpsertWithWhereUniqueWithoutItemGradeInput = {
@@ -64172,6 +72296,22 @@ export namespace Prisma {
   export type PurchaseOrderItemUpdateManyWithWhereWithoutItemGradeInput = {
     where: PurchaseOrderItemScalarWhereInput
     data: XOR<PurchaseOrderItemUpdateManyMutationInput, PurchaseOrderItemUncheckedUpdateManyWithoutItemGradeInput>
+  }
+
+  export type GRNItemUpsertWithWhereUniqueWithoutItemGradeInput = {
+    where: GRNItemWhereUniqueInput
+    update: XOR<GRNItemUpdateWithoutItemGradeInput, GRNItemUncheckedUpdateWithoutItemGradeInput>
+    create: XOR<GRNItemCreateWithoutItemGradeInput, GRNItemUncheckedCreateWithoutItemGradeInput>
+  }
+
+  export type GRNItemUpdateWithWhereUniqueWithoutItemGradeInput = {
+    where: GRNItemWhereUniqueInput
+    data: XOR<GRNItemUpdateWithoutItemGradeInput, GRNItemUncheckedUpdateWithoutItemGradeInput>
+  }
+
+  export type GRNItemUpdateManyWithWhereWithoutItemGradeInput = {
+    where: GRNItemScalarWhereInput
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyWithoutItemGradeInput>
   }
 
   export type ItemGroupCreateWithoutItemMastersInput = {
@@ -64219,6 +72359,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionCreateNestedManyWithoutToUnitInput
     products?: ProductCreateNestedManyWithoutUnitInput
     purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutItemMastersInput = {
@@ -64236,6 +72377,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
     products?: ProductUncheckedCreateNestedManyWithoutUnitInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutUnitInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitCreateOrConnectWithoutItemMastersInput = {
@@ -64261,6 +72403,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeCreateNestedManyWithoutCompanyInput
     unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutItemMastersInput = {
@@ -64282,6 +72426,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUncheckedCreateNestedManyWithoutCompanyInput
     unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutItemMastersInput = {
@@ -64305,6 +72451,8 @@ export namespace Prisma {
     brand?: BrandCreateNestedOneWithoutPurchaseOrderItemsInput
     itemGrade?: ItemGradeCreateNestedOneWithoutPurchaseOrderItemsInput
     unit?: UnitCreateNestedOneWithoutPurchaseOrderItemsInput
+    grnItems?: GRNItemCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemUncheckedCreateWithoutItemMasterInput = {
@@ -64323,6 +72471,8 @@ export namespace Prisma {
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemCreateOrConnectWithoutItemMasterInput = {
@@ -64332,6 +72482,46 @@ export namespace Prisma {
 
   export type PurchaseOrderItemCreateManyItemMasterInputEnvelope = {
     data: PurchaseOrderItemCreateManyItemMasterInput | PurchaseOrderItemCreateManyItemMasterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GRNItemCreateWithoutItemMasterInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grn: GRNCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
+    color?: ColorCreateNestedOneWithoutGrnItemsInput
+    brand?: BrandCreateNestedOneWithoutGrnItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutGrnItemsInput
+    unit?: UnitCreateNestedOneWithoutGrnItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUncheckedCreateWithoutItemMasterInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemCreateOrConnectWithoutItemMasterInput = {
+    where: GRNItemWhereUniqueInput
+    create: XOR<GRNItemCreateWithoutItemMasterInput, GRNItemUncheckedCreateWithoutItemMasterInput>
+  }
+
+  export type GRNItemCreateManyItemMasterInputEnvelope = {
+    data: GRNItemCreateManyItemMasterInput | GRNItemCreateManyItemMasterInput[]
     skipDuplicates?: boolean
   }
 
@@ -64397,6 +72587,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUpdateManyWithoutToUnitNestedInput
     products?: ProductUpdateManyWithoutUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutItemMastersInput = {
@@ -64414,6 +72605,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
     products?: ProductUncheckedUpdateManyWithoutUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type CompanyUpsertWithoutItemMastersInput = {
@@ -64445,6 +72637,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUpdateManyWithoutCompanyNestedInput
     unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutItemMastersInput = {
@@ -64466,6 +72660,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUncheckedUpdateManyWithoutCompanyNestedInput
     unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type PurchaseOrderItemUpsertWithWhereUniqueWithoutItemMasterInput = {
@@ -64482,6 +72678,22 @@ export namespace Prisma {
   export type PurchaseOrderItemUpdateManyWithWhereWithoutItemMasterInput = {
     where: PurchaseOrderItemScalarWhereInput
     data: XOR<PurchaseOrderItemUpdateManyMutationInput, PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterInput>
+  }
+
+  export type GRNItemUpsertWithWhereUniqueWithoutItemMasterInput = {
+    where: GRNItemWhereUniqueInput
+    update: XOR<GRNItemUpdateWithoutItemMasterInput, GRNItemUncheckedUpdateWithoutItemMasterInput>
+    create: XOR<GRNItemCreateWithoutItemMasterInput, GRNItemUncheckedCreateWithoutItemMasterInput>
+  }
+
+  export type GRNItemUpdateWithWhereUniqueWithoutItemMasterInput = {
+    where: GRNItemWhereUniqueInput
+    data: XOR<GRNItemUpdateWithoutItemMasterInput, GRNItemUncheckedUpdateWithoutItemMasterInput>
+  }
+
+  export type GRNItemUpdateManyWithWhereWithoutItemMasterInput = {
+    where: GRNItemScalarWhereInput
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyWithoutItemMasterInput>
   }
 
   export type AccountCreateWithoutPurchaseOrdersInput = {
@@ -64592,6 +72804,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeCreateNestedManyWithoutCompanyInput
     unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -64613,6 +72827,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUncheckedCreateNestedManyWithoutCompanyInput
     unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -64636,6 +72852,8 @@ export namespace Prisma {
     brand?: BrandCreateNestedOneWithoutPurchaseOrderItemsInput
     itemGrade?: ItemGradeCreateNestedOneWithoutPurchaseOrderItemsInput
     unit?: UnitCreateNestedOneWithoutPurchaseOrderItemsInput
+    grnItems?: GRNItemCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemUncheckedCreateWithoutPurchaseOrderInput = {
@@ -64654,6 +72872,8 @@ export namespace Prisma {
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
   }
 
   export type PurchaseOrderItemCreateOrConnectWithoutPurchaseOrderInput = {
@@ -64663,6 +72883,72 @@ export namespace Prisma {
 
   export type PurchaseOrderItemCreateManyPurchaseOrderInputEnvelope = {
     data: PurchaseOrderItemCreateManyPurchaseOrderInput | PurchaseOrderItemCreateManyPurchaseOrderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GRNCreateWithoutPurchaseOrderInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutGrnsInput
+    items?: GRNItemCreateNestedManyWithoutGrnInput
+  }
+
+  export type GRNUncheckedCreateWithoutPurchaseOrderInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    remarks?: string | null
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: GRNItemUncheckedCreateNestedManyWithoutGrnInput
+  }
+
+  export type GRNCreateOrConnectWithoutPurchaseOrderInput = {
+    where: GRNWhereUniqueInput
+    create: XOR<GRNCreateWithoutPurchaseOrderInput, GRNUncheckedCreateWithoutPurchaseOrderInput>
+  }
+
+  export type GRNCreateManyPurchaseOrderInputEnvelope = {
+    data: GRNCreateManyPurchaseOrderInput | GRNCreateManyPurchaseOrderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PurchaseInvoiceCreateWithoutPurchaseOrderInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    totalAmount?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutPurchaseInvoicesInput
+    items?: PurchaseInvoiceItemCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    totalAmount?: number
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type PurchaseInvoiceCreateOrConnectWithoutPurchaseOrderInput = {
+    where: PurchaseInvoiceWhereUniqueInput
+    create: XOR<PurchaseInvoiceCreateWithoutPurchaseOrderInput, PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput>
+  }
+
+  export type PurchaseInvoiceCreateManyPurchaseOrderInputEnvelope = {
+    data: PurchaseInvoiceCreateManyPurchaseOrderInput | PurchaseInvoiceCreateManyPurchaseOrderInput[]
     skipDuplicates?: boolean
   }
 
@@ -64803,6 +73089,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUpdateManyWithoutCompanyNestedInput
     unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -64824,6 +73112,8 @@ export namespace Prisma {
     itemGrades?: ItemGradeUncheckedUpdateManyWithoutCompanyNestedInput
     unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type PurchaseOrderItemUpsertWithWhereUniqueWithoutPurchaseOrderInput = {
@@ -64840,6 +73130,38 @@ export namespace Prisma {
   export type PurchaseOrderItemUpdateManyWithWhereWithoutPurchaseOrderInput = {
     where: PurchaseOrderItemScalarWhereInput
     data: XOR<PurchaseOrderItemUpdateManyMutationInput, PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderInput>
+  }
+
+  export type GRNUpsertWithWhereUniqueWithoutPurchaseOrderInput = {
+    where: GRNWhereUniqueInput
+    update: XOR<GRNUpdateWithoutPurchaseOrderInput, GRNUncheckedUpdateWithoutPurchaseOrderInput>
+    create: XOR<GRNCreateWithoutPurchaseOrderInput, GRNUncheckedCreateWithoutPurchaseOrderInput>
+  }
+
+  export type GRNUpdateWithWhereUniqueWithoutPurchaseOrderInput = {
+    where: GRNWhereUniqueInput
+    data: XOR<GRNUpdateWithoutPurchaseOrderInput, GRNUncheckedUpdateWithoutPurchaseOrderInput>
+  }
+
+  export type GRNUpdateManyWithWhereWithoutPurchaseOrderInput = {
+    where: GRNScalarWhereInput
+    data: XOR<GRNUpdateManyMutationInput, GRNUncheckedUpdateManyWithoutPurchaseOrderInput>
+  }
+
+  export type PurchaseInvoiceUpsertWithWhereUniqueWithoutPurchaseOrderInput = {
+    where: PurchaseInvoiceWhereUniqueInput
+    update: XOR<PurchaseInvoiceUpdateWithoutPurchaseOrderInput, PurchaseInvoiceUncheckedUpdateWithoutPurchaseOrderInput>
+    create: XOR<PurchaseInvoiceCreateWithoutPurchaseOrderInput, PurchaseInvoiceUncheckedCreateWithoutPurchaseOrderInput>
+  }
+
+  export type PurchaseInvoiceUpdateWithWhereUniqueWithoutPurchaseOrderInput = {
+    where: PurchaseInvoiceWhereUniqueInput
+    data: XOR<PurchaseInvoiceUpdateWithoutPurchaseOrderInput, PurchaseInvoiceUncheckedUpdateWithoutPurchaseOrderInput>
+  }
+
+  export type PurchaseInvoiceUpdateManyWithWhereWithoutPurchaseOrderInput = {
+    where: PurchaseInvoiceScalarWhereInput
+    data: XOR<PurchaseInvoiceUpdateManyMutationInput, PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderInput>
   }
 
   export type PurchaseOrderCreateWithoutItemsInput = {
@@ -64861,6 +73183,8 @@ export namespace Prisma {
     warehouse?: WarehouseCreateNestedOneWithoutPurchaseOrdersInput
     currency?: CurrencyCreateNestedOneWithoutPurchaseOrdersInput
     company: CompanyCreateNestedOneWithoutPurchaseOrdersInput
+    grns?: GRNCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderUncheckedCreateWithoutItemsInput = {
@@ -64882,6 +73206,8 @@ export namespace Prisma {
     companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    grns?: GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutPurchaseOrderInput
   }
 
   export type PurchaseOrderCreateOrConnectWithoutItemsInput = {
@@ -64902,6 +73228,7 @@ export namespace Prisma {
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
     baseUnit: UnitCreateNestedOneWithoutItemMastersInput
     company: CompanyCreateNestedOneWithoutItemMastersInput
+    grnItems?: GRNItemCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterUncheckedCreateWithoutPurchaseOrderItemsInput = {
@@ -64917,6 +73244,7 @@ export namespace Prisma {
     companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemMasterInput
   }
 
   export type ItemMasterCreateOrConnectWithoutPurchaseOrderItemsInput = {
@@ -64933,6 +73261,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutColorsInput
+    grnItems?: GRNItemCreateNestedManyWithoutColorInput
   }
 
   export type ColorUncheckedCreateWithoutPurchaseOrderItemsInput = {
@@ -64944,6 +73273,7 @@ export namespace Prisma {
     companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutColorInput
   }
 
   export type ColorCreateOrConnectWithoutPurchaseOrderItemsInput = {
@@ -64959,6 +73289,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutBrandsInput
+    grnItems?: GRNItemCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateWithoutPurchaseOrderItemsInput = {
@@ -64969,6 +73300,7 @@ export namespace Prisma {
     companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandCreateOrConnectWithoutPurchaseOrderItemsInput = {
@@ -64984,6 +73316,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutItemGradesInput
+    grnItems?: GRNItemCreateNestedManyWithoutItemGradeInput
   }
 
   export type ItemGradeUncheckedCreateWithoutPurchaseOrderItemsInput = {
@@ -64994,6 +73327,7 @@ export namespace Prisma {
     companyId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemGradeInput
   }
 
   export type ItemGradeCreateOrConnectWithoutPurchaseOrderItemsInput = {
@@ -65015,6 +73349,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionCreateNestedManyWithoutToUnitInput
     products?: ProductCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterCreateNestedManyWithoutBaseUnitInput
+    grnItems?: GRNItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutPurchaseOrderItemsInput = {
@@ -65032,11 +73367,84 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
     products?: ProductUncheckedCreateNestedManyWithoutUnitInput
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutBaseUnitInput
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitCreateOrConnectWithoutPurchaseOrderItemsInput = {
     where: UnitWhereUniqueInput
     create: XOR<UnitCreateWithoutPurchaseOrderItemsInput, UnitUncheckedCreateWithoutPurchaseOrderItemsInput>
+  }
+
+  export type GRNItemCreateWithoutPurchaseOrderItemInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grn: GRNCreateNestedOneWithoutItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutGrnItemsInput
+    color?: ColorCreateNestedOneWithoutGrnItemsInput
+    brand?: BrandCreateNestedOneWithoutGrnItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutGrnItemsInput
+    unit?: UnitCreateNestedOneWithoutGrnItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUncheckedCreateWithoutPurchaseOrderItemInput = {
+    id?: string
+    grnId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemCreateOrConnectWithoutPurchaseOrderItemInput = {
+    where: GRNItemWhereUniqueInput
+    create: XOR<GRNItemCreateWithoutPurchaseOrderItemInput, GRNItemUncheckedCreateWithoutPurchaseOrderItemInput>
+  }
+
+  export type GRNItemCreateManyPurchaseOrderItemInputEnvelope = {
+    data: GRNItemCreateManyPurchaseOrderItemInput | GRNItemCreateManyPurchaseOrderItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput = {
+    id?: string
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoice: PurchaseInvoiceCreateNestedOneWithoutItemsInput
+    grnItem?: GRNItemCreateNestedOneWithoutInvoiceItemsInput
+  }
+
+  export type PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput = {
+    id?: string
+    invoiceId: string
+    grnItemId?: string | null
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceItemCreateOrConnectWithoutPurchaseOrderItemInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    create: XOR<PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput, PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput>
+  }
+
+  export type PurchaseInvoiceItemCreateManyPurchaseOrderItemInputEnvelope = {
+    data: PurchaseInvoiceItemCreateManyPurchaseOrderItemInput | PurchaseInvoiceItemCreateManyPurchaseOrderItemInput[]
+    skipDuplicates?: boolean
   }
 
   export type PurchaseOrderUpsertWithoutItemsInput = {
@@ -65069,6 +73477,8 @@ export namespace Prisma {
     warehouse?: WarehouseUpdateOneWithoutPurchaseOrdersNestedInput
     currency?: CurrencyUpdateOneWithoutPurchaseOrdersNestedInput
     company?: CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+    grns?: GRNUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateWithoutItemsInput = {
@@ -65090,6 +73500,8 @@ export namespace Prisma {
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grns?: GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type ItemMasterUpsertWithoutPurchaseOrderItemsInput = {
@@ -65116,6 +73528,7 @@ export namespace Prisma {
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
     baseUnit?: UnitUpdateOneRequiredWithoutItemMastersNestedInput
     company?: CompanyUpdateOneRequiredWithoutItemMastersNestedInput
+    grnItems?: GRNItemUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterUncheckedUpdateWithoutPurchaseOrderItemsInput = {
@@ -65131,6 +73544,7 @@ export namespace Prisma {
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ColorUpsertWithoutPurchaseOrderItemsInput = {
@@ -65153,6 +73567,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutColorsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutColorNestedInput
   }
 
   export type ColorUncheckedUpdateWithoutPurchaseOrderItemsInput = {
@@ -65164,6 +73579,7 @@ export namespace Prisma {
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutColorNestedInput
   }
 
   export type BrandUpsertWithoutPurchaseOrderItemsInput = {
@@ -65185,6 +73601,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutBrandsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutPurchaseOrderItemsInput = {
@@ -65195,6 +73612,7 @@ export namespace Prisma {
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type ItemGradeUpsertWithoutPurchaseOrderItemsInput = {
@@ -65216,6 +73634,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutItemGradesNestedInput
+    grnItems?: GRNItemUpdateManyWithoutItemGradeNestedInput
   }
 
   export type ItemGradeUncheckedUpdateWithoutPurchaseOrderItemsInput = {
@@ -65226,6 +73645,7 @@ export namespace Prisma {
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutItemGradeNestedInput
   }
 
   export type UnitUpsertWithoutPurchaseOrderItemsInput = {
@@ -65253,6 +73673,7 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUpdateManyWithoutToUnitNestedInput
     products?: ProductUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutBaseUnitNestedInput
+    grnItems?: GRNItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutPurchaseOrderItemsInput = {
@@ -65270,6 +73691,1376 @@ export namespace Prisma {
     conversionsTo?: UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
     products?: ProductUncheckedUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutBaseUnitNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutUnitNestedInput
+  }
+
+  export type GRNItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput = {
+    where: GRNItemWhereUniqueInput
+    update: XOR<GRNItemUpdateWithoutPurchaseOrderItemInput, GRNItemUncheckedUpdateWithoutPurchaseOrderItemInput>
+    create: XOR<GRNItemCreateWithoutPurchaseOrderItemInput, GRNItemUncheckedCreateWithoutPurchaseOrderItemInput>
+  }
+
+  export type GRNItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput = {
+    where: GRNItemWhereUniqueInput
+    data: XOR<GRNItemUpdateWithoutPurchaseOrderItemInput, GRNItemUncheckedUpdateWithoutPurchaseOrderItemInput>
+  }
+
+  export type GRNItemUpdateManyWithWhereWithoutPurchaseOrderItemInput = {
+    where: GRNItemScalarWhereInput
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemInput>
+  }
+
+  export type PurchaseInvoiceItemUpsertWithWhereUniqueWithoutPurchaseOrderItemInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    update: XOR<PurchaseInvoiceItemUpdateWithoutPurchaseOrderItemInput, PurchaseInvoiceItemUncheckedUpdateWithoutPurchaseOrderItemInput>
+    create: XOR<PurchaseInvoiceItemCreateWithoutPurchaseOrderItemInput, PurchaseInvoiceItemUncheckedCreateWithoutPurchaseOrderItemInput>
+  }
+
+  export type PurchaseInvoiceItemUpdateWithWhereUniqueWithoutPurchaseOrderItemInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    data: XOR<PurchaseInvoiceItemUpdateWithoutPurchaseOrderItemInput, PurchaseInvoiceItemUncheckedUpdateWithoutPurchaseOrderItemInput>
+  }
+
+  export type PurchaseInvoiceItemUpdateManyWithWhereWithoutPurchaseOrderItemInput = {
+    where: PurchaseInvoiceItemScalarWhereInput
+    data: XOR<PurchaseInvoiceItemUpdateManyMutationInput, PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemInput>
+  }
+
+  export type PurchaseInvoiceItemScalarWhereInput = {
+    AND?: PurchaseInvoiceItemScalarWhereInput | PurchaseInvoiceItemScalarWhereInput[]
+    OR?: PurchaseInvoiceItemScalarWhereInput[]
+    NOT?: PurchaseInvoiceItemScalarWhereInput | PurchaseInvoiceItemScalarWhereInput[]
+    id?: StringFilter<"PurchaseInvoiceItem"> | string
+    invoiceId?: StringFilter<"PurchaseInvoiceItem"> | string
+    purchaseOrderItemId?: StringFilter<"PurchaseInvoiceItem"> | string
+    grnItemId?: StringNullableFilter<"PurchaseInvoiceItem"> | string | null
+    invoicedQty?: FloatFilter<"PurchaseInvoiceItem"> | number
+    rate?: FloatFilter<"PurchaseInvoiceItem"> | number
+    amount?: FloatFilter<"PurchaseInvoiceItem"> | number
+    createdAt?: DateTimeFilter<"PurchaseInvoiceItem"> | Date | string
+    updatedAt?: DateTimeFilter<"PurchaseInvoiceItem"> | Date | string
+  }
+
+  export type PurchaseOrderCreateWithoutGrnsInput = {
+    id?: string
+    poNumber: string
+    type: $Enums.PurchaseOrderType
+    status?: $Enums.PurchaseOrderStatus
+    date?: Date | string
+    partyName?: string | null
+    referenceNo?: string | null
+    documentDate?: Date | string | null
+    fileNo?: string | null
+    remarks?: string | null
+    totalAmount?: number
+    exchangeRate?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
+    warehouse?: WarehouseCreateNestedOneWithoutPurchaseOrdersInput
+    currency?: CurrencyCreateNestedOneWithoutPurchaseOrdersInput
+    company: CompanyCreateNestedOneWithoutPurchaseOrdersInput
+    items?: PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceCreateNestedManyWithoutPurchaseOrderInput
+  }
+
+  export type PurchaseOrderUncheckedCreateWithoutGrnsInput = {
+    id?: string
+    poNumber: string
+    type: $Enums.PurchaseOrderType
+    status?: $Enums.PurchaseOrderStatus
+    date?: Date | string
+    accountId?: number | null
+    partyName?: string | null
+    warehouseId?: number | null
+    referenceNo?: string | null
+    documentDate?: Date | string | null
+    fileNo?: string | null
+    remarks?: string | null
+    totalAmount?: number
+    currencyId?: number | null
+    exchangeRate?: number
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    invoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  }
+
+  export type PurchaseOrderCreateOrConnectWithoutGrnsInput = {
+    where: PurchaseOrderWhereUniqueInput
+    create: XOR<PurchaseOrderCreateWithoutGrnsInput, PurchaseOrderUncheckedCreateWithoutGrnsInput>
+  }
+
+  export type CompanyCreateWithoutGrnsInput = {
+    legalName: string
+    tradeName?: string | null
+    address?: string | null
+    country?: string | null
+    phone?: string | null
+    email?: string | null
+    taxId?: string | null
+    logoUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemGroups?: ItemGroupCreateNestedManyWithoutCompanyInput
+    colors?: ColorCreateNestedManyWithoutCompanyInput
+    brands?: BrandCreateNestedManyWithoutCompanyInput
+    units?: UnitCreateNestedManyWithoutCompanyInput
+    itemGrades?: ItemGradeCreateNestedManyWithoutCompanyInput
+    unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
+    itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
+    purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutGrnsInput = {
+    id?: number
+    legalName: string
+    tradeName?: string | null
+    address?: string | null
+    country?: string | null
+    phone?: string | null
+    email?: string | null
+    taxId?: string | null
+    logoUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemGroups?: ItemGroupUncheckedCreateNestedManyWithoutCompanyInput
+    colors?: ColorUncheckedCreateNestedManyWithoutCompanyInput
+    brands?: BrandUncheckedCreateNestedManyWithoutCompanyInput
+    units?: UnitUncheckedCreateNestedManyWithoutCompanyInput
+    itemGrades?: ItemGradeUncheckedCreateNestedManyWithoutCompanyInput
+    unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
+    itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutGrnsInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutGrnsInput, CompanyUncheckedCreateWithoutGrnsInput>
+  }
+
+  export type GRNItemCreateWithoutGrnInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutGrnItemsInput
+    color?: ColorCreateNestedOneWithoutGrnItemsInput
+    brand?: BrandCreateNestedOneWithoutGrnItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutGrnItemsInput
+    unit?: UnitCreateNestedOneWithoutGrnItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemUncheckedCreateWithoutGrnInput = {
+    id?: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
+  }
+
+  export type GRNItemCreateOrConnectWithoutGrnInput = {
+    where: GRNItemWhereUniqueInput
+    create: XOR<GRNItemCreateWithoutGrnInput, GRNItemUncheckedCreateWithoutGrnInput>
+  }
+
+  export type GRNItemCreateManyGrnInputEnvelope = {
+    data: GRNItemCreateManyGrnInput | GRNItemCreateManyGrnInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PurchaseOrderUpsertWithoutGrnsInput = {
+    update: XOR<PurchaseOrderUpdateWithoutGrnsInput, PurchaseOrderUncheckedUpdateWithoutGrnsInput>
+    create: XOR<PurchaseOrderCreateWithoutGrnsInput, PurchaseOrderUncheckedCreateWithoutGrnsInput>
+    where?: PurchaseOrderWhereInput
+  }
+
+  export type PurchaseOrderUpdateToOneWithWhereWithoutGrnsInput = {
+    where?: PurchaseOrderWhereInput
+    data: XOR<PurchaseOrderUpdateWithoutGrnsInput, PurchaseOrderUncheckedUpdateWithoutGrnsInput>
+  }
+
+  export type PurchaseOrderUpdateWithoutGrnsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    poNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumPurchaseOrderTypeFieldUpdateOperationsInput | $Enums.PurchaseOrderType
+    status?: EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    partyName?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceNo?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileNo?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    exchangeRate?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
+    warehouse?: WarehouseUpdateOneWithoutPurchaseOrdersNestedInput
+    currency?: CurrencyUpdateOneWithoutPurchaseOrdersNestedInput
+    company?: CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+    items?: PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUpdateManyWithoutPurchaseOrderNestedInput
+  }
+
+  export type PurchaseOrderUncheckedUpdateWithoutGrnsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    poNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumPurchaseOrderTypeFieldUpdateOperationsInput | $Enums.PurchaseOrderType
+    status?: EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountId?: NullableIntFieldUpdateOperationsInput | number | null
+    partyName?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    referenceNo?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileNo?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    exchangeRate?: FloatFieldUpdateOperationsInput | number
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  }
+
+  export type CompanyUpsertWithoutGrnsInput = {
+    update: XOR<CompanyUpdateWithoutGrnsInput, CompanyUncheckedUpdateWithoutGrnsInput>
+    create: XOR<CompanyCreateWithoutGrnsInput, CompanyUncheckedCreateWithoutGrnsInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutGrnsInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutGrnsInput, CompanyUncheckedUpdateWithoutGrnsInput>
+  }
+
+  export type CompanyUpdateWithoutGrnsInput = {
+    legalName?: StringFieldUpdateOperationsInput | string
+    tradeName?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemGroups?: ItemGroupUpdateManyWithoutCompanyNestedInput
+    colors?: ColorUpdateManyWithoutCompanyNestedInput
+    brands?: BrandUpdateManyWithoutCompanyNestedInput
+    units?: UnitUpdateManyWithoutCompanyNestedInput
+    itemGrades?: ItemGradeUpdateManyWithoutCompanyNestedInput
+    unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
+    itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
+    purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutGrnsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    legalName?: StringFieldUpdateOperationsInput | string
+    tradeName?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemGroups?: ItemGroupUncheckedUpdateManyWithoutCompanyNestedInput
+    colors?: ColorUncheckedUpdateManyWithoutCompanyNestedInput
+    brands?: BrandUncheckedUpdateManyWithoutCompanyNestedInput
+    units?: UnitUncheckedUpdateManyWithoutCompanyNestedInput
+    itemGrades?: ItemGradeUncheckedUpdateManyWithoutCompanyNestedInput
+    unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
+    itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseInvoices?: PurchaseInvoiceUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type GRNItemUpsertWithWhereUniqueWithoutGrnInput = {
+    where: GRNItemWhereUniqueInput
+    update: XOR<GRNItemUpdateWithoutGrnInput, GRNItemUncheckedUpdateWithoutGrnInput>
+    create: XOR<GRNItemCreateWithoutGrnInput, GRNItemUncheckedCreateWithoutGrnInput>
+  }
+
+  export type GRNItemUpdateWithWhereUniqueWithoutGrnInput = {
+    where: GRNItemWhereUniqueInput
+    data: XOR<GRNItemUpdateWithoutGrnInput, GRNItemUncheckedUpdateWithoutGrnInput>
+  }
+
+  export type GRNItemUpdateManyWithWhereWithoutGrnInput = {
+    where: GRNItemScalarWhereInput
+    data: XOR<GRNItemUpdateManyMutationInput, GRNItemUncheckedUpdateManyWithoutGrnInput>
+  }
+
+  export type GRNCreateWithoutItemsInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrder: PurchaseOrderCreateNestedOneWithoutGrnsInput
+    company: CompanyCreateNestedOneWithoutGrnsInput
+  }
+
+  export type GRNUncheckedCreateWithoutItemsInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    remarks?: string | null
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GRNCreateOrConnectWithoutItemsInput = {
+    where: GRNWhereUniqueInput
+    create: XOR<GRNCreateWithoutItemsInput, GRNUncheckedCreateWithoutItemsInput>
+  }
+
+  export type PurchaseOrderItemCreateWithoutGrnItemsInput = {
+    id?: string
+    packingType?: $Enums.PackingType | null
+    pcs?: number | null
+    unitSize?: number | null
+    quantity?: number | null
+    rate: number
+    amount: number
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrder: PurchaseOrderCreateNestedOneWithoutItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+    color?: ColorCreateNestedOneWithoutPurchaseOrderItemsInput
+    brand?: BrandCreateNestedOneWithoutPurchaseOrderItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutPurchaseOrderItemsInput
+    unit?: UnitCreateNestedOneWithoutPurchaseOrderItemsInput
+    invoiceItems?: PurchaseInvoiceItemCreateNestedManyWithoutPurchaseOrderItemInput
+  }
+
+  export type PurchaseOrderItemUncheckedCreateWithoutGrnItemsInput = {
+    id?: string
+    purchaseOrderId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    packingType?: $Enums.PackingType | null
+    pcs?: number | null
+    unitSize?: number | null
+    quantity?: number | null
+    unitId?: number | null
+    rate: number
+    amount: number
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+  }
+
+  export type PurchaseOrderItemCreateOrConnectWithoutGrnItemsInput = {
+    where: PurchaseOrderItemWhereUniqueInput
+    create: XOR<PurchaseOrderItemCreateWithoutGrnItemsInput, PurchaseOrderItemUncheckedCreateWithoutGrnItemsInput>
+  }
+
+  export type ItemMasterCreateWithoutGrnItemsInput = {
+    id?: string
+    code: string
+    name: string
+    shortDescription?: string | null
+    status?: string
+    hsCode?: string | null
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
+    baseUnit: UnitCreateNestedOneWithoutItemMastersInput
+    company: CompanyCreateNestedOneWithoutItemMastersInput
+    purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutItemMasterInput
+  }
+
+  export type ItemMasterUncheckedCreateWithoutGrnItemsInput = {
+    id?: string
+    code: string
+    name: string
+    shortDescription?: string | null
+    status?: string
+    hsCode?: string | null
+    imageUrl?: string | null
+    itemGroupId: string
+    baseUnitId: number
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
+  }
+
+  export type ItemMasterCreateOrConnectWithoutGrnItemsInput = {
+    where: ItemMasterWhereUniqueInput
+    create: XOR<ItemMasterCreateWithoutGrnItemsInput, ItemMasterUncheckedCreateWithoutGrnItemsInput>
+  }
+
+  export type ColorCreateWithoutGrnItemsInput = {
+    id?: string
+    code: string
+    name: string
+    pictureUrl?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutColorsInput
+    purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutColorInput
+  }
+
+  export type ColorUncheckedCreateWithoutGrnItemsInput = {
+    id?: string
+    code: string
+    name: string
+    pictureUrl?: string | null
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutColorInput
+  }
+
+  export type ColorCreateOrConnectWithoutGrnItemsInput = {
+    where: ColorWhereUniqueInput
+    create: XOR<ColorCreateWithoutGrnItemsInput, ColorUncheckedCreateWithoutGrnItemsInput>
+  }
+
+  export type BrandCreateWithoutGrnItemsInput = {
+    id?: string
+    code: string
+    name: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutBrandsInput
+    purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutGrnItemsInput = {
+    id?: string
+    code: string
+    name: string
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutGrnItemsInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutGrnItemsInput, BrandUncheckedCreateWithoutGrnItemsInput>
+  }
+
+  export type ItemGradeCreateWithoutGrnItemsInput = {
+    id?: string
+    code: string
+    name: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutItemGradesInput
+    purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutItemGradeInput
+  }
+
+  export type ItemGradeUncheckedCreateWithoutGrnItemsInput = {
+    id?: string
+    code: string
+    name: string
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemGradeInput
+  }
+
+  export type ItemGradeCreateOrConnectWithoutGrnItemsInput = {
+    where: ItemGradeWhereUniqueInput
+    create: XOR<ItemGradeCreateWithoutGrnItemsInput, ItemGradeUncheckedCreateWithoutGrnItemsInput>
+  }
+
+  export type UnitCreateWithoutGrnItemsInput = {
+    code: string
+    name: string
+    symbol: string
+    unitType: string
+    isBase?: boolean
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutUnitsInput
+    conversionsFrom?: UnitConversionCreateNestedManyWithoutFromUnitInput
+    conversionsTo?: UnitConversionCreateNestedManyWithoutToUnitInput
+    products?: ProductCreateNestedManyWithoutUnitInput
+    itemMasters?: ItemMasterCreateNestedManyWithoutBaseUnitInput
+    purchaseOrderItems?: PurchaseOrderItemCreateNestedManyWithoutUnitInput
+  }
+
+  export type UnitUncheckedCreateWithoutGrnItemsInput = {
+    id?: number
+    code: string
+    name: string
+    symbol: string
+    unitType: string
+    isBase?: boolean
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversionsFrom?: UnitConversionUncheckedCreateNestedManyWithoutFromUnitInput
+    conversionsTo?: UnitConversionUncheckedCreateNestedManyWithoutToUnitInput
+    products?: ProductUncheckedCreateNestedManyWithoutUnitInput
+    itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutBaseUnitInput
+    purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutUnitInput
+  }
+
+  export type UnitCreateOrConnectWithoutGrnItemsInput = {
+    where: UnitWhereUniqueInput
+    create: XOR<UnitCreateWithoutGrnItemsInput, UnitUncheckedCreateWithoutGrnItemsInput>
+  }
+
+  export type PurchaseInvoiceItemCreateWithoutGrnItemInput = {
+    id?: string
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoice: PurchaseInvoiceCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutInvoiceItemsInput
+  }
+
+  export type PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput = {
+    id?: string
+    invoiceId: string
+    purchaseOrderItemId: string
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceItemCreateOrConnectWithoutGrnItemInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    create: XOR<PurchaseInvoiceItemCreateWithoutGrnItemInput, PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput>
+  }
+
+  export type PurchaseInvoiceItemCreateManyGrnItemInputEnvelope = {
+    data: PurchaseInvoiceItemCreateManyGrnItemInput | PurchaseInvoiceItemCreateManyGrnItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GRNUpsertWithoutItemsInput = {
+    update: XOR<GRNUpdateWithoutItemsInput, GRNUncheckedUpdateWithoutItemsInput>
+    create: XOR<GRNCreateWithoutItemsInput, GRNUncheckedCreateWithoutItemsInput>
+    where?: GRNWhereInput
+  }
+
+  export type GRNUpdateToOneWithWhereWithoutItemsInput = {
+    where?: GRNWhereInput
+    data: XOR<GRNUpdateWithoutItemsInput, GRNUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type GRNUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutGrnsNestedInput
+    company?: CompanyUpdateOneRequiredWithoutGrnsNestedInput
+  }
+
+  export type GRNUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseOrderItemUpsertWithoutGrnItemsInput = {
+    update: XOR<PurchaseOrderItemUpdateWithoutGrnItemsInput, PurchaseOrderItemUncheckedUpdateWithoutGrnItemsInput>
+    create: XOR<PurchaseOrderItemCreateWithoutGrnItemsInput, PurchaseOrderItemUncheckedCreateWithoutGrnItemsInput>
+    where?: PurchaseOrderItemWhereInput
+  }
+
+  export type PurchaseOrderItemUpdateToOneWithWhereWithoutGrnItemsInput = {
+    where?: PurchaseOrderItemWhereInput
+    data: XOR<PurchaseOrderItemUpdateWithoutGrnItemsInput, PurchaseOrderItemUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type PurchaseOrderItemUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+    color?: ColorUpdateOneWithoutPurchaseOrderItemsNestedInput
+    brand?: BrandUpdateOneWithoutPurchaseOrderItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutPurchaseOrderItemsNestedInput
+    unit?: UnitUpdateOneWithoutPurchaseOrderItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput
+  }
+
+  export type PurchaseOrderItemUncheckedUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+  }
+
+  export type ItemMasterUpsertWithoutGrnItemsInput = {
+    update: XOR<ItemMasterUpdateWithoutGrnItemsInput, ItemMasterUncheckedUpdateWithoutGrnItemsInput>
+    create: XOR<ItemMasterCreateWithoutGrnItemsInput, ItemMasterUncheckedCreateWithoutGrnItemsInput>
+    where?: ItemMasterWhereInput
+  }
+
+  export type ItemMasterUpdateToOneWithWhereWithoutGrnItemsInput = {
+    where?: ItemMasterWhereInput
+    data: XOR<ItemMasterUpdateWithoutGrnItemsInput, ItemMasterUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type ItemMasterUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    hsCode?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
+    baseUnit?: UnitUpdateOneRequiredWithoutItemMastersNestedInput
+    company?: CompanyUpdateOneRequiredWithoutItemMastersNestedInput
+    purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutItemMasterNestedInput
+  }
+
+  export type ItemMasterUncheckedUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    hsCode?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGroupId?: StringFieldUpdateOperationsInput | string
+    baseUnitId?: IntFieldUpdateOperationsInput | number
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
+  }
+
+  export type ColorUpsertWithoutGrnItemsInput = {
+    update: XOR<ColorUpdateWithoutGrnItemsInput, ColorUncheckedUpdateWithoutGrnItemsInput>
+    create: XOR<ColorCreateWithoutGrnItemsInput, ColorUncheckedCreateWithoutGrnItemsInput>
+    where?: ColorWhereInput
+  }
+
+  export type ColorUpdateToOneWithWhereWithoutGrnItemsInput = {
+    where?: ColorWhereInput
+    data: XOR<ColorUpdateWithoutGrnItemsInput, ColorUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type ColorUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutColorsNestedInput
+    purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutColorNestedInput
+  }
+
+  export type ColorUncheckedUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    pictureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutColorNestedInput
+  }
+
+  export type BrandUpsertWithoutGrnItemsInput = {
+    update: XOR<BrandUpdateWithoutGrnItemsInput, BrandUncheckedUpdateWithoutGrnItemsInput>
+    create: XOR<BrandCreateWithoutGrnItemsInput, BrandUncheckedCreateWithoutGrnItemsInput>
+    where?: BrandWhereInput
+  }
+
+  export type BrandUpdateToOneWithWhereWithoutGrnItemsInput = {
+    where?: BrandWhereInput
+    data: XOR<BrandUpdateWithoutGrnItemsInput, BrandUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type BrandUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutBrandsNestedInput
+    purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type ItemGradeUpsertWithoutGrnItemsInput = {
+    update: XOR<ItemGradeUpdateWithoutGrnItemsInput, ItemGradeUncheckedUpdateWithoutGrnItemsInput>
+    create: XOR<ItemGradeCreateWithoutGrnItemsInput, ItemGradeUncheckedCreateWithoutGrnItemsInput>
+    where?: ItemGradeWhereInput
+  }
+
+  export type ItemGradeUpdateToOneWithWhereWithoutGrnItemsInput = {
+    where?: ItemGradeWhereInput
+    data: XOR<ItemGradeUpdateWithoutGrnItemsInput, ItemGradeUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type ItemGradeUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutItemGradesNestedInput
+    purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutItemGradeNestedInput
+  }
+
+  export type ItemGradeUncheckedUpdateWithoutGrnItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemGradeNestedInput
+  }
+
+  export type UnitUpsertWithoutGrnItemsInput = {
+    update: XOR<UnitUpdateWithoutGrnItemsInput, UnitUncheckedUpdateWithoutGrnItemsInput>
+    create: XOR<UnitCreateWithoutGrnItemsInput, UnitUncheckedCreateWithoutGrnItemsInput>
+    where?: UnitWhereInput
+  }
+
+  export type UnitUpdateToOneWithWhereWithoutGrnItemsInput = {
+    where?: UnitWhereInput
+    data: XOR<UnitUpdateWithoutGrnItemsInput, UnitUncheckedUpdateWithoutGrnItemsInput>
+  }
+
+  export type UnitUpdateWithoutGrnItemsInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    unitType?: StringFieldUpdateOperationsInput | string
+    isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutUnitsNestedInput
+    conversionsFrom?: UnitConversionUpdateManyWithoutFromUnitNestedInput
+    conversionsTo?: UnitConversionUpdateManyWithoutToUnitNestedInput
+    products?: ProductUpdateManyWithoutUnitNestedInput
+    itemMasters?: ItemMasterUpdateManyWithoutBaseUnitNestedInput
+    purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutUnitNestedInput
+  }
+
+  export type UnitUncheckedUpdateWithoutGrnItemsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    unitType?: StringFieldUpdateOperationsInput | string
+    isBase?: BoolFieldUpdateOperationsInput | boolean
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversionsFrom?: UnitConversionUncheckedUpdateManyWithoutFromUnitNestedInput
+    conversionsTo?: UnitConversionUncheckedUpdateManyWithoutToUnitNestedInput
+    products?: ProductUncheckedUpdateManyWithoutUnitNestedInput
+    itemMasters?: ItemMasterUncheckedUpdateManyWithoutBaseUnitNestedInput
+    purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutUnitNestedInput
+  }
+
+  export type PurchaseInvoiceItemUpsertWithWhereUniqueWithoutGrnItemInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    update: XOR<PurchaseInvoiceItemUpdateWithoutGrnItemInput, PurchaseInvoiceItemUncheckedUpdateWithoutGrnItemInput>
+    create: XOR<PurchaseInvoiceItemCreateWithoutGrnItemInput, PurchaseInvoiceItemUncheckedCreateWithoutGrnItemInput>
+  }
+
+  export type PurchaseInvoiceItemUpdateWithWhereUniqueWithoutGrnItemInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    data: XOR<PurchaseInvoiceItemUpdateWithoutGrnItemInput, PurchaseInvoiceItemUncheckedUpdateWithoutGrnItemInput>
+  }
+
+  export type PurchaseInvoiceItemUpdateManyWithWhereWithoutGrnItemInput = {
+    where: PurchaseInvoiceItemScalarWhereInput
+    data: XOR<PurchaseInvoiceItemUpdateManyMutationInput, PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemInput>
+  }
+
+  export type PurchaseOrderCreateWithoutInvoicesInput = {
+    id?: string
+    poNumber: string
+    type: $Enums.PurchaseOrderType
+    status?: $Enums.PurchaseOrderStatus
+    date?: Date | string
+    partyName?: string | null
+    referenceNo?: string | null
+    documentDate?: Date | string | null
+    fileNo?: string | null
+    remarks?: string | null
+    totalAmount?: number
+    exchangeRate?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
+    warehouse?: WarehouseCreateNestedOneWithoutPurchaseOrdersInput
+    currency?: CurrencyCreateNestedOneWithoutPurchaseOrdersInput
+    company: CompanyCreateNestedOneWithoutPurchaseOrdersInput
+    items?: PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNCreateNestedManyWithoutPurchaseOrderInput
+  }
+
+  export type PurchaseOrderUncheckedCreateWithoutInvoicesInput = {
+    id?: string
+    poNumber: string
+    type: $Enums.PurchaseOrderType
+    status?: $Enums.PurchaseOrderStatus
+    date?: Date | string
+    accountId?: number | null
+    partyName?: string | null
+    warehouseId?: number | null
+    referenceNo?: string | null
+    documentDate?: Date | string | null
+    fileNo?: string | null
+    remarks?: string | null
+    totalAmount?: number
+    currencyId?: number | null
+    exchangeRate?: number
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+    grns?: GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  }
+
+  export type PurchaseOrderCreateOrConnectWithoutInvoicesInput = {
+    where: PurchaseOrderWhereUniqueInput
+    create: XOR<PurchaseOrderCreateWithoutInvoicesInput, PurchaseOrderUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type CompanyCreateWithoutPurchaseInvoicesInput = {
+    legalName: string
+    tradeName?: string | null
+    address?: string | null
+    country?: string | null
+    phone?: string | null
+    email?: string | null
+    taxId?: string | null
+    logoUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemGroups?: ItemGroupCreateNestedManyWithoutCompanyInput
+    colors?: ColorCreateNestedManyWithoutCompanyInput
+    brands?: BrandCreateNestedManyWithoutCompanyInput
+    units?: UnitCreateNestedManyWithoutCompanyInput
+    itemGrades?: ItemGradeCreateNestedManyWithoutCompanyInput
+    unitConversions?: UnitConversionCreateNestedManyWithoutCompanyInput
+    itemMasters?: ItemMasterCreateNestedManyWithoutCompanyInput
+    purchaseOrders?: PurchaseOrderCreateNestedManyWithoutCompanyInput
+    grns?: GRNCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutPurchaseInvoicesInput = {
+    id?: number
+    legalName: string
+    tradeName?: string | null
+    address?: string | null
+    country?: string | null
+    phone?: string | null
+    email?: string | null
+    taxId?: string | null
+    logoUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemGroups?: ItemGroupUncheckedCreateNestedManyWithoutCompanyInput
+    colors?: ColorUncheckedCreateNestedManyWithoutCompanyInput
+    brands?: BrandUncheckedCreateNestedManyWithoutCompanyInput
+    units?: UnitUncheckedCreateNestedManyWithoutCompanyInput
+    itemGrades?: ItemGradeUncheckedCreateNestedManyWithoutCompanyInput
+    unitConversions?: UnitConversionUncheckedCreateNestedManyWithoutCompanyInput
+    itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutCompanyInput
+    purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+    grns?: GRNUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutPurchaseInvoicesInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutPurchaseInvoicesInput, CompanyUncheckedCreateWithoutPurchaseInvoicesInput>
+  }
+
+  export type PurchaseInvoiceItemCreateWithoutInvoiceInput = {
+    id?: string
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutInvoiceItemsInput
+    grnItem?: GRNItemCreateNestedOneWithoutInvoiceItemsInput
+  }
+
+  export type PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput = {
+    id?: string
+    purchaseOrderItemId: string
+    grnItemId?: string | null
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceItemCreateOrConnectWithoutInvoiceInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    create: XOR<PurchaseInvoiceItemCreateWithoutInvoiceInput, PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type PurchaseInvoiceItemCreateManyInvoiceInputEnvelope = {
+    data: PurchaseInvoiceItemCreateManyInvoiceInput | PurchaseInvoiceItemCreateManyInvoiceInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PurchaseOrderUpsertWithoutInvoicesInput = {
+    update: XOR<PurchaseOrderUpdateWithoutInvoicesInput, PurchaseOrderUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<PurchaseOrderCreateWithoutInvoicesInput, PurchaseOrderUncheckedCreateWithoutInvoicesInput>
+    where?: PurchaseOrderWhereInput
+  }
+
+  export type PurchaseOrderUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: PurchaseOrderWhereInput
+    data: XOR<PurchaseOrderUpdateWithoutInvoicesInput, PurchaseOrderUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type PurchaseOrderUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    poNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumPurchaseOrderTypeFieldUpdateOperationsInput | $Enums.PurchaseOrderType
+    status?: EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    partyName?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceNo?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileNo?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    exchangeRate?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
+    warehouse?: WarehouseUpdateOneWithoutPurchaseOrdersNestedInput
+    currency?: CurrencyUpdateOneWithoutPurchaseOrdersNestedInput
+    company?: CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+    items?: PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUpdateManyWithoutPurchaseOrderNestedInput
+  }
+
+  export type PurchaseOrderUncheckedUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    poNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumPurchaseOrderTypeFieldUpdateOperationsInput | $Enums.PurchaseOrderType
+    status?: EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountId?: NullableIntFieldUpdateOperationsInput | number | null
+    partyName?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    referenceNo?: NullableStringFieldUpdateOperationsInput | string | null
+    documentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileNo?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    exchangeRate?: FloatFieldUpdateOperationsInput | number
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  }
+
+  export type CompanyUpsertWithoutPurchaseInvoicesInput = {
+    update: XOR<CompanyUpdateWithoutPurchaseInvoicesInput, CompanyUncheckedUpdateWithoutPurchaseInvoicesInput>
+    create: XOR<CompanyCreateWithoutPurchaseInvoicesInput, CompanyUncheckedCreateWithoutPurchaseInvoicesInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutPurchaseInvoicesInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutPurchaseInvoicesInput, CompanyUncheckedUpdateWithoutPurchaseInvoicesInput>
+  }
+
+  export type CompanyUpdateWithoutPurchaseInvoicesInput = {
+    legalName?: StringFieldUpdateOperationsInput | string
+    tradeName?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemGroups?: ItemGroupUpdateManyWithoutCompanyNestedInput
+    colors?: ColorUpdateManyWithoutCompanyNestedInput
+    brands?: BrandUpdateManyWithoutCompanyNestedInput
+    units?: UnitUpdateManyWithoutCompanyNestedInput
+    itemGrades?: ItemGradeUpdateManyWithoutCompanyNestedInput
+    unitConversions?: UnitConversionUpdateManyWithoutCompanyNestedInput
+    itemMasters?: ItemMasterUpdateManyWithoutCompanyNestedInput
+    purchaseOrders?: PurchaseOrderUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutPurchaseInvoicesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    legalName?: StringFieldUpdateOperationsInput | string
+    tradeName?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    taxId?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemGroups?: ItemGroupUncheckedUpdateManyWithoutCompanyNestedInput
+    colors?: ColorUncheckedUpdateManyWithoutCompanyNestedInput
+    brands?: BrandUncheckedUpdateManyWithoutCompanyNestedInput
+    units?: UnitUncheckedUpdateManyWithoutCompanyNestedInput
+    itemGrades?: ItemGradeUncheckedUpdateManyWithoutCompanyNestedInput
+    unitConversions?: UnitConversionUncheckedUpdateManyWithoutCompanyNestedInput
+    itemMasters?: ItemMasterUncheckedUpdateManyWithoutCompanyNestedInput
+    purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type PurchaseInvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    update: XOR<PurchaseInvoiceItemUpdateWithoutInvoiceInput, PurchaseInvoiceItemUncheckedUpdateWithoutInvoiceInput>
+    create: XOR<PurchaseInvoiceItemCreateWithoutInvoiceInput, PurchaseInvoiceItemUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type PurchaseInvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput = {
+    where: PurchaseInvoiceItemWhereUniqueInput
+    data: XOR<PurchaseInvoiceItemUpdateWithoutInvoiceInput, PurchaseInvoiceItemUncheckedUpdateWithoutInvoiceInput>
+  }
+
+  export type PurchaseInvoiceItemUpdateManyWithWhereWithoutInvoiceInput = {
+    where: PurchaseInvoiceItemScalarWhereInput
+    data: XOR<PurchaseInvoiceItemUpdateManyMutationInput, PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceInput>
+  }
+
+  export type PurchaseInvoiceCreateWithoutItemsInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    totalAmount?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrder: PurchaseOrderCreateNestedOneWithoutInvoicesInput
+    company: CompanyCreateNestedOneWithoutPurchaseInvoicesInput
+  }
+
+  export type PurchaseInvoiceUncheckedCreateWithoutItemsInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    totalAmount?: number
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceCreateOrConnectWithoutItemsInput = {
+    where: PurchaseInvoiceWhereUniqueInput
+    create: XOR<PurchaseInvoiceCreateWithoutItemsInput, PurchaseInvoiceUncheckedCreateWithoutItemsInput>
+  }
+
+  export type PurchaseOrderItemCreateWithoutInvoiceItemsInput = {
+    id?: string
+    packingType?: $Enums.PackingType | null
+    pcs?: number | null
+    unitSize?: number | null
+    quantity?: number | null
+    rate: number
+    amount: number
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaseOrder: PurchaseOrderCreateNestedOneWithoutItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+    color?: ColorCreateNestedOneWithoutPurchaseOrderItemsInput
+    brand?: BrandCreateNestedOneWithoutPurchaseOrderItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutPurchaseOrderItemsInput
+    unit?: UnitCreateNestedOneWithoutPurchaseOrderItemsInput
+    grnItems?: GRNItemCreateNestedManyWithoutPurchaseOrderItemInput
+  }
+
+  export type PurchaseOrderItemUncheckedCreateWithoutInvoiceItemsInput = {
+    id?: string
+    purchaseOrderId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    packingType?: $Enums.PackingType | null
+    pcs?: number | null
+    unitSize?: number | null
+    quantity?: number | null
+    unitId?: number | null
+    rate: number
+    amount: number
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grnItems?: GRNItemUncheckedCreateNestedManyWithoutPurchaseOrderItemInput
+  }
+
+  export type PurchaseOrderItemCreateOrConnectWithoutInvoiceItemsInput = {
+    where: PurchaseOrderItemWhereUniqueInput
+    create: XOR<PurchaseOrderItemCreateWithoutInvoiceItemsInput, PurchaseOrderItemUncheckedCreateWithoutInvoiceItemsInput>
+  }
+
+  export type GRNItemCreateWithoutInvoiceItemsInput = {
+    id?: string
+    receivedQty: number
+    pcs?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    grn: GRNCreateNestedOneWithoutItemsInput
+    purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
+    itemMaster: ItemMasterCreateNestedOneWithoutGrnItemsInput
+    color?: ColorCreateNestedOneWithoutGrnItemsInput
+    brand?: BrandCreateNestedOneWithoutGrnItemsInput
+    itemGrade?: ItemGradeCreateNestedOneWithoutGrnItemsInput
+    unit?: UnitCreateNestedOneWithoutGrnItemsInput
+  }
+
+  export type GRNItemUncheckedCreateWithoutInvoiceItemsInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GRNItemCreateOrConnectWithoutInvoiceItemsInput = {
+    where: GRNItemWhereUniqueInput
+    create: XOR<GRNItemCreateWithoutInvoiceItemsInput, GRNItemUncheckedCreateWithoutInvoiceItemsInput>
+  }
+
+  export type PurchaseInvoiceUpsertWithoutItemsInput = {
+    update: XOR<PurchaseInvoiceUpdateWithoutItemsInput, PurchaseInvoiceUncheckedUpdateWithoutItemsInput>
+    create: XOR<PurchaseInvoiceCreateWithoutItemsInput, PurchaseInvoiceUncheckedCreateWithoutItemsInput>
+    where?: PurchaseInvoiceWhereInput
+  }
+
+  export type PurchaseInvoiceUpdateToOneWithWhereWithoutItemsInput = {
+    where?: PurchaseInvoiceWhereInput
+    data: XOR<PurchaseInvoiceUpdateWithoutItemsInput, PurchaseInvoiceUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PurchaseInvoiceUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutInvoicesNestedInput
+    company?: CompanyUpdateOneRequiredWithoutPurchaseInvoicesNestedInput
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseOrderItemUpsertWithoutInvoiceItemsInput = {
+    update: XOR<PurchaseOrderItemUpdateWithoutInvoiceItemsInput, PurchaseOrderItemUncheckedUpdateWithoutInvoiceItemsInput>
+    create: XOR<PurchaseOrderItemCreateWithoutInvoiceItemsInput, PurchaseOrderItemUncheckedCreateWithoutInvoiceItemsInput>
+    where?: PurchaseOrderItemWhereInput
+  }
+
+  export type PurchaseOrderItemUpdateToOneWithWhereWithoutInvoiceItemsInput = {
+    where?: PurchaseOrderItemWhereInput
+    data: XOR<PurchaseOrderItemUpdateWithoutInvoiceItemsInput, PurchaseOrderItemUncheckedUpdateWithoutInvoiceItemsInput>
+  }
+
+  export type PurchaseOrderItemUpdateWithoutInvoiceItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+    color?: ColorUpdateOneWithoutPurchaseOrderItemsNestedInput
+    brand?: BrandUpdateOneWithoutPurchaseOrderItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutPurchaseOrderItemsNestedInput
+    unit?: UnitUpdateOneWithoutPurchaseOrderItemsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput
+  }
+
+  export type PurchaseOrderItemUncheckedUpdateWithoutInvoiceItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+  }
+
+  export type GRNItemUpsertWithoutInvoiceItemsInput = {
+    update: XOR<GRNItemUpdateWithoutInvoiceItemsInput, GRNItemUncheckedUpdateWithoutInvoiceItemsInput>
+    create: XOR<GRNItemCreateWithoutInvoiceItemsInput, GRNItemUncheckedCreateWithoutInvoiceItemsInput>
+    where?: GRNItemWhereInput
+  }
+
+  export type GRNItemUpdateToOneWithWhereWithoutInvoiceItemsInput = {
+    where?: GRNItemWhereInput
+    data: XOR<GRNItemUpdateWithoutInvoiceItemsInput, GRNItemUncheckedUpdateWithoutInvoiceItemsInput>
+  }
+
+  export type GRNItemUpdateWithoutInvoiceItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput
+    color?: ColorUpdateOneWithoutGrnItemsNestedInput
+    brand?: BrandUpdateOneWithoutGrnItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutGrnItemsNestedInput
+    unit?: UnitUpdateOneWithoutGrnItemsNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateWithoutInvoiceItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostCreateManyAuthorInput = {
@@ -65637,6 +75428,8 @@ export namespace Prisma {
     currency?: CurrencyUpdateOneWithoutPurchaseOrdersNestedInput
     company?: CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
     items?: PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateWithoutWarehouseInput = {
@@ -65658,6 +75451,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateManyWithoutWarehouseInput = {
@@ -65737,6 +75532,20 @@ export namespace Prisma {
     rate: number
     amount: number
     remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GRNItemCreateManyUnitInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65840,6 +75649,7 @@ export namespace Prisma {
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
     company?: CompanyUpdateOneRequiredWithoutItemMastersNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutItemMasterNestedInput
+    grnItems?: GRNItemUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterUncheckedUpdateWithoutBaseUnitInput = {
@@ -65855,6 +75665,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterUncheckedUpdateManyWithoutBaseUnitInput = {
@@ -65887,6 +75698,8 @@ export namespace Prisma {
     color?: ColorUpdateOneWithoutPurchaseOrderItemsNestedInput
     brand?: BrandUpdateOneWithoutPurchaseOrderItemsNestedInput
     itemGrade?: ItemGradeUpdateOneWithoutPurchaseOrderItemsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateWithoutUnitInput = {
@@ -65905,6 +75718,8 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateManyWithoutUnitInput = {
@@ -65921,6 +75736,50 @@ export namespace Prisma {
     rate?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemUpdateWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput
+    color?: ColorUpdateOneWithoutGrnItemsNestedInput
+    brand?: BrandUpdateOneWithoutGrnItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutGrnItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66019,6 +75878,27 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GRNCreateManyCompanyInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceCreateManyCompanyInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    purchaseOrderId: string
+    totalAmount?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ItemGroupUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
@@ -66065,6 +75945,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutColorNestedInput
+    grnItems?: GRNItemUpdateManyWithoutColorNestedInput
   }
 
   export type ColorUncheckedUpdateWithoutCompanyInput = {
@@ -66076,6 +75957,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutColorNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutColorNestedInput
   }
 
   export type ColorUncheckedUpdateManyWithoutCompanyInput = {
@@ -66096,6 +75978,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutBrandNestedInput
+    grnItems?: GRNItemUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutCompanyInput = {
@@ -66106,6 +75989,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutBrandNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateManyWithoutCompanyInput = {
@@ -66131,6 +76015,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutCompanyInput = {
@@ -66148,6 +76033,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutUnitNestedInput
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutBaseUnitNestedInput
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutUnitNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateManyWithoutCompanyInput = {
@@ -66170,6 +76056,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutItemGradeNestedInput
+    grnItems?: GRNItemUpdateManyWithoutItemGradeNestedInput
   }
 
   export type ItemGradeUncheckedUpdateWithoutCompanyInput = {
@@ -66180,6 +76067,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemGradeNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutItemGradeNestedInput
   }
 
   export type ItemGradeUncheckedUpdateManyWithoutCompanyInput = {
@@ -66230,6 +76118,7 @@ export namespace Prisma {
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
     baseUnit?: UnitUpdateOneRequiredWithoutItemMastersNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutItemMasterNestedInput
+    grnItems?: GRNItemUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterUncheckedUpdateWithoutCompanyInput = {
@@ -66245,6 +76134,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterUncheckedUpdateManyWithoutCompanyInput = {
@@ -66280,6 +76170,8 @@ export namespace Prisma {
     warehouse?: WarehouseUpdateOneWithoutPurchaseOrdersNestedInput
     currency?: CurrencyUpdateOneWithoutPurchaseOrdersNestedInput
     items?: PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateWithoutCompanyInput = {
@@ -66301,6 +76193,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateManyWithoutCompanyInput = {
@@ -66319,6 +76213,73 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutGrnsNestedInput
+    items?: GRNItemUpdateManyWithoutGrnNestedInput
+  }
+
+  export type GRNUncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: GRNItemUncheckedUpdateManyWithoutGrnNestedInput
+  }
+
+  export type GRNUncheckedUpdateManyWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutInvoicesNestedInput
+    items?: PurchaseInvoiceItemUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateManyWithoutCompanyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66411,6 +76372,8 @@ export namespace Prisma {
     warehouse?: WarehouseUpdateOneWithoutPurchaseOrdersNestedInput
     company?: CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
     items?: PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateWithoutCurrencyInput = {
@@ -66432,6 +76395,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateManyWithoutCurrencyInput = {
@@ -66740,6 +76705,8 @@ export namespace Prisma {
     currency?: CurrencyUpdateOneWithoutPurchaseOrdersNestedInput
     company?: CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
     items?: PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateWithoutAccountInput = {
@@ -66761,6 +76728,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    grns?: GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+    invoices?: PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   }
 
   export type PurchaseOrderUncheckedUpdateManyWithoutAccountInput = {
@@ -66889,6 +76858,7 @@ export namespace Prisma {
     baseUnit?: UnitUpdateOneRequiredWithoutItemMastersNestedInput
     company?: CompanyUpdateOneRequiredWithoutItemMastersNestedInput
     purchaseOrderItems?: PurchaseOrderItemUpdateManyWithoutItemMasterNestedInput
+    grnItems?: GRNItemUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterUncheckedUpdateWithoutItemGroupInput = {
@@ -66904,6 +76874,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
+    grnItems?: GRNItemUncheckedUpdateManyWithoutItemMasterNestedInput
   }
 
   export type ItemMasterUncheckedUpdateManyWithoutItemGroupInput = {
@@ -66938,6 +76909,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GRNItemCreateManyColorInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PurchaseOrderItemUpdateWithoutColorInput = {
     id?: StringFieldUpdateOperationsInput | string
     packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
@@ -66954,6 +76939,8 @@ export namespace Prisma {
     brand?: BrandUpdateOneWithoutPurchaseOrderItemsNestedInput
     itemGrade?: ItemGradeUpdateOneWithoutPurchaseOrderItemsNestedInput
     unit?: UnitUpdateOneWithoutPurchaseOrderItemsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateWithoutColorInput = {
@@ -66972,6 +76959,8 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateManyWithoutColorInput = {
@@ -66988,6 +76977,50 @@ export namespace Prisma {
     rate?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemUpdateWithoutColorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput
+    brand?: BrandUpdateOneWithoutGrnItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutGrnItemsNestedInput
+    unit?: UnitUpdateOneWithoutGrnItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateWithoutColorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutColorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -67010,6 +77043,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GRNItemCreateManyBrandInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PurchaseOrderItemUpdateWithoutBrandInput = {
     id?: StringFieldUpdateOperationsInput | string
     packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
@@ -67026,6 +77073,8 @@ export namespace Prisma {
     color?: ColorUpdateOneWithoutPurchaseOrderItemsNestedInput
     itemGrade?: ItemGradeUpdateOneWithoutPurchaseOrderItemsNestedInput
     unit?: UnitUpdateOneWithoutPurchaseOrderItemsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateWithoutBrandInput = {
@@ -67044,6 +77093,8 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateManyWithoutBrandInput = {
@@ -67060,6 +77111,50 @@ export namespace Prisma {
     rate?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemUpdateWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput
+    color?: ColorUpdateOneWithoutGrnItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutGrnItemsNestedInput
+    unit?: UnitUpdateOneWithoutGrnItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -67082,6 +77177,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GRNItemCreateManyItemGradeInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PurchaseOrderItemUpdateWithoutItemGradeInput = {
     id?: StringFieldUpdateOperationsInput | string
     packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
@@ -67098,6 +77207,8 @@ export namespace Prisma {
     color?: ColorUpdateOneWithoutPurchaseOrderItemsNestedInput
     brand?: BrandUpdateOneWithoutPurchaseOrderItemsNestedInput
     unit?: UnitUpdateOneWithoutPurchaseOrderItemsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateWithoutItemGradeInput = {
@@ -67116,6 +77227,8 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateManyWithoutItemGradeInput = {
@@ -67132,6 +77245,50 @@ export namespace Prisma {
     rate?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemUpdateWithoutItemGradeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput
+    color?: ColorUpdateOneWithoutGrnItemsNestedInput
+    brand?: BrandUpdateOneWithoutGrnItemsNestedInput
+    unit?: UnitUpdateOneWithoutGrnItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateWithoutItemGradeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutItemGradeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -67154,6 +77311,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GRNItemCreateManyItemMasterInput = {
+    id?: string
+    grnId: string
+    purchaseOrderItemId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PurchaseOrderItemUpdateWithoutItemMasterInput = {
     id?: StringFieldUpdateOperationsInput | string
     packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
@@ -67170,6 +77341,8 @@ export namespace Prisma {
     brand?: BrandUpdateOneWithoutPurchaseOrderItemsNestedInput
     itemGrade?: ItemGradeUpdateOneWithoutPurchaseOrderItemsNestedInput
     unit?: UnitUpdateOneWithoutPurchaseOrderItemsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateWithoutItemMasterInput = {
@@ -67188,6 +77361,8 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterInput = {
@@ -67204,6 +77379,50 @@ export namespace Prisma {
     rate?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemUpdateWithoutItemMasterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
+    color?: ColorUpdateOneWithoutGrnItemsNestedInput
+    brand?: BrandUpdateOneWithoutGrnItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutGrnItemsNestedInput
+    unit?: UnitUpdateOneWithoutGrnItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateWithoutItemMasterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutItemMasterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -67226,6 +77445,27 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GRNCreateManyPurchaseOrderInput = {
+    id?: string
+    grnNumber: string
+    date?: Date | string
+    remarks?: string | null
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceCreateManyPurchaseOrderInput = {
+    id?: string
+    invoiceNumber: string
+    date?: Date | string
+    totalAmount?: number
+    status?: string
+    companyId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PurchaseOrderItemUpdateWithoutPurchaseOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
@@ -67242,6 +77482,8 @@ export namespace Prisma {
     brand?: BrandUpdateOneWithoutPurchaseOrderItemsNestedInput
     itemGrade?: ItemGradeUpdateOneWithoutPurchaseOrderItemsNestedInput
     unit?: UnitUpdateOneWithoutPurchaseOrderItemsNestedInput
+    grnItems?: GRNItemUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateWithoutPurchaseOrderInput = {
@@ -67260,6 +77502,8 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grnItems?: GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
   }
 
   export type PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderInput = {
@@ -67276,6 +77520,321 @@ export namespace Prisma {
     rate?: FloatFieldUpdateOperationsInput | number
     amount?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNUpdateWithoutPurchaseOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutGrnsNestedInput
+    items?: GRNItemUpdateManyWithoutGrnNestedInput
+  }
+
+  export type GRNUncheckedUpdateWithoutPurchaseOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: GRNItemUncheckedUpdateManyWithoutGrnNestedInput
+  }
+
+  export type GRNUncheckedUpdateManyWithoutPurchaseOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceUpdateWithoutPurchaseOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutPurchaseInvoicesNestedInput
+    items?: PurchaseInvoiceItemUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateWithoutPurchaseOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type PurchaseInvoiceUncheckedUpdateManyWithoutPurchaseOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemCreateManyPurchaseOrderItemInput = {
+    id?: string
+    grnId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceItemCreateManyPurchaseOrderItemInput = {
+    id?: string
+    invoiceId: string
+    grnItemId?: string | null
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GRNItemUpdateWithoutPurchaseOrderItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput
+    color?: ColorUpdateOneWithoutGrnItemsNestedInput
+    brand?: BrandUpdateOneWithoutGrnItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutGrnItemsNestedInput
+    unit?: UnitUpdateOneWithoutGrnItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateWithoutPurchaseOrderItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutPurchaseOrderItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    grnId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemUpdateWithoutPurchaseOrderItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoice?: PurchaseInvoiceUpdateOneRequiredWithoutItemsNestedInput
+    grnItem?: GRNItemUpdateOneWithoutInvoiceItemsNestedInput
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateWithoutPurchaseOrderItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    grnItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateManyWithoutPurchaseOrderItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    grnItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GRNItemCreateManyGrnInput = {
+    id?: string
+    purchaseOrderItemId: string
+    itemMasterId: string
+    colorId?: string | null
+    brandId?: string | null
+    itemGradeId?: string | null
+    receivedQty: number
+    pcs?: number | null
+    unitId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GRNItemUpdateWithoutGrnInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
+    itemMaster?: ItemMasterUpdateOneRequiredWithoutGrnItemsNestedInput
+    color?: ColorUpdateOneWithoutGrnItemsNestedInput
+    brand?: BrandUpdateOneWithoutGrnItemsNestedInput
+    itemGrade?: ItemGradeUpdateOneWithoutGrnItemsNestedInput
+    unit?: UnitUpdateOneWithoutGrnItemsNestedInput
+    invoiceItems?: PurchaseInvoiceItemUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateWithoutGrnInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
+  }
+
+  export type GRNItemUncheckedUpdateManyWithoutGrnInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    itemMasterId?: StringFieldUpdateOperationsInput | string
+    colorId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
+    receivedQty?: FloatFieldUpdateOperationsInput | number
+    pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemCreateManyGrnItemInput = {
+    id?: string
+    invoiceId: string
+    purchaseOrderItemId: string
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceItemUpdateWithoutGrnItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoice?: PurchaseInvoiceUpdateOneRequiredWithoutItemsNestedInput
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutInvoiceItemsNestedInput
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateWithoutGrnItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemCreateManyInvoiceInput = {
+    id?: string
+    purchaseOrderItemId: string
+    grnItemId?: string | null
+    invoicedQty: number
+    rate: number
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PurchaseInvoiceItemUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutInvoiceItemsNestedInput
+    grnItem?: GRNItemUpdateOneWithoutInvoiceItemsNestedInput
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    grnItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    purchaseOrderItemId?: StringFieldUpdateOperationsInput | string
+    grnItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    invoicedQty?: FloatFieldUpdateOperationsInput | number
+    rate?: FloatFieldUpdateOperationsInput | number
+    amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

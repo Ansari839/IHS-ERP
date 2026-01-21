@@ -205,8 +205,13 @@ export async function getPurchaseOrders() {
         include: {
             account: true,
             warehouse: true,
-            items: true,
-            company: true
+            company: true,
+            items: {
+                include: {
+                    grnItems: true,
+                    invoiceItems: true,
+                }
+            }
         }
     })
 }
@@ -221,11 +226,14 @@ export async function getPurchaseOrderById(id: string) {
                     itemMaster: true,
                     color: true,
                     brand: true,
-                    unit: true
+                    unit: true,
+                    grnItems: true,
+                    invoiceItems: true,
                 }
             },
             account: true,
-            warehouse: true
+            warehouse: true,
+            company: true
         }
     })
 }

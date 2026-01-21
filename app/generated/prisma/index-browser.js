@@ -518,6 +518,56 @@ exports.Prisma.PurchaseOrderItemScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.GRNScalarFieldEnum = {
+  id: 'id',
+  grnNumber: 'grnNumber',
+  date: 'date',
+  purchaseOrderId: 'purchaseOrderId',
+  remarks: 'remarks',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GRNItemScalarFieldEnum = {
+  id: 'id',
+  grnId: 'grnId',
+  purchaseOrderItemId: 'purchaseOrderItemId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  receivedQty: 'receivedQty',
+  pcs: 'pcs',
+  unitId: 'unitId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseInvoiceScalarFieldEnum = {
+  id: 'id',
+  invoiceNumber: 'invoiceNumber',
+  date: 'date',
+  purchaseOrderId: 'purchaseOrderId',
+  totalAmount: 'totalAmount',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseInvoiceItemScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  purchaseOrderItemId: 'purchaseOrderItemId',
+  grnItemId: 'grnItemId',
+  invoicedQty: 'invoicedQty',
+  rate: 'rate',
+  amount: 'amount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -630,7 +680,11 @@ exports.Prisma.ModelName = {
   ItemGrade: 'ItemGrade',
   ItemMaster: 'ItemMaster',
   PurchaseOrder: 'PurchaseOrder',
-  PurchaseOrderItem: 'PurchaseOrderItem'
+  PurchaseOrderItem: 'PurchaseOrderItem',
+  GRN: 'GRN',
+  GRNItem: 'GRNItem',
+  PurchaseInvoice: 'PurchaseInvoice',
+  PurchaseInvoiceItem: 'PurchaseInvoiceItem'
 };
 
 /**
