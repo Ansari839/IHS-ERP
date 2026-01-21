@@ -183,6 +183,7 @@ export function PurchaseOrderForm({
         setCurrentItem(prev => ({
             ...prev,
             colorId: undefined,
+            brandId: undefined,
             itemGradeId: undefined,
             pcs: 0,
             unitSize: 0,
@@ -369,6 +370,24 @@ export function PurchaseOrderForm({
                             </Select>
                         </div>
 
+                        {/* Brand */}
+                        <div className="space-y-1">
+                            <Label>Brand</Label>
+                            <Select
+                                value={currentItem.brandId}
+                                onValueChange={(v) => setCurrentItem(p => ({ ...p, brandId: v }))}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Brand" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {brands.map(b => (
+                                        <SelectItem key={b.id} value={b.id}>{b.name}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
                         {/* Grade */}
                         <div className="space-y-1">
                             <Label>Grade</Label>
@@ -477,7 +496,7 @@ export function PurchaseOrderForm({
                         <TableHeader className="bg-slate-50 dark:bg-slate-800">
                             <TableRow>
                                 <TableHead className="font-bold">Product</TableHead>
-                                <TableHead className="font-bold">Variant (Color/Grade)</TableHead>
+                                <TableHead className="font-bold">Variant (Clr/Grd/Brnd)</TableHead>
                                 <TableHead className="font-bold">Packing</TableHead>
                                 <TableHead className="font-bold text-center">Pcs</TableHead>
                                 <TableHead className="font-bold text-center">Weight</TableHead>
@@ -500,9 +519,10 @@ export function PurchaseOrderForm({
                                             <div className="font-semibold">{item.itemName} ({item.unitSymbol})</div>
                                         </TableCell>
                                         <TableCell>
-                                            <div className="flex gap-2">
+                                            <div className="flex flex-wrap gap-1">
                                                 {item.colorName && <BadgeSmall outline>{item.colorName}</BadgeSmall>}
                                                 {item.gradeName && <BadgeSmall>{item.gradeName}</BadgeSmall>}
+                                                {item.brandName && <BadgeSmall outline>{item.brandName}</BadgeSmall>}
                                             </div>
                                         </TableCell>
                                         <TableCell>
