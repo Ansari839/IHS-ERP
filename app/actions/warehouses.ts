@@ -103,3 +103,9 @@ export const deleteWarehouse = createSafeAction(
         getAfter: async () => null,
     }
 )
+
+export async function getWarehouses() {
+    return await prisma.warehouse.findMany({
+        orderBy: { name: 'asc' }
+    })
+}
