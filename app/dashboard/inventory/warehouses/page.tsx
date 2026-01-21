@@ -1,26 +1,22 @@
-import { Suspense } from 'react'
+// Since I can't easily create a NEW file and refactor everything in one go cleanly without risk,
+// I will create `WarehouseClient` and move the UI there.
+
+// ACTUALLY, simpler approach for now to fix user immediate issue without massive refactor:
+// I will keep `page.tsx` as Server Component.
+// I'll make the "Add Button + Dialog" a separate Client Component `<AddWarehouseDialog />`.
+// I'll make the "Edit Button + Dialog" a separate Client Component `<EditWarehouseDialog />` (or key existing one).
+// But for the Table Columns, I can just add them here.
+// The user complained "Navigate nahi hua". If I keep it uncontrolled, router.refresh() updates data, but Dialog stays open.
+// I MUST control the dialog.
+
+// Strategy:
+// 1. Create `components/warehouses/warehouse-list-client.tsx` (Client Component)
+//    - Props: initialWarehouses (passed from server page)
+//    - Contains: The Heading, Add Button (Controlled Dialog), and Table with Edit Buttons (Controlled Dialogs).
+// 2. Update `page.tsx` to fetch data and render `WarehouseListClient`.
+
+import { WarehouseListClient } from '@/components/warehouses/warehouse-list-client'
 import prisma from '@/lib/prisma'
-import { Button } from '@/components/ui/button'
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table'
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog'
-import { WarehouseForm } from '@/components/warehouses/warehouse-form'
-import { Badge } from '@/components/ui/badge'
-import { format } from 'date-fns'
-import { Plus, Pencil } from 'lucide-react'
-import { DeleteWarehouseButton } from '@/components/warehouses/delete-warehouse-button'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,82 +25,5 @@ export default async function WarehousesPage() {
         orderBy: { createdAt: 'desc' },
     })
 
-    return (
-        <div className="space-y-6">
-            <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold tracking-tight">Warehouses</h1>
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <Button>
-                            <Plus className="mr-2 h-4 w-4" />
-                            Add Warehouse
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Add New Warehouse</DialogTitle>
-                        </DialogHeader>
-                        <WarehouseForm />
-                    </DialogContent>
-                </Dialog>
-            </div>
-
-            <div className="rounded-md border overflow-x-auto">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Location</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Created At</TableHead>
-                            <TableHead className="text-right">Actions</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {warehouses.length === 0 ? (
-                            <TableRow>
-                                <TableCell colSpan={5} className="h-24 text-center">
-                                    No warehouses found.
-                                </TableCell>
-                            </TableRow>
-                        ) : (
-                            warehouses.map((warehouse) => (
-                                <TableRow key={warehouse.id}>
-                                    <TableCell className="font-medium">{warehouse.name}</TableCell>
-                                    <TableCell>{warehouse.location || '-'}</TableCell>
-                                    <TableCell>
-                                        <Badge variant={warehouse.status === 'ACTIVE' ? 'default' : 'secondary'}>
-                                            {warehouse.status}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell>
-                                        {format(new Date(warehouse.createdAt), 'MMM d, yyyy')}
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <div className="flex justify-end gap-2">
-                                            <Dialog>
-                                                <DialogTrigger asChild>
-                                                    <Button variant="ghost" size="icon">
-                                                        <Pencil className="h-4 w-4" />
-                                                    </Button>
-                                                </DialogTrigger>
-                                                <DialogContent>
-                                                    <DialogHeader>
-                                                        <DialogTitle>Edit Warehouse</DialogTitle>
-                                                    </DialogHeader>
-                                                    <WarehouseForm warehouse={warehouse} />
-                                                </DialogContent>
-                                            </Dialog>
-
-                                            <DeleteWarehouseButton id={warehouse.id} />
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
-                            ))
-                        )}
-                    </TableBody>
-                </Table>
-            </div>
-        </div>
-    )
+    return <WarehouseListClient initialData={warehouses} />
 }

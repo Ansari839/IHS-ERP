@@ -78,7 +78,14 @@ const navigation: NavigationItem[] = [
                     { name: "Item Grade", href: "/dashboard/fab-tex/products/item-grade", icon: Award, permission: "read:inventory" },
                 ]
             },
-            { name: "Purchase", href: "/dashboard/fab-tex/purchase", icon: ShoppingCart, permission: "read:inventory" },
+            {
+                name: "Purchase",
+                icon: ShoppingCart,
+                children: [
+                    { name: "Purchase Order", href: "/dashboard/fab-tex/purchase/purchase-order", icon: Layers, permission: "read:inventory" },
+                    { name: "Vendors", href: "/dashboard/fab-tex/purchase/vendors", icon: Users, permission: "read:inventory" },
+                ]
+            },
             { name: "Sale", href: "/dashboard/fab-tex/sales", icon: Banknote, permission: "read:inventory" },
         ]
     },

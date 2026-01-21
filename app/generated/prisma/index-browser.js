@@ -210,6 +210,8 @@ exports.Prisma.WarehouseScalarFieldEnum = {
   id: 'id',
   name: 'name',
   location: 'location',
+  contactPerson: 'contactPerson',
+  contactNumbers: 'contactNumbers',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -476,6 +478,46 @@ exports.Prisma.ItemMasterScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PurchaseOrderScalarFieldEnum = {
+  id: 'id',
+  poNumber: 'poNumber',
+  type: 'type',
+  status: 'status',
+  date: 'date',
+  accountId: 'accountId',
+  partyName: 'partyName',
+  warehouseId: 'warehouseId',
+  referenceNo: 'referenceNo',
+  documentDate: 'documentDate',
+  fileNo: 'fileNo',
+  remarks: 'remarks',
+  totalAmount: 'totalAmount',
+  currencyId: 'currencyId',
+  exchangeRate: 'exchangeRate',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseOrderItemScalarFieldEnum = {
+  id: 'id',
+  purchaseOrderId: 'purchaseOrderId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  packingType: 'packingType',
+  pcs: 'pcs',
+  unitSize: 'unitSize',
+  quantity: 'quantity',
+  unitId: 'unitId',
+  rate: 'rate',
+  amount: 'amount',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -533,6 +575,24 @@ exports.VoucherType = exports.$Enums.VoucherType = {
   CLOSING: 'CLOSING'
 };
 
+exports.PurchaseOrderType = exports.$Enums.PurchaseOrderType = {
+  LOCAL: 'LOCAL',
+  IMPORT: 'IMPORT'
+};
+
+exports.PurchaseOrderStatus = exports.$Enums.PurchaseOrderStatus = {
+  DRAFT: 'DRAFT',
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.PackingType = exports.$Enums.PackingType = {
+  EVEN: 'EVEN',
+  UNEVEN: 'UNEVEN'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   AuditAccess: 'AuditAccess',
@@ -568,7 +628,9 @@ exports.Prisma.ModelName = {
   Color: 'Color',
   Brand: 'Brand',
   ItemGrade: 'ItemGrade',
-  ItemMaster: 'ItemMaster'
+  ItemMaster: 'ItemMaster',
+  PurchaseOrder: 'PurchaseOrder',
+  PurchaseOrderItem: 'PurchaseOrderItem'
 };
 
 /**

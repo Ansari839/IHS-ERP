@@ -141,10 +141,13 @@ model Warehouse {
   id          Int             @id @default(autoincrement())
   name        String          @unique
   location    String?
+  contactPerson String?
+  contactNumbers String[]
   status      String          @default("ACTIVE") // ACTIVE, INACTIVE
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   userWarehouses UserWarehouse[]
+  purchaseOrders PurchaseOrder[]
 }
 
 model UserWarehouse {
@@ -175,6 +178,7 @@ model Unit {
   conversionsTo   UnitConversion[] @relation("ToUnit")
   products        Product[]
   itemMasters     ItemMaster[]
+  purchaseOrderItems PurchaseOrderItem[]
 }
 
 model UnitConversion {
@@ -216,6 +220,7 @@ model Company {
   itemGrades ItemGrade[]
   unitConversions UnitConversion[]
   itemMasters ItemMaster[]
+  purchaseOrders PurchaseOrder[]
 }
 
 model FiscalYear {
@@ -238,6 +243,7 @@ model Currency {
   exchangeRate  Float    @default(1.0) // Rate relative to Base Currency
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  purchaseOrders PurchaseOrder[]
 }
 
 model SystemConfig {
@@ -398,6 +404,7 @@ model Account {
   parent             Account?      @relation("AccountHierarchy", fields: [parentId], references: [id])
   children           Account[]     @relation("AccountHierarchy")
   journalLines       JournalLine[]
+  purchaseOrders     PurchaseOrder[]
 }
 
 model JournalEntry {
@@ -466,6 +473,7 @@ model Color {
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  purchaseOrderItems PurchaseOrderItem[]
 
 }
 
@@ -480,6 +488,7 @@ model Brand {
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  purchaseOrderItems PurchaseOrderItem[]
 }
 
 
@@ -494,6 +503,7 @@ model ItemGrade {
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  purchaseOrderItems PurchaseOrderItem[]
 }
 
 
@@ -517,5 +527,103 @@ model ItemMaster {
   
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
+  purchaseOrderItems PurchaseOrderItem[]
 }
 
+
+// --- Purchase Order Models ---
+
+enum PurchaseOrderType {
+  LOCAL
+  IMPORT
+}
+
+enum PurchaseOrderStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  COMPLETED
+  CANCELLED
+}
+
+enum PackingType {
+  EVEN
+  UNEVEN
+}
+
+model PurchaseOrder {
+  id              String             @id @default(uuid())
+  poNumber        String             @unique // Auto-generated PO-xxxx
+  type            PurchaseOrderType
+  status          PurchaseOrderStatus @default(DRAFT)
+  
+  date            DateTime           @default(now())
+  
+  // Party Info
+  accountId       Int?               // Link to Account (Vendor)
+  account         Account?           @relation(fields: [accountId], references: [id])
+  partyName       String?            // Fallback name if no account selected
+  
+  // Warehouse
+  warehouseId     Int?
+  warehouse       Warehouse?         @relation(fields: [warehouseId], references: [id])
+  
+  // Conditional Fields
+  referenceNo     String?            // Local: Bill No, Import: Inv No
+  documentDate    DateTime?          // Local: Delivery Order Date, Import: Document Date
+  fileNo          String?            // User defined
+  
+  remarks         String?
+  
+  // Financials
+  totalAmount     Float              @default(0.0)
+  currencyId      Int?
+  currency        Currency?          @relation(fields: [currencyId], references: [id])
+  exchangeRate    Float              @default(1.0)
+  
+  companyId       Int
+  company         Company            @relation(fields: [companyId], references: [id])
+  
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  
+  items           PurchaseOrderItem[]
+}
+
+model PurchaseOrderItem {
+  id              String        @id @default(uuid())
+  
+  purchaseOrderId String
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  
+  itemMasterId    String
+  itemMaster      ItemMaster    @relation(fields: [itemMasterId], references: [id])
+  
+  // Variant Details
+  colorId         String?
+  color           Color?        @relation(fields: [colorId], references: [id])
+  
+  brandId         String?
+  brand           Brand?        @relation(fields: [brandId], references: [id])
+  
+  itemGradeId     String?
+  itemGrade       ItemGrade?    @relation(fields: [itemGradeId], references: [id])
+  
+  // Packing Details
+  packingType     PackingType?
+  pcs             Float?        // Number of packages
+  unitSize        Float?        // Qty per package
+  
+  // Quantity & Rate
+  quantity        Float?
+  unitId          Int?
+  unit            Unit?         @relation(fields: [unitId], references: [id])
+  
+  rate            Float
+  amount          Float
+  
+  remarks         String?
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}

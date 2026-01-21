@@ -13,6 +13,10 @@ export const createWarehouse = createSafeAction(
 
         const name = formData.get('name') as string
         const location = formData.get('location') as string
+        const contactPerson = formData.get('contactPerson') as string
+        // Parse contactNumbers from JSON string
+        const contactNumbersJson = formData.get('contactNumbers') as string
+        const contactNumbers = contactNumbersJson ? JSON.parse(contactNumbersJson) : []
         const status = (formData.get('status') as string) || 'ACTIVE'
 
         if (!name) {
@@ -23,6 +27,8 @@ export const createWarehouse = createSafeAction(
             data: {
                 name,
                 location,
+                contactPerson,
+                contactNumbers,
                 status,
             },
         })
@@ -45,6 +51,8 @@ type UpdateWarehouseInput = {
     id: number
     name?: string
     location?: string
+    contactPerson?: string
+    contactNumbers?: string[]
     status?: string
 }
 
@@ -95,3 +103,9 @@ export const deleteWarehouse = createSafeAction(
         getAfter: async () => null,
     }
 )
+
+export async function getWarehouses() {
+    return await prisma.warehouse.findMany({
+        orderBy: { name: 'asc' }
+    })
+}
