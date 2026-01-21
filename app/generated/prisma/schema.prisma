@@ -180,6 +180,7 @@ model Unit {
   products           Product[]
   itemMasters        ItemMaster[]
   purchaseOrderItems PurchaseOrderItem[]
+  grnItems           GRNItem[]
 }
 
 model UnitConversion {
@@ -203,25 +204,27 @@ model UnitConversion {
 // --- Global Settings Models ---
 
 model Company {
-  id              Int              @id @default(autoincrement())
-  legalName       String
-  tradeName       String?
-  address         String?
-  country         String?
-  phone           String?
-  email           String?
-  taxId           String?
-  logoUrl         String?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  itemGroups      ItemGroup[]
-  colors          Color[]
-  brands          Brand[]
-  units           Unit[]
-  itemGrades      ItemGrade[]
-  unitConversions UnitConversion[]
-  itemMasters     ItemMaster[]
-  purchaseOrders  PurchaseOrder[]
+  id               Int               @id @default(autoincrement())
+  legalName        String
+  tradeName        String?
+  address          String?
+  country          String?
+  phone            String?
+  email            String?
+  taxId            String?
+  logoUrl          String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  itemGroups       ItemGroup[]
+  colors           Color[]
+  brands           Brand[]
+  units            Unit[]
+  itemGrades       ItemGrade[]
+  unitConversions  UnitConversion[]
+  itemMasters      ItemMaster[]
+  purchaseOrders   PurchaseOrder[]
+  grns             GRN[]
+  purchaseInvoices PurchaseInvoice[]
 }
 
 model FiscalYear {
@@ -474,6 +477,7 @@ model Color {
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   purchaseOrderItems PurchaseOrderItem[]
+  grnItems           GRNItem[]
 }
 
 model Brand {
@@ -488,6 +492,7 @@ model Brand {
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   purchaseOrderItems PurchaseOrderItem[]
+  grnItems           GRNItem[]
 }
 
 model ItemGrade {
@@ -502,6 +507,7 @@ model ItemGrade {
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   purchaseOrderItems PurchaseOrderItem[]
+  grnItems           GRNItem[]
 }
 
 model ItemMaster {
@@ -525,6 +531,7 @@ model ItemMaster {
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   purchaseOrderItems PurchaseOrderItem[]
+  grnItems           GRNItem[]
 }
 
 // --- Purchase Order Models ---
@@ -583,7 +590,9 @@ model PurchaseOrder {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  items PurchaseOrderItem[]
+  items    PurchaseOrderItem[]
+  grns     GRN[]
+  invoices PurchaseInvoice[]
 }
 
 model PurchaseOrderItem {
@@ -619,6 +628,101 @@ model PurchaseOrderItem {
   amount Float
 
   remarks String?
+
+  grnItems     GRNItem[]
+  invoiceItems PurchaseInvoiceItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GRN {
+  id        String   @id @default(uuid())
+  grnNumber String   @unique // Auto GRN-xxxx
+  date      DateTime @default(now())
+
+  purchaseOrderId String
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
+
+  remarks String?
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  items GRNItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GRNItem {
+  id String @id @default(uuid())
+
+  grnId String
+  grn   GRN    @relation(fields: [grnId], references: [id], onDelete: Cascade)
+
+  purchaseOrderItemId String
+  purchaseOrderItem   PurchaseOrderItem @relation(fields: [purchaseOrderItemId], references: [id])
+
+  itemMasterId String
+  itemMaster   ItemMaster @relation(fields: [itemMasterId], references: [id])
+
+  colorId String?
+  color   Color?  @relation(fields: [colorId], references: [id])
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  itemGradeId String?
+  itemGrade   ItemGrade? @relation(fields: [itemGradeId], references: [id])
+
+  receivedQty Float // Weight (kg)
+  pcs         Float? // Packages
+
+  unitId Int?
+  unit   Unit? @relation(fields: [unitId], references: [id])
+
+  invoiceItems PurchaseInvoiceItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PurchaseInvoice {
+  id            String   @id @default(uuid())
+  invoiceNumber String   @unique // INV-xxxx
+  date          DateTime @default(now())
+
+  purchaseOrderId String
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
+
+  totalAmount Float  @default(0.0)
+  status      String @default("UNPAID")
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  items PurchaseInvoiceItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PurchaseInvoiceItem {
+  id String @id @default(uuid())
+
+  invoiceId String
+  invoice   PurchaseInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  purchaseOrderItemId String
+  purchaseOrderItem   PurchaseOrderItem @relation(fields: [purchaseOrderItemId], references: [id])
+
+  grnItemId String?
+  grnItem   GRNItem? @relation(fields: [grnItemId], references: [id])
+
+  invoicedQty Float
+  rate        Float
+  amount      Float
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
