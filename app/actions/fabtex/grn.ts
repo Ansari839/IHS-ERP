@@ -67,6 +67,7 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
                         itemGradeId: item.itemGradeId || null,
                         receivedQty: parseFloat(item.receivedQty),
                         pcs: item.pcs ? parseFloat(item.pcs) : null,
+                        packingUnitId: item.packingUnitId || null,
                         unitId: item.unitId ? parseInt(item.unitId, 10) : null,
                     }))
                 }
@@ -118,6 +119,7 @@ export async function updateGRN(id: string, prevState: GRNState, formData: FormD
                             itemGradeId: item.itemGradeId || null,
                             receivedQty: parseFloat(item.receivedQty),
                             pcs: item.pcs ? parseFloat(item.pcs) : null,
+                            packingUnitId: item.packingUnitId || null,
                             unitId: item.unitId ? parseInt(item.unitId, 10) : null,
                         }))
                     }
@@ -157,7 +159,7 @@ export async function getGRNs() {
                 include: { account: true }
             },
             items: {
-                include: { itemMaster: true }
+                include: { itemMaster: true, packingUnit: true }
             }
         },
         orderBy: { date: 'desc' }
@@ -177,7 +179,8 @@ export async function getGRNById(id: string) {
                     color: true,
                     brand: true,
                     itemGrade: true,
-                    unit: true
+                    unit: true,
+                    packingUnit: true
                 }
             },
             company: true

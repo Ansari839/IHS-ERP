@@ -463,6 +463,17 @@ exports.Prisma.ItemGradeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PackingUnitScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  symbol: 'symbol',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ItemMasterScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -473,6 +484,7 @@ exports.Prisma.ItemMasterScalarFieldEnum = {
   imageUrl: 'imageUrl',
   itemGroupId: 'itemGroupId',
   baseUnitId: 'baseUnitId',
+  packingUnitId: 'packingUnitId',
   companyId: 'companyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -506,6 +518,7 @@ exports.Prisma.PurchaseOrderItemScalarFieldEnum = {
   colorId: 'colorId',
   brandId: 'brandId',
   itemGradeId: 'itemGradeId',
+  packingUnitId: 'packingUnitId',
   packingType: 'packingType',
   pcs: 'pcs',
   unitSize: 'unitSize',
@@ -537,6 +550,7 @@ exports.Prisma.GRNItemScalarFieldEnum = {
   colorId: 'colorId',
   brandId: 'brandId',
   itemGradeId: 'itemGradeId',
+  packingUnitId: 'packingUnitId',
   receivedQty: 'receivedQty',
   pcs: 'pcs',
   unitId: 'unitId',
@@ -678,6 +692,7 @@ exports.Prisma.ModelName = {
   Color: 'Color',
   Brand: 'Brand',
   ItemGrade: 'ItemGrade',
+  PackingUnit: 'PackingUnit',
   ItemMaster: 'ItemMaster',
   PurchaseOrder: 'PurchaseOrder',
   PurchaseOrderItem: 'PurchaseOrderItem',

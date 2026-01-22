@@ -38,6 +38,8 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
         receivedQty: it.receivedQty,
         pcs: it.pcs || 0,
         unitId: it.unitId,
+        packingUnitId: it.packingUnitId,
+        packingUnitSymbol: it.packingUnit?.symbol || it.packingUnit?.name,
         // These are needed for validation/UI even in edit
         remainingQty: 999999, // placeholder, will refine if needed
         orderedQty: 999999
@@ -67,7 +69,9 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
                     remainingQty: remaining > 0 ? remaining : 0,
                     receivedQty: currentGrnItem?.receivedQty || 0,
                     pcs: currentGrnItem?.pcs || 0,
-                    unitId: poItem.unitId
+                    unitId: poItem.unitId,
+                    packingUnitId: poItem.packingUnitId,
+                    packingUnitSymbol: poItem.packingUnit?.symbol || poItem.packingUnit?.name
                 }
             })
             setItems(mappedItems)
@@ -96,7 +100,9 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
                 remainingQty: remaining > 0 ? remaining : 0,
                 receivedQty: remaining > 0 ? remaining : 0,
                 pcs: item.pcs || 0,
-                unitId: item.unitId
+                unitId: item.unitId,
+                packingUnitId: item.packingUnitId,
+                packingUnitSymbol: item.packingUnit?.symbol || item.packingUnit?.name
             }
         })
         setItems(grnItems)
@@ -179,6 +185,7 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
                                 <TableHeader>
                                     <TableRow>
                                         <TableHead>Item</TableHead>
+                                        <TableHead>P. Unit</TableHead>
                                         <TableHead>Ordered</TableHead>
                                         <TableHead>Remaining</TableHead>
                                         <TableHead className="w-[150px]">Receiving Qty</TableHead>
@@ -193,6 +200,9 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
                                                 <div className="text-xs text-muted-foreground">
                                                     {item.colorName} / {item.gradeName} / {item.brandName}
                                                 </div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="text-xs font-medium">{item.packingUnitSymbol || '-'}</div>
                                             </TableCell>
                                             <TableCell>{item.orderedQty} {item.unitSymbol}</TableCell>
                                             <TableCell>

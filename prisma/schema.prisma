@@ -224,6 +224,7 @@ model Company {
   purchaseOrders PurchaseOrder[]
   grns            GRN[]
   purchaseInvoices PurchaseInvoice[]
+  packingUnits     PackingUnit[]
 }
 
 model FiscalYear {
@@ -511,6 +512,23 @@ model ItemGrade {
   grnItems    GRNItem[]
 }
 
+model PackingUnit {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  symbol      String?
+  status      String   @default("ACTIVE") // ACTIVE, INACTIVE
+  
+  companyId   Int
+  company     Company  @relation(fields: [companyId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  itemMasters ItemMaster[]
+  purchaseOrderItems PurchaseOrderItem[]
+  grnItems    GRNItem[]
+}
+
 
 model ItemMaster {
   id               String   @id @default(uuid())
@@ -526,6 +544,9 @@ model ItemMaster {
   
   baseUnitId       Int
   baseUnit         Unit      @relation(fields: [baseUnitId], references: [id])
+
+  packingUnitId    String?
+  packingUnit      PackingUnit? @relation(fields: [packingUnitId], references: [id])
   
   companyId        Int
   company          Company   @relation(fields: [companyId], references: [id])
@@ -618,6 +639,8 @@ model PurchaseOrderItem {
   itemGrade       ItemGrade?    @relation(fields: [itemGradeId], references: [id])
   
   // Packing Details
+  packingUnitId    String?
+  packingUnit      PackingUnit?  @relation(fields: [packingUnitId], references: [id])
   packingType     PackingType?
   pcs             Float?        // Number of packages
   unitSize        Float?        // Qty per package
@@ -678,6 +701,9 @@ model GRNItem {
   
   itemGradeId         String?
   itemGrade           ItemGrade?        @relation(fields: [itemGradeId], references: [id])
+  
+  packingUnitId       String?
+  packingUnit         PackingUnit?      @relation(fields: [packingUnitId], references: [id])
   
   receivedQty         Float             // Weight (kg)
   pcs                 Float?            // Packages

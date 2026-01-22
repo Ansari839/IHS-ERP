@@ -37,6 +37,7 @@ interface POFormProps {
     brands: any[]
     itemGrades: any[]
     units: any[]
+    packingUnits: any[]
 }
 
 type POItemInput = {
@@ -45,6 +46,7 @@ type POItemInput = {
     brandId?: string
     itemGradeId?: string
 
+    packingUnitId?: string
     packingType: PackingType
     pcs: number
     unitSize: number
@@ -58,6 +60,7 @@ type POItemInput = {
     // UI Helpers
     itemName?: string
     unitSymbol?: string
+    packingUnitSymbol?: string
     colorName?: string
     brandName?: string
     gradeName?: string
@@ -71,7 +74,8 @@ export function PurchaseOrderForm({
     colors,
     brands,
     itemGrades,
-    units
+    units,
+    packingUnits
 }: POFormProps) {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
@@ -98,6 +102,7 @@ export function PurchaseOrderForm({
 
             itemName: items.find(m => m.id === i.itemMasterId)?.name,
             unitSymbol: units.find(u => u.id === i.unitId)?.symbol,
+            packingUnitSymbol: packingUnits.find(p => p.id === i.packingUnitId)?.symbol || packingUnits.find(p => p.id === i.packingUnitId)?.name,
             colorName: colors.find(c => c.id === i.colorId)?.name,
             brandName: brands.find(b => b.id === i.brandId)?.name,
             gradeName: itemGrades.find(g => g.id === i.itemGradeId)?.name,
@@ -124,7 +129,9 @@ export function PurchaseOrderForm({
                 itemMasterId: itemId,
                 itemName: product.name,
                 unitId: product.baseUnitId, // Default to base unit
-                unitSymbol: product.baseUnit?.symbol
+                unitSymbol: product.baseUnit?.symbol,
+                packingUnitId: product.packingUnitId || undefined,
+                packingUnitSymbol: product.packingUnit?.symbol || product.packingUnit?.name || undefined
             }))
         }
     }
@@ -168,10 +175,12 @@ export function PurchaseOrderForm({
             rate: currentItem.rate || 0,
             amount: currentItem.amount || 0,
             unitId: currentItem.unitId,
+            packingUnitId: currentItem.packingUnitId,
             remarks: currentItem.remarks,
 
             itemName: currentItem.itemName,
             unitSymbol: currentItem.unitSymbol,
+            packingUnitSymbol: currentItem.packingUnitSymbol,
             colorName: colors.find(c => c.id === currentItem.colorId)?.name,
             brandName: brands.find(b => b.id === currentItem.brandId)?.name,
             gradeName: itemGrades.find(g => g.id === currentItem.itemGradeId)?.name,
@@ -406,6 +415,28 @@ export function PurchaseOrderForm({
                             </Select>
                         </div>
 
+                        {/* Packing Unit */}
+                        <div className="space-y-1">
+                            <Label>Packing Unit</Label>
+                            <Select
+                                value={currentItem.packingUnitId}
+                                onValueChange={(v) => {
+                                    const pu = packingUnits.find(p => p.id === v);
+                                    setCurrentItem(p => ({ ...p, packingUnitId: v, packingUnitSymbol: pu?.symbol || pu?.name }));
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="P. Unit" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="none">None</SelectItem>
+                                    {packingUnits.map(pu => (
+                                        <SelectItem key={pu.id} value={pu.id}>{pu.name} {pu.symbol ? `(${pu.symbol})` : ''}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
                         {/* Packing Type */}
                         <div className="space-y-1">
                             <Label>Packing</Label>
@@ -423,23 +454,23 @@ export function PurchaseOrderForm({
                             </Select>
                         </div>
 
-                        {/* Qty of UOM */}
+                        {/* Qty of UOM (Packages) */}
                         <div className="space-y-1">
-                            <Label>Qty of {currentItem.unitSymbol || 'UOM'}</Label>
+                            <Label>No. of {currentItem.packingUnitSymbol || 'Pkgs'}</Label>
                             <Input
                                 type="number"
-                                placeholder={`e.g. 33 ${currentItem.unitSymbol || ''}`}
+                                placeholder={`e.g. 10 ${currentItem.packingUnitSymbol || ''}`}
                                 value={currentItem.pcs || ''}
                                 onChange={(e) => setCurrentItem(p => ({ ...p, pcs: parseFloat(e.target.value) || 0 }))}
                             />
                         </div>
 
-                        {/* UOM Size */}
+                        {/* UOM Size (Qty per Package) */}
                         <div className="space-y-1">
-                            <Label>{currentItem.unitSymbol || 'UOM'} Size</Label>
+                            <Label>{currentItem.packingUnitSymbol || 'Pkg'} Size</Label>
                             <Input
                                 type="number"
-                                placeholder="Optional"
+                                placeholder={`Qty per ${currentItem.packingUnitSymbol || 'Pkg'}`}
                                 disabled={currentItem.packingType === 'UNEVEN'}
                                 value={currentItem.unitSize || ''}
                                 onChange={(e) => setCurrentItem(p => ({ ...p, unitSize: parseFloat(e.target.value) || 0 }))}
@@ -498,6 +529,7 @@ export function PurchaseOrderForm({
                                 <TableHead className="font-bold">Product</TableHead>
                                 <TableHead className="font-bold">Variant (Clr/Grd/Brnd)</TableHead>
                                 <TableHead className="font-bold">Packing</TableHead>
+                                <TableHead className="font-bold">P. Unit</TableHead>
                                 <TableHead className="font-bold text-center">Pcs</TableHead>
                                 <TableHead className="font-bold text-center">Weight</TableHead>
                                 <TableHead className="font-bold text-right">Rate</TableHead>
@@ -508,7 +540,7 @@ export function PurchaseOrderForm({
                         <TableBody>
                             {poItems.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={8} className="text-center h-32 text-muted-foreground">
+                                    <TableCell colSpan={9} className="text-center h-32 text-muted-foreground">
                                         No variant rows added yet. Select an item and fill the form above.
                                     </TableCell>
                                 </TableRow>
@@ -532,6 +564,9 @@ export function PurchaseOrderForm({
                                                     <span className="text-muted-foreground">{item.pcs} x {item.unitSize}</span>
                                                 )}
                                             </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="text-xs font-medium">{item.packingUnitSymbol || '-'}</div>
                                         </TableCell>
                                         <TableCell className="text-center">{item.pcs || '-'}</TableCell>
                                         <TableCell className="text-center font-bold">{item.quantity} {item.unitSymbol}</TableCell>
@@ -576,7 +611,7 @@ export function PurchaseOrderForm({
                     {initialData ? 'Update Purchase Order' : 'Confirm & Save Purchase Order'}
                 </Button>
             </div>
-        </form>
+        </form >
     )
 }
 

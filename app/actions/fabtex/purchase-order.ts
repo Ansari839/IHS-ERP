@@ -94,6 +94,7 @@ export async function createPurchaseOrder(prevState: POState, formData: FormData
                             amount: item.amount ? parseFloat(item.amount) : 0,
                             unitId: item.unitId ? parseInt(item.unitId, 10) : null,
                             packingType: item.packingType || null,
+                            packingUnitId: item.packingUnitId || null,
                             pcs: item.pcs ? parseFloat(item.pcs) : null,
                             unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
                             remarks: item.remarks || null
@@ -171,6 +172,7 @@ export async function updatePurchaseOrder(id: string, prevState: POState, formDa
                         amount: item.amount ? parseFloat(item.amount) : 0,
                         unitId: item.unitId ? parseInt(item.unitId, 10) : null,
                         packingType: item.packingType || null,
+                        packingUnitId: item.packingUnitId || null,
                         pcs: item.pcs ? parseFloat(item.pcs) : null,
                         unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
                         remarks: item.remarks || null
@@ -227,6 +229,7 @@ export async function getPurchaseOrderById(id: string) {
                     color: true,
                     brand: true,
                     unit: true,
+                    packingUnit: true,
                     grnItems: true,
                     invoiceItems: true,
                 }
