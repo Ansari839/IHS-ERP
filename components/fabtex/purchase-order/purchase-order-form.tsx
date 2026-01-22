@@ -82,6 +82,7 @@ export function PurchaseOrderForm({
 
     // Header State
     const [type, setType] = useState<PurchaseOrderType>(initialData?.type || 'LOCAL')
+    const [warehouseId, setWarehouseId] = useState<string>(initialData?.warehouseId?.toString() || '')
     const [partyDetails, setPartyDetails] = useState({
         accountId: initialData?.accountId?.toString() || '',
         partyName: initialData?.partyName || ''
@@ -213,6 +214,12 @@ export function PurchaseOrderForm({
 
         formData.append('items', JSON.stringify(poItems))
 
+        // Ensure controlled fields are in formData
+        formData.set('type', type)
+        formData.set('accountId', partyDetails.accountId)
+        formData.set('partyName', partyDetails.partyName)
+        formData.set('warehouseId', warehouseId)
+
         startTransition(async () => {
             const result = initialData
                 ? await updatePurchaseOrder(initialData.id, {}, formData)
@@ -275,7 +282,11 @@ export function PurchaseOrderForm({
                 {/* Warehouse */}
                 <div className="space-y-2">
                     <Label>Warehouse</Label>
-                    <Select name="warehouseId" defaultValue={initialData?.warehouseId?.toString()}>
+                    <Select
+                        name="warehouseId"
+                        value={warehouseId}
+                        onValueChange={setWarehouseId}
+                    >
                         <SelectTrigger>
                             <SelectValue placeholder="Select Warehouse" />
                         </SelectTrigger>

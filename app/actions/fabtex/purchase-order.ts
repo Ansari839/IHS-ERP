@@ -73,9 +73,9 @@ export async function createPurchaseOrder(prevState: POState, formData: FormData
                     type,
                     date: new Date(dateStr),
                     status: PurchaseOrderStatus.DRAFT,
-                    accountId: accountIdStr ? parseInt(accountIdStr, 10) : null,
+                    accountId: (accountIdStr && accountIdStr !== 'null' && accountIdStr !== 'undefined' && accountIdStr !== '') ? parseInt(accountIdStr, 10) : null,
                     partyName: partyName || undefined,
-                    warehouseId: warehouseIdStr ? parseInt(warehouseIdStr, 10) : null,
+                    warehouseId: (warehouseIdStr && warehouseIdStr !== 'null' && warehouseIdStr !== 'undefined' && warehouseIdStr !== '') ? parseInt(warehouseIdStr, 10) : null,
                     referenceNo: referenceNo || null,
                     fileNo: fileNo || null,
                     documentDate: documentDateStr ? new Date(documentDateStr) : null,
@@ -94,7 +94,7 @@ export async function createPurchaseOrder(prevState: POState, formData: FormData
                             amount: item.amount ? parseFloat(item.amount) : 0,
                             unitId: item.unitId ? parseInt(item.unitId, 10) : null,
                             packingType: item.packingType || null,
-                            packingUnitId: item.packingUnitId || null,
+                            packingUnitId: (item.packingUnitId && item.packingUnitId !== 'none') ? item.packingUnitId : null,
                             pcs: item.pcs ? parseFloat(item.pcs) : null,
                             unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
                             remarks: item.remarks || null
@@ -108,9 +108,9 @@ export async function createPurchaseOrder(prevState: POState, formData: FormData
         revalidatePath('/dashboard/fab-tex/purchase/purchase-order')
         return { success: true, data: transaction }
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Create PO Error:', error)
-        return { success: false, error: 'Failed to create Purchase Order' }
+        return { success: false, error: error.message || 'Failed to create Purchase Order' }
     }
 }
 
@@ -130,39 +130,33 @@ export async function updatePurchaseOrder(id: string, prevState: POState, formDa
         const fileNo = formData.get('fileNo') as string
         const documentDateStr = formData.get('documentDate') as string
         const itemsJson = formData.get('items') as string
+        if (!itemsJson) return { success: false, error: 'No items provided' }
         const items = JSON.parse(itemsJson)
+
+        if (!type || !dateStr || items.length === 0) {
+            return { success: false, error: 'Missing required fields' }
+        }
 
         const totalAmount = items.reduce((sum: number, item: any) => sum + (parseFloat(item.amount) || 0), 0)
 
-        // Transaction: Update PO Header, Delete Old Items, Create New Items
-        // (Simpler than diffing for now)
-        await prisma.$transaction(async (tx) => {
-            await tx.purchaseOrder.update({
-                where: { id },
-                data: {
-                    type,
-                    date: new Date(dateStr),
-                    accountId: accountIdStr ? parseInt(accountIdStr, 10) : null,
-                    partyName: partyName || undefined,
-                    warehouseId: warehouseIdStr ? parseInt(warehouseIdStr, 10) : null,
-                    referenceNo: referenceNo || null,
-                    fileNo: fileNo || null,
-                    documentDate: documentDateStr ? new Date(documentDateStr) : null,
-                    remarks: remarks || null,
-                    totalAmount,
-                }
-            })
-
-            // Delete existing items
-            await tx.purchaseOrderItem.deleteMany({
-                where: { purchaseOrderId: id }
-            })
-
-            // Create new items
-            if (items.length > 0) {
-                await tx.purchaseOrderItem.createMany({
-                    data: items.map((item: any) => ({
-                        purchaseOrderId: id,
+        const startTime = Date.now()
+        // Use a single nested update to avoid interactive transaction overhead
+        await prisma.purchaseOrder.update({
+            where: { id },
+            data: {
+                type,
+                date: new Date(dateStr),
+                accountId: (accountIdStr && accountIdStr !== 'null' && accountIdStr !== 'undefined' && accountIdStr !== '') ? parseInt(accountIdStr, 10) : null,
+                partyName: partyName || null,
+                warehouseId: (warehouseIdStr && warehouseIdStr !== 'null' && warehouseIdStr !== 'undefined' && warehouseIdStr !== '') ? parseInt(warehouseIdStr, 10) : null,
+                referenceNo: referenceNo || null,
+                fileNo: fileNo || null,
+                documentDate: documentDateStr ? new Date(documentDateStr) : null,
+                remarks: remarks || null,
+                totalAmount,
+                items: {
+                    deleteMany: {}, // Delete all existing items
+                    create: items.map((item: any) => ({
                         itemMasterId: item.itemMasterId,
                         colorId: item.colorId || null,
                         brandId: item.brandId || null,
@@ -172,21 +166,26 @@ export async function updatePurchaseOrder(id: string, prevState: POState, formDa
                         amount: item.amount ? parseFloat(item.amount) : 0,
                         unitId: item.unitId ? parseInt(item.unitId, 10) : null,
                         packingType: item.packingType || null,
-                        packingUnitId: item.packingUnitId || null,
+                        packingUnitId: (item.packingUnitId && item.packingUnitId !== 'none') ? item.packingUnitId : null,
                         pcs: item.pcs ? parseFloat(item.pcs) : null,
                         unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
                         remarks: item.remarks || null
                     }))
-                })
+                }
             }
         })
+        console.log(`PO Update completed in ${Date.now() - startTime}ms`)
 
         revalidatePath('/dashboard/fab-tex/purchase/purchase-order')
         return { success: true }
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Update PO Error:', error)
-        return { success: false, error: 'Failed to update Purchase Order' }
+        // Return a more descriptive error if possible
+        if (error.code === 'P2003') {
+            return { success: false, error: 'Cannot update PO items: Some items are already received in a GRN.' }
+        }
+        return { success: false, error: error.message || 'Failed to update Purchase Order' }
     }
 }
 

@@ -536,6 +536,8 @@ exports.Prisma.GRNScalarFieldEnum = {
   grnNumber: 'grnNumber',
   date: 'date',
   purchaseOrderId: 'purchaseOrderId',
+  lotNo: 'lotNo',
+  warehouseRefNo: 'warehouseRefNo',
   remarks: 'remarks',
   companyId: 'companyId',
   createdAt: 'createdAt',
@@ -553,6 +555,8 @@ exports.Prisma.GRNItemScalarFieldEnum = {
   packingUnitId: 'packingUnitId',
   receivedQty: 'receivedQty',
   pcs: 'pcs',
+  unitSize: 'unitSize',
+  packingType: 'packingType',
   unitId: 'unitId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

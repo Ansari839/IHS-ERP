@@ -667,6 +667,9 @@ model GRN {
   purchaseOrderId String
   purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
 
+  lotNo          String?
+  warehouseRefNo String?
+
   remarks String?
 
   companyId Int
@@ -704,6 +707,8 @@ model GRNItem {
 
   receivedQty Float // Weight (kg)
   pcs         Float? // Packages
+  unitSize    Float? // Qty per package
+  packingType PackingType?
 
   unitId Int?
   unit   Unit? @relation(fields: [unitId], references: [id])

@@ -50413,6 +50413,8 @@ export namespace Prisma {
     grnNumber: string | null
     date: Date | null
     purchaseOrderId: string | null
+    lotNo: string | null
+    warehouseRefNo: string | null
     remarks: string | null
     companyId: number | null
     createdAt: Date | null
@@ -50424,6 +50426,8 @@ export namespace Prisma {
     grnNumber: string | null
     date: Date | null
     purchaseOrderId: string | null
+    lotNo: string | null
+    warehouseRefNo: string | null
     remarks: string | null
     companyId: number | null
     createdAt: Date | null
@@ -50435,6 +50439,8 @@ export namespace Prisma {
     grnNumber: number
     date: number
     purchaseOrderId: number
+    lotNo: number
+    warehouseRefNo: number
     remarks: number
     companyId: number
     createdAt: number
@@ -50456,6 +50462,8 @@ export namespace Prisma {
     grnNumber?: true
     date?: true
     purchaseOrderId?: true
+    lotNo?: true
+    warehouseRefNo?: true
     remarks?: true
     companyId?: true
     createdAt?: true
@@ -50467,6 +50475,8 @@ export namespace Prisma {
     grnNumber?: true
     date?: true
     purchaseOrderId?: true
+    lotNo?: true
+    warehouseRefNo?: true
     remarks?: true
     companyId?: true
     createdAt?: true
@@ -50478,6 +50488,8 @@ export namespace Prisma {
     grnNumber?: true
     date?: true
     purchaseOrderId?: true
+    lotNo?: true
+    warehouseRefNo?: true
     remarks?: true
     companyId?: true
     createdAt?: true
@@ -50576,6 +50588,8 @@ export namespace Prisma {
     grnNumber: string
     date: Date
     purchaseOrderId: string
+    lotNo: string | null
+    warehouseRefNo: string | null
     remarks: string | null
     companyId: number
     createdAt: Date
@@ -50606,6 +50620,8 @@ export namespace Prisma {
     grnNumber?: boolean
     date?: boolean
     purchaseOrderId?: boolean
+    lotNo?: boolean
+    warehouseRefNo?: boolean
     remarks?: boolean
     companyId?: boolean
     createdAt?: boolean
@@ -50621,6 +50637,8 @@ export namespace Prisma {
     grnNumber?: boolean
     date?: boolean
     purchaseOrderId?: boolean
+    lotNo?: boolean
+    warehouseRefNo?: boolean
     remarks?: boolean
     companyId?: boolean
     createdAt?: boolean
@@ -50634,6 +50652,8 @@ export namespace Prisma {
     grnNumber?: boolean
     date?: boolean
     purchaseOrderId?: boolean
+    lotNo?: boolean
+    warehouseRefNo?: boolean
     remarks?: boolean
     companyId?: boolean
     createdAt?: boolean
@@ -50647,13 +50667,15 @@ export namespace Prisma {
     grnNumber?: boolean
     date?: boolean
     purchaseOrderId?: boolean
+    lotNo?: boolean
+    warehouseRefNo?: boolean
     remarks?: boolean
     companyId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type GRNOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "grnNumber" | "date" | "purchaseOrderId" | "remarks" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["gRN"]>
+  export type GRNOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "grnNumber" | "date" | "purchaseOrderId" | "lotNo" | "warehouseRefNo" | "remarks" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["gRN"]>
   export type GRNInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -50681,6 +50703,8 @@ export namespace Prisma {
       grnNumber: string
       date: Date
       purchaseOrderId: string
+      lotNo: string | null
+      warehouseRefNo: string | null
       remarks: string | null
       companyId: number
       createdAt: Date
@@ -51115,6 +51139,8 @@ export namespace Prisma {
     readonly grnNumber: FieldRef<"GRN", 'String'>
     readonly date: FieldRef<"GRN", 'DateTime'>
     readonly purchaseOrderId: FieldRef<"GRN", 'String'>
+    readonly lotNo: FieldRef<"GRN", 'String'>
+    readonly warehouseRefNo: FieldRef<"GRN", 'String'>
     readonly remarks: FieldRef<"GRN", 'String'>
     readonly companyId: FieldRef<"GRN", 'Int'>
     readonly createdAt: FieldRef<"GRN", 'DateTime'>
@@ -51572,12 +51598,14 @@ export namespace Prisma {
   export type GRNItemAvgAggregateOutputType = {
     receivedQty: number | null
     pcs: number | null
+    unitSize: number | null
     unitId: number | null
   }
 
   export type GRNItemSumAggregateOutputType = {
     receivedQty: number | null
     pcs: number | null
+    unitSize: number | null
     unitId: number | null
   }
 
@@ -51592,6 +51620,8 @@ export namespace Prisma {
     packingUnitId: string | null
     receivedQty: number | null
     pcs: number | null
+    unitSize: number | null
+    packingType: $Enums.PackingType | null
     unitId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -51608,6 +51638,8 @@ export namespace Prisma {
     packingUnitId: string | null
     receivedQty: number | null
     pcs: number | null
+    unitSize: number | null
+    packingType: $Enums.PackingType | null
     unitId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -51624,6 +51656,8 @@ export namespace Prisma {
     packingUnitId: number
     receivedQty: number
     pcs: number
+    unitSize: number
+    packingType: number
     unitId: number
     createdAt: number
     updatedAt: number
@@ -51634,12 +51668,14 @@ export namespace Prisma {
   export type GRNItemAvgAggregateInputType = {
     receivedQty?: true
     pcs?: true
+    unitSize?: true
     unitId?: true
   }
 
   export type GRNItemSumAggregateInputType = {
     receivedQty?: true
     pcs?: true
+    unitSize?: true
     unitId?: true
   }
 
@@ -51654,6 +51690,8 @@ export namespace Prisma {
     packingUnitId?: true
     receivedQty?: true
     pcs?: true
+    unitSize?: true
+    packingType?: true
     unitId?: true
     createdAt?: true
     updatedAt?: true
@@ -51670,6 +51708,8 @@ export namespace Prisma {
     packingUnitId?: true
     receivedQty?: true
     pcs?: true
+    unitSize?: true
+    packingType?: true
     unitId?: true
     createdAt?: true
     updatedAt?: true
@@ -51686,6 +51726,8 @@ export namespace Prisma {
     packingUnitId?: true
     receivedQty?: true
     pcs?: true
+    unitSize?: true
+    packingType?: true
     unitId?: true
     createdAt?: true
     updatedAt?: true
@@ -51789,6 +51831,8 @@ export namespace Prisma {
     packingUnitId: string | null
     receivedQty: number
     pcs: number | null
+    unitSize: number | null
+    packingType: $Enums.PackingType | null
     unitId: number | null
     createdAt: Date
     updatedAt: Date
@@ -51824,6 +51868,8 @@ export namespace Prisma {
     packingUnitId?: boolean
     receivedQty?: boolean
     pcs?: boolean
+    unitSize?: boolean
+    packingType?: boolean
     unitId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -51850,6 +51896,8 @@ export namespace Prisma {
     packingUnitId?: boolean
     receivedQty?: boolean
     pcs?: boolean
+    unitSize?: boolean
+    packingType?: boolean
     unitId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -51874,6 +51922,8 @@ export namespace Prisma {
     packingUnitId?: boolean
     receivedQty?: boolean
     pcs?: boolean
+    unitSize?: boolean
+    packingType?: boolean
     unitId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -51898,12 +51948,14 @@ export namespace Prisma {
     packingUnitId?: boolean
     receivedQty?: boolean
     pcs?: boolean
+    unitSize?: boolean
+    packingType?: boolean
     unitId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type GRNItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "grnId" | "purchaseOrderItemId" | "itemMasterId" | "colorId" | "brandId" | "itemGradeId" | "packingUnitId" | "receivedQty" | "pcs" | "unitId" | "createdAt" | "updatedAt", ExtArgs["result"]["gRNItem"]>
+  export type GRNItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "grnId" | "purchaseOrderItemId" | "itemMasterId" | "colorId" | "brandId" | "itemGradeId" | "packingUnitId" | "receivedQty" | "pcs" | "unitSize" | "packingType" | "unitId" | "createdAt" | "updatedAt", ExtArgs["result"]["gRNItem"]>
   export type GRNItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     grn?: boolean | GRNDefaultArgs<ExtArgs>
     purchaseOrderItem?: boolean | PurchaseOrderItemDefaultArgs<ExtArgs>
@@ -51961,6 +52013,8 @@ export namespace Prisma {
       packingUnitId: string | null
       receivedQty: number
       pcs: number | null
+      unitSize: number | null
+      packingType: $Enums.PackingType | null
       unitId: number | null
       createdAt: Date
       updatedAt: Date
@@ -52406,6 +52460,8 @@ export namespace Prisma {
     readonly packingUnitId: FieldRef<"GRNItem", 'String'>
     readonly receivedQty: FieldRef<"GRNItem", 'Float'>
     readonly pcs: FieldRef<"GRNItem", 'Float'>
+    readonly unitSize: FieldRef<"GRNItem", 'Float'>
+    readonly packingType: FieldRef<"GRNItem", 'PackingType'>
     readonly unitId: FieldRef<"GRNItem", 'Int'>
     readonly createdAt: FieldRef<"GRNItem", 'DateTime'>
     readonly updatedAt: FieldRef<"GRNItem", 'DateTime'>
@@ -55859,6 +55915,8 @@ export namespace Prisma {
     grnNumber: 'grnNumber',
     date: 'date',
     purchaseOrderId: 'purchaseOrderId',
+    lotNo: 'lotNo',
+    warehouseRefNo: 'warehouseRefNo',
     remarks: 'remarks',
     companyId: 'companyId',
     createdAt: 'createdAt',
@@ -55879,6 +55937,8 @@ export namespace Prisma {
     packingUnitId: 'packingUnitId',
     receivedQty: 'receivedQty',
     pcs: 'pcs',
+    unitSize: 'unitSize',
+    packingType: 'packingType',
     unitId: 'unitId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -59046,6 +59106,8 @@ export namespace Prisma {
     grnNumber?: StringFilter<"GRN"> | string
     date?: DateTimeFilter<"GRN"> | Date | string
     purchaseOrderId?: StringFilter<"GRN"> | string
+    lotNo?: StringNullableFilter<"GRN"> | string | null
+    warehouseRefNo?: StringNullableFilter<"GRN"> | string | null
     remarks?: StringNullableFilter<"GRN"> | string | null
     companyId?: IntFilter<"GRN"> | number
     createdAt?: DateTimeFilter<"GRN"> | Date | string
@@ -59060,6 +59122,8 @@ export namespace Prisma {
     grnNumber?: SortOrder
     date?: SortOrder
     purchaseOrderId?: SortOrder
+    lotNo?: SortOrderInput | SortOrder
+    warehouseRefNo?: SortOrderInput | SortOrder
     remarks?: SortOrderInput | SortOrder
     companyId?: SortOrder
     createdAt?: SortOrder
@@ -59077,6 +59141,8 @@ export namespace Prisma {
     NOT?: GRNWhereInput | GRNWhereInput[]
     date?: DateTimeFilter<"GRN"> | Date | string
     purchaseOrderId?: StringFilter<"GRN"> | string
+    lotNo?: StringNullableFilter<"GRN"> | string | null
+    warehouseRefNo?: StringNullableFilter<"GRN"> | string | null
     remarks?: StringNullableFilter<"GRN"> | string | null
     companyId?: IntFilter<"GRN"> | number
     createdAt?: DateTimeFilter<"GRN"> | Date | string
@@ -59091,6 +59157,8 @@ export namespace Prisma {
     grnNumber?: SortOrder
     date?: SortOrder
     purchaseOrderId?: SortOrder
+    lotNo?: SortOrderInput | SortOrder
+    warehouseRefNo?: SortOrderInput | SortOrder
     remarks?: SortOrderInput | SortOrder
     companyId?: SortOrder
     createdAt?: SortOrder
@@ -59110,6 +59178,8 @@ export namespace Prisma {
     grnNumber?: StringWithAggregatesFilter<"GRN"> | string
     date?: DateTimeWithAggregatesFilter<"GRN"> | Date | string
     purchaseOrderId?: StringWithAggregatesFilter<"GRN"> | string
+    lotNo?: StringNullableWithAggregatesFilter<"GRN"> | string | null
+    warehouseRefNo?: StringNullableWithAggregatesFilter<"GRN"> | string | null
     remarks?: StringNullableWithAggregatesFilter<"GRN"> | string | null
     companyId?: IntWithAggregatesFilter<"GRN"> | number
     createdAt?: DateTimeWithAggregatesFilter<"GRN"> | Date | string
@@ -59130,6 +59200,8 @@ export namespace Prisma {
     packingUnitId?: StringNullableFilter<"GRNItem"> | string | null
     receivedQty?: FloatFilter<"GRNItem"> | number
     pcs?: FloatNullableFilter<"GRNItem"> | number | null
+    unitSize?: FloatNullableFilter<"GRNItem"> | number | null
+    packingType?: EnumPackingTypeNullableFilter<"GRNItem"> | $Enums.PackingType | null
     unitId?: IntNullableFilter<"GRNItem"> | number | null
     createdAt?: DateTimeFilter<"GRNItem"> | Date | string
     updatedAt?: DateTimeFilter<"GRNItem"> | Date | string
@@ -59155,6 +59227,8 @@ export namespace Prisma {
     packingUnitId?: SortOrderInput | SortOrder
     receivedQty?: SortOrder
     pcs?: SortOrderInput | SortOrder
+    unitSize?: SortOrderInput | SortOrder
+    packingType?: SortOrderInput | SortOrder
     unitId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -59183,6 +59257,8 @@ export namespace Prisma {
     packingUnitId?: StringNullableFilter<"GRNItem"> | string | null
     receivedQty?: FloatFilter<"GRNItem"> | number
     pcs?: FloatNullableFilter<"GRNItem"> | number | null
+    unitSize?: FloatNullableFilter<"GRNItem"> | number | null
+    packingType?: EnumPackingTypeNullableFilter<"GRNItem"> | $Enums.PackingType | null
     unitId?: IntNullableFilter<"GRNItem"> | number | null
     createdAt?: DateTimeFilter<"GRNItem"> | Date | string
     updatedAt?: DateTimeFilter<"GRNItem"> | Date | string
@@ -59208,6 +59284,8 @@ export namespace Prisma {
     packingUnitId?: SortOrderInput | SortOrder
     receivedQty?: SortOrder
     pcs?: SortOrderInput | SortOrder
+    unitSize?: SortOrderInput | SortOrder
+    packingType?: SortOrderInput | SortOrder
     unitId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -59232,6 +59310,8 @@ export namespace Prisma {
     packingUnitId?: StringNullableWithAggregatesFilter<"GRNItem"> | string | null
     receivedQty?: FloatWithAggregatesFilter<"GRNItem"> | number
     pcs?: FloatNullableWithAggregatesFilter<"GRNItem"> | number | null
+    unitSize?: FloatNullableWithAggregatesFilter<"GRNItem"> | number | null
+    packingType?: EnumPackingTypeNullableWithAggregatesFilter<"GRNItem"> | $Enums.PackingType | null
     unitId?: IntNullableWithAggregatesFilter<"GRNItem"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"GRNItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"GRNItem"> | Date | string
@@ -62396,6 +62476,8 @@ export namespace Prisma {
     id?: string
     grnNumber: string
     date?: Date | string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -62409,6 +62491,8 @@ export namespace Prisma {
     grnNumber: string
     date?: Date | string
     purchaseOrderId: string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
     createdAt?: Date | string
@@ -62420,6 +62504,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62433,6 +62519,8 @@ export namespace Prisma {
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62445,6 +62533,8 @@ export namespace Prisma {
     grnNumber: string
     date?: Date | string
     purchaseOrderId: string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
     createdAt?: Date | string
@@ -62455,6 +62545,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62465,6 +62557,8 @@ export namespace Prisma {
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62475,6 +62569,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -62499,6 +62595,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -62509,6 +62607,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -62533,6 +62633,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -62550,6 +62652,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -62559,6 +62663,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62574,6 +62680,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -65209,6 +65317,8 @@ export namespace Prisma {
     grnNumber?: SortOrder
     date?: SortOrder
     purchaseOrderId?: SortOrder
+    lotNo?: SortOrder
+    warehouseRefNo?: SortOrder
     remarks?: SortOrder
     companyId?: SortOrder
     createdAt?: SortOrder
@@ -65224,6 +65334,8 @@ export namespace Prisma {
     grnNumber?: SortOrder
     date?: SortOrder
     purchaseOrderId?: SortOrder
+    lotNo?: SortOrder
+    warehouseRefNo?: SortOrder
     remarks?: SortOrder
     companyId?: SortOrder
     createdAt?: SortOrder
@@ -65235,6 +65347,8 @@ export namespace Prisma {
     grnNumber?: SortOrder
     date?: SortOrder
     purchaseOrderId?: SortOrder
+    lotNo?: SortOrder
+    warehouseRefNo?: SortOrder
     remarks?: SortOrder
     companyId?: SortOrder
     createdAt?: SortOrder
@@ -65266,6 +65380,8 @@ export namespace Prisma {
     packingUnitId?: SortOrder
     receivedQty?: SortOrder
     pcs?: SortOrder
+    unitSize?: SortOrder
+    packingType?: SortOrder
     unitId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -65274,6 +65390,7 @@ export namespace Prisma {
   export type GRNItemAvgOrderByAggregateInput = {
     receivedQty?: SortOrder
     pcs?: SortOrder
+    unitSize?: SortOrder
     unitId?: SortOrder
   }
 
@@ -65288,6 +65405,8 @@ export namespace Prisma {
     packingUnitId?: SortOrder
     receivedQty?: SortOrder
     pcs?: SortOrder
+    unitSize?: SortOrder
+    packingType?: SortOrder
     unitId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -65304,6 +65423,8 @@ export namespace Prisma {
     packingUnitId?: SortOrder
     receivedQty?: SortOrder
     pcs?: SortOrder
+    unitSize?: SortOrder
+    packingType?: SortOrder
     unitId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -65312,6 +65433,7 @@ export namespace Prisma {
   export type GRNItemSumOrderByAggregateInput = {
     receivedQty?: SortOrder
     pcs?: SortOrder
+    unitSize?: SortOrder
     unitId?: SortOrder
   }
 
@@ -71105,6 +71227,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -71128,6 +71252,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     invoiceItems?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutGrnItemInput
@@ -71381,6 +71507,8 @@ export namespace Prisma {
     packingUnitId?: StringNullableFilter<"GRNItem"> | string | null
     receivedQty?: FloatFilter<"GRNItem"> | number
     pcs?: FloatNullableFilter<"GRNItem"> | number | null
+    unitSize?: FloatNullableFilter<"GRNItem"> | number | null
+    packingType?: EnumPackingTypeNullableFilter<"GRNItem"> | $Enums.PackingType | null
     unitId?: IntNullableFilter<"GRNItem"> | number | null
     createdAt?: DateTimeFilter<"GRNItem"> | Date | string
     updatedAt?: DateTimeFilter<"GRNItem"> | Date | string
@@ -71978,6 +72106,8 @@ export namespace Prisma {
     id?: string
     grnNumber: string
     date?: Date | string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -71990,6 +72120,8 @@ export namespace Prisma {
     grnNumber: string
     date?: Date | string
     purchaseOrderId: string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -72299,6 +72431,8 @@ export namespace Prisma {
     grnNumber?: StringFilter<"GRN"> | string
     date?: DateTimeFilter<"GRN"> | Date | string
     purchaseOrderId?: StringFilter<"GRN"> | string
+    lotNo?: StringNullableFilter<"GRN"> | string | null
+    warehouseRefNo?: StringNullableFilter<"GRN"> | string | null
     remarks?: StringNullableFilter<"GRN"> | string | null
     companyId?: IntFilter<"GRN"> | number
     createdAt?: DateTimeFilter<"GRN"> | Date | string
@@ -73873,6 +74007,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -73895,6 +74031,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -74109,6 +74247,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -74131,6 +74271,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -74345,6 +74487,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -74367,6 +74511,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -74625,6 +74771,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -74647,6 +74795,8 @@ export namespace Prisma {
     itemGradeId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -74979,6 +75129,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -75001,6 +75153,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -75425,6 +75579,8 @@ export namespace Prisma {
     id?: string
     grnNumber: string
     date?: Date | string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -75436,6 +75592,8 @@ export namespace Prisma {
     id?: string
     grnNumber: string
     date?: Date | string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
     createdAt?: Date | string
@@ -75949,6 +76107,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -75971,6 +76131,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -76459,6 +76621,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItem: PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
@@ -76481,6 +76645,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -76632,6 +76798,8 @@ export namespace Prisma {
     id?: string
     grnNumber: string
     date?: Date | string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -76644,6 +76812,8 @@ export namespace Prisma {
     grnNumber: string
     date?: Date | string
     purchaseOrderId: string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
     createdAt?: Date | string
@@ -76942,6 +77112,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -76954,6 +77126,8 @@ export namespace Prisma {
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -77604,6 +77778,8 @@ export namespace Prisma {
     id?: string
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
     grn: GRNCreateNestedOneWithoutItemsInput
@@ -77627,6 +77803,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -77740,6 +77918,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -77763,6 +77943,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -78254,6 +78436,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -78458,6 +78642,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -78481,6 +78667,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     invoiceItems?: PurchaseInvoiceItemUncheckedUpdateManyWithoutGrnItemNestedInput
@@ -78497,6 +78685,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -78601,6 +78791,8 @@ export namespace Prisma {
     grnNumber: string
     date?: Date | string
     purchaseOrderId: string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -78952,6 +79144,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -78964,6 +79158,8 @@ export namespace Prisma {
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -78975,6 +79171,8 @@ export namespace Prisma {
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderId?: StringFieldUpdateOperationsInput | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79691,6 +79889,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -79761,6 +79961,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -79783,6 +79985,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79799,6 +80003,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79833,6 +80039,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -79903,6 +80111,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -79925,6 +80135,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79941,6 +80153,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79975,6 +80189,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -80045,6 +80261,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -80067,6 +80285,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80083,6 +80303,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80132,6 +80354,8 @@ export namespace Prisma {
     itemGradeId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -80251,6 +80475,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -80273,6 +80499,8 @@ export namespace Prisma {
     itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80289,6 +80517,8 @@ export namespace Prisma {
     itemGradeId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80323,6 +80553,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -80393,6 +80625,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -80415,6 +80649,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80431,6 +80667,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80459,6 +80697,8 @@ export namespace Prisma {
     id?: string
     grnNumber: string
     date?: Date | string
+    lotNo?: string | null
+    warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
     createdAt?: Date | string
@@ -80541,6 +80781,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80552,6 +80794,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80563,6 +80807,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     grnNumber?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+    lotNo?: NullableStringFieldUpdateOperationsInput | string | null
+    warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80614,6 +80860,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -80634,6 +80882,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneRequiredWithoutItemsNestedInput
@@ -80656,6 +80906,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80672,6 +80924,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80720,6 +80974,8 @@ export namespace Prisma {
     packingUnitId?: string | null
     receivedQty: number
     pcs?: number | null
+    unitSize?: number | null
+    packingType?: $Enums.PackingType | null
     unitId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -80729,6 +80985,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItem?: PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
@@ -80751,6 +81009,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80767,6 +81027,8 @@ export namespace Prisma {
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     receivedQty?: FloatFieldUpdateOperationsInput | number
     pcs?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitSize?: NullableFloatFieldUpdateOperationsInput | number | null
+    packingType?: NullableEnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType | null
     unitId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

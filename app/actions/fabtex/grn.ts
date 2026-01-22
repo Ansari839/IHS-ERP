@@ -24,6 +24,7 @@ export async function getPurchaseOrdersForGRN() {
                     brand: true,
                     itemGrade: true,
                     unit: true,
+                    packingUnit: true,
                     grnItems: true
                 }
             }
@@ -43,6 +44,8 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
         const poId = formData.get('purchaseOrderId') as string
         const grnNumber = formData.get('grnNumber') as string
         const date = formData.get('date') as string
+        const lotNo = formData.get('lotNo') as string
+        const warehouseRefNo = formData.get('warehouseRefNo') as string
         const remarks = formData.get('remarks') as string
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
@@ -56,6 +59,8 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
                 grnNumber,
                 date: new Date(date),
                 purchaseOrderId: poId,
+                lotNo: lotNo || null,
+                warehouseRefNo: warehouseRefNo || null,
                 remarks,
                 companyId: company.id,
                 items: {
@@ -67,7 +72,9 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
                         itemGradeId: item.itemGradeId || null,
                         receivedQty: parseFloat(item.receivedQty),
                         pcs: item.pcs ? parseFloat(item.pcs) : null,
-                        packingUnitId: item.packingUnitId || null,
+                        unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
+                        packingType: item.packingType || null,
+                        packingUnitId: (item.packingUnitId && item.packingUnitId !== 'none') ? item.packingUnitId : null,
                         unitId: item.unitId ? parseInt(item.unitId, 10) : null,
                     }))
                 }
@@ -89,6 +96,8 @@ export async function updateGRN(id: string, prevState: GRNState, formData: FormD
 
         const grnNumber = formData.get('grnNumber') as string
         const date = formData.get('date') as string
+        const lotNo = formData.get('lotNo') as string
+        const warehouseRefNo = formData.get('warehouseRefNo') as string
         const remarks = formData.get('remarks') as string
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
@@ -97,35 +106,34 @@ export async function updateGRN(id: string, prevState: GRNState, formData: FormD
             return { success: false, error: 'Invalid GRN data' }
         }
 
-        await prisma.$transaction(async (tx) => {
-            // 1. Delete old items
-            await tx.gRNItem.deleteMany({
-                where: { grnId: id }
-            })
-
-            // 2. Update GRN header
-            await tx.gRN.update({
-                where: { id },
-                data: {
-                    grnNumber,
-                    date: new Date(date),
-                    remarks,
-                    items: {
-                        create: items.map((item: any) => ({
-                            purchaseOrderItemId: item.purchaseOrderItemId,
-                            itemMasterId: item.itemMasterId,
-                            colorId: item.colorId || null,
-                            brandId: item.brandId || null,
-                            itemGradeId: item.itemGradeId || null,
-                            receivedQty: parseFloat(item.receivedQty),
-                            pcs: item.pcs ? parseFloat(item.pcs) : null,
-                            packingUnitId: item.packingUnitId || null,
-                            unitId: item.unitId ? parseInt(item.unitId, 10) : null,
-                        }))
-                    }
+        const startTime = Date.now()
+        await prisma.gRN.update({
+            where: { id },
+            data: {
+                grnNumber,
+                date: new Date(date),
+                lotNo: lotNo || null,
+                warehouseRefNo: warehouseRefNo || null,
+                remarks,
+                items: {
+                    deleteMany: {}, // Delete old items
+                    create: items.map((item: any) => ({
+                        purchaseOrderItemId: item.purchaseOrderItemId,
+                        itemMasterId: item.itemMasterId,
+                        colorId: item.colorId || null,
+                        brandId: item.brandId || null,
+                        itemGradeId: item.itemGradeId || null,
+                        receivedQty: parseFloat(item.receivedQty),
+                        pcs: item.pcs ? parseFloat(item.pcs) : null,
+                        unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
+                        packingType: item.packingType || null,
+                        packingUnitId: (item.packingUnitId && item.packingUnitId !== 'none') ? item.packingUnitId : null,
+                        unitId: item.unitId ? parseInt(item.unitId, 10) : null,
+                    }))
                 }
-            })
+            }
         })
+        console.log(`GRN Update completed in ${Date.now() - startTime}ms`)
 
         revalidatePath('/dashboard/fab-tex/purchase/grn')
         return { success: true, message: 'GRN updated successfully' }
@@ -171,7 +179,21 @@ export async function getGRNById(id: string) {
         where: { id },
         include: {
             purchaseOrder: {
-                include: { account: true, warehouse: true }
+                include: {
+                    account: true,
+                    warehouse: true,
+                    items: {
+                        include: {
+                            itemMaster: true,
+                            color: true,
+                            brand: true,
+                            itemGrade: true,
+                            unit: true,
+                            packingUnit: true,
+                            grnItems: true
+                        }
+                    }
+                }
             },
             items: {
                 include: {
