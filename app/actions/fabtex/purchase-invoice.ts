@@ -265,6 +265,23 @@ export async function updatePurchaseInvoice(invoiceId: string, prevState: Invoic
     }
 }
 
+export async function deletePurchaseInvoice(id: string) {
+    try {
+        const user = await getCurrentUser()
+        if (!user) return { success: false, error: 'Unauthorized' }
+
+        await prisma.purchaseInvoice.delete({
+            where: { id }
+        })
+
+        revalidatePath('/dashboard/fab-tex/purchase/invoice')
+        return { success: true, message: 'Invoice deleted successfully' }
+    } catch (error: any) {
+        console.error('INVOICE_DELETE_ERROR:', error)
+        return { success: false, error: error.message || 'Failed to delete Invoice' }
+    }
+}
+
 
 export async function getPurchaseInvoices() {
     console.log('Fetching all purchase invoices...')

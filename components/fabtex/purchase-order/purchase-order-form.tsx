@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { Combobox } from '@/components/ui/combobox'
 import {
     Select,
     SelectContent,
@@ -261,43 +262,27 @@ export function PurchaseOrderForm({
                 {/* Party Selection */}
                 <div className="space-y-2">
                     <Label>Party (Vendor)</Label>
-                    <Select
-                        name="accountId"
+                    <Combobox
+                        options={accounts.map(a => ({ label: a.name, value: a.id.toString() }))}
                         value={partyDetails.accountId}
-                        onValueChange={(v) => setPartyDetails(p => ({ ...p, accountId: v }))}
-                    >
-                        <SelectTrigger>
-                            <SelectValue placeholder="Select Party" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {accounts.map(acc => (
-                                <SelectItem key={acc.id} value={acc.id.toString()}>
-                                    {acc.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                        onChange={(val) => setPartyDetails(p => ({ ...p, accountId: val }))}
+                        placeholder="Select Vendor..."
+                        searchPlaceholder="Search vendor..."
+                        emptyText="No vendor found."
+                    />
                 </div>
 
                 {/* Warehouse */}
                 <div className="space-y-2">
                     <Label>Warehouse</Label>
-                    <Select
-                        name="warehouseId"
+                    <Combobox
+                        options={warehouses.map(w => ({ label: w.name, value: w.id.toString() }))}
                         value={warehouseId}
-                        onValueChange={setWarehouseId}
-                    >
-                        <SelectTrigger>
-                            <SelectValue placeholder="Select Warehouse" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {warehouses.map(w => (
-                                <SelectItem key={w.id} value={w.id.toString()}>
-                                    {w.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                        onChange={setWarehouseId}
+                        placeholder="Select Warehouse..."
+                        searchPlaceholder="Search warehouse..."
+                        emptyText="No warehouse found."
+                    />
                 </div>
 
                 {/* Date */}
@@ -351,83 +336,61 @@ export function PurchaseOrderForm({
                 {/* 1. Item Selection */}
                 <div className="max-w-md space-y-2">
                     <Label className="text-primary font-semibold">Choose Product</Label>
-                    <Select
+                    <Combobox
+                        options={items.map(i => ({ label: i.name, value: i.id }))}
                         value={currentItem.itemMasterId}
-                        onValueChange={handleProductSelect}
-                    >
-                        <SelectTrigger className="h-11 border-primary/20">
-                            <SelectValue placeholder="Select Product to start adding variants" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {items.map(item => (
-                                <SelectItem key={item.id} value={item.id}>
-                                    {item.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                        onChange={handleProductSelect}
+                        placeholder="Choose Product..."
+                        searchPlaceholder="Search product..."
+                        emptyText="No product found."
+                    />
                 </div>
 
                 {/* 2. Variant Sub-form (Visible only when item is selected) */}
                 {currentItem.itemMasterId && (
-                    <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-9 gap-3 items-end p-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-end p-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200">
 
                         {/* Color */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-3 lg:col-span-2 space-y-1">
                             <Label>Color</Label>
-                            <Select
+                            <Combobox
+                                options={colors.map(c => ({ label: c.name, value: c.id }))}
                                 value={currentItem.colorId}
-                                onValueChange={(v) => setCurrentItem(p => ({ ...p, colorId: v }))}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Color" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {colors.map(c => (
-                                        <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                                onChange={(val) => setCurrentItem(p => ({ ...p, colorId: val }))}
+                                placeholder="Select Color..."
+                                searchPlaceholder="Search color..."
+                                emptyText="No color found."
+                            />
                         </div>
 
                         {/* Brand */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-3 lg:col-span-2 space-y-1">
                             <Label>Brand</Label>
-                            <Select
+                            <Combobox
+                                options={brands.map(b => ({ label: b.name, value: b.id }))}
                                 value={currentItem.brandId}
-                                onValueChange={(v) => setCurrentItem(p => ({ ...p, brandId: v }))}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Brand" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {brands.map(b => (
-                                        <SelectItem key={b.id} value={b.id}>{b.name}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                                onChange={(val) => setCurrentItem(p => ({ ...p, brandId: val }))}
+                                placeholder="Select Brand..."
+                                searchPlaceholder="Search brand..."
+                                emptyText="No brand found."
+                            />
                         </div>
 
                         {/* Grade */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-3 lg:col-span-2 space-y-1">
                             <Label>Grade</Label>
-                            <Select
+                            <Combobox
+                                options={itemGrades.map(g => ({ label: g.name, value: g.id }))}
                                 value={currentItem.itemGradeId}
-                                onValueChange={(v) => setCurrentItem(p => ({ ...p, itemGradeId: v }))}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Grade" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {itemGrades.map(g => (
-                                        <SelectItem key={g.id} value={g.id}>{g.name}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                                onChange={(val) => setCurrentItem(p => ({ ...p, itemGradeId: val }))}
+                                placeholder="Select Grade..."
+                                searchPlaceholder="Search grade..."
+                                emptyText="No grade found."
+                            />
                         </div>
 
                         {/* Packing Unit */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-3 lg:col-span-2 space-y-1">
                             <Label>Packing Unit</Label>
                             <Select
                                 value={currentItem.packingUnitId}
@@ -449,7 +412,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Packing Type */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
                             <Label>Packing</Label>
                             <Select
                                 value={currentItem.packingType}
@@ -466,7 +429,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Qty of UOM (Packages) */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
                             <Label>No. of {currentItem.packingUnitSymbol || 'Pkgs'}</Label>
                             <Input
                                 type="number"
@@ -477,7 +440,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* UOM Size (Qty per Package) */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
                             <Label>{currentItem.packingUnitSymbol || 'Pkg'} Size</Label>
                             <Input
                                 type="number"
@@ -489,7 +452,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Weight (Total Qty) */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
                             <Label>Weight (kg)</Label>
                             <Input
                                 type="number"
@@ -501,7 +464,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Rate */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
                             <Label>Rate (Opt)</Label>
                             <Input
                                 type="number"
@@ -512,7 +475,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Amount */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-6 lg:col-span-3 space-y-1">
                             <Label>Amount</Label>
                             <Input
                                 type="number"
@@ -523,9 +486,9 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Add BTN */}
-                        <div>
+                        <div className="md:col-span-6 lg:col-span-3">
                             <Button type="button" onClick={addItem} className="w-full">
-                                <Plus className="h-4 w-4 mr-1" /> Add
+                                <Plus className="h-4 w-4 mr-1" /> Add Item
                             </Button>
                         </div>
 

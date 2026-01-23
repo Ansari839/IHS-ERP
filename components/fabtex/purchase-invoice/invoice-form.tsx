@@ -26,6 +26,7 @@ interface InvoiceFormProps {
     allEligibleGRNs?: any[]
     initialData?: any
     invoiceId?: string
+    readOnly?: boolean
 }
 
 export function InvoiceForm({
@@ -39,7 +40,8 @@ export function InvoiceForm({
     packingUnits,
     allEligibleGRNs = [],
     initialData,
-    invoiceId
+    invoiceId,
+    readOnly = false
 }: InvoiceFormProps) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
@@ -76,7 +78,8 @@ export function InvoiceForm({
         remainingQty: item.purchaseOrderItem?.quantity || 0,
         invoicedQty: item.invoicedQty,
         rate: item.rate,
-        amount: item.amount
+        amount: item.amount,
+        isGrnItem: !!item.grnItemId
     })) || [])
 
     // PO Change Handlers
@@ -156,9 +159,9 @@ export function InvoiceForm({
                 grnItemId: grnItem.id,
                 itemMasterId: grnItem.itemMasterId,
                 itemName: grnItem.itemMaster.name,
-                colorId: grnItem.colorId,
-                brandId: grnItem.brandId,
-                itemGradeId: grnItem.itemGradeId,
+                colorId: grnItem.colorId || poItem?.colorId,
+                brandId: grnItem.brandId || poItem?.brandId,
+                itemGradeId: grnItem.itemGradeId || poItem?.itemGradeId,
                 unitId: grnItem.unitId,
                 unitSymbol: grnItem.unit?.symbol,
                 packingLabel: grnItem.packingUnit?.symbol || 'Qty',
@@ -167,7 +170,8 @@ export function InvoiceForm({
                 remainingQty: grnItem.receivedQty,
                 invoicedQty: grnItem.receivedQty,
                 rate: poItem?.rate || 0,
-                amount: grnItem.receivedQty * (poItem?.rate || 0)
+                amount: grnItem.receivedQty * (poItem?.rate || 0),
+                isGrnItem: true
             }
         })
         setItems(invoiceItems)
@@ -198,9 +202,9 @@ export function InvoiceForm({
                 grnItemId: grnItem.id,
                 itemMasterId: grnItem.itemMasterId,
                 itemName: grnItem.itemMaster.name,
-                colorId: grnItem.colorId,
-                brandId: grnItem.brandId,
-                itemGradeId: grnItem.itemGradeId,
+                colorId: grnItem.colorId || poItem?.colorId,
+                brandId: grnItem.brandId || poItem?.brandId,
+                itemGradeId: grnItem.itemGradeId || poItem?.itemGradeId,
                 unitId: grnItem.unitId,
                 unitSymbol: grnItem.unit?.symbol,
                 packingLabel: grnItem.packingUnit?.symbol || 'Qty',
@@ -209,7 +213,8 @@ export function InvoiceForm({
                 remainingQty: grnItem.receivedQty,
                 invoicedQty: grnItem.receivedQty,
                 rate: poItem?.rate || 0,
-                amount: grnItem.receivedQty * (poItem?.rate || 0)
+                amount: grnItem.receivedQty * (poItem?.rate || 0),
+                isGrnItem: true
             }
         })
         setItems(invoiceItems)
@@ -337,6 +342,7 @@ export function InvoiceForm({
                                 }}
                                 className="rounded-full"
                                 size="sm"
+                                disabled={readOnly}
                             >
                                 <LinkIcon className="w-4 h-4 mr-2" />
                                 From PO
@@ -352,6 +358,7 @@ export function InvoiceForm({
                                 }}
                                 className="rounded-full"
                                 size="sm"
+                                disabled={readOnly}
                             >
                                 <FileText className="w-4 h-4 mr-2" />
                                 From GRN
@@ -366,6 +373,7 @@ export function InvoiceForm({
                                 }}
                                 className="rounded-full"
                                 size="sm"
+                                disabled={readOnly}
                             >
                                 <Plus className="w-4 h-4 mr-2" />
                                 Direct Invoice
@@ -426,6 +434,7 @@ export function InvoiceForm({
                                 <Select
                                     onValueChange={setSelectedVendorId}
                                     defaultValue={selectedVendorId}
+                                    disabled={readOnly}
                                 >
                                     <SelectTrigger className="bg-background/50 border-primary/20 hover:border-primary transition-colors">
                                         <SelectValue placeholder="Select Vendor" />
@@ -447,6 +456,7 @@ export function InvoiceForm({
                                 <Select
                                     onValueChange={onGRNChange}
                                     value={selectedGRNId}
+                                    disabled={readOnly}
                                 >
                                     <SelectTrigger className="bg-background/50 border-primary/20">
                                         <SelectValue placeholder="Select GRN..." />
@@ -484,6 +494,7 @@ export function InvoiceForm({
                                 onChange={e => setInvoiceNumber(e.target.value)}
                                 required
                                 className="bg-background/50 border-primary/20"
+                                disabled={readOnly}
                             />
                         </div>
                         <div className="space-y-2">
@@ -493,6 +504,7 @@ export function InvoiceForm({
                                 onChange={e => setSupplierInvoiceNo(e.target.value)}
                                 placeholder="Ref #"
                                 className="bg-background/50 border-primary/20"
+                                disabled={readOnly}
                             />
                         </div>
                         <div className="space-y-2">
@@ -503,6 +515,7 @@ export function InvoiceForm({
                                 onChange={e => setDate(e.target.value)}
                                 required
                                 className="bg-background/50 border-primary/20"
+                                disabled={readOnly}
                             />
                         </div>
                     </div>
@@ -514,7 +527,7 @@ export function InvoiceForm({
                                 Invoice Items
                                 <Badge variant="secondary" className="rounded-full">{items.length}</Badge>
                             </h3>
-                            {invoiceMode === 'DIRECT' && (
+                            {invoiceMode === 'DIRECT' && !readOnly && (
                                 <Button type="button" onClick={addDirectItem} size="sm" className="rounded-full shadow-lg">
                                     <Plus className="w-4 h-4 mr-2" /> Add Item
                                 </Button>
@@ -536,46 +549,61 @@ export function InvoiceForm({
                                     {items.map((item, idx) => (
                                         <TableRow key={idx} className="hover:bg-primary/5 transition-colors group">
                                             <TableCell>
-                                                {invoiceMode === 'PO' ? (
-                                                    <div className="space-y-1">
-                                                        <div className="font-bold text-primary">{item.itemName}</div>
+                                                <div className="space-y-1">
+                                                    <div className="font-bold text-primary">{item.itemName}</div>
+                                                    {item.isGrnItem ? (
+                                                        <div className="flex flex-wrap gap-2 mt-1">
+                                                            <div className="text-xs bg-muted px-2 py-1 rounded border border-border/50 flex items-center gap-1">
+                                                                <span className="text-muted-foreground font-semibold text-[10px] uppercase">Brand:</span>
+                                                                <span className="font-medium text-foreground">{brands.find(b => b.id === item.brandId)?.name || '-'}</span>
+                                                            </div>
+                                                            <div className="text-xs bg-muted px-2 py-1 rounded border border-border/50 flex items-center gap-1">
+                                                                <span className="text-muted-foreground font-semibold text-[10px] uppercase">Color:</span>
+                                                                <span className="font-medium text-foreground">{colors.find(c => c.id === item.colorId)?.name || '-'}</span>
+                                                            </div>
+                                                            <div className="text-xs bg-muted px-2 py-1 rounded border border-border/50 flex items-center gap-1">
+                                                                <span className="text-muted-foreground font-semibold text-[10px] uppercase">Grade:</span>
+                                                                <span className="font-medium text-foreground">{itemGrades.find(g => g.id === item.itemGradeId)?.name || '-'}</span>
+                                                            </div>
+                                                        </div>
+                                                    ) : invoiceMode === 'PO' ? (
                                                         <div className="flex gap-2 text-[10px] text-muted-foreground uppercase tracking-wider">
                                                             {item.orderedQty > 0 && <span>Ordered: {item.orderedQty}</span>}
                                                             {item.alreadyInvoiced > 0 && <span className="text-blue-500">Billed: {item.alreadyInvoiced}</span>}
                                                             <span>Remain: {item.remainingQty}</span>
                                                         </div>
-                                                    </div>
-                                                ) : (
-                                                    <div className="grid grid-cols-1 gap-2">
-                                                        <Select
-                                                            value={item.itemMasterId}
-                                                            onValueChange={(val) => updateItem(idx, { itemMasterId: val })}
-                                                        >
-                                                            <SelectTrigger className="h-9 truncate">
-                                                                <SelectValue placeholder="Select Product..." />
-                                                            </SelectTrigger>
-                                                            <SelectContent>
-                                                                {itemMasters.map(m => (
-                                                                    <SelectItem key={m.id} value={m.id}>{m.name}</SelectItem>
-                                                                ))}
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <div className="flex gap-2">
-                                                            <Select value={item.colorId} onValueChange={(v) => updateItem(idx, { colorId: v })}>
-                                                                <SelectTrigger className="h-7 text-[10px]"><SelectValue placeholder="Color" /></SelectTrigger>
-                                                                <SelectContent>{colors.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}</SelectContent>
+                                                    ) : (
+                                                        <div className="grid grid-cols-1 gap-2">
+                                                            <Select
+                                                                value={item.itemMasterId}
+                                                                onValueChange={(val) => updateItem(idx, { itemMasterId: val })}
+                                                            >
+                                                                <SelectTrigger className="h-9 truncate">
+                                                                    <SelectValue placeholder="Select Product..." />
+                                                                </SelectTrigger>
+                                                                <SelectContent>
+                                                                    {itemMasters.map(m => (
+                                                                        <SelectItem key={m.id} value={m.id}>{m.name}</SelectItem>
+                                                                    ))}
+                                                                </SelectContent>
                                                             </Select>
-                                                            <Select value={item.brandId} onValueChange={(v) => updateItem(idx, { brandId: v })}>
-                                                                <SelectTrigger className="h-7 text-[10px]"><SelectValue placeholder="Brand" /></SelectTrigger>
-                                                                <SelectContent>{brands.map(b => <SelectItem key={b.id} value={b.id}>{b.name}</SelectItem>)}</SelectContent>
-                                                            </Select>
-                                                            <Select value={item.itemGradeId} onValueChange={(v) => updateItem(idx, { itemGradeId: v })}>
-                                                                <SelectTrigger className="h-7 text-[10px]"><SelectValue placeholder="Grade" /></SelectTrigger>
-                                                                <SelectContent>{itemGrades.map(g => <SelectItem key={g.id} value={g.id}>{g.name}</SelectItem>)}</SelectContent>
-                                                            </Select>
+                                                            <div className="flex gap-2">
+                                                                <Select value={item.colorId} onValueChange={(v) => updateItem(idx, { colorId: v })}>
+                                                                    <SelectTrigger className="h-7 text-[10px]"><SelectValue placeholder="Color" /></SelectTrigger>
+                                                                    <SelectContent>{colors.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}</SelectContent>
+                                                                </Select>
+                                                                <Select value={item.brandId} onValueChange={(v) => updateItem(idx, { brandId: v })}>
+                                                                    <SelectTrigger className="h-7 text-[10px]"><SelectValue placeholder="Brand" /></SelectTrigger>
+                                                                    <SelectContent>{brands.map(b => <SelectItem key={b.id} value={b.id}>{b.name}</SelectItem>)}</SelectContent>
+                                                                </Select>
+                                                                <Select value={item.itemGradeId} onValueChange={(v) => updateItem(idx, { itemGradeId: v })}>
+                                                                    <SelectTrigger className="h-7 text-[10px]"><SelectValue placeholder="Grade" /></SelectTrigger>
+                                                                    <SelectContent>{itemGrades.map(g => <SelectItem key={g.id} value={g.id}>{g.name}</SelectItem>)}</SelectContent>
+                                                                </Select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )}
+                                                    )}
+                                                </div>
                                             </TableCell>
                                             <TableCell>
                                                 <div className="space-y-1">
@@ -584,7 +612,8 @@ export function InvoiceForm({
                                                         value={item.invoicedQty || ''}
                                                         placeholder="0.00"
                                                         onChange={e => updateItem(idx, { invoicedQty: parseFloat(e.target.value) || 0 })}
-                                                        className="h-9 font-medium border-primary/10"
+                                                        disabled={readOnly || item.isGrnItem}
+                                                        className={`h-9 font-medium border-primary/10 ${item.isGrnItem ? 'bg-muted opacity-80 cursor-not-allowed' : ''}`}
                                                     />
                                                     <div className="text-[10px] text-center font-semibold text-muted-foreground uppercase">{item.unitSymbol || item.packingLabel || 'Qty'}</div>
                                                 </div>
@@ -596,6 +625,7 @@ export function InvoiceForm({
                                                         value={item.rate || ''}
                                                         placeholder="0.00"
                                                         onChange={e => updateItem(idx, { rate: parseFloat(e.target.value) || 0 })}
+                                                        disabled={readOnly}
                                                         className="h-9 font-medium border-primary/10"
                                                     />
                                                     <div className="text-[10px] text-center text-muted-foreground font-semibold">UNIT PRICE</div>
@@ -607,15 +637,17 @@ export function InvoiceForm({
                                                 </div>
                                             </TableCell>
                                             <TableCell>
-                                                <Button
-                                                    type="button"
-                                                    variant="ghost"
-                                                    size="icon"
-                                                    onClick={() => removeRow(idx)}
-                                                    className="opacity-0 group-hover:opacity-100 text-destructive hover:bg-destructive/10 transition-all rounded-full"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </Button>
+                                                {!readOnly && (
+                                                    <Button
+                                                        type="button"
+                                                        variant="ghost"
+                                                        size="icon"
+                                                        onClick={() => removeRow(idx)}
+                                                        className="opacity-0 group-hover:opacity-100 text-destructive hover:bg-destructive/10 transition-all rounded-full"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </Button>
+                                                )}
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -631,6 +663,7 @@ export function InvoiceForm({
                             onChange={e => setRemarks(e.target.value)}
                             placeholder="Additional instructions, payment terms, etc..."
                             className="bg-background/50 border-primary/20 min-h-[100px] rounded-xl"
+                            disabled={readOnly}
                         />
                     </div>
                 </CardContent>
@@ -651,20 +684,22 @@ export function InvoiceForm({
                         >
                             Cancel
                         </Button>
-                        <Button
-                            type="submit"
-                            disabled={loading || (invoiceMode === 'PO' && !selectedPO) || (invoiceMode === 'DIRECT' && !selectedVendorId)}
-                            className="rounded-full px-10 shadow-lg shadow-primary/20"
-                        >
-                            {loading ? (
-                                <div className="flex items-center gap-2">
-                                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                    Processing...
-                                </div>
-                            ) : (
-                                <span>{invoiceId ? 'Update Invoice' : 'Post Invoice'}</span>
-                            )}
-                        </Button>
+                        {!readOnly && (
+                            <Button
+                                type="submit"
+                                disabled={loading || (invoiceMode === 'PO' && !selectedPO) || (invoiceMode === 'DIRECT' && !selectedVendorId)}
+                                className="rounded-full px-10 shadow-lg shadow-primary/20"
+                            >
+                                {loading ? (
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        Processing...
+                                    </div>
+                                ) : (
+                                    <span>{invoiceId ? 'Update Invoice' : 'Post Invoice'}</span>
+                                )}
+                            </Button>
+                        )}
                     </div>
                 </CardFooter>
             </Card>

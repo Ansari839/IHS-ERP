@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Plus, Edit, FileText } from 'lucide-react'
 import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
+import { DeleteInvoiceButton } from '@/components/fabtex/purchase-invoice/delete-button'
 
 export default async function InvoiceListPage() {
     const invoices = await getPurchaseInvoices()
@@ -83,19 +84,27 @@ export default async function InvoiceListPage() {
                                         <TableCell>
                                             <Badge
                                                 className={`rounded-full px-3 ${inv.status === 'PAID'
-                                                        ? 'bg-green-100 text-green-700'
-                                                        : 'bg-amber-100 text-amber-700'
+                                                    ? 'bg-green-100 text-green-700'
+                                                    : 'bg-amber-100 text-amber-700'
                                                     }`}
                                             >
                                                 {inv.status}
                                             </Badge>
                                         </TableCell>
                                         <TableCell>
-                                            <Button asChild variant="ghost" size="icon" className="group-hover:opacity-100 opacity-0 transition-opacity rounded-full shadow-sm bg-background border border-primary/10">
-                                                <Link href={`/dashboard/fab-tex/purchase/invoice/${inv.id}/edit`}>
-                                                    <Edit className="w-4 h-4 text-primary" />
-                                                </Link>
-                                            </Button>
+                                            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <Button asChild variant="ghost" size="icon" className="rounded-full shadow-sm bg-background border border-primary/10">
+                                                    <Link href={`/dashboard/fab-tex/purchase/invoice/${inv.id}/view`}>
+                                                        <FileText className="w-4 h-4 text-blue-600" />
+                                                    </Link>
+                                                </Button>
+                                                <Button asChild variant="ghost" size="icon" className="rounded-full shadow-sm bg-background border border-primary/10">
+                                                    <Link href={`/dashboard/fab-tex/purchase/invoice/${inv.id}/edit`}>
+                                                        <Edit className="w-4 h-4 text-primary" />
+                                                    </Link>
+                                                </Button>
+                                                <DeleteInvoiceButton id={inv.id} invoiceNumber={inv.invoiceNumber} />
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))
