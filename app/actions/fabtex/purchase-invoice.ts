@@ -3,6 +3,75 @@
 import { revalidatePath } from 'next/cache'
 import prisma from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
+export async function debugPOData(poId: string) {
+    try {
+        console.log(`[DEBUG_PO] Fetching deep data for PO ID: ${poId}...`)
+        const po = await prisma.purchaseOrder.findUnique({
+            where: { id: poId },
+            include: {
+                items: {
+                    include: {
+                        itemMaster: true,
+                        grnItems: true,
+                        invoiceItems: true
+                    }
+                },
+                grns: {
+                    include: {
+                        items: true
+                    }
+                }
+            }
+        })
+        if (!po) {
+            console.log(`[DEBUG_PO] PO ${poId} not found in DB!`)
+            return
+        }
+        console.log(`[DEBUG_PO] PO Number: ${po.poNumber} | Status: ${po.status}`)
+        console.log(`[DEBUG_PO] Items Found: ${po.items.length}`)
+        po.items.forEach((it, i) => {
+            console.log(`[DEBUG_PO] Item[${i}]: ${it.itemMaster?.name} | Qty: ${it.quantity} | GRN Links: ${it.grnItems.length}`)
+        })
+        console.log(`[DEBUG_PO] GRNs Found: ${po.grns.length}`)
+        po.grns.forEach((g, i) => {
+            console.log(`[DEBUG_PO] GRN[${i}]: ${g.id} | Items: ${g.items.length}`)
+        })
+    } catch (e: any) {
+        console.error(`[DEBUG_PO] ERROR:`, e.message)
+    }
+}
+
+export async function getInvoiceFormData() {
+    const [{ pos: purchaseOrders, allEligibleGRNs }, accounts, itemMasters, units, colors, brands, itemGrades, packingUnits] = await Promise.all([
+        getEligibleForInvoicing(),
+        prisma.account.findMany({
+            where: { isPosting: true },
+            orderBy: { name: 'asc' }
+        }),
+        prisma.itemMaster.findMany({
+            include: { baseUnit: true, packingUnit: true },
+            orderBy: { name: 'asc' }
+        }),
+        prisma.unit.findMany({ orderBy: { symbol: 'asc' } }),
+        prisma.color.findMany({ orderBy: { name: 'asc' } }),
+        prisma.brand.findMany({ orderBy: { name: 'asc' } }),
+        prisma.itemGrade.findMany({ orderBy: { name: 'asc' } }),
+        prisma.packingUnit.findMany({ orderBy: { name: 'asc' } })
+    ])
+
+    return {
+        purchaseOrders,
+        accounts,
+        itemMasters,
+        units,
+        colors,
+        brands,
+        itemGrades,
+        packingUnits,
+        allEligibleGRNs
+    }
+}
+
 
 export type InvoiceState = {
     success: boolean
@@ -11,26 +80,67 @@ export type InvoiceState = {
 }
 
 export async function getEligibleForInvoicing() {
-    // Fetch POs that have items not fully invoiced
-    // This is a bit complex for a single query, so we'll fetch POs and their items
-    return await prisma.purchaseOrder.findMany({
+    console.log(`[SERVER] Fetching eligible POs at ${new Date().toLocaleTimeString()}...`)
+    const pos = await prisma.purchaseOrder.findMany({
         where: {
-            status: { in: ['APPROVED', 'PENDING', 'COMPLETED'] }
+            status: { in: ['APPROVED', 'PENDING', 'COMPLETED', 'DRAFT'] }
         },
         include: {
             account: true,
+            grns: {
+                include: {
+                    items: {
+                        include: {
+                            itemMaster: true,
+                            unit: true,
+                            color: true,
+                            brand: true,
+                            itemGrade: true,
+                            packingUnit: true
+                        }
+                    }
+                }
+            },
             items: {
                 include: {
                     itemMaster: true,
                     grnItems: true,
                     invoiceItems: true,
-                    unit: true
+                    unit: true,
+                    color: true,
+                    brand: true,
+                    itemGrade: true,
+                    packingUnit: true
                 }
             }
         },
         orderBy: { createdAt: 'desc' }
     })
+    console.log(`[SERVER] Found ${pos.length} eligible POs`)
+    pos.forEach((po, index) => {
+        try {
+            console.log(`[SERVER] PO[${index}]: ${po.poNumber} (ID: ${po.id})`)
+            console.log(`   - Items Count: ${po.items?.length || 0}`)
+            console.log(`   - GRNs Count: ${po.grns?.length || 0}`)
+            if (po.items && po.items.length > 0) {
+                console.log(`   - First Item: ${po.items[0].itemMaster?.name || 'No ItemMaster'} | Qty: ${po.items[0].quantity}`)
+            }
+        } catch (e: any) {
+            console.log(`[SERVER] Error logging PO[${index}]:`, e.message)
+        }
+    })
+    // Flatten all GRNs for direct selection if needed
+    const allEligibleGRNs = pos.flatMap(po =>
+        (po.grns || []).map(grn => ({
+            ...grn,
+            poNumber: po.poNumber,
+            vendorName: po.account?.name || po.partyName
+        }))
+    )
+
+    return { pos, allEligibleGRNs }
 }
+
 
 export async function createPurchaseInvoice(prevState: InvoiceState, formData: FormData): Promise<InvoiceState> {
     try {
@@ -40,15 +150,20 @@ export async function createPurchaseInvoice(prevState: InvoiceState, formData: F
         const company = await prisma.company.findFirst()
         if (!company) return { success: false, error: 'No company defined' }
 
-        const poId = formData.get('purchaseOrderId') as string
+        const purchaseOrderId = formData.get('purchaseOrderId') as string || null
+        const accountId = formData.get('accountId') ? parseInt(formData.get('accountId') as string) : null
+
         const invoiceNumber = formData.get('invoiceNumber') as string
+        const supplierInvoiceNo = formData.get('supplierInvoiceNo') as string
         const date = formData.get('date') as string
         const status = formData.get('status') as string || 'UNPAID'
+        const remarks = formData.get('remarks') as string
+
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
 
-        if (!poId || !items || items.length === 0) {
-            return { success: false, error: 'Invalid Invoice data' }
+        if (!items || items.length === 0) {
+            return { success: false, error: 'No items in invoice' }
         }
 
         const totalAmount = items.reduce((sum: number, it: any) => sum + parseFloat(it.amount), 0)
@@ -56,15 +171,23 @@ export async function createPurchaseInvoice(prevState: InvoiceState, formData: F
         await prisma.purchaseInvoice.create({
             data: {
                 invoiceNumber,
+                supplierInvoiceNo,
                 date: new Date(date),
-                purchaseOrderId: poId,
+                purchaseOrderId: purchaseOrderId || undefined,
+                accountId,
+                remarks,
                 totalAmount,
                 status,
                 companyId: company.id,
                 items: {
                     create: items.map((item: any) => ({
-                        purchaseOrderItemId: item.purchaseOrderItemId,
+                        purchaseOrderItemId: item.purchaseOrderItemId || null,
                         grnItemId: item.grnItemId || null,
+                        itemMasterId: item.itemMasterId || null,
+                        colorId: item.colorId || null,
+                        brandId: item.brandId || null,
+                        itemGradeId: item.itemGradeId || null,
+                        unitId: item.unitId ? parseInt(item.unitId) : null,
                         invoicedQty: parseFloat(item.invoicedQty),
                         rate: parseFloat(item.rate),
                         amount: parseFloat(item.amount)
@@ -81,14 +204,21 @@ export async function createPurchaseInvoice(prevState: InvoiceState, formData: F
     }
 }
 
+
 export async function updatePurchaseInvoice(invoiceId: string, prevState: InvoiceState, formData: FormData): Promise<InvoiceState> {
     try {
         const user = await getCurrentUser()
         if (!user) return { success: false, error: 'Unauthorized' }
 
+        const purchaseOrderId = formData.get('purchaseOrderId') as string || null
+        const accountId = formData.get('accountId') ? parseInt(formData.get('accountId') as string) : null
+
         const invoiceNumber = formData.get('invoiceNumber') as string
+        const supplierInvoiceNo = formData.get('supplierInvoiceNo') as string
         const date = formData.get('date') as string
         const status = formData.get('status') as string || 'UNPAID'
+        const remarks = formData.get('remarks') as string
+
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
 
@@ -98,31 +228,33 @@ export async function updatePurchaseInvoice(invoiceId: string, prevState: Invoic
 
         const totalAmount = items.reduce((sum: number, it: any) => sum + parseFloat(it.amount), 0)
 
-        await prisma.$transaction(async (tx) => {
-            // Delete existing items
-            await tx.purchaseInvoiceItem.deleteMany({
-                where: { invoiceId }
-            })
-
-            // Update main invoice record
-            await tx.purchaseInvoice.update({
-                where: { id: invoiceId },
-                data: {
-                    invoiceNumber,
-                    date: new Date(date),
-                    totalAmount,
-                    status,
-                    items: {
-                        create: items.map((item: any) => ({
-                            purchaseOrderItemId: item.purchaseOrderItemId,
-                            grnItemId: item.grnItemId || null,
-                            invoicedQty: parseFloat(item.invoicedQty),
-                            rate: parseFloat(item.rate),
-                            amount: parseFloat(item.amount)
-                        }))
-                    }
+        await prisma.purchaseInvoice.update({
+            where: { id: invoiceId },
+            data: {
+                invoiceNumber,
+                supplierInvoiceNo,
+                date: new Date(date),
+                purchaseOrderId: purchaseOrderId || null,
+                accountId,
+                remarks,
+                totalAmount,
+                status,
+                items: {
+                    deleteMany: {},
+                    create: items.map((item: any) => ({
+                        purchaseOrderItemId: item.purchaseOrderItemId || null,
+                        grnItemId: item.grnItemId || null,
+                        itemMasterId: item.itemMasterId || null,
+                        colorId: item.colorId || null,
+                        brandId: item.brandId || null,
+                        itemGradeId: item.itemGradeId || null,
+                        unitId: item.unitId ? parseInt(item.unitId) : null,
+                        invoicedQty: parseFloat(item.invoicedQty),
+                        rate: parseFloat(item.rate),
+                        amount: parseFloat(item.amount)
+                    }))
                 }
-            })
+            }
         })
 
         revalidatePath('/dashboard/fab-tex/purchase/invoice')
@@ -133,17 +265,21 @@ export async function updatePurchaseInvoice(invoiceId: string, prevState: Invoic
     }
 }
 
+
 export async function getPurchaseInvoices() {
+    console.log('Fetching all purchase invoices...')
     return await prisma.purchaseInvoice.findMany({
         include: {
             purchaseOrder: {
                 include: { account: true }
             },
+            account: true,
             items: {
                 include: {
                     purchaseOrderItem: {
                         include: { itemMaster: true }
-                    }
+                    },
+                    itemMaster: true
                 }
             }
         },
@@ -151,13 +287,16 @@ export async function getPurchaseInvoices() {
     })
 }
 
+
 export async function getPurchaseInvoiceById(id: string) {
+    console.log('Fetching purchase invoice by ID:', id)
     return await prisma.purchaseInvoice.findUnique({
         where: { id },
         include: {
             purchaseOrder: {
                 include: { account: true }
             },
+            account: true,
             items: {
                 include: {
                     purchaseOrderItem: {
@@ -166,12 +305,19 @@ export async function getPurchaseInvoiceById(id: string) {
                             unit: true,
                             color: true,
                             brand: true,
-                            itemGrade: true
+                            itemGrade: true,
+                            packingUnit: true
                         }
                     },
-                    grnItem: true
+                    grnItem: true,
+                    itemMaster: true,
+                    unit: true,
+                    color: true,
+                    brand: true,
+                    itemGrade: true
                 }
             }
         }
     })
 }
+

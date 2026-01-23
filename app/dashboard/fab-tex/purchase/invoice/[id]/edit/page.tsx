@@ -1,11 +1,11 @@
-import { getPurchaseInvoiceById, getEligibleForInvoicing } from '@/app/actions/fabtex/purchase-invoice'
+import { getPurchaseInvoiceById, getInvoiceFormData } from '@/app/actions/fabtex/purchase-invoice'
 import { InvoiceForm } from '@/components/fabtex/purchase-invoice/invoice-form'
 import { notFound } from 'next/navigation'
 
 export default async function EditInvoicePage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
     const invoice = await getPurchaseInvoiceById(id)
-    const purchaseOrders = await getEligibleForInvoicing()
+    const data = await getInvoiceFormData()
 
     if (!invoice) notFound()
 
@@ -15,10 +15,11 @@ export default async function EditInvoicePage({ params }: { params: Promise<{ id
                 <h2 className="text-3xl font-bold tracking-tight">Edit Purchase Invoice</h2>
             </div>
             <InvoiceForm
-                purchaseOrders={purchaseOrders}
+                {...data}
                 initialData={invoice}
                 invoiceId={id}
             />
         </div>
     )
 }
+

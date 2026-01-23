@@ -175,12 +175,13 @@ model Unit {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  conversionsFrom    UnitConversion[]    @relation("FromUnit")
-  conversionsTo      UnitConversion[]    @relation("ToUnit")
-  products           Product[]
-  itemMasters        ItemMaster[]
-  purchaseOrderItems PurchaseOrderItem[]
-  grnItems           GRNItem[]
+  conversionsFrom      UnitConversion[]      @relation("FromUnit")
+  conversionsTo        UnitConversion[]      @relation("ToUnit")
+  products             Product[]
+  itemMasters          ItemMaster[]
+  purchaseOrderItems   PurchaseOrderItem[]
+  grnItems             GRNItem[]
+  purchaseInvoiceItems PurchaseInvoiceItem[]
 }
 
 model UnitConversion {
@@ -406,10 +407,11 @@ model Account {
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @updatedAt
 
-  parent         Account?        @relation("AccountHierarchy", fields: [parentId], references: [id])
-  children       Account[]       @relation("AccountHierarchy")
-  journalLines   JournalLine[]
-  purchaseOrders PurchaseOrder[]
+  parent           Account?          @relation("AccountHierarchy", fields: [parentId], references: [id])
+  children         Account[]         @relation("AccountHierarchy")
+  journalLines     JournalLine[]
+  purchaseOrders   PurchaseOrder[]
+  purchaseInvoices PurchaseInvoice[]
 }
 
 model JournalEntry {
@@ -475,10 +477,11 @@ model Color {
   companyId Int
   company   Company @relation(fields: [companyId], references: [id])
 
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  purchaseOrderItems PurchaseOrderItem[]
-  grnItems           GRNItem[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  purchaseOrderItems   PurchaseOrderItem[]
+  grnItems             GRNItem[]
+  purchaseInvoiceItems PurchaseInvoiceItem[]
 }
 
 model Brand {
@@ -490,10 +493,11 @@ model Brand {
   companyId Int
   company   Company @relation(fields: [companyId], references: [id])
 
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  purchaseOrderItems PurchaseOrderItem[]
-  grnItems           GRNItem[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  purchaseOrderItems   PurchaseOrderItem[]
+  grnItems             GRNItem[]
+  purchaseInvoiceItems PurchaseInvoiceItem[]
 }
 
 model ItemGrade {
@@ -505,10 +509,11 @@ model ItemGrade {
   companyId Int
   company   Company @relation(fields: [companyId], references: [id])
 
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  purchaseOrderItems PurchaseOrderItem[]
-  grnItems           GRNItem[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  purchaseOrderItems   PurchaseOrderItem[]
+  grnItems             GRNItem[]
+  purchaseInvoiceItems PurchaseInvoiceItem[]
 }
 
 model PackingUnit {
@@ -549,10 +554,11 @@ model ItemMaster {
   companyId Int
   company   Company @relation(fields: [companyId], references: [id])
 
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  purchaseOrderItems PurchaseOrderItem[]
-  grnItems           GRNItem[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  purchaseOrderItems   PurchaseOrderItem[]
+  grnItems             GRNItem[]
+  purchaseInvoiceItems PurchaseInvoiceItem[]
 }
 
 // --- Purchase Order Models ---
@@ -720,12 +726,17 @@ model GRNItem {
 }
 
 model PurchaseInvoice {
-  id            String   @id @default(uuid())
-  invoiceNumber String   @unique // INV-xxxx
-  date          DateTime @default(now())
+  id                String   @id @default(uuid())
+  invoiceNumber     String   @unique // INV-xxxx
+  date              DateTime @default(now())
+  supplierInvoiceNo String?
+  remarks           String?
 
-  purchaseOrderId String
-  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
+  purchaseOrderId String?
+  purchaseOrder   PurchaseOrder? @relation(fields: [purchaseOrderId], references: [id])
+
+  accountId Int?
+  account   Account? @relation(fields: [accountId], references: [id])
 
   totalAmount Float  @default(0.0)
   status      String @default("UNPAID")
@@ -745,11 +756,26 @@ model PurchaseInvoiceItem {
   invoiceId String
   invoice   PurchaseInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
 
-  purchaseOrderItemId String
-  purchaseOrderItem   PurchaseOrderItem @relation(fields: [purchaseOrderItemId], references: [id])
+  purchaseOrderItemId String?
+  purchaseOrderItem   PurchaseOrderItem? @relation(fields: [purchaseOrderItemId], references: [id])
 
   grnItemId String?
   grnItem   GRNItem? @relation(fields: [grnItemId], references: [id])
+
+  itemMasterId String?
+  itemMaster   ItemMaster? @relation(fields: [itemMasterId], references: [id])
+
+  colorId String?
+  color   Color?  @relation(fields: [colorId], references: [id])
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  itemGradeId String?
+  itemGrade   ItemGrade? @relation(fields: [itemGradeId], references: [id])
+
+  unitId Int?
+  unit   Unit? @relation(fields: [unitId], references: [id])
 
   invoicedQty Float
   rate        Float
