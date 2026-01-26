@@ -1,4 +1,6 @@
 
+export const dynamic = 'force-dynamic'
+
 import { PurchaseOrderForm } from '@/components/fabtex/purchase-order/purchase-order-form'
 import { getItemMasters } from '@/app/actions/fabtex/item-master'
 import { getColors } from '@/app/actions/fabtex/colors'
