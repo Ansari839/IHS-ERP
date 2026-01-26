@@ -2,24 +2,25 @@ import { getPurchaseInvoiceById, getInvoiceFormData } from '@/app/actions/fabtex
 import { InvoiceForm } from '@/components/fabtex/purchase-invoice/invoice-form'
 import { notFound } from 'next/navigation'
 
-export default async function EditInvoicePage({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params
-    const invoice = await getPurchaseInvoiceById(id)
-    const data = await getInvoiceFormData()
+export const dynamic = 'force-dynamic'
 
-    if (!invoice) notFound()
+export default async function ViewInvoicePage({ params }: { params: { id: string } }) {
+    const { id } = params
+    const invoice = await getPurchaseInvoiceById(id)
+    const formData = await getInvoiceFormData()
+
+    if (!invoice) {
+        notFound()
+    }
 
     return (
         <div className="flex-1 space-y-4 p-8 pt-6">
-            <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">Edit Purchase Invoice</h2>
-            </div>
             <InvoiceForm
-                {...data}
+                {...formData}
                 initialData={invoice}
                 invoiceId={id}
+                readOnly={true}
             />
         </div>
     )
 }
-

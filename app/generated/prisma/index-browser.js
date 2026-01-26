@@ -463,6 +463,17 @@ exports.Prisma.ItemGradeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PackingUnitScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  symbol: 'symbol',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ItemMasterScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -473,6 +484,7 @@ exports.Prisma.ItemMasterScalarFieldEnum = {
   imageUrl: 'imageUrl',
   itemGroupId: 'itemGroupId',
   baseUnitId: 'baseUnitId',
+  packingUnitId: 'packingUnitId',
   companyId: 'companyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -506,6 +518,7 @@ exports.Prisma.PurchaseOrderItemScalarFieldEnum = {
   colorId: 'colorId',
   brandId: 'brandId',
   itemGradeId: 'itemGradeId',
+  packingUnitId: 'packingUnitId',
   packingType: 'packingType',
   pcs: 'pcs',
   unitSize: 'unitSize',
@@ -523,6 +536,8 @@ exports.Prisma.GRNScalarFieldEnum = {
   grnNumber: 'grnNumber',
   date: 'date',
   purchaseOrderId: 'purchaseOrderId',
+  lotNo: 'lotNo',
+  warehouseRefNo: 'warehouseRefNo',
   remarks: 'remarks',
   companyId: 'companyId',
   createdAt: 'createdAt',
@@ -537,8 +552,11 @@ exports.Prisma.GRNItemScalarFieldEnum = {
   colorId: 'colorId',
   brandId: 'brandId',
   itemGradeId: 'itemGradeId',
+  packingUnitId: 'packingUnitId',
   receivedQty: 'receivedQty',
   pcs: 'pcs',
+  unitSize: 'unitSize',
+  packingType: 'packingType',
   unitId: 'unitId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -548,7 +566,10 @@ exports.Prisma.PurchaseInvoiceScalarFieldEnum = {
   id: 'id',
   invoiceNumber: 'invoiceNumber',
   date: 'date',
+  supplierInvoiceNo: 'supplierInvoiceNo',
+  remarks: 'remarks',
   purchaseOrderId: 'purchaseOrderId',
+  accountId: 'accountId',
   totalAmount: 'totalAmount',
   status: 'status',
   companyId: 'companyId',
@@ -561,6 +582,11 @@ exports.Prisma.PurchaseInvoiceItemScalarFieldEnum = {
   invoiceId: 'invoiceId',
   purchaseOrderItemId: 'purchaseOrderItemId',
   grnItemId: 'grnItemId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  unitId: 'unitId',
   invoicedQty: 'invoicedQty',
   rate: 'rate',
   amount: 'amount',
@@ -678,6 +704,7 @@ exports.Prisma.ModelName = {
   Color: 'Color',
   Brand: 'Brand',
   ItemGrade: 'ItemGrade',
+  PackingUnit: 'PackingUnit',
   ItemMaster: 'ItemMaster',
   PurchaseOrder: 'PurchaseOrder',
   PurchaseOrderItem: 'PurchaseOrderItem',

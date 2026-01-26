@@ -43,6 +43,7 @@ const formSchema = z.object({
     hsCode: z.string().optional(),
     itemGroupId: z.string().min(1, "Item Group is required"),
     baseUnitId: z.string().min(1, "Base Unit is required"), // Form uses string, we coerce to number in action
+    packingUnitId: z.string().optional().nullable(),
     imageUrl: z.string().optional(),
 });
 
@@ -53,6 +54,7 @@ interface ItemMasterFormProps {
     defaultValues?: any;
     itemGroups: any[];
     units: any[];
+    packingUnits: any[];
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
 }
@@ -62,6 +64,7 @@ export function ItemMasterForm({
     defaultValues,
     itemGroups,
     units,
+    packingUnits,
     open: externalOpen,
     onOpenChange: setExternalOpen,
 }: ItemMasterFormProps) {
@@ -83,6 +86,7 @@ export function ItemMasterForm({
             hsCode: (defaultValues?.hsCode as string) || "",
             itemGroupId: (defaultValues?.itemGroupId as string) || "",
             baseUnitId: (defaultValues?.baseUnitId?.toString() as string) || "",
+            packingUnitId: (defaultValues?.packingUnitId as string) || "",
             imageUrl: (defaultValues?.imageUrl as string) || "",
         },
     });
@@ -114,6 +118,7 @@ export function ItemMasterForm({
         if (values.hsCode) formData.append("hsCode", values.hsCode);
         formData.append("itemGroupId", values.itemGroupId);
         formData.append("baseUnitId", values.baseUnitId);
+        if (values.packingUnitId) formData.append("packingUnitId", values.packingUnitId);
         if (values.imageUrl) formData.append("imageUrl", values.imageUrl); // Preserve existing URL if not changed
 
         if (fileInputRef.current?.files?.[0]) {
@@ -248,6 +253,29 @@ export function ItemMasterForm({
 
                             <FormField
                                 control={form.control}
+                                name="packingUnitId"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Packing Unit</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value || undefined} disabled={isPending}>
+                                            <FormControl>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select Packing" />
+                                                </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                                {packingUnits.map((p) => (
+                                                    <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <FormField
+                                control={form.control}
                                 name="hsCode"
                                 render={({ field }) => (
                                     <FormItem>
@@ -314,6 +342,6 @@ export function ItemMasterForm({
                     </form>
                 </Form>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     );
 }
