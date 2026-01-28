@@ -167,7 +167,10 @@ export async function getGRNs() {
                 include: { account: true }
             },
             items: {
-                include: { itemMaster: true, packingUnit: true }
+                include: {
+                    itemMaster: { include: { packingUnit: true } },
+                    packingUnit: true
+                }
             }
         },
         orderBy: { date: 'desc' }
@@ -184,7 +187,7 @@ export async function getGRNById(id: string) {
                     warehouse: true,
                     items: {
                         include: {
-                            itemMaster: true,
+                            itemMaster: { include: { packingUnit: true } },
                             color: true,
                             brand: true,
                             itemGrade: true,
@@ -197,7 +200,7 @@ export async function getGRNById(id: string) {
             },
             items: {
                 include: {
-                    itemMaster: true,
+                    itemMaster: { include: { packingUnit: true } },
                     color: true,
                     brand: true,
                     itemGrade: true,

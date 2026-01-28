@@ -30,6 +30,7 @@ import {
     Box,
     Award,
     Layers,
+    Undo2,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -85,6 +86,7 @@ const navigation: NavigationItem[] = [
                     { name: "Purchase Order", href: "/dashboard/fab-tex/purchase/purchase-order", icon: Layers, permission: "read:inventory" },
                     { name: "Goods Receipt Note (GRN)", href: "/dashboard/fab-tex/purchase/grn", icon: Package, permission: "read:inventory" },
                     { name: "Purchase Invoice", href: "/dashboard/fab-tex/purchase/invoice", icon: Receipt, permission: "read:inventory" },
+                    { name: "Purchase Return", href: "/dashboard/fab-tex/purchase/purchase-return", icon: Undo2, permission: "read:inventory" },
                     { name: "Vendors", href: "/dashboard/fab-tex/purchase/vendors", icon: Users, permission: "read:inventory" },
                 ]
             },

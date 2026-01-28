@@ -294,9 +294,12 @@ export async function getPurchaseInvoices() {
             items: {
                 include: {
                     purchaseOrderItem: {
-                        include: { itemMaster: true }
+                        include: {
+                            itemMaster: { include: { packingUnit: true } },
+                            packingUnit: true
+                        }
                     },
-                    itemMaster: true
+                    itemMaster: { include: { packingUnit: true } }
                 }
             }
         },
@@ -322,7 +325,7 @@ export async function getPurchaseInvoiceById(id: string) {
                 include: {
                     purchaseOrderItem: {
                         include: {
-                            itemMaster: true,
+                            itemMaster: { include: { packingUnit: true } },
                             unit: true,
                             color: true,
                             brand: true,
@@ -331,7 +334,7 @@ export async function getPurchaseInvoiceById(id: string) {
                         }
                     },
                     grnItem: true,
-                    itemMaster: true,
+                    itemMaster: { include: { packingUnit: true } },
                     unit: true,
                     color: true,
                     brand: true,

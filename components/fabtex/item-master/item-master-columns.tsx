@@ -32,7 +32,7 @@ export type ItemMaster = {
     companyId: number;
     itemGroup: { name: string };
     baseUnit: { name: string; symbol: string };
-    packingUnit?: { name: string } | null;
+    packingUnit?: { name: string; symbol: string | null } | null;
     createdAt: Date;
     updatedAt: Date;
 };
@@ -69,8 +69,13 @@ export const getItemMasterColumns = (itemGroups: any[], units: any[], packingUni
         header: "Unit",
     },
     {
-        accessorKey: "packingUnit.name",
-        header: "Packing",
+        accessorKey: "packingUnit",
+        header: "Packing Unit",
+        cell: ({ row }) => {
+            const unit = row.original.packingUnit;
+            if (!unit) return <span className="text-muted-foreground">-</span>;
+            return <span>{unit.symbol || unit.name}</span>;
+        },
     },
     {
         accessorKey: "status",

@@ -594,6 +594,38 @@ exports.Prisma.PurchaseInvoiceItemScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PurchaseReturnScalarFieldEnum = {
+  id: 'id',
+  returnNumber: 'returnNumber',
+  date: 'date',
+  remarks: 'remarks',
+  purchaseInvoiceId: 'purchaseInvoiceId',
+  grnId: 'grnId',
+  accountId: 'accountId',
+  totalAmount: 'totalAmount',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseReturnItemScalarFieldEnum = {
+  id: 'id',
+  returnId: 'returnId',
+  purchaseInvoiceItemId: 'purchaseInvoiceItemId',
+  grnItemId: 'grnItemId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  unitId: 'unitId',
+  returnedQty: 'returnedQty',
+  rate: 'rate',
+  amount: 'amount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -711,7 +743,9 @@ exports.Prisma.ModelName = {
   GRN: 'GRN',
   GRNItem: 'GRNItem',
   PurchaseInvoice: 'PurchaseInvoice',
-  PurchaseInvoiceItem: 'PurchaseInvoiceItem'
+  PurchaseInvoiceItem: 'PurchaseInvoiceItem',
+  PurchaseReturn: 'PurchaseReturn',
+  PurchaseReturnItem: 'PurchaseReturnItem'
 };
 
 /**

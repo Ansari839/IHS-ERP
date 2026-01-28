@@ -182,6 +182,7 @@ model Unit {
   purchaseOrderItems   PurchaseOrderItem[]
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
+  purchaseReturnItems  PurchaseReturnItem[]
 }
 
 model UnitConversion {
@@ -226,6 +227,7 @@ model Company {
   purchaseOrders   PurchaseOrder[]
   grns             GRN[]
   purchaseInvoices PurchaseInvoice[]
+  purchaseReturns  PurchaseReturn[]
   packingUnits     PackingUnit[]
 }
 
@@ -412,6 +414,7 @@ model Account {
   journalLines     JournalLine[]
   purchaseOrders   PurchaseOrder[]
   purchaseInvoices PurchaseInvoice[]
+  purchaseReturns  PurchaseReturn[]
 }
 
 model JournalEntry {
@@ -482,6 +485,7 @@ model Color {
   purchaseOrderItems   PurchaseOrderItem[]
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
+  purchaseReturnItems  PurchaseReturnItem[]
 }
 
 model Brand {
@@ -498,6 +502,7 @@ model Brand {
   purchaseOrderItems   PurchaseOrderItem[]
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
+  purchaseReturnItems  PurchaseReturnItem[]
 }
 
 model ItemGrade {
@@ -514,6 +519,7 @@ model ItemGrade {
   purchaseOrderItems   PurchaseOrderItem[]
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
+  purchaseReturnItems  PurchaseReturnItem[]
 }
 
 model PackingUnit {
@@ -559,6 +565,7 @@ model ItemMaster {
   purchaseOrderItems   PurchaseOrderItem[]
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
+  purchaseReturnItems  PurchaseReturnItem[]
 }
 
 // --- Purchase Order Models ---
@@ -681,7 +688,8 @@ model GRN {
   companyId Int
   company   Company @relation(fields: [companyId], references: [id])
 
-  items GRNItem[]
+  items           GRNItem[]
+  purchaseReturns PurchaseReturn[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -744,7 +752,8 @@ model PurchaseInvoice {
   companyId Int
   company   Company @relation(fields: [companyId], references: [id])
 
-  items PurchaseInvoiceItem[]
+  items           PurchaseInvoiceItem[]
+  purchaseReturns PurchaseReturn[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -778,6 +787,65 @@ model PurchaseInvoiceItem {
   unit   Unit? @relation(fields: [unitId], references: [id])
 
   invoicedQty Float
+  rate        Float
+  amount      Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PurchaseReturn {
+  id           String   @id @default(uuid())
+  returnNumber String   @unique // PR-xxxx
+  date         DateTime @default(now())
+  remarks      String?
+
+  purchaseInvoiceId String?
+  purchaseInvoice   PurchaseInvoice? @relation(fields: [purchaseInvoiceId], references: [id])
+
+  grnId String?
+  grn   GRN?    @relation(fields: [grnId], references: [id])
+
+  accountId Int?
+  account   Account? @relation(fields: [accountId], references: [id])
+
+  totalAmount Float  @default(0.0)
+  status      String @default("PENDING")
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  items PurchaseReturnItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PurchaseReturnItem {
+  id String @id @default(uuid())
+
+  returnId String
+  return   PurchaseReturn @relation(fields: [returnId], references: [id], onDelete: Cascade)
+
+  purchaseInvoiceItemId String?
+  grnItemId             String?
+
+  itemMasterId String
+  itemMaster   ItemMaster @relation(fields: [itemMasterId], references: [id])
+
+  colorId String?
+  color   Color?  @relation(fields: [colorId], references: [id])
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  itemGradeId String?
+  itemGrade   ItemGrade? @relation(fields: [itemGradeId], references: [id])
+
+  unitId Int?
+  unit   Unit? @relation(fields: [unitId], references: [id])
+
+  returnedQty Float
   rate        Float
   amount      Float
 

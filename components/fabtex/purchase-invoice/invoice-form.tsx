@@ -72,7 +72,7 @@ export function InvoiceForm({
         itemGradeId: item.itemGradeId || item.purchaseOrderItem?.itemGradeId,
         unitId: item.unitId || item.purchaseOrderItem?.unitId,
         unitSymbol: item.unit?.symbol || item.purchaseOrderItem?.unit?.symbol,
-        packingLabel: item.purchaseOrderItem?.packingUnit?.symbol || 'Qty',
+        packingLabel: item.purchaseOrderItem?.packingUnit?.symbol || item.purchaseOrderItem?.packingUnit?.name || item.purchaseOrderItem?.itemMaster?.packingUnit?.symbol || item.purchaseOrderItem?.itemMaster?.packingUnit?.name || 'Qty',
         orderedQty: item.purchaseOrderItem?.quantity || 0,
         alreadyInvoiced: 0,
         remainingQty: item.purchaseOrderItem?.quantity || 0,
@@ -120,7 +120,7 @@ export function InvoiceForm({
                 itemGradeId: item.itemGradeId,
                 unitId: item.unitId,
                 unitSymbol: item.unit?.symbol,
-                packingLabel: item.packingUnit?.symbol || 'Qty',
+                packingLabel: item.packingUnit?.symbol || item.packingUnit?.name || item.itemMaster?.packingUnit?.symbol || item.itemMaster?.packingUnit?.name || 'Qty',
                 orderedQty: item.quantity || 0,
                 alreadyInvoiced,
                 remainingQty: remaining > 0 ? remaining : 0,
@@ -164,7 +164,7 @@ export function InvoiceForm({
                 itemGradeId: grnItem.itemGradeId || poItem?.itemGradeId,
                 unitId: grnItem.unitId,
                 unitSymbol: grnItem.unit?.symbol,
-                packingLabel: grnItem.packingUnit?.symbol || 'Qty',
+                packingLabel: grnItem.packingUnit?.symbol || grnItem.packingUnit?.name || grnItem.itemMaster?.packingUnit?.symbol || grnItem.itemMaster?.packingUnit?.name || poItem?.packingUnit?.symbol || poItem?.packingUnit?.name || poItem?.itemMaster?.packingUnit?.symbol || poItem?.itemMaster?.packingUnit?.name || 'Qty',
                 orderedQty: poItem?.quantity || 0,
                 alreadyInvoiced: 0, // In GRN context, we usually bill what we receive
                 remainingQty: grnItem.receivedQty,
@@ -207,7 +207,7 @@ export function InvoiceForm({
                 itemGradeId: grnItem.itemGradeId || poItem?.itemGradeId,
                 unitId: grnItem.unitId,
                 unitSymbol: grnItem.unit?.symbol,
-                packingLabel: grnItem.packingUnit?.symbol || 'Qty',
+                packingLabel: grnItem.packingUnit?.symbol || grnItem.packingUnit?.name || grnItem.itemMaster?.packingUnit?.symbol || grnItem.itemMaster?.packingUnit?.name || poItem?.packingUnit?.symbol || poItem?.packingUnit?.name || poItem?.itemMaster?.packingUnit?.symbol || poItem?.itemMaster?.packingUnit?.name || 'Qty',
                 orderedQty: poItem?.quantity || 0,
                 alreadyInvoiced: (poItem?.invoiceItems || []).reduce((sum: number, ii: any) => sum + ii.invoicedQty, 0),
                 remainingQty: grnItem.receivedQty,
@@ -261,7 +261,7 @@ export function InvoiceForm({
                         newItem.itemName = master.name
                         newItem.unitId = master.baseUnitId
                         newItem.unitSymbol = master.baseUnit?.symbol
-                        newItem.packingLabel = master.packingUnit?.symbol || 'Qty'
+                        newItem.packingLabel = master.packingUnit?.symbol || master.packingUnit?.name || 'Qty'
                     }
                 }
                 return newItem

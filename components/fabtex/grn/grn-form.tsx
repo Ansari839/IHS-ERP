@@ -41,7 +41,7 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
         pcs: it.pcs || 0,
         unitId: it.unitId,
         packingUnitId: it.packingUnitId,
-        packingUnitSymbol: it.packingUnit?.symbol || it.packingUnit?.name,
+        packingUnitSymbol: it.packingUnit?.symbol || it.packingUnit?.name || it.itemMaster?.packingUnit?.symbol || it.itemMaster?.packingUnit?.name,
         packingType: it.packingType || 'EVEN',
         unitSize: it.unitSize || 0,
         // These are needed for validation/UI even in edit
@@ -77,7 +77,7 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
                     packingType: currentGrnItem?.packingType || poItem.packingType || 'EVEN',
                     unitId: poItem.unitId,
                     packingUnitId: poItem.packingUnitId,
-                    packingUnitSymbol: poItem.packingUnit?.symbol || poItem.packingUnit?.name
+                    packingUnitSymbol: poItem.packingUnit?.symbol || poItem.packingUnit?.name || poItem.itemMaster?.packingUnit?.symbol || poItem.itemMaster?.packingUnit?.name
                 }
             })
             setItems(mappedItems)
@@ -110,7 +110,7 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
                 packingType: item.packingType || 'EVEN',
                 unitId: item.unitId,
                 packingUnitId: item.packingUnitId,
-                packingUnitSymbol: item.packingUnit?.symbol || item.packingUnit?.name
+                packingUnitSymbol: item.packingUnit?.symbol || item.packingUnit?.name || item.itemMaster?.packingUnit?.symbol || item.itemMaster?.packingUnit?.name
             }
         })
         setItems(grnItems)
@@ -215,8 +215,8 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
                                         <TableHead>P. Type</TableHead>
                                         <TableHead>Ordered</TableHead>
                                         <TableHead>Remaining</TableHead>
-                                        <TableHead className="w-[100px]">Pcs</TableHead>
-                                        <TableHead className="w-[100px]">Pkg Size</TableHead>
+                                        <TableHead className="w-[100px]">{items.find(i => i.packingUnitSymbol)?.packingUnitSymbol || 'Pkgs'} Count</TableHead>
+                                        <TableHead className="w-[100px]">{items.find(i => i.packingUnitSymbol)?.packingUnitSymbol || 'Pkg'} Size</TableHead>
                                         <TableHead className="w-[150px]">Receiving Qty</TableHead>
                                         <TableHead className="w-[50px]"></TableHead>
                                     </TableRow>

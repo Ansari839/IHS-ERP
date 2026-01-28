@@ -211,6 +211,8 @@ export async function getPurchaseOrders() {
                 include: {
                     grnItems: true,
                     invoiceItems: true,
+                    itemMaster: { include: { packingUnit: true } },
+                    packingUnit: true
                 }
             }
         }
@@ -224,7 +226,7 @@ export async function getPurchaseOrderById(id: string) {
         include: {
             items: {
                 include: {
-                    itemMaster: true,
+                    itemMaster: { include: { packingUnit: true } },
                     color: true,
                     brand: true,
                     unit: true,

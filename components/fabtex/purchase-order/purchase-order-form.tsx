@@ -104,7 +104,10 @@ export function PurchaseOrderForm({
 
             itemName: items.find(m => m.id === i.itemMasterId)?.name,
             unitSymbol: units.find(u => u.id === i.unitId)?.symbol,
-            packingUnitSymbol: packingUnits.find(p => p.id === i.packingUnitId)?.symbol || packingUnits.find(p => p.id === i.packingUnitId)?.name,
+            packingUnitSymbol: packingUnits.find(p => p.id === i.packingUnitId)?.symbol ||
+                packingUnits.find(p => p.id === i.packingUnitId)?.name ||
+                i.itemMaster?.packingUnit?.symbol ||
+                i.itemMaster?.packingUnit?.name,
             colorName: colors.find(c => c.id === i.colorId)?.name,
             brandName: brands.find(b => b.id === i.brandId)?.name,
             gradeName: itemGrades.find(g => g.id === i.itemGradeId)?.name,
@@ -430,10 +433,10 @@ export function PurchaseOrderForm({
 
                         {/* Qty of UOM (Packages) */}
                         <div className="md:col-span-4 lg:col-span-2 space-y-1">
-                            <Label>No. of {currentItem.packingUnitSymbol || 'Pkgs'}</Label>
+                            <Label>{currentItem.packingUnitSymbol || 'Pkgs'} Count</Label>
                             <Input
                                 type="number"
-                                placeholder={`e.g. 10 ${currentItem.packingUnitSymbol || ''}`}
+                                placeholder={`e.g. 10 ${currentItem.packingUnitSymbol || 'Pkgs'}`}
                                 value={currentItem.pcs || ''}
                                 onChange={(e) => setCurrentItem(p => ({ ...p, pcs: parseFloat(e.target.value) || 0 }))}
                             />
@@ -444,7 +447,7 @@ export function PurchaseOrderForm({
                             <Label>{currentItem.packingUnitSymbol || 'Pkg'} Size</Label>
                             <Input
                                 type="number"
-                                placeholder={`Qty per ${currentItem.packingUnitSymbol || 'Pkg'}`}
+                                placeholder={`Weight per ${currentItem.packingUnitSymbol || 'Pkg'}`}
                                 disabled={currentItem.packingType === 'UNEVEN'}
                                 value={currentItem.unitSize || ''}
                                 onChange={(e) => setCurrentItem(p => ({ ...p, unitSize: parseFloat(e.target.value) || 0 }))}
@@ -504,7 +507,7 @@ export function PurchaseOrderForm({
                                 <TableHead className="font-bold">Variant (Clr/Grd/Brnd)</TableHead>
                                 <TableHead className="font-bold">Packing</TableHead>
                                 <TableHead className="font-bold">P. Unit</TableHead>
-                                <TableHead className="font-bold text-center">Pcs</TableHead>
+                                <TableHead className="font-bold text-center">{poItems.find(i => i.packingUnitSymbol)?.packingUnitSymbol || 'Pkgs'}</TableHead>
                                 <TableHead className="font-bold text-center">Weight</TableHead>
                                 <TableHead className="font-bold text-right">Rate</TableHead>
                                 <TableHead className="font-bold text-right">Amount</TableHead>
@@ -542,7 +545,9 @@ export function PurchaseOrderForm({
                                         <TableCell>
                                             <div className="text-xs font-medium">{item.packingUnitSymbol || '-'}</div>
                                         </TableCell>
-                                        <TableCell className="text-center">{item.pcs || '-'}</TableCell>
+                                        <TableCell className="text-center">
+                                            {item.pcs ? `${item.pcs} ${item.packingUnitSymbol || 'Pkgs'}` : '-'}
+                                        </TableCell>
                                         <TableCell className="text-center font-bold">{item.quantity} {item.unitSymbol}</TableCell>
                                         <TableCell className="text-right">{item.rate.toFixed(2)}</TableCell>
                                         <TableCell className="text-right font-bold text-primary">
