@@ -12,8 +12,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { verifyAccessToken } from '@/lib/jwt'
 
-// Use Node.js runtime instead of Edge for JWT verification
-export const runtime = 'nodejs'
+
 
 /**
  * Check if user is authenticated
@@ -42,7 +41,7 @@ function isAuthenticated(request: NextRequest): boolean {
     }
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname
     const authenticated = isAuthenticated(request)
 

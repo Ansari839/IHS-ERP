@@ -311,7 +311,11 @@ export async function getPurchaseInvoiceById(id: string) {
         where: { id },
         include: {
             purchaseOrder: {
-                include: { account: true }
+                include: {
+                    account: true,
+                    items: true,
+                    grns: true
+                }
             },
             account: true,
             items: {

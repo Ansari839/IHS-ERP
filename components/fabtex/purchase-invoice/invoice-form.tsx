@@ -474,7 +474,7 @@ export function InvoiceForm({
                         )}
 
                         {/* In-UI Debug Info for User */}
-                        {invoiceMode === 'PO' && selectedPO && (
+                        {invoiceMode === 'PO' && selectedPO && !readOnly && (
                             <div className="p-3 bg-muted/50 rounded-lg border border-primary/10 text-xs space-y-1">
                                 <p className="font-bold text-primary">Debug Info:</p>
                                 <p>PO: <span className="text-foreground">{selectedPO.poNumber}</span></p>
