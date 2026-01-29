@@ -7,13 +7,13 @@ import { z } from 'zod';
 
 const itemMasterSchema = z.object({
     name: z.string().min(1, "Name is required"),
-    shortDescription: z.string().optional(),
+    shortDescription: z.string().nullish(),
     status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
-    hsCode: z.string().optional(),
+    hsCode: z.string().nullish(),
     itemGroupId: z.string().min(1, "Item Group is required"),
     baseUnitId: z.coerce.number().min(1, "Base Unit is required"),
-    packingUnitId: z.string().optional().nullable(),
-    imageUrl: z.string().optional(),
+    packingUnitId: z.string().nullish(),
+    imageUrl: z.string().nullish(),
 });
 
 export type ItemMasterState = {
@@ -91,7 +91,14 @@ export async function createItemMaster(prevState: ItemMasterState, formData: For
 
 
     const validated = itemMasterSchema.safeParse({
-        name, shortDescription, status, hsCode, itemGroupId, baseUnitId, packingUnitId, imageUrl: finalImageUrl
+        name,
+        shortDescription: shortDescription || null,
+        status,
+        hsCode: hsCode || null,
+        itemGroupId,
+        baseUnitId,
+        packingUnitId: packingUnitId || null,
+        imageUrl: finalImageUrl || null
     });
 
     if (!validated.success) {
@@ -168,7 +175,14 @@ export async function updateItemMaster(id: string, prevState: ItemMasterState, f
     }
 
     const validated = itemMasterSchema.safeParse({
-        name, shortDescription, status, hsCode, itemGroupId, baseUnitId, packingUnitId, imageUrl
+        name,
+        shortDescription: shortDescription || null,
+        status,
+        hsCode: hsCode || null,
+        itemGroupId,
+        baseUnitId,
+        packingUnitId: packingUnitId || null,
+        imageUrl: imageUrl || null
     });
 
     if (!validated.success) {

@@ -608,7 +608,7 @@ model ItemMaster {
   id               String  @id @default(uuid())
   code             String  @unique
   name             String
-  shortDescription String
+  shortDescription String?
   status           String  @default("ACTIVE") // ACTIVE, INACTIVE
   hsCode           String?
   imageUrl         String?

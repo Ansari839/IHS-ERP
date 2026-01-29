@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 const packingUnitSchema = z.object({
     name: z.string().min(1, "Name is required"),
-    symbol: z.string().optional().nullable(),
+    symbol: z.string().nullish(),
     status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
 });
 
@@ -47,7 +47,11 @@ export async function createPackingUnit(prevState: PackingUnitState, formData: F
     const symbol = formData.get('symbol') as string;
     const status = formData.get('status') as "ACTIVE" | "INACTIVE" || "ACTIVE";
 
-    const validated = packingUnitSchema.safeParse({ name, symbol, status });
+    const validated = packingUnitSchema.safeParse({
+        name,
+        symbol: symbol || null,
+        status
+    });
     if (!validated.success) {
         return { success: false, error: validated.error.issues[0].message };
     }
@@ -95,7 +99,11 @@ export async function updatePackingUnit(id: string, prevState: PackingUnitState,
     const symbol = formData.get('symbol') as string;
     const status = formData.get('status') as "ACTIVE" | "INACTIVE" || "ACTIVE";
 
-    const validated = packingUnitSchema.safeParse({ name, symbol, status });
+    const validated = packingUnitSchema.safeParse({
+        name,
+        symbol: symbol || null,
+        status
+    });
     if (!validated.success) {
         return { success: false, error: validated.error.issues[0].message };
     }

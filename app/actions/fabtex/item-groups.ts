@@ -7,8 +7,8 @@ import { z } from 'zod';
 
 const itemGroupSchema = z.object({
     name: z.string().min(1, "Name is required"),
-    description: z.string().optional().nullable().transform(val => val || undefined),
-    parentId: z.string().optional().nullable(),
+    description: z.string().nullish(),
+    parentId: z.string().nullish(),
     status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
 });
 
@@ -64,7 +64,12 @@ export async function createItemGroup(prevState: ItemGroupState, formData: FormD
     const parentId = formData.get('parentId') as string | null;
     const status = formData.get('status') as "ACTIVE" | "INACTIVE" || "ACTIVE";
 
-    const validated = itemGroupSchema.safeParse({ name, description, parentId: parentId === "null" ? null : parentId, status });
+    const validated = itemGroupSchema.safeParse({
+        name,
+        description: description || null,
+        parentId: parentId === "null" ? null : parentId,
+        status
+    });
     if (!validated.success) {
         return { success: false, error: validated.error.issues[0].message };
     }
@@ -135,7 +140,12 @@ export async function updateItemGroup(id: string, prevState: ItemGroupState, for
     const parentId = formData.get('parentId') as string | null;
     const status = formData.get('status') as "ACTIVE" | "INACTIVE" || "ACTIVE";
 
-    const validated = itemGroupSchema.safeParse({ name, description, parentId: parentId === "null" ? null : parentId, status });
+    const validated = itemGroupSchema.safeParse({
+        name,
+        description: description || null,
+        parentId: parentId === "null" ? null : parentId,
+        status
+    });
     if (!validated.success) {
         return { success: false, error: validated.error.issues[0].message };
     }
