@@ -203,5 +203,5 @@ export async function getItemLedger(itemId: string, segment: string = 'YARN') {
     }
 
     // Return reversed (Newest first) for UI, but balance is already correct
-    return transactions.reverse()
+    return transactions
 }
