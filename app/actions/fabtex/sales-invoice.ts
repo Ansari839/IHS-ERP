@@ -42,6 +42,7 @@ export type InvoiceState = {
 }
 
 export async function getEligibleForInvoicing() {
+    // 1. Fetch SO-linked DOs (current logic preserved)
     const sos = await prisma.salesOrder.findMany({
         where: {
             status: { in: ['APPROVED', 'PENDING', 'COMPLETED', 'DRAFT'] }
@@ -79,17 +80,29 @@ export async function getEligibleForInvoicing() {
         orderBy: { createdAt: 'desc' }
     })
 
-    // Filter SOs that have at least one DO with pending quantities for invoicing
-    const filteredSos = sos.filter(so => {
-        return (so.deliveryOrders || []).some(doItem => {
-            return (doItem.items || []).some((item: any) => {
-                const totalInvoiced = (item.invoiceItems || []).reduce((sum: number, invItem: any) => sum + (invItem.invoicedQty || 0), 0)
-                return (item.deliveredQty || 0) > totalInvoiced
-            })
-        })
+    // 2. Fetch Direct DOs (No SO link)
+    const directDos = await prisma.deliveryOrder.findMany({
+        where: {
+            salesOrderId: null,
+            accountId: { not: null }
+        },
+        include: {
+            account: true,
+            items: {
+                include: {
+                    itemMaster: true,
+                    unit: true,
+                    color: true,
+                    brand: true,
+                    itemGrade: true,
+                    packingUnit: true,
+                    invoiceItems: true
+                }
+            }
+        }
     })
 
-    const allEligibleDOs = filteredSos.flatMap(so =>
+    const allEligibleFromSos = sos.flatMap(so =>
         (so.deliveryOrders || []).map(doItem => ({
             ...doItem,
             soNumber: so.soNumber,
@@ -100,6 +113,23 @@ export async function getEligibleForInvoicing() {
             })
         }))
     ).filter(doItem => !doItem.isFullyInvoiced)
+
+    const allEligibleDirect = directDos.map(doItem => ({
+        ...doItem,
+        soNumber: 'DIRECT',
+        customerName: doItem.account?.name || 'Unknown',
+        isFullyInvoiced: !(doItem.items || []).some((item: any) => {
+            const totalInvoiced = (item.invoiceItems || []).reduce((sum: number, invItem: any) => sum + (invItem.invoicedQty || 0), 0)
+            return (item.deliveredQty || 0) > totalInvoiced
+        })
+    })).filter(doItem => !doItem.isFullyInvoiced)
+
+    const allEligibleDOs = [...allEligibleFromSos, ...allEligibleDirect]
+
+    // Special: Filter filteredSos to only include those that have at least one eligible DO
+    const filteredSos = sos.filter(so =>
+        allEligibleFromSos.some(edo => edo.salesOrderId === so.id)
+    )
 
     return { sos: filteredSos, allEligibleDOs }
 }

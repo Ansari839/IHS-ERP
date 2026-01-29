@@ -688,6 +688,7 @@ exports.Prisma.DeliveryOrderScalarFieldEnum = {
   doNumber: 'doNumber',
   date: 'date',
   salesOrderId: 'salesOrderId',
+  accountId: 'accountId',
   driverName: 'driverName',
   vehicleNo: 'vehicleNo',
   gatePassNo: 'gatePassNo',

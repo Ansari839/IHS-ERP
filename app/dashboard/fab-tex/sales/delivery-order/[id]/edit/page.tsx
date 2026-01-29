@@ -1,6 +1,6 @@
 
 import { DeliveryOrderForm } from '@/components/fabtex/sales/delivery-order-form'
-import { getDeliveryOrderById, getSalesOrdersForDO } from '@/app/actions/fabtex/delivery-order'
+import { getDeliveryOrderById, getDOFormData } from '@/app/actions/fabtex/delivery-order'
 import { notFound } from 'next/navigation'
 
 interface EditDOPageProps {
@@ -11,9 +11,9 @@ export default async function EditDOPage({ params }: EditDOPageProps) {
     const resolvedParams = await params
     const doId = resolvedParams.id
 
-    const [doItem, salesOrders] = await Promise.all([
+    const [doItem, formData] = await Promise.all([
         getDeliveryOrderById(doId),
-        getSalesOrdersForDO()
+        getDOFormData()
     ])
 
     if (!doItem) {
@@ -27,7 +27,7 @@ export default async function EditDOPage({ params }: EditDOPageProps) {
                 <p className="text-muted-foreground">Update details for {doItem.doNumber}.</p>
             </div>
 
-            <DeliveryOrderForm salesOrders={salesOrders} initialData={doItem as any} doId={doId} />
+            <DeliveryOrderForm {...formData} initialData={doItem as any} doId={doId} />
         </div>
     )
 }

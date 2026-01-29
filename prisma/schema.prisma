@@ -449,6 +449,7 @@ model Account {
   salesOrders        SalesOrder[]
   salesInvoices      SalesInvoice[]
   salesReturns       SalesReturn[]
+  deliveryOrders     DeliveryOrder[]
   
   brokerName         String?
   contactPerson      String?
@@ -1049,8 +1050,11 @@ model DeliveryOrder {
   doNumber        String         @unique // Auto DO-xxxx
   date            DateTime       @default(now())
   
-  salesOrderId    String
-  salesOrder      SalesOrder     @relation(fields: [salesOrderId], references: [id])
+  salesOrderId    String?
+  salesOrder      SalesOrder?    @relation(fields: [salesOrderId], references: [id])
+  
+  accountId       Int?
+  account         Account?       @relation(fields: [accountId], references: [id])
   
   driverName      String?
   vehicleNo       String?
@@ -1075,8 +1079,8 @@ model DeliveryOrderItem {
   deliveryOrderId     String
   deliveryOrder       DeliveryOrder     @relation(fields: [deliveryOrderId], references: [id], onDelete: Cascade)
   
-  salesOrderItemId    String
-  salesOrderItem      SalesOrderItem    @relation(fields: [salesOrderItemId], references: [id])
+  salesOrderItemId    String?
+  salesOrderItem      SalesOrderItem? @relation(fields: [salesOrderItemId], references: [id])
   
   itemMasterId        String
   itemMaster          ItemMaster        @relation(fields: [itemMasterId], references: [id])

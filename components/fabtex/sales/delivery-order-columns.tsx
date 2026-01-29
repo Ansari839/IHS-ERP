@@ -16,7 +16,7 @@ import { deleteDeliveryOrder } from '@/app/actions/fabtex/delivery-order'
 import { toast } from 'sonner'
 import Link from 'next/link'
 
-export const columns: ColumnDef<DeliveryOrder & { salesOrder: any, items: any[] }>[] = [
+export const columns: ColumnDef<DeliveryOrder & { salesOrder: any, account: any, items: any[] }>[] = [
     {
         accessorKey: 'doNumber',
         header: 'DO Number',
@@ -29,12 +29,12 @@ export const columns: ColumnDef<DeliveryOrder & { salesOrder: any, items: any[] 
     {
         accessorKey: 'salesOrder.soNumber',
         header: 'SO Link',
-        cell: ({ row }) => row.original.salesOrder?.soNumber || '-',
+        cell: ({ row }) => row.original.salesOrder?.soNumber || <span className="text-muted-foreground italic text-[10px]">Direct</span>,
     },
     {
         accessorKey: 'party',
         header: 'Customer',
-        cell: ({ row }) => row.original.salesOrder?.account?.name || row.original.salesOrder?.partyName || '-',
+        cell: ({ row }) => row.original.account?.name || row.original.salesOrder?.account?.name || row.original.salesOrder?.partyName || '-',
     },
     {
         accessorKey: 'gatePassNo',

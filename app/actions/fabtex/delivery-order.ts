@@ -41,6 +41,36 @@ export async function getSalesOrdersForDO() {
     })
 }
 
+export async function getDOFormData() {
+    const [salesOrders, accounts, itemMasters, units, colors, brands, itemGrades, packingUnits] = await Promise.all([
+        getSalesOrdersForDO(),
+        prisma.account.findMany({
+            where: { isPosting: true },
+            orderBy: { name: 'asc' }
+        }),
+        prisma.itemMaster.findMany({
+            include: { baseUnit: true, packingUnit: true },
+            orderBy: { name: 'asc' }
+        }),
+        prisma.unit.findMany({ orderBy: { symbol: 'asc' } }),
+        prisma.color.findMany({ orderBy: { name: 'asc' } }),
+        prisma.brand.findMany({ orderBy: { name: 'asc' } }),
+        prisma.itemGrade.findMany({ orderBy: { name: 'asc' } }),
+        prisma.packingUnit.findMany({ orderBy: { name: 'asc' } })
+    ])
+
+    return {
+        salesOrders,
+        accounts,
+        itemMasters,
+        units,
+        colors,
+        brands,
+        itemGrades,
+        packingUnits
+    }
+}
+
 export async function createDeliveryOrder(prevState: DOState, formData: FormData): Promise<DOState> {
     try {
         const user = await getCurrentUser()
@@ -49,7 +79,8 @@ export async function createDeliveryOrder(prevState: DOState, formData: FormData
         const company = await prisma.company.findFirst()
         if (!company) return { success: false, error: 'No company defined' }
 
-        const soId = formData.get('salesOrderId') as string
+        const soId = formData.get('salesOrderId') as string || null
+        const accountId = formData.get('accountId') as string || null
         const doNumber = formData.get('doNumber') as string
         const date = formData.get('date') as string
         const gatePassNo = formData.get('gatePassNo') as string
@@ -58,15 +89,16 @@ export async function createDeliveryOrder(prevState: DOState, formData: FormData
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
 
-        if (!soId || !items || items.length === 0) {
-            return { success: false, error: 'Invalid DO data' }
+        if ((!soId && !accountId) || !items || items.length === 0) {
+            return { success: false, error: 'Invalid DO data. Please select a Sales Order or a Customer.' }
         }
 
         await prisma.deliveryOrder.create({
             data: {
                 doNumber,
                 date: new Date(date),
-                salesOrderId: soId,
+                salesOrderId: soId || null,
+                accountId: accountId ? parseInt(accountId, 10) : null,
                 gatePassNo: gatePassNo || null,
                 vehicleNo: vehicleNo || null,
                 remarks,
@@ -103,6 +135,8 @@ export async function updateDeliveryOrder(id: string, prevState: DOState, formDa
         const user = await getCurrentUser()
         if (!user) return { success: false, error: 'Unauthorized' }
 
+        const soId = formData.get('salesOrderId') as string || null
+        const accountId = formData.get('accountId') as string || null
         const doNumber = formData.get('doNumber') as string
         const date = formData.get('date') as string
         const gatePassNo = formData.get('gatePassNo') as string
@@ -111,7 +145,7 @@ export async function updateDeliveryOrder(id: string, prevState: DOState, formDa
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
 
-        if (!id || !items || items.length === 0) {
+        if (!id || (!soId && !accountId) || !items || items.length === 0) {
             return { success: false, error: 'Invalid DO data' }
         }
 
@@ -121,6 +155,8 @@ export async function updateDeliveryOrder(id: string, prevState: DOState, formDa
             data: {
                 doNumber,
                 date: new Date(date),
+                salesOrderId: soId || null,
+                accountId: accountId ? parseInt(accountId, 10) : null,
                 gatePassNo: gatePassNo || null,
                 vehicleNo: vehicleNo || null,
                 remarks,
@@ -128,7 +164,7 @@ export async function updateDeliveryOrder(id: string, prevState: DOState, formDa
                 items: {
                     deleteMany: {}, // Delete old items
                     create: items.map((item: any) => ({
-                        salesOrderItemId: item.salesOrderItemId,
+                        salesOrderItemId: item.salesOrderItemId || null,
                         itemMasterId: item.itemMasterId,
                         colorId: item.colorId || null,
                         brandId: item.brandId || null,
@@ -183,6 +219,7 @@ export async function getDeliveryOrders(segment?: string) {
             salesOrder: {
                 include: { account: true }
             },
+            account: true, // Added this
             items: {
                 include: {
                     itemMaster: { include: { packingUnit: true } },
@@ -215,6 +252,7 @@ export async function getDeliveryOrderById(id: string) {
                     }
                 }
             },
+            account: true, // Added this
             items: {
                 include: {
                     itemMaster: { include: { packingUnit: true } },

@@ -42,7 +42,7 @@ export default async function DODetailPage({ params }: { params: Promise<{ id: s
                             </div>
                             <div className="text-sm">
                                 <span className="text-muted-foreground">SO Ref:</span>
-                                <span className="font-medium ml-2">{doItem.salesOrder.soNumber}</span>
+                                <span className="font-medium ml-2">{doItem.salesOrder?.soNumber || 'DIRECT'}</span>
                             </div>
                             <div className="text-sm">
                                 <span className="text-muted-foreground">Gate Pass:</span>
@@ -61,15 +61,15 @@ export default async function DODetailPage({ params }: { params: Promise<{ id: s
                         <div>
                             <h4 className="font-bold text-sm uppercase text-primary mb-2 border-b">Customer (Bill To)</h4>
                             <div className="space-y-1">
-                                <p className="font-bold">{doItem.salesOrder.account?.name || doItem.salesOrder.partyName}</p>
-                                <p className="text-sm">{doItem.salesOrder.account?.description || '-'}</p>
+                                <p className="font-bold">{doItem.account?.name || doItem.salesOrder?.account?.name || doItem.salesOrder?.partyName || 'Unknown Customer'}</p>
+                                <p className="text-sm">{doItem.account?.description || doItem.salesOrder?.account?.description || '-'}</p>
                             </div>
                         </div>
                         <div>
                             <h4 className="font-bold text-sm uppercase text-primary mb-2 border-b">Dispatched From</h4>
                             <div className="space-y-1">
-                                <p className="font-bold">{doItem.salesOrder.warehouse?.name || 'Central Warehouse'}</p>
-                                <p className="text-sm">{doItem.salesOrder.warehouse?.location || doItem.company?.address}</p>
+                                <p className="font-bold">{doItem.salesOrder?.warehouse?.name || 'Central Warehouse'}</p>
+                                <p className="text-sm">{doItem.salesOrder?.warehouse?.location || doItem.company?.address || 'Company Location'}</p>
                             </div>
                         </div>
                     </div>
