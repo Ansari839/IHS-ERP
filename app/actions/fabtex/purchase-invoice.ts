@@ -179,6 +179,7 @@ export async function createPurchaseInvoice(prevState: InvoiceState, formData: F
                 totalAmount,
                 status,
                 companyId: company.id,
+                segment: (formData.get('segment') as any) || 'GENERAL',
                 items: {
                     create: items.map((item: any) => ({
                         purchaseOrderItemId: item.purchaseOrderItemId || null,
@@ -239,6 +240,7 @@ export async function updatePurchaseInvoice(invoiceId: string, prevState: Invoic
                 remarks,
                 totalAmount,
                 status,
+                segment: (formData.get('segment') as any) || 'GENERAL',
                 items: {
                     deleteMany: {},
                     create: items.map((item: any) => ({
@@ -283,9 +285,15 @@ export async function deletePurchaseInvoice(id: string) {
 }
 
 
-export async function getPurchaseInvoices() {
-    console.log('Fetching all purchase invoices...')
+export async function getPurchaseInvoices(segment?: string) {
+    const company = await prisma.company.findFirst()
+    if (!company) return []
+
     return await prisma.purchaseInvoice.findMany({
+        where: {
+            companyId: company.id,
+            ...(segment && { segment: segment as any })
+        },
         include: {
             purchaseOrder: {
                 include: { account: true }

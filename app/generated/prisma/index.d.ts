@@ -247,6 +247,15 @@ export namespace $Enums {
 export type ProductType = (typeof ProductType)[keyof typeof ProductType]
 
 
+export const BusinessSegment: {
+  GENERAL: 'GENERAL',
+  YARN: 'YARN',
+  FABRIC: 'FABRIC'
+};
+
+export type BusinessSegment = (typeof BusinessSegment)[keyof typeof BusinessSegment]
+
+
 export const AccountType: {
   ASSET: 'ASSET',
   LIABILITY: 'LIABILITY',
@@ -313,6 +322,10 @@ export type PackingType = (typeof PackingType)[keyof typeof PackingType]
 export type ProductType = $Enums.ProductType
 
 export const ProductType: typeof $Enums.ProductType
+
+export type BusinessSegment = $Enums.BusinessSegment
+
+export const BusinessSegment: typeof $Enums.BusinessSegment
 
 export type AccountType = $Enums.AccountType
 
@@ -17475,6 +17488,7 @@ export namespace Prisma {
     location: string | null
     contactPerson: string | null
     status: string | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -17485,6 +17499,7 @@ export namespace Prisma {
     location: string | null
     contactPerson: string | null
     status: string | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -17496,6 +17511,7 @@ export namespace Prisma {
     contactPerson: number
     contactNumbers: number
     status: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -17516,6 +17532,7 @@ export namespace Prisma {
     location?: true
     contactPerson?: true
     status?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -17526,6 +17543,7 @@ export namespace Prisma {
     location?: true
     contactPerson?: true
     status?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -17537,6 +17555,7 @@ export namespace Prisma {
     contactPerson?: true
     contactNumbers?: true
     status?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -17635,6 +17654,7 @@ export namespace Prisma {
     contactPerson: string | null
     contactNumbers: string[]
     status: string
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: WarehouseCountAggregateOutputType | null
@@ -17665,6 +17685,7 @@ export namespace Prisma {
     contactPerson?: boolean
     contactNumbers?: boolean
     status?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userWarehouses?: boolean | Warehouse$userWarehousesArgs<ExtArgs>
@@ -17679,6 +17700,7 @@ export namespace Prisma {
     contactPerson?: boolean
     contactNumbers?: boolean
     status?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["warehouse"]>
@@ -17690,6 +17712,7 @@ export namespace Prisma {
     contactPerson?: boolean
     contactNumbers?: boolean
     status?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["warehouse"]>
@@ -17701,11 +17724,12 @@ export namespace Prisma {
     contactPerson?: boolean
     contactNumbers?: boolean
     status?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type WarehouseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "location" | "contactPerson" | "contactNumbers" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["warehouse"]>
+  export type WarehouseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "location" | "contactPerson" | "contactNumbers" | "status" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["warehouse"]>
   export type WarehouseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userWarehouses?: boolean | Warehouse$userWarehousesArgs<ExtArgs>
     purchaseOrders?: boolean | Warehouse$purchaseOrdersArgs<ExtArgs>
@@ -17727,6 +17751,7 @@ export namespace Prisma {
       contactPerson: string | null
       contactNumbers: string[]
       status: string
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["warehouse"]>
@@ -18160,6 +18185,7 @@ export namespace Prisma {
     readonly contactPerson: FieldRef<"Warehouse", 'String'>
     readonly contactNumbers: FieldRef<"Warehouse", 'String[]'>
     readonly status: FieldRef<"Warehouse", 'String'>
+    readonly segment: FieldRef<"Warehouse", 'BusinessSegment'>
     readonly createdAt: FieldRef<"Warehouse", 'DateTime'>
     readonly updatedAt: FieldRef<"Warehouse", 'DateTime'>
   }
@@ -21115,6 +21141,7 @@ export namespace Prisma {
     toUnitId: number | null
     conversionRate: number | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21125,6 +21152,7 @@ export namespace Prisma {
     toUnitId: number | null
     conversionRate: number | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21135,6 +21163,7 @@ export namespace Prisma {
     toUnitId: number
     conversionRate: number
     companyId: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -21163,6 +21192,7 @@ export namespace Prisma {
     toUnitId?: true
     conversionRate?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21173,6 +21203,7 @@ export namespace Prisma {
     toUnitId?: true
     conversionRate?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21183,6 +21214,7 @@ export namespace Prisma {
     toUnitId?: true
     conversionRate?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -21280,6 +21312,7 @@ export namespace Prisma {
     toUnitId: number
     conversionRate: number
     companyId: number
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: UnitConversionCountAggregateOutputType | null
@@ -21309,6 +21342,7 @@ export namespace Prisma {
     toUnitId?: boolean
     conversionRate?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -21322,6 +21356,7 @@ export namespace Prisma {
     toUnitId?: boolean
     conversionRate?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -21335,6 +21370,7 @@ export namespace Prisma {
     toUnitId?: boolean
     conversionRate?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -21348,11 +21384,12 @@ export namespace Prisma {
     toUnitId?: boolean
     conversionRate?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UnitConversionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fromUnitId" | "toUnitId" | "conversionRate" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["unitConversion"]>
+  export type UnitConversionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fromUnitId" | "toUnitId" | "conversionRate" | "companyId" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["unitConversion"]>
   export type UnitConversionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     fromUnit?: boolean | UnitDefaultArgs<ExtArgs>
@@ -21382,6 +21419,7 @@ export namespace Prisma {
       toUnitId: number
       conversionRate: number
       companyId: number
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["unitConversion"]>
@@ -21815,6 +21853,7 @@ export namespace Prisma {
     readonly toUnitId: FieldRef<"UnitConversion", 'Int'>
     readonly conversionRate: FieldRef<"UnitConversion", 'Float'>
     readonly companyId: FieldRef<"UnitConversion", 'Int'>
+    readonly segment: FieldRef<"UnitConversion", 'BusinessSegment'>
     readonly createdAt: FieldRef<"UnitConversion", 'DateTime'>
     readonly updatedAt: FieldRef<"UnitConversion", 'DateTime'>
   }
@@ -35980,6 +36019,7 @@ export namespace Prisma {
     description: string | null
     openingBalance: number | null
     openingBalanceType: $Enums.BalanceType | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -35995,6 +36035,7 @@ export namespace Prisma {
     description: string | null
     openingBalance: number | null
     openingBalanceType: $Enums.BalanceType | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -36010,6 +36051,7 @@ export namespace Prisma {
     description: number
     openingBalance: number
     openingBalanceType: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -36041,6 +36083,7 @@ export namespace Prisma {
     description?: true
     openingBalance?: true
     openingBalanceType?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -36056,6 +36099,7 @@ export namespace Prisma {
     description?: true
     openingBalance?: true
     openingBalanceType?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -36071,6 +36115,7 @@ export namespace Prisma {
     description?: true
     openingBalance?: true
     openingBalanceType?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -36173,6 +36218,7 @@ export namespace Prisma {
     description: string | null
     openingBalance: number
     openingBalanceType: $Enums.BalanceType
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: AccountCountAggregateOutputType | null
@@ -36207,6 +36253,7 @@ export namespace Prisma {
     description?: boolean
     openingBalance?: boolean
     openingBalanceType?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | Account$parentArgs<ExtArgs>
@@ -36229,6 +36276,7 @@ export namespace Prisma {
     description?: boolean
     openingBalance?: boolean
     openingBalanceType?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | Account$parentArgs<ExtArgs>
@@ -36245,6 +36293,7 @@ export namespace Prisma {
     description?: boolean
     openingBalance?: boolean
     openingBalanceType?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | Account$parentArgs<ExtArgs>
@@ -36261,11 +36310,12 @@ export namespace Prisma {
     description?: boolean
     openingBalance?: boolean
     openingBalanceType?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "type" | "parentId" | "level" | "isPosting" | "description" | "openingBalance" | "openingBalanceType" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "type" | "parentId" | "level" | "isPosting" | "description" | "openingBalance" | "openingBalanceType" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     parent?: boolean | Account$parentArgs<ExtArgs>
     children?: boolean | Account$childrenArgs<ExtArgs>
@@ -36303,6 +36353,7 @@ export namespace Prisma {
       description: string | null
       openingBalance: number
       openingBalanceType: $Enums.BalanceType
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["account"]>
@@ -36744,6 +36795,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Account", 'String'>
     readonly openingBalance: FieldRef<"Account", 'Float'>
     readonly openingBalanceType: FieldRef<"Account", 'BalanceType'>
+    readonly segment: FieldRef<"Account", 'BusinessSegment'>
     readonly createdAt: FieldRef<"Account", 'DateTime'>
     readonly updatedAt: FieldRef<"Account", 'DateTime'>
   }
@@ -40699,6 +40751,7 @@ export namespace Prisma {
     status: string | null
     parentId: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -40711,6 +40764,7 @@ export namespace Prisma {
     status: string | null
     parentId: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -40723,6 +40777,7 @@ export namespace Prisma {
     status: number
     parentId: number
     companyId: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -40745,6 +40800,7 @@ export namespace Prisma {
     status?: true
     parentId?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -40757,6 +40813,7 @@ export namespace Prisma {
     status?: true
     parentId?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -40769,6 +40826,7 @@ export namespace Prisma {
     status?: true
     parentId?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -40868,6 +40926,7 @@ export namespace Prisma {
     status: string
     parentId: string | null
     companyId: number
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: ItemGroupCountAggregateOutputType | null
@@ -40899,6 +40958,7 @@ export namespace Prisma {
     status?: boolean
     parentId?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | ItemGroup$parentArgs<ExtArgs>
@@ -40916,6 +40976,7 @@ export namespace Prisma {
     status?: boolean
     parentId?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | ItemGroup$parentArgs<ExtArgs>
@@ -40930,6 +40991,7 @@ export namespace Prisma {
     status?: boolean
     parentId?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | ItemGroup$parentArgs<ExtArgs>
@@ -40944,11 +41006,12 @@ export namespace Prisma {
     status?: boolean
     parentId?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ItemGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "description" | "status" | "parentId" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["itemGroup"]>
+  export type ItemGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "description" | "status" | "parentId" | "companyId" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["itemGroup"]>
   export type ItemGroupInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     parent?: boolean | ItemGroup$parentArgs<ExtArgs>
     children?: boolean | ItemGroup$childrenArgs<ExtArgs>
@@ -40981,6 +41044,7 @@ export namespace Prisma {
       status: string
       parentId: string | null
       companyId: number
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["itemGroup"]>
@@ -41417,6 +41481,7 @@ export namespace Prisma {
     readonly status: FieldRef<"ItemGroup", 'String'>
     readonly parentId: FieldRef<"ItemGroup", 'String'>
     readonly companyId: FieldRef<"ItemGroup", 'Int'>
+    readonly segment: FieldRef<"ItemGroup", 'BusinessSegment'>
     readonly createdAt: FieldRef<"ItemGroup", 'DateTime'>
     readonly updatedAt: FieldRef<"ItemGroup", 'DateTime'>
   }
@@ -46860,6 +46925,7 @@ export namespace Prisma {
     baseUnitId: number | null
     packingUnitId: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -46876,6 +46942,7 @@ export namespace Prisma {
     baseUnitId: number | null
     packingUnitId: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -46892,6 +46959,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId: number
     companyId: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -46920,6 +46988,7 @@ export namespace Prisma {
     baseUnitId?: true
     packingUnitId?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -46936,6 +47005,7 @@ export namespace Prisma {
     baseUnitId?: true
     packingUnitId?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -46952,6 +47022,7 @@ export namespace Prisma {
     baseUnitId?: true
     packingUnitId?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -47055,6 +47126,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId: string | null
     companyId: number
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: ItemMasterCountAggregateOutputType | null
@@ -47090,6 +47162,7 @@ export namespace Prisma {
     baseUnitId?: boolean
     packingUnitId?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     itemGroup?: boolean | ItemGroupDefaultArgs<ExtArgs>
@@ -47115,6 +47188,7 @@ export namespace Prisma {
     baseUnitId?: boolean
     packingUnitId?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     itemGroup?: boolean | ItemGroupDefaultArgs<ExtArgs>
@@ -47135,6 +47209,7 @@ export namespace Prisma {
     baseUnitId?: boolean
     packingUnitId?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     itemGroup?: boolean | ItemGroupDefaultArgs<ExtArgs>
@@ -47155,11 +47230,12 @@ export namespace Prisma {
     baseUnitId?: boolean
     packingUnitId?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ItemMasterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "shortDescription" | "status" | "hsCode" | "imageUrl" | "itemGroupId" | "baseUnitId" | "packingUnitId" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["itemMaster"]>
+  export type ItemMasterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "shortDescription" | "status" | "hsCode" | "imageUrl" | "itemGroupId" | "baseUnitId" | "packingUnitId" | "companyId" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["itemMaster"]>
   export type ItemMasterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     itemGroup?: boolean | ItemGroupDefaultArgs<ExtArgs>
     baseUnit?: boolean | UnitDefaultArgs<ExtArgs>
@@ -47208,6 +47284,7 @@ export namespace Prisma {
       baseUnitId: number
       packingUnitId: string | null
       companyId: number
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["itemMaster"]>
@@ -47652,6 +47729,7 @@ export namespace Prisma {
     readonly baseUnitId: FieldRef<"ItemMaster", 'Int'>
     readonly packingUnitId: FieldRef<"ItemMaster", 'String'>
     readonly companyId: FieldRef<"ItemMaster", 'Int'>
+    readonly segment: FieldRef<"ItemMaster", 'BusinessSegment'>
     readonly createdAt: FieldRef<"ItemMaster", 'DateTime'>
     readonly updatedAt: FieldRef<"ItemMaster", 'DateTime'>
   }
@@ -48230,6 +48308,7 @@ export namespace Prisma {
     currencyId: number | null
     exchangeRate: number | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -48251,6 +48330,7 @@ export namespace Prisma {
     currencyId: number | null
     exchangeRate: number | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -48272,6 +48352,7 @@ export namespace Prisma {
     currencyId: number
     exchangeRate: number
     companyId: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -48313,6 +48394,7 @@ export namespace Prisma {
     currencyId?: true
     exchangeRate?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -48334,6 +48416,7 @@ export namespace Prisma {
     currencyId?: true
     exchangeRate?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -48355,6 +48438,7 @@ export namespace Prisma {
     currencyId?: true
     exchangeRate?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -48463,6 +48547,7 @@ export namespace Prisma {
     currencyId: number | null
     exchangeRate: number
     companyId: number
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: PurchaseOrderCountAggregateOutputType | null
@@ -48503,6 +48588,7 @@ export namespace Prisma {
     currencyId?: boolean
     exchangeRate?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     account?: boolean | PurchaseOrder$accountArgs<ExtArgs>
@@ -48532,6 +48618,7 @@ export namespace Prisma {
     currencyId?: boolean
     exchangeRate?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     account?: boolean | PurchaseOrder$accountArgs<ExtArgs>
@@ -48557,6 +48644,7 @@ export namespace Prisma {
     currencyId?: boolean
     exchangeRate?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     account?: boolean | PurchaseOrder$accountArgs<ExtArgs>
@@ -48582,11 +48670,12 @@ export namespace Prisma {
     currencyId?: boolean
     exchangeRate?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PurchaseOrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "poNumber" | "type" | "status" | "date" | "accountId" | "partyName" | "warehouseId" | "referenceNo" | "documentDate" | "fileNo" | "remarks" | "totalAmount" | "currencyId" | "exchangeRate" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["purchaseOrder"]>
+  export type PurchaseOrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "poNumber" | "type" | "status" | "date" | "accountId" | "partyName" | "warehouseId" | "referenceNo" | "documentDate" | "fileNo" | "remarks" | "totalAmount" | "currencyId" | "exchangeRate" | "companyId" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["purchaseOrder"]>
   export type PurchaseOrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | PurchaseOrder$accountArgs<ExtArgs>
     warehouse?: boolean | PurchaseOrder$warehouseArgs<ExtArgs>
@@ -48638,6 +48727,7 @@ export namespace Prisma {
       currencyId: number | null
       exchangeRate: number
       companyId: number
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["purchaseOrder"]>
@@ -49086,6 +49176,7 @@ export namespace Prisma {
     readonly currencyId: FieldRef<"PurchaseOrder", 'Int'>
     readonly exchangeRate: FieldRef<"PurchaseOrder", 'Float'>
     readonly companyId: FieldRef<"PurchaseOrder", 'Int'>
+    readonly segment: FieldRef<"PurchaseOrder", 'BusinessSegment'>
     readonly createdAt: FieldRef<"PurchaseOrder", 'DateTime'>
     readonly updatedAt: FieldRef<"PurchaseOrder", 'DateTime'>
   }
@@ -51129,6 +51220,7 @@ export namespace Prisma {
     warehouseRefNo: string | null
     remarks: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -51142,6 +51234,7 @@ export namespace Prisma {
     warehouseRefNo: string | null
     remarks: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -51155,6 +51248,7 @@ export namespace Prisma {
     warehouseRefNo: number
     remarks: number
     companyId: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -51178,6 +51272,7 @@ export namespace Prisma {
     warehouseRefNo?: true
     remarks?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -51191,6 +51286,7 @@ export namespace Prisma {
     warehouseRefNo?: true
     remarks?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -51204,6 +51300,7 @@ export namespace Prisma {
     warehouseRefNo?: true
     remarks?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -51304,6 +51401,7 @@ export namespace Prisma {
     warehouseRefNo: string | null
     remarks: string | null
     companyId: number
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: GRNCountAggregateOutputType | null
@@ -51336,6 +51434,7 @@ export namespace Prisma {
     warehouseRefNo?: boolean
     remarks?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
@@ -51354,6 +51453,7 @@ export namespace Prisma {
     warehouseRefNo?: boolean
     remarks?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
@@ -51369,6 +51469,7 @@ export namespace Prisma {
     warehouseRefNo?: boolean
     remarks?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
@@ -51384,11 +51485,12 @@ export namespace Prisma {
     warehouseRefNo?: boolean
     remarks?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type GRNOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "grnNumber" | "date" | "purchaseOrderId" | "lotNo" | "warehouseRefNo" | "remarks" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["gRN"]>
+  export type GRNOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "grnNumber" | "date" | "purchaseOrderId" | "lotNo" | "warehouseRefNo" | "remarks" | "companyId" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["gRN"]>
   export type GRNInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseOrder?: boolean | PurchaseOrderDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -51422,6 +51524,7 @@ export namespace Prisma {
       warehouseRefNo: string | null
       remarks: string | null
       companyId: number
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["gRN"]>
@@ -51859,6 +51962,7 @@ export namespace Prisma {
     readonly warehouseRefNo: FieldRef<"GRN", 'String'>
     readonly remarks: FieldRef<"GRN", 'String'>
     readonly companyId: FieldRef<"GRN", 'Int'>
+    readonly segment: FieldRef<"GRN", 'BusinessSegment'>
     readonly createdAt: FieldRef<"GRN", 'DateTime'>
     readonly updatedAt: FieldRef<"GRN", 'DateTime'>
   }
@@ -53773,6 +53877,7 @@ export namespace Prisma {
     totalAmount: number | null
     status: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -53788,6 +53893,7 @@ export namespace Prisma {
     totalAmount: number | null
     status: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -53803,6 +53909,7 @@ export namespace Prisma {
     totalAmount: number
     status: number
     companyId: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -53832,6 +53939,7 @@ export namespace Prisma {
     totalAmount?: true
     status?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -53847,6 +53955,7 @@ export namespace Prisma {
     totalAmount?: true
     status?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -53862,6 +53971,7 @@ export namespace Prisma {
     totalAmount?: true
     status?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -53964,6 +54074,7 @@ export namespace Prisma {
     totalAmount: number
     status: string
     companyId: number
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: PurchaseInvoiceCountAggregateOutputType | null
@@ -53998,6 +54109,7 @@ export namespace Prisma {
     totalAmount?: boolean
     status?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseOrder?: boolean | PurchaseInvoice$purchaseOrderArgs<ExtArgs>
@@ -54019,6 +54131,7 @@ export namespace Prisma {
     totalAmount?: boolean
     status?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseOrder?: boolean | PurchaseInvoice$purchaseOrderArgs<ExtArgs>
@@ -54037,6 +54150,7 @@ export namespace Prisma {
     totalAmount?: boolean
     status?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseOrder?: boolean | PurchaseInvoice$purchaseOrderArgs<ExtArgs>
@@ -54055,11 +54169,12 @@ export namespace Prisma {
     totalAmount?: boolean
     status?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PurchaseInvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceNumber" | "date" | "supplierInvoiceNo" | "remarks" | "purchaseOrderId" | "accountId" | "totalAmount" | "status" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["purchaseInvoice"]>
+  export type PurchaseInvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceNumber" | "date" | "supplierInvoiceNo" | "remarks" | "purchaseOrderId" | "accountId" | "totalAmount" | "status" | "companyId" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["purchaseInvoice"]>
   export type PurchaseInvoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseOrder?: boolean | PurchaseInvoice$purchaseOrderArgs<ExtArgs>
     account?: boolean | PurchaseInvoice$accountArgs<ExtArgs>
@@ -54099,6 +54214,7 @@ export namespace Prisma {
       totalAmount: number
       status: string
       companyId: number
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["purchaseInvoice"]>
@@ -54539,6 +54655,7 @@ export namespace Prisma {
     readonly totalAmount: FieldRef<"PurchaseInvoice", 'Float'>
     readonly status: FieldRef<"PurchaseInvoice", 'String'>
     readonly companyId: FieldRef<"PurchaseInvoice", 'Int'>
+    readonly segment: FieldRef<"PurchaseInvoice", 'BusinessSegment'>
     readonly createdAt: FieldRef<"PurchaseInvoice", 'DateTime'>
     readonly updatedAt: FieldRef<"PurchaseInvoice", 'DateTime'>
   }
@@ -56486,6 +56603,7 @@ export namespace Prisma {
     totalAmount: number | null
     status: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -56501,6 +56619,7 @@ export namespace Prisma {
     totalAmount: number | null
     status: string | null
     companyId: number | null
+    segment: $Enums.BusinessSegment | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -56516,6 +56635,7 @@ export namespace Prisma {
     totalAmount: number
     status: number
     companyId: number
+    segment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -56545,6 +56665,7 @@ export namespace Prisma {
     totalAmount?: true
     status?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -56560,6 +56681,7 @@ export namespace Prisma {
     totalAmount?: true
     status?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -56575,6 +56697,7 @@ export namespace Prisma {
     totalAmount?: true
     status?: true
     companyId?: true
+    segment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -56677,6 +56800,7 @@ export namespace Prisma {
     totalAmount: number
     status: string
     companyId: number
+    segment: $Enums.BusinessSegment
     createdAt: Date
     updatedAt: Date
     _count: PurchaseReturnCountAggregateOutputType | null
@@ -56711,6 +56835,7 @@ export namespace Prisma {
     totalAmount?: boolean
     status?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseInvoice?: boolean | PurchaseReturn$purchaseInvoiceArgs<ExtArgs>
@@ -56732,6 +56857,7 @@ export namespace Prisma {
     totalAmount?: boolean
     status?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseInvoice?: boolean | PurchaseReturn$purchaseInvoiceArgs<ExtArgs>
@@ -56751,6 +56877,7 @@ export namespace Prisma {
     totalAmount?: boolean
     status?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     purchaseInvoice?: boolean | PurchaseReturn$purchaseInvoiceArgs<ExtArgs>
@@ -56770,11 +56897,12 @@ export namespace Prisma {
     totalAmount?: boolean
     status?: boolean
     companyId?: boolean
+    segment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PurchaseReturnOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "returnNumber" | "date" | "remarks" | "purchaseInvoiceId" | "grnId" | "accountId" | "totalAmount" | "status" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["purchaseReturn"]>
+  export type PurchaseReturnOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "returnNumber" | "date" | "remarks" | "purchaseInvoiceId" | "grnId" | "accountId" | "totalAmount" | "status" | "companyId" | "segment" | "createdAt" | "updatedAt", ExtArgs["result"]["purchaseReturn"]>
   export type PurchaseReturnInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchaseInvoice?: boolean | PurchaseReturn$purchaseInvoiceArgs<ExtArgs>
     grn?: boolean | PurchaseReturn$grnArgs<ExtArgs>
@@ -56816,6 +56944,7 @@ export namespace Prisma {
       totalAmount: number
       status: string
       companyId: number
+      segment: $Enums.BusinessSegment
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["purchaseReturn"]>
@@ -57256,6 +57385,7 @@ export namespace Prisma {
     readonly totalAmount: FieldRef<"PurchaseReturn", 'Float'>
     readonly status: FieldRef<"PurchaseReturn", 'String'>
     readonly companyId: FieldRef<"PurchaseReturn", 'Int'>
+    readonly segment: FieldRef<"PurchaseReturn", 'BusinessSegment'>
     readonly createdAt: FieldRef<"PurchaseReturn", 'DateTime'>
     readonly updatedAt: FieldRef<"PurchaseReturn", 'DateTime'>
   }
@@ -59227,6 +59357,7 @@ export namespace Prisma {
     contactPerson: 'contactPerson',
     contactNumbers: 'contactNumbers',
     status: 'status',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59265,6 +59396,7 @@ export namespace Prisma {
     toUnitId: 'toUnitId',
     conversionRate: 'conversionRate',
     companyId: 'companyId',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59448,6 +59580,7 @@ export namespace Prisma {
     description: 'description',
     openingBalance: 'openingBalance',
     openingBalanceType: 'openingBalanceType',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59502,6 +59635,7 @@ export namespace Prisma {
     status: 'status',
     parentId: 'parentId',
     companyId: 'companyId',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59575,6 +59709,7 @@ export namespace Prisma {
     baseUnitId: 'baseUnitId',
     packingUnitId: 'packingUnitId',
     companyId: 'companyId',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59599,6 +59734,7 @@ export namespace Prisma {
     currencyId: 'currencyId',
     exchangeRate: 'exchangeRate',
     companyId: 'companyId',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59638,6 +59774,7 @@ export namespace Prisma {
     warehouseRefNo: 'warehouseRefNo',
     remarks: 'remarks',
     companyId: 'companyId',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59677,6 +59814,7 @@ export namespace Prisma {
     totalAmount: 'totalAmount',
     status: 'status',
     companyId: 'companyId',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59715,6 +59853,7 @@ export namespace Prisma {
     totalAmount: 'totalAmount',
     status: 'status',
     companyId: 'companyId',
+    segment: 'segment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -59848,6 +59987,20 @@ export namespace Prisma {
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'BusinessSegment'
+   */
+  export type EnumBusinessSegmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BusinessSegment'>
+    
+
+
+  /**
+   * Reference to a field of type 'BusinessSegment[]'
+   */
+  export type ListEnumBusinessSegmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BusinessSegment[]'>
     
 
 
@@ -60613,6 +60766,7 @@ export namespace Prisma {
     contactPerson?: StringNullableFilter<"Warehouse"> | string | null
     contactNumbers?: StringNullableListFilter<"Warehouse">
     status?: StringFilter<"Warehouse"> | string
+    segment?: EnumBusinessSegmentFilter<"Warehouse"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"Warehouse"> | Date | string
     updatedAt?: DateTimeFilter<"Warehouse"> | Date | string
     userWarehouses?: UserWarehouseListRelationFilter
@@ -60626,6 +60780,7 @@ export namespace Prisma {
     contactPerson?: SortOrderInput | SortOrder
     contactNumbers?: SortOrder
     status?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userWarehouses?: UserWarehouseOrderByRelationAggregateInput
@@ -60642,6 +60797,7 @@ export namespace Prisma {
     contactPerson?: StringNullableFilter<"Warehouse"> | string | null
     contactNumbers?: StringNullableListFilter<"Warehouse">
     status?: StringFilter<"Warehouse"> | string
+    segment?: EnumBusinessSegmentFilter<"Warehouse"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"Warehouse"> | Date | string
     updatedAt?: DateTimeFilter<"Warehouse"> | Date | string
     userWarehouses?: UserWarehouseListRelationFilter
@@ -60655,6 +60811,7 @@ export namespace Prisma {
     contactPerson?: SortOrderInput | SortOrder
     contactNumbers?: SortOrder
     status?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: WarehouseCountOrderByAggregateInput
@@ -60674,6 +60831,7 @@ export namespace Prisma {
     contactPerson?: StringNullableWithAggregatesFilter<"Warehouse"> | string | null
     contactNumbers?: StringNullableListFilter<"Warehouse">
     status?: StringWithAggregatesFilter<"Warehouse"> | string
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"Warehouse"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"Warehouse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Warehouse"> | Date | string
   }
@@ -60844,6 +61002,7 @@ export namespace Prisma {
     toUnitId?: IntFilter<"UnitConversion"> | number
     conversionRate?: FloatFilter<"UnitConversion"> | number
     companyId?: IntFilter<"UnitConversion"> | number
+    segment?: EnumBusinessSegmentFilter<"UnitConversion"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"UnitConversion"> | Date | string
     updatedAt?: DateTimeFilter<"UnitConversion"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
@@ -60857,6 +61016,7 @@ export namespace Prisma {
     toUnitId?: SortOrder
     conversionRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     company?: CompanyOrderByWithRelationInput
@@ -60874,6 +61034,7 @@ export namespace Prisma {
     toUnitId?: IntFilter<"UnitConversion"> | number
     conversionRate?: FloatFilter<"UnitConversion"> | number
     companyId?: IntFilter<"UnitConversion"> | number
+    segment?: EnumBusinessSegmentFilter<"UnitConversion"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"UnitConversion"> | Date | string
     updatedAt?: DateTimeFilter<"UnitConversion"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
@@ -60887,6 +61048,7 @@ export namespace Prisma {
     toUnitId?: SortOrder
     conversionRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UnitConversionCountOrderByAggregateInput
@@ -60905,6 +61067,7 @@ export namespace Prisma {
     toUnitId?: IntWithAggregatesFilter<"UnitConversion"> | number
     conversionRate?: FloatWithAggregatesFilter<"UnitConversion"> | number
     companyId?: IntWithAggregatesFilter<"UnitConversion"> | number
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"UnitConversion"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"UnitConversion"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"UnitConversion"> | Date | string
   }
@@ -61797,6 +61960,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Account"> | string | null
     openingBalance?: FloatFilter<"Account"> | number
     openingBalanceType?: EnumBalanceTypeFilter<"Account"> | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFilter<"Account"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
     parent?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
@@ -61818,6 +61982,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     openingBalance?: SortOrder
     openingBalanceType?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parent?: AccountOrderByWithRelationInput
@@ -61842,6 +62007,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Account"> | string | null
     openingBalance?: FloatFilter<"Account"> | number
     openingBalanceType?: EnumBalanceTypeFilter<"Account"> | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFilter<"Account"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
     parent?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
@@ -61863,6 +62029,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     openingBalance?: SortOrder
     openingBalanceType?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AccountCountOrderByAggregateInput
@@ -61886,6 +62053,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Account"> | string | null
     openingBalance?: FloatWithAggregatesFilter<"Account"> | number
     openingBalanceType?: EnumBalanceTypeWithAggregatesFilter<"Account"> | $Enums.BalanceType
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"Account"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
   }
@@ -62105,6 +62273,7 @@ export namespace Prisma {
     status?: StringFilter<"ItemGroup"> | string
     parentId?: StringNullableFilter<"ItemGroup"> | string | null
     companyId?: IntFilter<"ItemGroup"> | number
+    segment?: EnumBusinessSegmentFilter<"ItemGroup"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"ItemGroup"> | Date | string
     updatedAt?: DateTimeFilter<"ItemGroup"> | Date | string
     parent?: XOR<ItemGroupNullableScalarRelationFilter, ItemGroupWhereInput> | null
@@ -62121,6 +62290,7 @@ export namespace Prisma {
     status?: SortOrder
     parentId?: SortOrderInput | SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parent?: ItemGroupOrderByWithRelationInput
@@ -62140,6 +62310,7 @@ export namespace Prisma {
     status?: StringFilter<"ItemGroup"> | string
     parentId?: StringNullableFilter<"ItemGroup"> | string | null
     companyId?: IntFilter<"ItemGroup"> | number
+    segment?: EnumBusinessSegmentFilter<"ItemGroup"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"ItemGroup"> | Date | string
     updatedAt?: DateTimeFilter<"ItemGroup"> | Date | string
     parent?: XOR<ItemGroupNullableScalarRelationFilter, ItemGroupWhereInput> | null
@@ -62156,6 +62327,7 @@ export namespace Prisma {
     status?: SortOrder
     parentId?: SortOrderInput | SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ItemGroupCountOrderByAggregateInput
@@ -62176,6 +62348,7 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"ItemGroup"> | string
     parentId?: StringNullableWithAggregatesFilter<"ItemGroup"> | string | null
     companyId?: IntWithAggregatesFilter<"ItemGroup"> | number
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"ItemGroup"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"ItemGroup"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ItemGroup"> | Date | string
   }
@@ -62518,6 +62691,7 @@ export namespace Prisma {
     baseUnitId?: IntFilter<"ItemMaster"> | number
     packingUnitId?: StringNullableFilter<"ItemMaster"> | string | null
     companyId?: IntFilter<"ItemMaster"> | number
+    segment?: EnumBusinessSegmentFilter<"ItemMaster"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"ItemMaster"> | Date | string
     updatedAt?: DateTimeFilter<"ItemMaster"> | Date | string
     itemGroup?: XOR<ItemGroupScalarRelationFilter, ItemGroupWhereInput>
@@ -62542,6 +62716,7 @@ export namespace Prisma {
     baseUnitId?: SortOrder
     packingUnitId?: SortOrderInput | SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     itemGroup?: ItemGroupOrderByWithRelationInput
@@ -62569,6 +62744,7 @@ export namespace Prisma {
     baseUnitId?: IntFilter<"ItemMaster"> | number
     packingUnitId?: StringNullableFilter<"ItemMaster"> | string | null
     companyId?: IntFilter<"ItemMaster"> | number
+    segment?: EnumBusinessSegmentFilter<"ItemMaster"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"ItemMaster"> | Date | string
     updatedAt?: DateTimeFilter<"ItemMaster"> | Date | string
     itemGroup?: XOR<ItemGroupScalarRelationFilter, ItemGroupWhereInput>
@@ -62593,6 +62769,7 @@ export namespace Prisma {
     baseUnitId?: SortOrder
     packingUnitId?: SortOrderInput | SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ItemMasterCountOrderByAggregateInput
@@ -62617,6 +62794,7 @@ export namespace Prisma {
     baseUnitId?: IntWithAggregatesFilter<"ItemMaster"> | number
     packingUnitId?: StringNullableWithAggregatesFilter<"ItemMaster"> | string | null
     companyId?: IntWithAggregatesFilter<"ItemMaster"> | number
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"ItemMaster"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"ItemMaster"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ItemMaster"> | Date | string
   }
@@ -62641,6 +62819,7 @@ export namespace Prisma {
     currencyId?: IntNullableFilter<"PurchaseOrder"> | number | null
     exchangeRate?: FloatFilter<"PurchaseOrder"> | number
     companyId?: IntFilter<"PurchaseOrder"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseOrder"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseOrder"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseOrder"> | Date | string
     account?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
@@ -62669,6 +62848,7 @@ export namespace Prisma {
     currencyId?: SortOrderInput | SortOrder
     exchangeRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     account?: AccountOrderByWithRelationInput
@@ -62700,6 +62880,7 @@ export namespace Prisma {
     currencyId?: IntNullableFilter<"PurchaseOrder"> | number | null
     exchangeRate?: FloatFilter<"PurchaseOrder"> | number
     companyId?: IntFilter<"PurchaseOrder"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseOrder"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseOrder"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseOrder"> | Date | string
     account?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
@@ -62728,6 +62909,7 @@ export namespace Prisma {
     currencyId?: SortOrderInput | SortOrder
     exchangeRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PurchaseOrderCountOrderByAggregateInput
@@ -62757,6 +62939,7 @@ export namespace Prisma {
     currencyId?: IntNullableWithAggregatesFilter<"PurchaseOrder"> | number | null
     exchangeRate?: FloatWithAggregatesFilter<"PurchaseOrder"> | number
     companyId?: IntWithAggregatesFilter<"PurchaseOrder"> | number
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"PurchaseOrder"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"PurchaseOrder"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PurchaseOrder"> | Date | string
   }
@@ -62914,6 +63097,7 @@ export namespace Prisma {
     warehouseRefNo?: StringNullableFilter<"GRN"> | string | null
     remarks?: StringNullableFilter<"GRN"> | string | null
     companyId?: IntFilter<"GRN"> | number
+    segment?: EnumBusinessSegmentFilter<"GRN"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"GRN"> | Date | string
     updatedAt?: DateTimeFilter<"GRN"> | Date | string
     purchaseOrder?: XOR<PurchaseOrderScalarRelationFilter, PurchaseOrderWhereInput>
@@ -62931,6 +63115,7 @@ export namespace Prisma {
     warehouseRefNo?: SortOrderInput | SortOrder
     remarks?: SortOrderInput | SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     purchaseOrder?: PurchaseOrderOrderByWithRelationInput
@@ -62951,6 +63136,7 @@ export namespace Prisma {
     warehouseRefNo?: StringNullableFilter<"GRN"> | string | null
     remarks?: StringNullableFilter<"GRN"> | string | null
     companyId?: IntFilter<"GRN"> | number
+    segment?: EnumBusinessSegmentFilter<"GRN"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"GRN"> | Date | string
     updatedAt?: DateTimeFilter<"GRN"> | Date | string
     purchaseOrder?: XOR<PurchaseOrderScalarRelationFilter, PurchaseOrderWhereInput>
@@ -62968,6 +63154,7 @@ export namespace Prisma {
     warehouseRefNo?: SortOrderInput | SortOrder
     remarks?: SortOrderInput | SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: GRNCountOrderByAggregateInput
@@ -62989,6 +63176,7 @@ export namespace Prisma {
     warehouseRefNo?: StringNullableWithAggregatesFilter<"GRN"> | string | null
     remarks?: StringNullableWithAggregatesFilter<"GRN"> | string | null
     companyId?: IntWithAggregatesFilter<"GRN"> | number
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"GRN"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"GRN"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"GRN"> | Date | string
   }
@@ -63138,6 +63326,7 @@ export namespace Prisma {
     totalAmount?: FloatFilter<"PurchaseInvoice"> | number
     status?: StringFilter<"PurchaseInvoice"> | string
     companyId?: IntFilter<"PurchaseInvoice"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseInvoice"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
     purchaseOrder?: XOR<PurchaseOrderNullableScalarRelationFilter, PurchaseOrderWhereInput> | null
@@ -63158,6 +63347,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     purchaseOrder?: PurchaseOrderOrderByWithRelationInput
@@ -63181,6 +63371,7 @@ export namespace Prisma {
     totalAmount?: FloatFilter<"PurchaseInvoice"> | number
     status?: StringFilter<"PurchaseInvoice"> | string
     companyId?: IntFilter<"PurchaseInvoice"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseInvoice"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
     purchaseOrder?: XOR<PurchaseOrderNullableScalarRelationFilter, PurchaseOrderWhereInput> | null
@@ -63201,6 +63392,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PurchaseInvoiceCountOrderByAggregateInput
@@ -63224,6 +63416,7 @@ export namespace Prisma {
     totalAmount?: FloatWithAggregatesFilter<"PurchaseInvoice"> | number
     status?: StringWithAggregatesFilter<"PurchaseInvoice"> | string
     companyId?: IntWithAggregatesFilter<"PurchaseInvoice"> | number
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"PurchaseInvoice"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"PurchaseInvoice"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PurchaseInvoice"> | Date | string
   }
@@ -63365,6 +63558,7 @@ export namespace Prisma {
     totalAmount?: FloatFilter<"PurchaseReturn"> | number
     status?: StringFilter<"PurchaseReturn"> | string
     companyId?: IntFilter<"PurchaseReturn"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseReturn"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseReturn"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseReturn"> | Date | string
     purchaseInvoice?: XOR<PurchaseInvoiceNullableScalarRelationFilter, PurchaseInvoiceWhereInput> | null
@@ -63385,6 +63579,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     purchaseInvoice?: PurchaseInvoiceOrderByWithRelationInput
@@ -63408,6 +63603,7 @@ export namespace Prisma {
     totalAmount?: FloatFilter<"PurchaseReturn"> | number
     status?: StringFilter<"PurchaseReturn"> | string
     companyId?: IntFilter<"PurchaseReturn"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseReturn"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseReturn"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseReturn"> | Date | string
     purchaseInvoice?: XOR<PurchaseInvoiceNullableScalarRelationFilter, PurchaseInvoiceWhereInput> | null
@@ -63428,6 +63624,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PurchaseReturnCountOrderByAggregateInput
@@ -63451,6 +63648,7 @@ export namespace Prisma {
     totalAmount?: FloatWithAggregatesFilter<"PurchaseReturn"> | number
     status?: StringWithAggregatesFilter<"PurchaseReturn"> | string
     companyId?: IntWithAggregatesFilter<"PurchaseReturn"> | number
+    segment?: EnumBusinessSegmentWithAggregatesFilter<"PurchaseReturn"> | $Enums.BusinessSegment
     createdAt?: DateTimeWithAggregatesFilter<"PurchaseReturn"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PurchaseReturn"> | Date | string
   }
@@ -64197,6 +64395,7 @@ export namespace Prisma {
     contactPerson?: string | null
     contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     userWarehouses?: UserWarehouseCreateNestedManyWithoutWarehouseInput
@@ -64210,6 +64409,7 @@ export namespace Prisma {
     contactPerson?: string | null
     contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     userWarehouses?: UserWarehouseUncheckedCreateNestedManyWithoutWarehouseInput
@@ -64222,6 +64422,7 @@ export namespace Prisma {
     contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userWarehouses?: UserWarehouseUpdateManyWithoutWarehouseNestedInput
@@ -64235,6 +64436,7 @@ export namespace Prisma {
     contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userWarehouses?: UserWarehouseUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -64248,6 +64450,7 @@ export namespace Prisma {
     contactPerson?: string | null
     contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -64258,6 +64461,7 @@ export namespace Prisma {
     contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64269,6 +64473,7 @@ export namespace Prisma {
     contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64434,6 +64639,7 @@ export namespace Prisma {
 
   export type UnitConversionCreateInput = {
     conversionRate: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutUnitConversionsInput
@@ -64447,12 +64653,14 @@ export namespace Prisma {
     toUnitId: number
     conversionRate: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type UnitConversionUpdateInput = {
     conversionRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutUnitConversionsNestedInput
@@ -64466,6 +64674,7 @@ export namespace Prisma {
     toUnitId?: IntFieldUpdateOperationsInput | number
     conversionRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64476,12 +64685,14 @@ export namespace Prisma {
     toUnitId: number
     conversionRate: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type UnitConversionUpdateManyMutationInput = {
     conversionRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64492,6 +64703,7 @@ export namespace Prisma {
     toUnitId?: IntFieldUpdateOperationsInput | number
     conversionRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65439,6 +65651,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: AccountCreateNestedOneWithoutChildrenInput
@@ -65460,6 +65673,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AccountUncheckedCreateNestedManyWithoutParentInput
@@ -65478,6 +65692,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: AccountUpdateOneWithoutChildrenNestedInput
@@ -65499,6 +65714,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AccountUncheckedUpdateManyWithoutParentNestedInput
@@ -65519,6 +65735,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65532,6 +65749,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65547,6 +65765,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65759,6 +65978,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: ItemGroupCreateNestedOneWithoutChildrenInput
@@ -65775,6 +65995,7 @@ export namespace Prisma {
     status?: string
     parentId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: ItemGroupUncheckedCreateNestedManyWithoutParentInput
@@ -65787,6 +66008,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: ItemGroupUpdateOneWithoutChildrenNestedInput
@@ -65803,6 +66025,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ItemGroupUncheckedUpdateManyWithoutParentNestedInput
@@ -65817,6 +66040,7 @@ export namespace Prisma {
     status?: string
     parentId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -65827,6 +66051,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -65839,6 +66064,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66201,6 +66427,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
@@ -66225,6 +66452,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -66241,6 +66469,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
@@ -66265,6 +66494,7 @@ export namespace Prisma {
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -66285,6 +66515,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -66297,6 +66528,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66313,6 +66545,7 @@ export namespace Prisma {
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66330,6 +66563,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
@@ -66358,6 +66592,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
@@ -66378,6 +66613,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
@@ -66406,6 +66642,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
@@ -66430,6 +66667,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -66447,6 +66685,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66468,6 +66707,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66620,6 +66860,7 @@ export namespace Prisma {
     lotNo?: string | null
     warehouseRefNo?: string | null
     remarks?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder: PurchaseOrderCreateNestedOneWithoutGrnsInput
@@ -66637,6 +66878,7 @@ export namespace Prisma {
     warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: GRNItemUncheckedCreateNestedManyWithoutGrnInput
@@ -66650,6 +66892,7 @@ export namespace Prisma {
     lotNo?: NullableStringFieldUpdateOperationsInput | string | null
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutGrnsNestedInput
@@ -66667,6 +66910,7 @@ export namespace Prisma {
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: GRNItemUncheckedUpdateManyWithoutGrnNestedInput
@@ -66682,6 +66926,7 @@ export namespace Prisma {
     warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -66693,6 +66938,7 @@ export namespace Prisma {
     lotNo?: NullableStringFieldUpdateOperationsInput | string | null
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66706,6 +66952,7 @@ export namespace Prisma {
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66840,6 +67087,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder?: PurchaseOrderCreateNestedOneWithoutInvoicesInput
@@ -66860,6 +67108,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
@@ -66874,6 +67123,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneWithoutInvoicesNestedInput
@@ -66894,6 +67144,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -66911,6 +67162,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -66923,6 +67175,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -66938,6 +67191,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -67060,6 +67314,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseInvoice?: PurchaseInvoiceCreateNestedOneWithoutPurchaseReturnsInput
@@ -67080,6 +67335,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseReturnItemUncheckedCreateNestedManyWithoutReturnInput
@@ -67092,6 +67348,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseInvoice?: PurchaseInvoiceUpdateOneWithoutPurchaseReturnsNestedInput
@@ -67112,6 +67369,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseReturnItemUncheckedUpdateManyWithoutReturnNestedInput
@@ -67128,6 +67386,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -67139,6 +67398,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -67154,6 +67414,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -67955,6 +68216,13 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type EnumBusinessSegmentFilter<$PrismaModel = never> = {
+    equals?: $Enums.BusinessSegment | EnumBusinessSegmentFieldRefInput<$PrismaModel>
+    in?: $Enums.BusinessSegment[] | ListEnumBusinessSegmentFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BusinessSegment[] | ListEnumBusinessSegmentFieldRefInput<$PrismaModel>
+    not?: NestedEnumBusinessSegmentFilter<$PrismaModel> | $Enums.BusinessSegment
+  }
+
   export type PurchaseOrderListRelationFilter = {
     every?: PurchaseOrderWhereInput
     some?: PurchaseOrderWhereInput
@@ -67972,6 +68240,7 @@ export namespace Prisma {
     contactPerson?: SortOrder
     contactNumbers?: SortOrder
     status?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67986,6 +68255,7 @@ export namespace Prisma {
     location?: SortOrder
     contactPerson?: SortOrder
     status?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -67996,12 +68266,23 @@ export namespace Prisma {
     location?: SortOrder
     contactPerson?: SortOrder
     status?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type WarehouseSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type EnumBusinessSegmentWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BusinessSegment | EnumBusinessSegmentFieldRefInput<$PrismaModel>
+    in?: $Enums.BusinessSegment[] | ListEnumBusinessSegmentFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BusinessSegment[] | ListEnumBusinessSegmentFieldRefInput<$PrismaModel>
+    not?: NestedEnumBusinessSegmentWithAggregatesFilter<$PrismaModel> | $Enums.BusinessSegment
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBusinessSegmentFilter<$PrismaModel>
+    _max?: NestedEnumBusinessSegmentFilter<$PrismaModel>
   }
 
   export type WarehouseScalarRelationFilter = {
@@ -68193,6 +68474,7 @@ export namespace Prisma {
     toUnitId?: SortOrder
     conversionRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68211,6 +68493,7 @@ export namespace Prisma {
     toUnitId?: SortOrder
     conversionRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68221,6 +68504,7 @@ export namespace Prisma {
     toUnitId?: SortOrder
     conversionRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68973,6 +69257,7 @@ export namespace Prisma {
     description?: SortOrder
     openingBalance?: SortOrder
     openingBalanceType?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68995,6 +69280,7 @@ export namespace Prisma {
     description?: SortOrder
     openingBalance?: SortOrder
     openingBalanceType?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69010,6 +69296,7 @@ export namespace Prisma {
     description?: SortOrder
     openingBalance?: SortOrder
     openingBalanceType?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69212,6 +69499,7 @@ export namespace Prisma {
     status?: SortOrder
     parentId?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69228,6 +69516,7 @@ export namespace Prisma {
     status?: SortOrder
     parentId?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69240,6 +69529,7 @@ export namespace Prisma {
     status?: SortOrder
     parentId?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69428,6 +69718,7 @@ export namespace Prisma {
     baseUnitId?: SortOrder
     packingUnitId?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69449,6 +69740,7 @@ export namespace Prisma {
     baseUnitId?: SortOrder
     packingUnitId?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69465,6 +69757,7 @@ export namespace Prisma {
     baseUnitId?: SortOrder
     packingUnitId?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69526,6 +69819,7 @@ export namespace Prisma {
     currencyId?: SortOrder
     exchangeRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69556,6 +69850,7 @@ export namespace Prisma {
     currencyId?: SortOrder
     exchangeRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69577,6 +69872,7 @@ export namespace Prisma {
     currencyId?: SortOrder
     exchangeRate?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69758,6 +70054,7 @@ export namespace Prisma {
     warehouseRefNo?: SortOrder
     remarks?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69775,6 +70072,7 @@ export namespace Prisma {
     warehouseRefNo?: SortOrder
     remarks?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69788,6 +70086,7 @@ export namespace Prisma {
     warehouseRefNo?: SortOrder
     remarks?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69890,6 +70189,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69911,6 +70211,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -69926,6 +70227,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -70042,6 +70344,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -70063,6 +70366,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -70078,6 +70382,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     status?: SortOrder
     companyId?: SortOrder
+    segment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -70829,6 +71134,10 @@ export namespace Prisma {
   export type WarehouseUpdatecontactNumbersInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type EnumBusinessSegmentFieldUpdateOperationsInput = {
+    set?: $Enums.BusinessSegment
   }
 
   export type UserWarehouseUpdateManyWithoutWarehouseNestedInput = {
@@ -74772,6 +75081,23 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedEnumBusinessSegmentFilter<$PrismaModel = never> = {
+    equals?: $Enums.BusinessSegment | EnumBusinessSegmentFieldRefInput<$PrismaModel>
+    in?: $Enums.BusinessSegment[] | ListEnumBusinessSegmentFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BusinessSegment[] | ListEnumBusinessSegmentFieldRefInput<$PrismaModel>
+    not?: NestedEnumBusinessSegmentFilter<$PrismaModel> | $Enums.BusinessSegment
+  }
+
+  export type NestedEnumBusinessSegmentWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BusinessSegment | EnumBusinessSegmentFieldRefInput<$PrismaModel>
+    in?: $Enums.BusinessSegment[] | ListEnumBusinessSegmentFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BusinessSegment[] | ListEnumBusinessSegmentFieldRefInput<$PrismaModel>
+    not?: NestedEnumBusinessSegmentWithAggregatesFilter<$PrismaModel> | $Enums.BusinessSegment
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBusinessSegmentFilter<$PrismaModel>
+    _max?: NestedEnumBusinessSegmentFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -76276,6 +76602,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
@@ -76302,6 +76629,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
@@ -76371,6 +76699,7 @@ export namespace Prisma {
     currencyId?: IntNullableFilter<"PurchaseOrder"> | number | null
     exchangeRate?: FloatFilter<"PurchaseOrder"> | number
     companyId?: IntFilter<"PurchaseOrder"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseOrder"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseOrder"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseOrder"> | Date | string
   }
@@ -76425,6 +76754,7 @@ export namespace Prisma {
     contactPerson?: string | null
     contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrders?: PurchaseOrderCreateNestedManyWithoutWarehouseInput
@@ -76437,6 +76767,7 @@ export namespace Prisma {
     contactPerson?: string | null
     contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrders?: PurchaseOrderUncheckedCreateNestedManyWithoutWarehouseInput
@@ -76514,6 +76845,7 @@ export namespace Prisma {
     contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrders?: PurchaseOrderUpdateManyWithoutWarehouseNestedInput
@@ -76526,6 +76858,7 @@ export namespace Prisma {
     contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrders?: PurchaseOrderUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -76587,6 +76920,7 @@ export namespace Prisma {
 
   export type UnitConversionCreateWithoutFromUnitInput = {
     conversionRate: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutUnitConversionsInput
@@ -76598,6 +76932,7 @@ export namespace Prisma {
     toUnitId: number
     conversionRate: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -76614,6 +76949,7 @@ export namespace Prisma {
 
   export type UnitConversionCreateWithoutToUnitInput = {
     conversionRate: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutUnitConversionsInput
@@ -76625,6 +76961,7 @@ export namespace Prisma {
     fromUnitId: number
     conversionRate: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -76680,6 +77017,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
@@ -76702,6 +77040,7 @@ export namespace Prisma {
     itemGroupId: string
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -76987,6 +77326,7 @@ export namespace Prisma {
     toUnitId?: IntFilter<"UnitConversion"> | number
     conversionRate?: FloatFilter<"UnitConversion"> | number
     companyId?: IntFilter<"UnitConversion"> | number
+    segment?: EnumBusinessSegmentFilter<"UnitConversion"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"UnitConversion"> | Date | string
     updatedAt?: DateTimeFilter<"UnitConversion"> | Date | string
   }
@@ -77069,6 +77409,7 @@ export namespace Prisma {
     baseUnitId?: IntFilter<"ItemMaster"> | number
     packingUnitId?: StringNullableFilter<"ItemMaster"> | string | null
     companyId?: IntFilter<"ItemMaster"> | number
+    segment?: EnumBusinessSegmentFilter<"ItemMaster"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"ItemMaster"> | Date | string
     updatedAt?: DateTimeFilter<"ItemMaster"> | Date | string
   }
@@ -77529,6 +77870,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: ItemGroupCreateNestedOneWithoutChildrenInput
@@ -77543,6 +77885,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     parentId?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: ItemGroupUncheckedCreateNestedManyWithoutParentInput
@@ -77720,6 +78063,7 @@ export namespace Prisma {
 
   export type UnitConversionCreateWithoutCompanyInput = {
     conversionRate: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     fromUnit: UnitCreateNestedOneWithoutConversionsFromInput
@@ -77731,6 +78075,7 @@ export namespace Prisma {
     fromUnitId: number
     toUnitId: number
     conversionRate: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -77753,6 +78098,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
@@ -77775,6 +78121,7 @@ export namespace Prisma {
     itemGroupId: string
     baseUnitId: number
     packingUnitId?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -77806,6 +78153,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
@@ -77832,6 +78180,7 @@ export namespace Prisma {
     totalAmount?: number
     currencyId?: number | null
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
@@ -77856,6 +78205,7 @@ export namespace Prisma {
     lotNo?: string | null
     warehouseRefNo?: string | null
     remarks?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder: PurchaseOrderCreateNestedOneWithoutGrnsInput
@@ -77871,6 +78221,7 @@ export namespace Prisma {
     lotNo?: string | null
     warehouseRefNo?: string | null
     remarks?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: GRNItemUncheckedCreateNestedManyWithoutGrnInput
@@ -77895,6 +78246,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder?: PurchaseOrderCreateNestedOneWithoutInvoicesInput
@@ -77913,6 +78265,7 @@ export namespace Prisma {
     accountId?: number | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
@@ -77936,6 +78289,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseInvoice?: PurchaseInvoiceCreateNestedOneWithoutPurchaseReturnsInput
@@ -77954,6 +78308,7 @@ export namespace Prisma {
     accountId?: number | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseReturnItemUncheckedCreateNestedManyWithoutReturnInput
@@ -78032,6 +78387,7 @@ export namespace Prisma {
     status?: StringFilter<"ItemGroup"> | string
     parentId?: StringNullableFilter<"ItemGroup"> | string | null
     companyId?: IntFilter<"ItemGroup"> | number
+    segment?: EnumBusinessSegmentFilter<"ItemGroup"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"ItemGroup"> | Date | string
     updatedAt?: DateTimeFilter<"ItemGroup"> | Date | string
   }
@@ -78232,6 +78588,7 @@ export namespace Prisma {
     warehouseRefNo?: StringNullableFilter<"GRN"> | string | null
     remarks?: StringNullableFilter<"GRN"> | string | null
     companyId?: IntFilter<"GRN"> | number
+    segment?: EnumBusinessSegmentFilter<"GRN"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"GRN"> | Date | string
     updatedAt?: DateTimeFilter<"GRN"> | Date | string
   }
@@ -78266,6 +78623,7 @@ export namespace Prisma {
     totalAmount?: FloatFilter<"PurchaseInvoice"> | number
     status?: StringFilter<"PurchaseInvoice"> | string
     companyId?: IntFilter<"PurchaseInvoice"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseInvoice"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseInvoice"> | Date | string
   }
@@ -78300,6 +78658,7 @@ export namespace Prisma {
     totalAmount?: FloatFilter<"PurchaseReturn"> | number
     status?: StringFilter<"PurchaseReturn"> | string
     companyId?: IntFilter<"PurchaseReturn"> | number
+    segment?: EnumBusinessSegmentFilter<"PurchaseReturn"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"PurchaseReturn"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseReturn"> | Date | string
   }
@@ -78414,6 +78773,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
@@ -78440,6 +78800,7 @@ export namespace Prisma {
     totalAmount?: number
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
@@ -78929,6 +79290,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: AccountCreateNestedOneWithoutChildrenInput
@@ -78949,6 +79311,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     journalLines?: JournalLineUncheckedCreateNestedManyWithoutAccountInput
@@ -78971,6 +79334,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AccountCreateNestedManyWithoutParentInput
@@ -78990,6 +79354,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AccountUncheckedCreateNestedManyWithoutParentInput
@@ -79047,6 +79412,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     warehouse?: WarehouseCreateNestedOneWithoutPurchaseOrdersInput
@@ -79073,6 +79439,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
@@ -79098,6 +79465,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder?: PurchaseOrderCreateNestedOneWithoutInvoicesInput
@@ -79116,6 +79484,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
@@ -79139,6 +79508,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseInvoice?: PurchaseInvoiceCreateNestedOneWithoutPurchaseReturnsInput
@@ -79157,6 +79527,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseReturnItemUncheckedCreateNestedManyWithoutReturnInput
@@ -79192,6 +79563,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: AccountUpdateOneWithoutChildrenNestedInput
@@ -79212,6 +79584,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     journalLines?: JournalLineUncheckedUpdateManyWithoutAccountNestedInput
@@ -79250,6 +79623,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Account"> | string | null
     openingBalance?: FloatFilter<"Account"> | number
     openingBalanceType?: EnumBalanceTypeFilter<"Account"> | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFilter<"Account"> | $Enums.BusinessSegment
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
@@ -79438,6 +79812,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: AccountCreateNestedOneWithoutChildrenInput
@@ -79458,6 +79833,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AccountUncheckedCreateNestedManyWithoutParentInput
@@ -79521,6 +79897,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: AccountUpdateOneWithoutChildrenNestedInput
@@ -79541,6 +79918,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AccountUncheckedUpdateManyWithoutParentNestedInput
@@ -79591,6 +79969,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: ItemGroupCreateNestedOneWithoutChildrenInput
@@ -79606,6 +79985,7 @@ export namespace Prisma {
     status?: string
     parentId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemMasters?: ItemMasterUncheckedCreateNestedManyWithoutItemGroupInput
@@ -79622,6 +80002,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: ItemGroupCreateNestedManyWithoutParentInput
@@ -79636,6 +80017,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: ItemGroupUncheckedCreateNestedManyWithoutParentInput
@@ -79714,6 +80096,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     baseUnit: UnitCreateNestedOneWithoutItemMastersInput
@@ -79736,6 +80119,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -79771,6 +80155,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: ItemGroupUpdateOneWithoutChildrenNestedInput
@@ -79786,6 +80171,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemMasters?: ItemMasterUncheckedUpdateManyWithoutItemGroupNestedInput
@@ -81025,6 +81411,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
@@ -81047,6 +81434,7 @@ export namespace Prisma {
     itemGroupId: string
     baseUnitId: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -81277,6 +81665,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: ItemGroupCreateNestedOneWithoutChildrenInput
@@ -81292,6 +81681,7 @@ export namespace Prisma {
     status?: string
     parentId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: ItemGroupUncheckedCreateNestedManyWithoutParentInput
@@ -81630,6 +82020,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: ItemGroupUpdateOneWithoutChildrenNestedInput
@@ -81645,6 +82036,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ItemGroupUncheckedUpdateManyWithoutParentNestedInput
@@ -81870,6 +82262,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: AccountCreateNestedOneWithoutChildrenInput
@@ -81890,6 +82283,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AccountUncheckedCreateNestedManyWithoutParentInput
@@ -81909,6 +82303,7 @@ export namespace Prisma {
     contactPerson?: string | null
     contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     userWarehouses?: UserWarehouseCreateNestedManyWithoutWarehouseInput
@@ -81921,6 +82316,7 @@ export namespace Prisma {
     contactPerson?: string | null
     contactNumbers?: WarehouseCreatecontactNumbersInput | string[]
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     userWarehouses?: UserWarehouseUncheckedCreateNestedManyWithoutWarehouseInput
@@ -82068,6 +82464,7 @@ export namespace Prisma {
     lotNo?: string | null
     warehouseRefNo?: string | null
     remarks?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutGrnsInput
@@ -82083,6 +82480,7 @@ export namespace Prisma {
     warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: GRNItemUncheckedCreateNestedManyWithoutGrnInput
@@ -82107,6 +82505,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     account?: AccountCreateNestedOneWithoutPurchaseInvoicesInput
@@ -82125,6 +82524,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
@@ -82161,6 +82561,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: AccountUpdateOneWithoutChildrenNestedInput
@@ -82181,6 +82582,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AccountUncheckedUpdateManyWithoutParentNestedInput
@@ -82206,6 +82608,7 @@ export namespace Prisma {
     contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userWarehouses?: UserWarehouseUpdateManyWithoutWarehouseNestedInput
@@ -82218,6 +82621,7 @@ export namespace Prisma {
     contactPerson?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumbers?: WarehouseUpdatecontactNumbersInput | string[]
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userWarehouses?: UserWarehouseUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -82374,6 +82778,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
@@ -82401,6 +82806,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     grns?: GRNUncheckedCreateNestedManyWithoutPurchaseOrderInput
@@ -82420,6 +82826,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
@@ -82443,6 +82850,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     grnItems?: GRNItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -82737,6 +83145,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
@@ -82764,6 +83173,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grns?: GRNUncheckedUpdateManyWithoutPurchaseOrderNestedInput
@@ -82789,6 +83199,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
@@ -82812,6 +83223,7 @@ export namespace Prisma {
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grnItems?: GRNItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -83064,6 +83476,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
@@ -83091,6 +83504,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
@@ -83209,6 +83623,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseInvoice?: PurchaseInvoiceCreateNestedOneWithoutPurchaseReturnsInput
@@ -83227,6 +83642,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseReturnItemUncheckedCreateNestedManyWithoutReturnInput
@@ -83266,6 +83682,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
@@ -83293,6 +83710,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
@@ -83398,6 +83816,7 @@ export namespace Prisma {
     lotNo?: string | null
     warehouseRefNo?: string | null
     remarks?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder: PurchaseOrderCreateNestedOneWithoutGrnsInput
@@ -83414,6 +83833,7 @@ export namespace Prisma {
     warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseReturns?: PurchaseReturnUncheckedCreateNestedManyWithoutGrnInput
@@ -83479,6 +83899,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
@@ -83502,6 +83923,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -83744,6 +84166,7 @@ export namespace Prisma {
     lotNo?: NullableStringFieldUpdateOperationsInput | string | null
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutGrnsNestedInput
@@ -83760,6 +84183,7 @@ export namespace Prisma {
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseReturns?: PurchaseReturnUncheckedUpdateManyWithoutGrnNestedInput
@@ -83837,6 +84261,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
@@ -83860,6 +84285,7 @@ export namespace Prisma {
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -84096,6 +84522,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     account?: AccountCreateNestedOneWithoutPurchaseOrdersInput
@@ -84123,6 +84550,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
@@ -84143,6 +84571,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: AccountCreateNestedOneWithoutChildrenInput
@@ -84163,6 +84592,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AccountUncheckedCreateNestedManyWithoutParentInput
@@ -84279,6 +84709,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     grn?: GRNCreateNestedOneWithoutPurchaseReturnsInput
@@ -84297,6 +84728,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseReturnItemUncheckedCreateNestedManyWithoutReturnInput
@@ -84336,6 +84768,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
@@ -84363,6 +84796,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
@@ -84389,6 +84823,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: AccountUpdateOneWithoutChildrenNestedInput
@@ -84409,6 +84844,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AccountUncheckedUpdateManyWithoutParentNestedInput
@@ -84517,6 +84953,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder?: PurchaseOrderCreateNestedOneWithoutInvoicesInput
@@ -84536,6 +84973,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseReturns?: PurchaseReturnUncheckedCreateNestedManyWithoutPurchaseInvoiceInput
@@ -84642,6 +85080,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
@@ -84665,6 +85104,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -84835,6 +85275,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneWithoutInvoicesNestedInput
@@ -84854,6 +85295,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseReturns?: PurchaseReturnUncheckedUpdateManyWithoutPurchaseInvoiceNestedInput
@@ -84978,6 +85420,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
@@ -85001,6 +85444,7 @@ export namespace Prisma {
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -85179,6 +85623,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder?: PurchaseOrderCreateNestedOneWithoutInvoicesInput
@@ -85198,6 +85643,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: PurchaseInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
@@ -85215,6 +85661,7 @@ export namespace Prisma {
     lotNo?: string | null
     warehouseRefNo?: string | null
     remarks?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrder: PurchaseOrderCreateNestedOneWithoutGrnsInput
@@ -85231,6 +85678,7 @@ export namespace Prisma {
     warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: GRNItemUncheckedCreateNestedManyWithoutGrnInput
@@ -85250,6 +85698,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     parent?: AccountCreateNestedOneWithoutChildrenInput
@@ -85270,6 +85719,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: AccountUncheckedCreateNestedManyWithoutParentInput
@@ -85398,6 +85848,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneWithoutInvoicesNestedInput
@@ -85417,6 +85868,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -85440,6 +85892,7 @@ export namespace Prisma {
     lotNo?: NullableStringFieldUpdateOperationsInput | string | null
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutGrnsNestedInput
@@ -85456,6 +85909,7 @@ export namespace Prisma {
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: GRNItemUncheckedUpdateManyWithoutGrnNestedInput
@@ -85481,6 +85935,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: AccountUpdateOneWithoutChildrenNestedInput
@@ -85501,6 +85956,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AccountUncheckedUpdateManyWithoutParentNestedInput
@@ -85592,6 +86048,7 @@ export namespace Prisma {
     remarks?: string | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseInvoice?: PurchaseInvoiceCreateNestedOneWithoutPurchaseReturnsInput
@@ -85611,6 +86068,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -85628,6 +86086,7 @@ export namespace Prisma {
     status?: string
     hsCode?: string | null
     imageUrl?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     itemGroup: ItemGroupCreateNestedOneWithoutItemMastersInput
@@ -85651,6 +86110,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedCreateNestedManyWithoutItemMasterInput
@@ -85820,6 +86280,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseInvoice?: PurchaseInvoiceUpdateOneWithoutPurchaseReturnsNestedInput
@@ -85839,6 +86300,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -85862,6 +86324,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
@@ -85885,6 +86348,7 @@ export namespace Prisma {
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -86382,6 +86846,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -86414,6 +86879,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
@@ -86440,6 +86906,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
@@ -86463,6 +86930,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86472,6 +86940,7 @@ export namespace Prisma {
     toUnitId: number
     conversionRate: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -86481,6 +86950,7 @@ export namespace Prisma {
     fromUnitId: number
     conversionRate: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -86507,6 +86977,7 @@ export namespace Prisma {
     itemGroupId: string
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -86581,6 +87052,7 @@ export namespace Prisma {
 
   export type UnitConversionUpdateWithoutFromUnitInput = {
     conversionRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutUnitConversionsNestedInput
@@ -86592,6 +87064,7 @@ export namespace Prisma {
     toUnitId?: IntFieldUpdateOperationsInput | number
     conversionRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86601,12 +87074,14 @@ export namespace Prisma {
     toUnitId?: IntFieldUpdateOperationsInput | number
     conversionRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UnitConversionUpdateWithoutToUnitInput = {
     conversionRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutUnitConversionsNestedInput
@@ -86618,6 +87093,7 @@ export namespace Prisma {
     fromUnitId?: IntFieldUpdateOperationsInput | number
     conversionRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86627,6 +87103,7 @@ export namespace Prisma {
     fromUnitId?: IntFieldUpdateOperationsInput | number
     conversionRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86673,6 +87150,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
@@ -86695,6 +87173,7 @@ export namespace Prisma {
     itemGroupId?: StringFieldUpdateOperationsInput | string
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -86714,6 +87193,7 @@ export namespace Prisma {
     itemGroupId?: StringFieldUpdateOperationsInput | string
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -86935,6 +87415,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     parentId?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -86984,6 +87465,7 @@ export namespace Prisma {
     fromUnitId: number
     toUnitId: number
     conversionRate: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -86999,6 +87481,7 @@ export namespace Prisma {
     itemGroupId: string
     baseUnitId: number
     packingUnitId?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87019,6 +87502,7 @@ export namespace Prisma {
     totalAmount?: number
     currencyId?: number | null
     exchangeRate?: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87031,6 +87515,7 @@ export namespace Prisma {
     lotNo?: string | null
     warehouseRefNo?: string | null
     remarks?: string | null
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87045,6 +87530,7 @@ export namespace Prisma {
     accountId?: number | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87059,6 +87545,7 @@ export namespace Prisma {
     accountId?: number | null
     totalAmount?: number
     status?: string
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87079,6 +87566,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: ItemGroupUpdateOneWithoutChildrenNestedInput
@@ -87093,6 +87581,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ItemGroupUncheckedUpdateManyWithoutParentNestedInput
@@ -87106,6 +87595,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87271,6 +87761,7 @@ export namespace Prisma {
 
   export type UnitConversionUpdateWithoutCompanyInput = {
     conversionRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fromUnit?: UnitUpdateOneRequiredWithoutConversionsFromNestedInput
@@ -87282,6 +87773,7 @@ export namespace Prisma {
     fromUnitId?: IntFieldUpdateOperationsInput | number
     toUnitId?: IntFieldUpdateOperationsInput | number
     conversionRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87291,6 +87783,7 @@ export namespace Prisma {
     fromUnitId?: IntFieldUpdateOperationsInput | number
     toUnitId?: IntFieldUpdateOperationsInput | number
     conversionRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87303,6 +87796,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
@@ -87325,6 +87819,7 @@ export namespace Prisma {
     itemGroupId?: StringFieldUpdateOperationsInput | string
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -87344,6 +87839,7 @@ export namespace Prisma {
     itemGroupId?: StringFieldUpdateOperationsInput | string
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87361,6 +87857,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
@@ -87387,6 +87884,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
@@ -87410,6 +87908,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87421,6 +87920,7 @@ export namespace Prisma {
     lotNo?: NullableStringFieldUpdateOperationsInput | string | null
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneRequiredWithoutGrnsNestedInput
@@ -87436,6 +87936,7 @@ export namespace Prisma {
     lotNo?: NullableStringFieldUpdateOperationsInput | string | null
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: GRNItemUncheckedUpdateManyWithoutGrnNestedInput
@@ -87450,6 +87951,7 @@ export namespace Prisma {
     lotNo?: NullableStringFieldUpdateOperationsInput | string | null
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87462,6 +87964,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneWithoutInvoicesNestedInput
@@ -87480,6 +87983,7 @@ export namespace Prisma {
     accountId?: NullableIntFieldUpdateOperationsInput | number | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -87496,6 +88000,7 @@ export namespace Prisma {
     accountId?: NullableIntFieldUpdateOperationsInput | number | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87507,6 +88012,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseInvoice?: PurchaseInvoiceUpdateOneWithoutPurchaseReturnsNestedInput
@@ -87525,6 +88031,7 @@ export namespace Prisma {
     accountId?: NullableIntFieldUpdateOperationsInput | number | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseReturnItemUncheckedUpdateManyWithoutReturnNestedInput
@@ -87540,6 +88047,7 @@ export namespace Prisma {
     accountId?: NullableIntFieldUpdateOperationsInput | number | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87645,6 +88153,7 @@ export namespace Prisma {
     totalAmount?: number
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87662,6 +88171,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutPurchaseOrdersNestedInput
@@ -87688,6 +88198,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
@@ -87711,6 +88222,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -87880,6 +88392,7 @@ export namespace Prisma {
     description?: string | null
     openingBalance?: number
     openingBalanceType?: $Enums.BalanceType
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87908,6 +88421,7 @@ export namespace Prisma {
     currencyId?: number | null
     exchangeRate?: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87922,6 +88436,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87936,6 +88451,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -87949,6 +88465,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AccountUpdateManyWithoutParentNestedInput
@@ -87968,6 +88485,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: AccountUncheckedUpdateManyWithoutParentNestedInput
@@ -87987,6 +88505,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     openingBalance?: FloatFieldUpdateOperationsInput | number
     openingBalanceType?: EnumBalanceTypeFieldUpdateOperationsInput | $Enums.BalanceType
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -88027,6 +88546,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     exchangeRate?: FloatFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     warehouse?: WarehouseUpdateOneWithoutPurchaseOrdersNestedInput
@@ -88053,6 +88573,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
@@ -88076,6 +88597,7 @@ export namespace Prisma {
     currencyId?: NullableIntFieldUpdateOperationsInput | number | null
     exchangeRate?: FloatFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -88088,6 +88610,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrder?: PurchaseOrderUpdateOneWithoutInvoicesNestedInput
@@ -88106,6 +88629,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -88122,6 +88646,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -88133,6 +88658,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseInvoice?: PurchaseInvoiceUpdateOneWithoutPurchaseReturnsNestedInput
@@ -88151,6 +88677,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseReturnItemUncheckedUpdateManyWithoutReturnNestedInput
@@ -88166,6 +88693,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -88208,6 +88736,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -88223,6 +88752,7 @@ export namespace Prisma {
     baseUnitId: number
     packingUnitId?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -88233,6 +88763,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ItemGroupUpdateManyWithoutParentNestedInput
@@ -88247,6 +88778,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ItemGroupUncheckedUpdateManyWithoutParentNestedInput
@@ -88260,6 +88792,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -88272,6 +88805,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     baseUnit?: UnitUpdateOneRequiredWithoutItemMastersNestedInput
@@ -88294,6 +88828,7 @@ export namespace Prisma {
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -88313,6 +88848,7 @@ export namespace Prisma {
     baseUnitId?: IntFieldUpdateOperationsInput | number
     packingUnitId?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -89162,6 +89698,7 @@ export namespace Prisma {
     itemGroupId: string
     baseUnitId: number
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -89210,6 +89747,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     hsCode?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemGroup?: ItemGroupUpdateOneRequiredWithoutItemMastersNestedInput
@@ -89232,6 +89770,7 @@ export namespace Prisma {
     itemGroupId?: StringFieldUpdateOperationsInput | string
     baseUnitId?: IntFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseOrderItems?: PurchaseOrderItemUncheckedUpdateManyWithoutItemMasterNestedInput
@@ -89251,6 +89790,7 @@ export namespace Prisma {
     itemGroupId?: StringFieldUpdateOperationsInput | string
     baseUnitId?: IntFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -89674,6 +90214,7 @@ export namespace Prisma {
     warehouseRefNo?: string | null
     remarks?: string | null
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -89688,6 +90229,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -89760,6 +90302,7 @@ export namespace Prisma {
     lotNo?: NullableStringFieldUpdateOperationsInput | string | null
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutGrnsNestedInput
@@ -89775,6 +90318,7 @@ export namespace Prisma {
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: GRNItemUncheckedUpdateManyWithoutGrnNestedInput
@@ -89789,6 +90333,7 @@ export namespace Prisma {
     warehouseRefNo?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -89801,6 +90346,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutPurchaseInvoicesNestedInput
@@ -89819,6 +90365,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -89835,6 +90382,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -90000,6 +90548,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -90064,6 +90613,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     purchaseInvoice?: PurchaseInvoiceUpdateOneWithoutPurchaseReturnsNestedInput
@@ -90082,6 +90632,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseReturnItemUncheckedUpdateManyWithoutReturnNestedInput
@@ -90097,6 +90648,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -90191,6 +90743,7 @@ export namespace Prisma {
     totalAmount?: number
     status?: string
     companyId: number
+    segment?: $Enums.BusinessSegment
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -90250,6 +90803,7 @@ export namespace Prisma {
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     grn?: GRNUpdateOneWithoutPurchaseReturnsNestedInput
@@ -90268,6 +90822,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: PurchaseReturnItemUncheckedUpdateManyWithoutReturnNestedInput
@@ -90283,6 +90838,7 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    segment?: EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

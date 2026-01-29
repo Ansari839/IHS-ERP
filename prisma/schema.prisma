@@ -144,6 +144,7 @@ model Warehouse {
   contactPerson String?
   contactNumbers String[]
   status      String          @default("ACTIVE") // ACTIVE, INACTIVE
+  segment     BusinessSegment @default(GENERAL)
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   userWarehouses UserWarehouse[]
@@ -193,6 +194,7 @@ model UnitConversion {
   
   companyId      Int
   company        Company @relation(fields: [companyId], references: [id])
+  segment        BusinessSegment @default(GENERAL)
 
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -273,6 +275,12 @@ enum ProductType {
   YARN
   FABRIC
   PACKING_MATERIAL
+}
+
+enum BusinessSegment {
+  GENERAL
+  YARN
+  FABRIC
 }
 
 model Category {
@@ -406,6 +414,7 @@ model Account {
   description        String?
   openingBalance     Float         @default(0.0)
   openingBalanceType BalanceType   @default(DR)
+  segment            BusinessSegment @default(GENERAL)
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
   
@@ -466,6 +475,7 @@ model ItemGroup {
 
   companyId   Int
   company     Company     @relation(fields: [companyId], references: [id])
+  segment     BusinessSegment @default(GENERAL)
 
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -566,6 +576,7 @@ model ItemMaster {
   
   companyId        Int
   company          Company   @relation(fields: [companyId], references: [id])
+  segment          BusinessSegment @default(GENERAL)
   
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
@@ -629,6 +640,7 @@ model PurchaseOrder {
   
   companyId       Int
   company         Company            @relation(fields: [companyId], references: [id])
+  segment         BusinessSegment    @default(GENERAL)
   
   createdAt       DateTime           @default(now())
   updatedAt       DateTime           @updatedAt
@@ -696,6 +708,7 @@ model GRN {
   
   companyId       Int
   company         Company        @relation(fields: [companyId], references: [id])
+  segment         BusinessSegment @default(GENERAL)
   
   items           GRNItem[]
   purchaseReturns PurchaseReturn[]
@@ -760,6 +773,7 @@ model PurchaseInvoice {
   
   companyId       Int
   company         Company               @relation(fields: [companyId], references: [id])
+  segment         BusinessSegment       @default(GENERAL)
   
   items           PurchaseInvoiceItem[]
   purchaseReturns PurchaseReturn[]
@@ -823,6 +837,7 @@ model PurchaseReturn {
   
   companyId       Int
   company         Company               @relation(fields: [companyId], references: [id])
+  segment         BusinessSegment       @default(GENERAL)
   
   items           PurchaseReturnItem[]
   

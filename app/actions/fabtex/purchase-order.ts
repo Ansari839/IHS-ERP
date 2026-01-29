@@ -82,6 +82,7 @@ export async function createPurchaseOrder(prevState: POState, formData: FormData
                     remarks: remarks || null,
                     totalAmount,
                     companyId: company.id,
+                    segment: (formData.get('segment') as any) || 'GENERAL',
 
                     items: {
                         create: items.map((item: any) => ({
@@ -154,6 +155,7 @@ export async function updatePurchaseOrder(id: string, prevState: POState, formDa
                 documentDate: documentDateStr ? new Date(documentDateStr) : null,
                 remarks: remarks || null,
                 totalAmount,
+                segment: (formData.get('segment') as any) || 'GENERAL',
                 items: {
                     deleteMany: {}, // Delete all existing items
                     create: items.map((item: any) => ({
@@ -200,23 +202,32 @@ export async function deletePurchaseOrder(id: string): Promise<POState> {
 }
 
 // Fetchers
-export async function getPurchaseOrders() {
-    return await prisma.purchaseOrder.findMany({
-        orderBy: { createdAt: 'desc' },
-        include: {
-            account: true,
-            warehouse: true,
-            company: true,
-            items: {
-                include: {
-                    grnItems: true,
-                    invoiceItems: true,
-                    itemMaster: { include: { packingUnit: true } },
-                    packingUnit: true
+export async function getPurchaseOrders(segment?: string) {
+    try {
+        const company = await prisma.company.findFirst()
+        if (!company) return []
+
+        return await prisma.purchaseOrder.findMany({
+            where: {
+                companyId: company.id,
+                ...(segment && { segment: segment as any })
+            },
+            include: {
+                account: true,
+                warehouse: true,
+                items: {
+                    include: {
+                        grnItems: true,
+                        invoiceItems: true,
+                    }
                 }
-            }
-        }
-    })
+            },
+            orderBy: { createdAt: 'desc' }
+        })
+    } catch (error) {
+        console.error('getPurchaseOrders Error:', error)
+        return []
+    }
 }
 
 export async function getPurchaseOrderById(id: string) {

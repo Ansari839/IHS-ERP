@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { DeleteInvoiceButton } from '@/components/fabtex/purchase-invoice/delete-button'
 
 export default async function InvoiceListPage() {
-    const invoices = await getPurchaseInvoices()
+    const invoices = await getPurchaseInvoices('YARN')
 
     return (
         <div className="flex-1 space-y-4 p-8 pt-6">

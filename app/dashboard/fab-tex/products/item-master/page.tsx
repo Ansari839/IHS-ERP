@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 async function ItemMasterList() {
     const [data, itemGroups, units, packingUnits] = await Promise.all([
-        getItemMasters(),
+        getItemMasters('YARN'),
         getItemGroups(),
         getUoms(),
         getPackingUnits()

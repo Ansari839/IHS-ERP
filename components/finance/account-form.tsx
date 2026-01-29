@@ -41,9 +41,10 @@ interface AccountFormProps {
     initialData?: Account | null;
     parentId?: number | null;
     onSuccess: () => void;
+    segment?: string;
 }
 
-export function AccountForm({ initialData, parentId, onSuccess }: AccountFormProps) {
+export function AccountForm({ initialData, parentId, onSuccess, segment = 'GENERAL' }: AccountFormProps) {
     const [loading, setLoading] = useState(false);
     const [summaryAccounts, setSummaryAccounts] = useState<Account[]>([]);
 
@@ -97,6 +98,7 @@ export function AccountForm({ initialData, parentId, onSuccess }: AccountFormPro
         try {
             const payload = {
                 ...values,
+                segment: segment,
                 parentId: (values.parentId && values.parentId !== "none") ? parseInt(values.parentId) : null,
             };
 

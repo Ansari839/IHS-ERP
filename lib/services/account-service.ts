@@ -145,6 +145,7 @@ export class AccountService {
         isPosting: boolean;
         openingBalance?: number;
         openingBalanceType?: BalanceType;
+        segment?: string;
     }) {
         let level = 0;
         if (data.parentId) {
@@ -171,6 +172,7 @@ export class AccountService {
                 isPosting: data.isPosting,
                 openingBalance: data.openingBalance || 0,
                 openingBalanceType: data.openingBalanceType || BalanceType.DR,
+                segment: (data.segment as any) || 'GENERAL',
             },
         });
     }
@@ -178,8 +180,11 @@ export class AccountService {
     /**
      * Get Account Hierarchy
      */
-    static async getAccountHierarchy() {
+    static async getAccountHierarchy(segment?: string) {
         const allAccounts = await prisma.account.findMany({
+            where: {
+                ...(segment && { segment: segment as any }),
+            },
             orderBy: { code: 'asc' },
         });
 
@@ -198,11 +203,12 @@ export class AccountService {
     /**
      * Get flattened list of posting accounts
      */
-    static async getPostingAccounts(type?: AccountType) {
+    static async getPostingAccounts(type?: AccountType, segment?: string) {
         return prisma.account.findMany({
             where: {
                 isPosting: true,
                 ...(type && { type }),
+                ...(segment && { segment: segment as any }),
             },
             orderBy: { code: 'asc' },
         });

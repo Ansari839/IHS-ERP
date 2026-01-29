@@ -77,6 +77,7 @@ const navigation: NavigationItem[] = [
                     { name: "Units & Conversions", href: "/dashboard/fab-tex/products/uom", icon: Scale, permission: "read:inventory" },
                     { name: "Item Packing", href: "/dashboard/fab-tex/products/item-packing", icon: Box, permission: "read:inventory" },
                     { name: "Item Grade", href: "/dashboard/fab-tex/products/item-grade", icon: Award, permission: "read:inventory" },
+                    { name: "Warehouses", href: "/dashboard/fab-tex/warehouses", icon: Warehouse, permission: "read:inventory" },
                 ]
             },
             {
@@ -90,7 +91,21 @@ const navigation: NavigationItem[] = [
                     { name: "Vendors", href: "/dashboard/fab-tex/purchase/vendors", icon: Users, permission: "read:inventory" },
                 ]
             },
-            { name: "Sale", href: "/dashboard/fab-tex/sales", icon: Banknote, permission: "read:inventory" },
+            {
+                name: "Sale",
+                icon: Banknote,
+                children: [
+                    { name: "Sales Order", href: "/dashboard/fab-tex/sales", icon: Layers, permission: "read:inventory" },
+                    { name: "Customers", href: "/dashboard/fab-tex/sales/customers", icon: Users, permission: "read:inventory" },
+                ]
+            },
+            {
+                name: "Reports",
+                icon: BarChart3,
+                children: [
+                    { name: "Stock Ledger", href: "/dashboard/fab-tex/reports/stock", icon: ScrollText, permission: "read:reports" },
+                ]
+            },
         ]
     },
     {

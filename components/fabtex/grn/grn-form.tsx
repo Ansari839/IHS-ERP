@@ -17,9 +17,10 @@ interface GRNFormProps {
     purchaseOrders: any[]
     initialData?: any
     grnId?: string
+    segment?: string
 }
 
-export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
+export function GRNForm({ purchaseOrders, initialData, grnId, segment = 'YARN' }: GRNFormProps) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [selectedPO, setSelectedPO] = useState<any>(initialData?.purchaseOrder || null)
@@ -138,6 +139,7 @@ export function GRNForm({ purchaseOrders, initialData, grnId }: GRNFormProps) {
         formData.append('warehouseRefNo', warehouseRefNo)
         formData.append('remarks', remarks)
         formData.append('items', JSON.stringify(validItems))
+        formData.append('segment', segment)
 
         let result;
         if (grnId) {

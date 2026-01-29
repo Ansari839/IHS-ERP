@@ -22,6 +22,7 @@ interface ReturnFormProps {
     colors: any[]
     brands: any[]
     itemGrades: any[]
+    segment?: string
 }
 
 export function ReturnForm({
@@ -31,7 +32,8 @@ export function ReturnForm({
     units,
     colors,
     brands,
-    itemGrades
+    itemGrades,
+    segment = 'YARN'
 }: ReturnFormProps) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
@@ -95,6 +97,7 @@ export function ReturnForm({
         formData.append('date', date)
         formData.append('remarks', remarks)
         formData.append('items', JSON.stringify(validItems))
+        formData.append('segment', segment)
 
         const result = await createPurchaseReturn({ success: false }, formData)
         setLoading(false)

@@ -213,6 +213,7 @@ exports.Prisma.WarehouseScalarFieldEnum = {
   contactPerson: 'contactPerson',
   contactNumbers: 'contactNumbers',
   status: 'status',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -242,6 +243,7 @@ exports.Prisma.UnitConversionScalarFieldEnum = {
   toUnitId: 'toUnitId',
   conversionRate: 'conversionRate',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -386,6 +388,7 @@ exports.Prisma.AccountScalarFieldEnum = {
   description: 'description',
   openingBalance: 'openingBalance',
   openingBalanceType: 'openingBalanceType',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -428,6 +431,7 @@ exports.Prisma.ItemGroupScalarFieldEnum = {
   status: 'status',
   parentId: 'parentId',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -486,6 +490,7 @@ exports.Prisma.ItemMasterScalarFieldEnum = {
   baseUnitId: 'baseUnitId',
   packingUnitId: 'packingUnitId',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -507,6 +512,7 @@ exports.Prisma.PurchaseOrderScalarFieldEnum = {
   currencyId: 'currencyId',
   exchangeRate: 'exchangeRate',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -540,6 +546,7 @@ exports.Prisma.GRNScalarFieldEnum = {
   warehouseRefNo: 'warehouseRefNo',
   remarks: 'remarks',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -573,6 +580,7 @@ exports.Prisma.PurchaseInvoiceScalarFieldEnum = {
   totalAmount: 'totalAmount',
   status: 'status',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -605,6 +613,7 @@ exports.Prisma.PurchaseReturnScalarFieldEnum = {
   totalAmount: 'totalAmount',
   status: 'status',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -651,6 +660,12 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+exports.BusinessSegment = exports.$Enums.BusinessSegment = {
+  GENERAL: 'GENERAL',
+  YARN: 'YARN',
+  FABRIC: 'FABRIC'
+};
+
 exports.ProductType = exports.$Enums.ProductType = {
   YARN: 'YARN',
   FABRIC: 'FABRIC',

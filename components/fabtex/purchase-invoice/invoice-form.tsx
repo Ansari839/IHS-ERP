@@ -27,6 +27,7 @@ interface InvoiceFormProps {
     initialData?: any
     invoiceId?: string
     readOnly?: boolean
+    segment?: string
 }
 
 export function InvoiceForm({
@@ -41,7 +42,8 @@ export function InvoiceForm({
     allEligibleGRNs = [],
     initialData,
     invoiceId,
-    readOnly = false
+    readOnly = false,
+    segment = 'YARN'
 }: InvoiceFormProps) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
@@ -301,6 +303,7 @@ export function InvoiceForm({
         formData.append('date', date)
         formData.append('remarks', remarks)
         formData.append('items', JSON.stringify(validItems))
+        formData.append('segment', segment)
 
         let result
         if (invoiceId) {

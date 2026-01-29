@@ -60,6 +60,7 @@ export async function createPurchaseReturn(prevState: ReturnState, formData: For
                 accountId: accountId ? parseInt(accountId) : null,
                 totalAmount,
                 companyId: company.id,
+                segment: (formData.get('segment') as any) || 'GENERAL',
                 items: {
                     create: items.map((item: any) => ({
                         itemMasterId: item.itemMasterId,
@@ -85,8 +86,15 @@ export async function createPurchaseReturn(prevState: ReturnState, formData: For
     }
 }
 
-export async function getPurchaseReturns() {
+export async function getPurchaseReturns(segment?: string) {
+    const company = await prisma.company.findFirst()
+    if (!company) return []
+
     return await prisma.purchaseReturn.findMany({
+        where: {
+            companyId: company.id,
+            ...(segment && { segment: segment as any })
+        },
         include: {
             account: true,
             purchaseInvoice: true,

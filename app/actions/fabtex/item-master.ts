@@ -22,7 +22,7 @@ export type ItemMasterState = {
     data?: any;
 };
 
-export async function getItemMasters() {
+export async function getItemMasters(segment?: string) {
     try {
         const user = await getCurrentUser();
         if (!user) return [];
@@ -36,7 +36,10 @@ export async function getItemMasters() {
         }
 
         const items = await prisma.itemMaster.findMany({
-            where: { companyId: company.id },
+            where: {
+                companyId: company.id,
+                ...(segment && { segment: segment as any })
+            },
             include: {
                 itemGroup: true,
                 baseUnit: true,
@@ -126,7 +129,8 @@ export async function createItemMaster(prevState: ItemMasterState, formData: For
                 itemGroupId: validated.data.itemGroupId,
                 baseUnitId: validated.data.baseUnitId,
                 packingUnitId: validated.data.packingUnitId || null,
-                companyId: company.id
+                companyId: company.id,
+                segment: (formData.get('segment') as any) || 'GENERAL'
             }
         });
 

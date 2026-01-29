@@ -26,9 +26,10 @@ import { DeleteWarehouseButton } from '@/components/warehouses/delete-warehouse-
 
 interface WarehouseListClientProps {
     initialData: any[] // Using any to bypass exact Prisma type matching issues usually found in Client components
+    segment?: string
 }
 
-export function WarehouseListClient({ initialData }: WarehouseListClientProps) {
+export function WarehouseListClient({ initialData, segment = 'GENERAL' }: WarehouseListClientProps) {
     const [createOpen, setCreateOpen] = useState(false)
     // We can also track edit state per item if needed, but for simplicity relying on individual Dialog triggers
 
@@ -47,7 +48,7 @@ export function WarehouseListClient({ initialData }: WarehouseListClientProps) {
                         <DialogHeader>
                             <DialogTitle>Add New Warehouse</DialogTitle>
                         </DialogHeader>
-                        <WarehouseForm onSuccess={() => setCreateOpen(false)} />
+                        <WarehouseForm onSuccess={() => setCreateOpen(false)} segment={segment} />
                     </DialogContent>
                 </Dialog>
             </div>
@@ -102,7 +103,7 @@ export function WarehouseListClient({ initialData }: WarehouseListClientProps) {
                                     <TableCell className="text-right">
                                         <div className="flex justify-end gap-2">
                                             {/* Edit Dialog - Self Managed State */}
-                                            <EditWarehouseDialog warehouse={warehouse} />
+                                            <EditWarehouseDialog warehouse={warehouse} segment={segment} />
                                             <DeleteWarehouseButton id={warehouse.id} />
                                         </div>
                                     </TableCell>
@@ -116,7 +117,7 @@ export function WarehouseListClient({ initialData }: WarehouseListClientProps) {
     )
 }
 
-function EditWarehouseDialog({ warehouse }: { warehouse: any }) {
+function EditWarehouseDialog({ warehouse, segment }: { warehouse: any, segment: string }) {
     const [open, setOpen] = useState(false)
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -129,7 +130,7 @@ function EditWarehouseDialog({ warehouse }: { warehouse: any }) {
                 <DialogHeader>
                     <DialogTitle>Edit Warehouse</DialogTitle>
                 </DialogHeader>
-                <WarehouseForm warehouse={warehouse} onSuccess={() => setOpen(false)} />
+                <WarehouseForm warehouse={warehouse} onSuccess={() => setOpen(false)} segment={segment} />
             </DialogContent>
         </Dialog>
     )

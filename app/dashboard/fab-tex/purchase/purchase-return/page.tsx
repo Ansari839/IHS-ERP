@@ -7,7 +7,7 @@ import { ReturnList } from '@/components/fabtex/purchase-return/return-list'
 import { getPurchaseReturns } from '@/app/actions/fabtex/purchase-return'
 
 export default async function PurchaseReturnPage() {
-    const returns = await getPurchaseReturns()
+    const returns = await getPurchaseReturns('YARN')
 
     return (
         <div className="flex-1 space-y-6 p-8 pt-6">

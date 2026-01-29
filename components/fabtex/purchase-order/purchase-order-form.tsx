@@ -39,6 +39,7 @@ interface POFormProps {
     itemGrades: any[]
     units: any[]
     packingUnits: any[]
+    segment?: string
 }
 
 type POItemInput = {
@@ -76,7 +77,8 @@ export function PurchaseOrderForm({
     brands,
     itemGrades,
     units,
-    packingUnits
+    packingUnits,
+    segment = 'YARN'
 }: POFormProps) {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
@@ -223,6 +225,7 @@ export function PurchaseOrderForm({
         formData.set('accountId', partyDetails.accountId)
         formData.set('partyName', partyDetails.partyName)
         formData.set('warehouseId', warehouseId)
+        formData.set('segment', segment)
 
         startTransition(async () => {
             const result = initialData

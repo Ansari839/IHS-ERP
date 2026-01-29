@@ -57,6 +57,7 @@ interface ItemMasterFormProps {
     packingUnits: any[];
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
+    segment?: string;
 }
 
 export function ItemMasterForm({
@@ -67,6 +68,7 @@ export function ItemMasterForm({
     packingUnits,
     open: externalOpen,
     onOpenChange: setExternalOpen,
+    segment = "YARN",
 }: ItemMasterFormProps) {
     const [internalOpen, setInternalOpen] = useState(false);
     const [isPending, startTransition] = useTransition();
@@ -113,6 +115,7 @@ export function ItemMasterForm({
     async function onSubmit(values: FormValues) {
         const formData = new FormData();
         formData.append("name", values.name);
+        formData.append("segment", segment);
         if (values.shortDescription) formData.append("shortDescription", values.shortDescription);
         formData.append("status", values.status);
         if (values.hsCode) formData.append("hsCode", values.hsCode);

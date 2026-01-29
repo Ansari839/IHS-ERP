@@ -63,6 +63,7 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
                 warehouseRefNo: warehouseRefNo || null,
                 remarks,
                 companyId: company.id,
+                segment: (formData.get('segment') as any) || 'GENERAL',
                 items: {
                     create: items.map((item: any) => ({
                         purchaseOrderItemId: item.purchaseOrderItemId,
@@ -115,6 +116,7 @@ export async function updateGRN(id: string, prevState: GRNState, formData: FormD
                 lotNo: lotNo || null,
                 warehouseRefNo: warehouseRefNo || null,
                 remarks,
+                segment: (formData.get('segment') as any) || 'GENERAL',
                 items: {
                     deleteMany: {}, // Delete old items
                     create: items.map((item: any) => ({
@@ -160,8 +162,15 @@ export async function deleteGRN(id: string): Promise<GRNState> {
     }
 }
 
-export async function getGRNs() {
+export async function getGRNs(segment?: string) {
+    const company = await prisma.company.findFirst()
+    if (!company) return []
+
     return await prisma.gRN.findMany({
+        where: {
+            companyId: company.id,
+            ...(segment && { segment: segment as any })
+        },
         include: {
             purchaseOrder: {
                 include: { account: true }

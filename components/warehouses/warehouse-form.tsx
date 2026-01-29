@@ -26,9 +26,10 @@ interface WarehouseFormProps {
         status: string
     }
     onSuccess?: () => void
+    segment?: string
 }
 
-export function WarehouseForm({ warehouse, onSuccess }: WarehouseFormProps) {
+export function WarehouseForm({ warehouse, onSuccess, segment = 'GENERAL' }: WarehouseFormProps) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -77,6 +78,7 @@ export function WarehouseForm({ warehouse, onSuccess }: WarehouseFormProps) {
                 // For create, we append to formData or pass special handling in action
                 // Since our action expects JSON string for arrays in FormData:
                 formData.set('contactNumbers', JSON.stringify(filteredNumbers))
+                formData.set('segment', segment)
                 result = await createWarehouse(formData)
             }
 

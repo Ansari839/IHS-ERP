@@ -8,7 +8,7 @@ import { format } from 'date-fns'
 import { GRNActions } from '@/components/fabtex/grn/grn-actions'
 
 export default async function GRNListPage() {
-    const grns = await getGRNs()
+    const grns = await getGRNs('YARN')
 
     return (
         <div className="flex-1 space-y-4 p-8 pt-6">
