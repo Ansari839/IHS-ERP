@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import {
     Table,
     TableBody,
@@ -81,7 +82,7 @@ export function PartyListClient({ initialData, type, segment, accountType }: Par
                             <TableHead>Code</TableHead>
                             <TableHead>Name</TableHead>
                             <TableHead>Type</TableHead>
-                            <TableHead>Opening Balance</TableHead>
+                            <TableHead>Closing Balance</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -96,14 +97,23 @@ export function PartyListClient({ initialData, type, segment, accountType }: Par
                             initialData.map((acc) => (
                                 <TableRow key={acc.id} className="hover:bg-primary/5 transition-colors">
                                     <TableCell className="font-mono text-xs">{acc.code}</TableCell>
-                                    <TableCell className="font-semibold">{acc.name}</TableCell>
+                                    <TableCell className="font-semibold">
+                                        {/* Only link if it's a Vendor for now, though Customer works too */}
+                                        <Link
+                                            href={`/dashboard/fab-tex/purchase/vendors/${acc.id}`}
+                                            className="hover:underline text-blue-600"
+                                        >
+                                            {acc.name}
+                                        </Link>
+                                    </TableCell>
                                     <TableCell>
                                         <Badge variant="outline" className="bg-background">
                                             {acc.type}
                                         </Badge>
                                     </TableCell>
-                                    <TableCell className="font-mono">
-                                        {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(acc.openingBalance)} {acc.openingBalanceType}
+                                    <TableCell className="font-mono font-bold">
+                                        {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(Math.abs(acc.closingBalance || 0))}
+                                        {(acc.closingBalance || 0) >= 0 ? ' CR' : ' DR'}
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <div className="flex justify-end gap-2">

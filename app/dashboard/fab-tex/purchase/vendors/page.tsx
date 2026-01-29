@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function FabTexVendorsPage() {
     // Fetch only YARN vendors (Liability type + YARN segment)
-    const vendors = await AccountService.getPostingAccounts(AccountType.LIABILITY, 'YARN');
+    const vendors = await AccountService.getAccountsWithBalance(AccountType.LIABILITY, 'YARN');
 
     return (
         <div className="p-8">

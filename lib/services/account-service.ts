@@ -215,6 +215,91 @@ export class AccountService {
     }
 
     /**
+     * Get Accounts with calculated Closing Balance
+     */
+    static async getAccountsWithBalance(type: AccountType, segment?: string) {
+        const accounts = await prisma.account.findMany({
+            where: {
+                type,
+                ...(segment && { segment: segment as any }),
+                isPosting: true
+            },
+            include: {
+                journalLines: true
+            },
+            orderBy: { name: 'asc' }
+        });
+
+        return accounts.map(acc => {
+            const totalDebit = acc.journalLines.reduce((sum, line) => sum + line.debit, 0);
+            const totalCredit = acc.journalLines.reduce((sum, line) => sum + line.credit, 0);
+
+            let closingBalance = 0;
+            const opening = acc.openingBalance || 0;
+
+            // Logic matches standard accounting equation
+            if (type === 'ASSET' || type === 'EXPENSE') {
+                // Normal Dr Balance
+                // Balance = Opening(Dr) + Debit - Credit
+                // If Opening is Cr, treat as negative
+                const opDr = acc.openingBalanceType === 'DR' ? opening : -opening;
+                closingBalance = opDr + totalDebit - totalCredit;
+            } else {
+                // Normal Cr Balance (Liability, Equity, Income)
+                // Balance = Opening(Cr) + Credit - Debit
+                // If Opening is Dr, treat as negative
+                const opCr = acc.openingBalanceType === 'CR' ? opening : -opening;
+                closingBalance = opCr + totalCredit - totalDebit;
+            }
+
+            return {
+                ...acc,
+                closingBalance,
+                // We keep the Prisma generated types clean, but add this calculated field
+                journalLines: undefined // Remove heavy lines from list result
+            };
+        });
+    }
+
+    /**
+     * Get Account Ledger (Detailed Transactions)
+     */
+    static async getAccountLedger(accountId: number) {
+        const account = await prisma.account.findUnique({
+            where: { id: accountId }
+        });
+
+        if (!account) return null;
+
+        const lines = await prisma.journalLine.findMany({
+            where: { accountId },
+            include: {
+                entry: true
+            },
+            orderBy: {
+                entry: {
+                    date: 'asc'
+                }
+            }
+        });
+
+        const ledgerItems = lines.map(line => {
+            return {
+                ...line,
+                date: line.entry.date,
+                type: line.entry.type,
+                number: line.entry.number,
+                narration: line.entry.narration
+            };
+        });
+
+        return {
+            account,
+            lines: ledgerItems
+        };
+    }
+
+    /**
      * Delete an Account
      */
     static async deleteAccount(id: number) {
