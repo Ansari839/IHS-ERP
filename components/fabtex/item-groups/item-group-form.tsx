@@ -66,7 +66,7 @@ export function ItemGroupForm({ mode, defaultValues, existingGroups = [], trigge
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: defaultValues?.name || "",
-            description: defaultValues?.description || "",
+            description: defaultValues?.description || undefined,
             parentId: defaultValues?.parentId || "null", // Use "null" string for Select value
             status: defaultValues?.status || "ACTIVE",
         },
@@ -77,7 +77,7 @@ export function ItemGroupForm({ mode, defaultValues, existingGroups = [], trigge
         if (defaultValues) {
             form.reset({
                 name: defaultValues.name || "",
-                description: defaultValues.description || "",
+                description: defaultValues.description || undefined,
                 parentId: defaultValues.parentId || "null",
                 status: defaultValues.status || "ACTIVE",
             });

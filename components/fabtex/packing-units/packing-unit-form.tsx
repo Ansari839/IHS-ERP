@@ -65,7 +65,7 @@ export function PackingUnitForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: (defaultValues?.name as string) || "",
-            symbol: (defaultValues?.symbol as string) || "",
+            symbol: (defaultValues?.symbol as string) || undefined,
             status: (defaultValues?.status as "ACTIVE" | "INACTIVE") || "ACTIVE",
         },
     });

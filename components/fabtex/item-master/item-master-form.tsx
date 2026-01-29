@@ -43,7 +43,7 @@ const formSchema = z.object({
     hsCode: z.string().optional(),
     itemGroupId: z.string().min(1, "Item Group is required"),
     baseUnitId: z.string().min(1, "Base Unit is required"), // Form uses string, we coerce to number in action
-    packingUnitId: z.string().optional().nullable(),
+    packingUnitId: z.string().optional(),
     imageUrl: z.string().optional(),
 });
 
@@ -83,13 +83,13 @@ export function ItemMasterForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: (defaultValues?.name as string) || "",
-            shortDescription: (defaultValues?.shortDescription as string) || "",
+            shortDescription: (defaultValues?.shortDescription as string) || undefined,
             status: (defaultValues?.status as "ACTIVE" | "INACTIVE") || "ACTIVE",
-            hsCode: (defaultValues?.hsCode as string) || "",
+            hsCode: (defaultValues?.hsCode as string) || undefined,
             itemGroupId: (defaultValues?.itemGroupId as string) || "",
             baseUnitId: (defaultValues?.baseUnitId?.toString() as string) || "",
-            packingUnitId: (defaultValues?.packingUnitId as string) || "",
-            imageUrl: (defaultValues?.imageUrl as string) || "",
+            packingUnitId: (defaultValues?.packingUnitId as string) || undefined,
+            imageUrl: (defaultValues?.imageUrl as string) || undefined,
         },
     });
 

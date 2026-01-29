@@ -86,8 +86,11 @@ export function PrintLayout({ data, type, copyType }: PrintLayoutProps) {
                             <div className="pl-2 border-l-2 border-gray-200">
                                 <p className="font-black text-sm uppercase">{warehouse.name}</p>
                                 <p className="text-[10px] text-gray-600 italic leading-tight">{warehouse.location}</p>
+                                {warehouse.contactPerson && (
+                                    <p className="text-[10px] font-bold mt-1">Contact: {warehouse.contactPerson}</p>
+                                )}
                                 {warehouse.contactNumbers?.length > 0 && (
-                                    <p className="text-[10px] font-bold mt-1 tracking-tighter">PH: {warehouse.contactNumbers.join(', ')}</p>
+                                    <p className="text-[10px] font-bold tracking-tighter">PH: {warehouse.contactNumbers.join(', ')}</p>
                                 )}
                             </div>
                         </div>
@@ -114,41 +117,54 @@ export function PrintLayout({ data, type, copyType }: PrintLayoutProps) {
                         </tr>
                     </thead>
                     <tbody className="text-[11px]">
-                        {data.items.map((item: any, idx: number) => (
-                            <tr key={idx} className="border-b border-gray-100 last:border-black">
-                                <td className="p-2">
-                                    <div className="font-black text-sm uppercase">{item.itemMaster?.name}</div>
-                                    <div className="flex gap-4 text-[9px] text-gray-500 font-bold uppercase mt-0.5">
-                                        {item.brand && <span>BRAND: {item.brand.name}</span>}
-                                        {item.color && <span>COLOR: {item.color.name}</span>}
-                                        {item.itemGrade && <span>GRADE: {item.itemGrade.name}</span>}
-                                    </div>
-                                </td>
-                                <td className="p-2 text-center text-[10px] font-bold uppercase tracking-tighter">
-                                    {item.packingType || 'EVEN'}
-                                </td>
-                                <td className="p-2 text-center font-black">
-                                    {item.pcs || '-'}
-                                </td>
-                                <td className="p-2 text-center font-bold italic">
-                                    {item.unitSize || '-'}
-                                </td>
-                                <td className="p-2 text-right font-black text-sm">
-                                    {type === 'DO' ? item.deliveredQty : item.invoicedQty}
-                                    <span className="text-[9px] ml-1 font-bold text-gray-400 uppercase tracking-widest">{item.unit?.symbol || 'KG'}</span>
-                                </td>
-                                {type === 'INVOICE' && (
-                                    <>
-                                        <td className="p-2 text-right font-bold italic">
-                                            {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(item.rate)}
-                                        </td>
-                                        <td className="p-2 text-right font-black text-sm">
-                                            {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(item.amount)}
-                                        </td>
-                                    </>
-                                )}
-                            </tr>
-                        ))}
+                        {data.items.map((item: any, idx: number) => {
+                            // Get packing display text
+                            const packingDisplay = item.packingType === 'EVEN' && item.pcs
+                                ? `Even Packing of ${item.pcs} pack${item.pcs > 1 ? 's' : ''}`
+                                : (item.packingType || 'MANUAL')
+
+                            return (
+                                <tr key={idx} className="border-b border-gray-100 last:border-black">
+                                    <td className="p-2">
+                                        <div className="font-black text-sm uppercase">{item.itemMaster?.name}</div>
+                                        <div className="flex gap-4 text-[9px] text-gray-500 font-bold uppercase mt-0.5">
+                                            {item.brand && <span>BRAND: {item.brand.name}</span>}
+                                            {item.color && <span>COLOR: {item.color.name}</span>}
+                                            {item.itemGrade && <span>GRADE: {item.itemGrade.name}</span>}
+                                        </div>
+                                        {/* Office Copy Only: Show SO Item Reference */}
+                                        {copyType === 'OFFICE' && type === 'DO' && item.salesOrderItem && (
+                                            <div className="text-[8px] text-blue-600 font-bold uppercase mt-1 italic">
+                                                SO ITEM REF: {item.salesOrderItem.id.substring(0, 8)}
+                                            </div>
+                                        )}
+                                    </td>
+                                    <td className="p-2 text-center text-[10px] font-bold uppercase tracking-tighter">
+                                        {packingDisplay}
+                                    </td>
+                                    <td className="p-2 text-center font-black">
+                                        {item.pcs || '-'}
+                                    </td>
+                                    <td className="p-2 text-center font-bold italic">
+                                        {item.unitSize || '-'}
+                                    </td>
+                                    <td className="p-2 text-right font-black text-sm">
+                                        {type === 'DO' ? item.deliveredQty : item.invoicedQty}
+                                        <span className="text-[9px] ml-1 font-bold text-gray-400 uppercase tracking-widest">{item.unit?.symbol || 'KG'}</span>
+                                    </td>
+                                    {type === 'INVOICE' && (
+                                        <>
+                                            <td className="p-2 text-right font-bold italic">
+                                                {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(item.rate)}
+                                            </td>
+                                            <td className="p-2 text-right font-black text-sm">
+                                                {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(item.amount)}
+                                            </td>
+                                        </>
+                                    )}
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
 
