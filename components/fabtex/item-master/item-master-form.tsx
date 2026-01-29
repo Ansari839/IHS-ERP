@@ -43,7 +43,7 @@ const formSchema = z.object({
     hsCode: z.string().optional(),
     itemGroupId: z.string().min(1, "Item Group is required"),
     baseUnitId: z.string().min(1, "Base Unit is required"), // Form uses string, we coerce to number in action
-    packingUnitId: z.string().optional().nullable(),
+    packingUnitId: z.string().optional(),
     imageUrl: z.string().optional(),
 });
 
@@ -88,7 +88,7 @@ export function ItemMasterForm({
             hsCode: (defaultValues?.hsCode as string) || "",
             itemGroupId: (defaultValues?.itemGroupId as string) || "",
             baseUnitId: (defaultValues?.baseUnitId?.toString() as string) || "",
-            packingUnitId: (defaultValues?.packingUnitId as string) || "",
+            packingUnitId: (defaultValues?.packingUnitId as string) || undefined, // Select handles undefined/null better
             imageUrl: (defaultValues?.imageUrl as string) || "",
         },
     });

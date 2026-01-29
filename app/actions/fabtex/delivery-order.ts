@@ -264,7 +264,8 @@ export async function getDeliveryOrderById(id: string) {
                     }
                 }
             },
-            account: true, // Added this
+            account: true,
+            warehouse: true, // Added warehouse relation
             items: {
                 include: {
                     itemMaster: { include: { packingUnit: true } },
@@ -272,7 +273,8 @@ export async function getDeliveryOrderById(id: string) {
                     brand: true,
                     itemGrade: true,
                     unit: true,
-                    packingUnit: true
+                    packingUnit: true,
+                    salesOrderItem: true // Include SO item for reference
                 }
             },
             company: true
