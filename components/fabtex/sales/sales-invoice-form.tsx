@@ -23,6 +23,7 @@ interface InvoiceFormProps {
     brands: any[]
     itemGrades: any[]
     packingUnits: any[]
+    warehouses: any[]
     allEligibleDOs?: any[]
     initialData?: any
     invoiceId?: string
@@ -39,6 +40,7 @@ export function SalesInvoiceForm({
     brands,
     itemGrades,
     packingUnits,
+    warehouses = [],
     allEligibleDOs = [],
     initialData,
     invoiceId,
@@ -56,6 +58,8 @@ export function SalesInvoiceForm({
     const [invoiceNumber, setInvoiceNumber] = useState(initialData?.invoiceNumber || `SINV-${Date.now().toString().slice(-6)}`)
     const [date, setDate] = useState(initialData?.date ? new Date(initialData.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0])
     const [remarks, setRemarks] = useState(initialData?.remarks || '')
+    const [warehouseId, setWarehouseId] = useState<string>(initialData?.warehouseId?.toString() || '')
+    const [warehouseRefNo, setWarehouseRefNo] = useState(initialData?.warehouseRefNo || '')
 
     // Items State
     const [items, setItems] = useState<any[]>(initialData?.items?.map((item: any) => ({
@@ -76,6 +80,9 @@ export function SalesInvoiceForm({
         invoicedQty: item.invoicedQty,
         rate: item.rate,
         amount: item.amount,
+        pcs: item.pcs || 0,
+        unitSize: item.unitSize || 0,
+        packingType: item.packingType || 'EVEN',
         isDoItem: !!item.deliveryOrderItemId
     })) || [])
 
@@ -108,7 +115,10 @@ export function SalesInvoiceForm({
                 remainingQty: remaining > 0 ? remaining : 0,
                 invoicedQty: remaining > 0 ? remaining : 0,
                 rate: item.rate,
-                amount: (remaining > 0 ? remaining : 0) * item.rate
+                amount: (remaining > 0 ? remaining : 0) * item.rate,
+                pcs: item.pcs || 0,
+                unitSize: item.unitSize || 0,
+                packingType: item.packingType || 'EVEN'
             }
         })
         setItems(invoiceItems)
@@ -147,6 +157,9 @@ export function SalesInvoiceForm({
                 invoicedQty: doItemLine.deliveredQty,
                 rate: soItem?.rate || 0,
                 amount: doItemLine.deliveredQty * (soItem?.rate || 0),
+                pcs: doItemLine.pcs || 0,
+                unitSize: doItemLine.unitSize || 0,
+                packingType: doItemLine.packingType || 'EVEN',
                 isDoItem: true
             }
         })
@@ -157,18 +170,17 @@ export function SalesInvoiceForm({
         const doItem = allEligibleDOs.find(g => g.id === doId)
         if (!doItem) return
 
-        const so = salesOrders.find(p => p.id === doItem.salesOrderId)
-        if (!so) return
+        const so = doItem.salesOrderId ? salesOrders.find(p => p.id === doItem.salesOrderId) : null
 
         setSelectedSO(so)
         setInvoiceMode('DO')
         setSelectedDOId(doId)
-        setSelectedCustomerId(so.accountId?.toString() || '')
+        setSelectedCustomerId(doItem.accountId?.toString() || so?.accountId?.toString() || '')
 
         const invoiceItems = doItem.items.map((doItemLine: any) => {
-            const soItem = so.items.find((soi: any) => soi.id === doItemLine.salesOrderItemId)
+            const soItem = so ? so.items.find((soi: any) => soi.id === doItemLine.salesOrderItemId) : null
             return {
-                salesOrderItemId: doItemLine.salesOrderItemId,
+                salesOrderItemId: doItemLine.salesOrderItemId ? doItemLine.salesOrderItemId : null,
                 deliveryOrderItemId: doItemLine.id,
                 itemMasterId: doItemLine.itemMasterId,
                 itemName: doItemLine.itemMaster.name,
@@ -179,11 +191,14 @@ export function SalesInvoiceForm({
                 unitSymbol: doItemLine.unit?.symbol,
                 packingLabel: doItemLine.packingUnit?.symbol || doItemLine.packingUnit?.name || doItemLine.itemMaster?.packingUnit?.symbol || doItemLine.itemMaster?.packingUnit?.name || soItem?.packingUnit?.symbol || soItem?.packingUnit?.name || soItem?.itemMaster?.packingUnit?.symbol || soItem?.itemMaster?.packingUnit?.name || 'Qty',
                 orderedQty: soItem?.quantity || 0,
-                alreadyInvoiced: (soItem?.invoiceItems || []).reduce((sum: number, ii: any) => sum + ii.invoicedQty, 0),
+                alreadyInvoiced: soItem ? (soItem.invoiceItems || []).reduce((sum: number, ii: any) => sum + ii.invoicedQty, 0) : 0,
                 remainingQty: doItemLine.deliveredQty,
                 invoicedQty: doItemLine.deliveredQty,
                 rate: soItem?.rate || 0,
                 amount: doItemLine.deliveredQty * (soItem?.rate || 0),
+                pcs: doItemLine.pcs || 0,
+                unitSize: doItemLine.unitSize || 0,
+                packingType: doItemLine.packingType || 'EVEN',
                 isDoItem: true
             }
         })
@@ -204,10 +219,12 @@ export function SalesInvoiceForm({
             packingLabel: 'Qty',
             orderedQty: 0,
             alreadyInvoiced: 0,
-            remainingQty: 0,
             invoicedQty: 0,
             rate: 0,
-            amount: 0
+            amount: 0,
+            pcs: 0,
+            unitSize: 0,
+            packingType: 'EVEN'
         }])
     }
 
@@ -219,9 +236,18 @@ export function SalesInvoiceForm({
         setItems(prev => prev.map((it, i) => {
             if (i === index) {
                 const newItem = { ...it, ...updates }
-                if ('invoicedQty' in updates || 'rate' in updates) {
+
+                // Packing Logic consistency with Delivery Order
+                if ('packingType' in updates || 'pcs' in updates || 'unitSize' in updates) {
+                    if (newItem.packingType === 'EVEN') {
+                        newItem.invoicedQty = (newItem.pcs || 0) * (newItem.unitSize || 0)
+                    }
+                }
+
+                if ('invoicedQty' in updates || 'rate' in updates || 'packingType' in updates || 'pcs' in updates || 'unitSize' in updates) {
                     newItem.amount = (newItem.invoicedQty || 0) * (newItem.rate || 0)
                 }
+
                 if ('itemMasterId' in updates) {
                     const master = itemMasters.find(m => m.id === updates.itemMasterId)
                     if (master) {
@@ -265,6 +291,8 @@ export function SalesInvoiceForm({
 
         formData.append('invoiceNumber', invoiceNumber)
         formData.append('date', date)
+        formData.append('warehouseId', warehouseId)
+        formData.append('warehouseRefNo', warehouseRefNo)
         formData.append('remarks', remarks)
         formData.append('items', JSON.stringify(validItems))
         formData.append('segment', segment)
@@ -350,10 +378,10 @@ export function SalesInvoiceForm({
                 </CardHeader>
                 <CardContent className="p-6 space-y-8">
                     {/* Header Details */}
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                         {invoiceMode === 'SO' && (
-                            <div className="space-y-2">
-                                <Label className="text-sm font-semibold">Select Sales Order</Label>
+                            <div className="space-y-2 md:col-span-2">
+                                <Label className="text-sm font-semibold text-blue-600">Select Sales Order</Label>
                                 <Select
                                     onValueChange={onSOChange}
                                     defaultValue={selectedSO?.id}
@@ -374,8 +402,8 @@ export function SalesInvoiceForm({
                         )}
 
                         {invoiceMode === 'DO' && (
-                            <div className="space-y-2">
-                                <Label className="text-sm font-semibold">Select Delivery Order (DO)</Label>
+                            <div className="space-y-2 md:col-span-2">
+                                <Label className="text-sm font-semibold text-blue-600">Select Delivery Order (DO)</Label>
                                 <Select
                                     onValueChange={onDirectDOChange}
                                     defaultValue={selectedDOId}
@@ -396,8 +424,8 @@ export function SalesInvoiceForm({
                         )}
 
                         {invoiceMode === 'DIRECT' && (
-                            <div className="space-y-2">
-                                <Label className="text-sm font-semibold">Customer (Account)</Label>
+                            <div className="space-y-2 md:col-span-2">
+                                <Label className="text-sm font-semibold text-blue-600">Customer (Account)</Label>
                                 <Select
                                     onValueChange={setSelectedCustomerId}
                                     defaultValue={selectedCustomerId}
@@ -417,15 +445,61 @@ export function SalesInvoiceForm({
                             </div>
                         )}
 
+                        <div className="space-y-2">
+                            <Label className="text-sm font-semibold">Invoice Number</Label>
+                            <Input
+                                value={invoiceNumber}
+                                onChange={e => setInvoiceNumber(e.target.value)}
+                                className="bg-background/50 font-mono"
+                                readOnly={readOnly}
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label className="text-sm font-semibold">Date</Label>
+                            <Input
+                                type="date"
+                                value={date}
+                                onChange={e => setDate(e.target.value)}
+                                className="bg-background/50"
+                                readOnly={readOnly}
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label className="text-sm font-semibold text-emerald-600">Warehouse / Godown</Label>
+                            <Select value={warehouseId} onValueChange={setWarehouseId} disabled={readOnly}>
+                                <SelectTrigger className="bg-background/50 border-emerald-200">
+                                    <SelectValue placeholder="Select Godown" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {warehouses.map(w => (
+                                        <SelectItem key={w.id} value={w.id.toString()}>{w.name}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label className="text-sm font-semibold text-emerald-600">Godown Ref</Label>
+                            <Input
+                                value={warehouseRefNo}
+                                onChange={e => setWarehouseRefNo(e.target.value)}
+                                placeholder="Ref/Challan No"
+                                className="bg-background/50 border-emerald-200"
+                                readOnly={readOnly}
+                            />
+                        </div>
+
                         {invoiceMode === 'SO' && selectedSO && (selectedSO.deliveryOrders?.length ?? 0) > 0 && (
                             <div className="space-y-2">
-                                <Label className="text-sm font-semibold">Map from DO (Optional)</Label>
+                                <Label className="text-sm font-semibold text-orange-600">Map from DO (Optional)</Label>
                                 <Select
                                     onValueChange={onDOChange}
                                     value={selectedDOId}
                                     disabled={readOnly}
                                 >
-                                    <SelectTrigger className="bg-background/50 border-primary/20">
+                                    <SelectTrigger className="bg-background/50 border-orange-200">
                                         <SelectValue placeholder="Select DO..." />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -479,13 +553,16 @@ export function SalesInvoiceForm({
 
                         <div className="rounded-2xl border border-primary/10 overflow-hidden shadow-sm">
                             <Table>
-                                <TableHeader className="bg-muted/50">
+                                <TableHeader className="bg-muted/50 text-[10px] uppercase">
                                     <TableRow>
-                                        <TableHead className="w-[300px]">Item Details</TableHead>
-                                        <TableHead className="w-[120px]">Billing Qty</TableHead>
-                                        <TableHead className="w-[120px]">Rate</TableHead>
-                                        <TableHead className="w-[150px]">Amount</TableHead>
-                                        <TableHead className="w-[50px]"></TableHead>
+                                        <TableHead className="w-[250px]">Item Details</TableHead>
+                                        <TableHead className="w-[90px]">P. Type</TableHead>
+                                        <TableHead className="w-[70px]">Pkgs</TableHead>
+                                        <TableHead className="w-[70px]">Size</TableHead>
+                                        <TableHead className="w-[110px]">Billing Qty</TableHead>
+                                        <TableHead className="w-[100px]">Rate</TableHead>
+                                        <TableHead className="w-[120px]">Amount</TableHead>
+                                        {!readOnly && <TableHead className="w-[50px]"></TableHead>}
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
@@ -496,24 +573,14 @@ export function SalesInvoiceForm({
                                                     <div className="font-bold text-primary">{item.itemName}</div>
                                                     {item.isDoItem ? (
                                                         <div className="flex flex-wrap gap-2 mt-1">
-                                                            <div className="text-xs bg-muted px-2 py-1 rounded border border-border/50 flex items-center gap-1">
-                                                                <span className="text-muted-foreground font-semibold text-[10px] uppercase">Brand:</span>
-                                                                <span className="font-medium text-foreground">{brands.find(b => b.id === item.brandId)?.name || '-'}</span>
+                                                            <div className="text-[10px] bg-muted px-2 py-0.5 rounded border border-border/50">
+                                                                <span className="text-muted-foreground mr-1">BRAND:</span>
+                                                                {brands.find(b => b.id === item.brandId)?.name || '-'}
                                                             </div>
-                                                            <div className="text-xs bg-muted px-2 py-1 rounded border border-border/50 flex items-center gap-1">
-                                                                <span className="text-muted-foreground font-semibold text-[10px] uppercase">Color:</span>
-                                                                <span className="font-medium text-foreground">{colors.find(c => c.id === item.colorId)?.name || '-'}</span>
+                                                            <div className="text-[10px] bg-muted px-2 py-0.5 rounded border border-border/50">
+                                                                <span className="text-muted-foreground mr-1">COLOR:</span>
+                                                                {colors.find(c => c.id === item.colorId)?.name || '-'}
                                                             </div>
-                                                            <div className="text-xs bg-muted px-2 py-1 rounded border border-border/50 flex items-center gap-1">
-                                                                <span className="text-muted-foreground font-semibold text-[10px] uppercase">Grade:</span>
-                                                                <span className="font-medium text-foreground">{itemGrades.find(g => g.id === item.itemGradeId)?.name || '-'}</span>
-                                                            </div>
-                                                        </div>
-                                                    ) : invoiceMode === 'SO' ? (
-                                                        <div className="flex gap-2 text-[10px] text-muted-foreground uppercase tracking-wider">
-                                                            {item.orderedQty > 0 && <span>Ordered: {item.orderedQty}</span>}
-                                                            {item.alreadyInvoiced > 0 && <span className="text-blue-500">Billed: {item.alreadyInvoiced}</span>}
-                                                            <span>Remain: {item.remainingQty}</span>
                                                         </div>
                                                     ) : (
                                                         <div className="grid grid-cols-1 gap-2">
@@ -521,7 +588,7 @@ export function SalesInvoiceForm({
                                                                 value={item.itemMasterId}
                                                                 onValueChange={(val) => updateItem(idx, { itemMasterId: val })}
                                                             >
-                                                                <SelectTrigger className="h-9 truncate">
+                                                                <SelectTrigger className="h-8 text-[11px] truncate">
                                                                     <SelectValue placeholder="Select Product..." />
                                                                 </SelectTrigger>
                                                                 <SelectContent>
@@ -535,49 +602,80 @@ export function SalesInvoiceForm({
                                                 </div>
                                             </TableCell>
                                             <TableCell>
-                                                <div className="space-y-1">
+                                                <Select
+                                                    value={item.packingType || 'EVEN'}
+                                                    onValueChange={val => updateItem(idx, { packingType: val })}
+                                                    disabled={readOnly}
+                                                >
+                                                    <SelectTrigger className="h-8 text-[10px] capitalize">
+                                                        <SelectValue />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="EVEN">Even</SelectItem>
+                                                        <SelectItem value="UNEVEN">Uneven</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Input
+                                                    type="number"
+                                                    value={item.pcs || ''}
+                                                    step="0.01"
+                                                    className="h-8 text-xs text-center font-bold"
+                                                    onChange={e => updateItem(idx, { pcs: parseFloat(e.target.value) || 0 })}
+                                                    disabled={readOnly}
+                                                />
+                                            </TableCell>
+                                            <TableCell>
+                                                <Input
+                                                    type="number"
+                                                    value={item.unitSize || ''}
+                                                    step="0.01"
+                                                    className="h-8 text-xs text-center font-bold"
+                                                    onChange={e => updateItem(idx, { unitSize: parseFloat(e.target.value) || 0 })}
+                                                    disabled={readOnly}
+                                                />
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="flex items-center gap-1">
                                                     <Input
                                                         type="number"
                                                         value={item.invoicedQty || ''}
-                                                        placeholder="0.00"
+                                                        step="0.001"
+                                                        className={`h-8 text-xs font-bold text-right ${item.packingType === 'EVEN' ? 'bg-muted' : ''}`}
+                                                        disabled={readOnly || item.packingType === 'EVEN'}
                                                         onChange={e => updateItem(idx, { invoicedQty: parseFloat(e.target.value) || 0 })}
-                                                        disabled={readOnly || item.isDoItem}
-                                                        className={`h-9 font-medium border-primary/10 ${item.isDoItem ? 'bg-muted opacity-80 cursor-not-allowed' : ''}`}
                                                     />
-                                                    <div className="text-[10px] text-center font-semibold text-muted-foreground uppercase">{item.unitSymbol || item.packingLabel || 'Qty'}</div>
+                                                    <span className="text-[10px] text-muted-foreground">{item.unitSymbol}</span>
                                                 </div>
                                             </TableCell>
                                             <TableCell>
-                                                <div className="space-y-1">
-                                                    <Input
-                                                        type="number"
-                                                        value={item.rate || ''}
-                                                        placeholder="0.00"
-                                                        onChange={e => updateItem(idx, { rate: parseFloat(e.target.value) || 0 })}
-                                                        disabled={readOnly}
-                                                        className="h-9 font-medium border-primary/10"
-                                                    />
-                                                    <div className="text-[10px] text-center text-muted-foreground font-semibold">UNIT PRICE</div>
-                                                </div>
+                                                <Input
+                                                    type="number"
+                                                    value={item.rate || ''}
+                                                    step="0.01"
+                                                    className="h-8 text-xs font-bold text-right"
+                                                    onChange={e => updateItem(idx, { rate: parseFloat(e.target.value) || 0 })}
+                                                    disabled={readOnly}
+                                                />
                                             </TableCell>
                                             <TableCell>
-                                                <div className="text-right font-bold text-lg text-primary">
-                                                    {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(item.amount)}
+                                                <div className="text-right font-bold text-xs text-primary">
+                                                    {item.amount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                 </div>
                                             </TableCell>
-                                            <TableCell>
-                                                {!readOnly && (
+                                            {!readOnly && (
+                                                <TableCell>
                                                     <Button
-                                                        type="button"
                                                         variant="ghost"
                                                         size="icon"
                                                         onClick={() => removeRow(idx)}
-                                                        className="opacity-0 group-hover:opacity-100 text-destructive hover:bg-destructive/10 transition-all rounded-full"
+                                                        className="h-8 w-8 text-destructive opacity-0 group-hover:opacity-100 transition-opacity"
                                                     >
                                                         <Trash2 className="w-4 h-4" />
                                                     </Button>
-                                                )}
-                                            </TableCell>
+                                                </TableCell>
+                                            )}
                                         </TableRow>
                                     ))}
                                 </TableBody>

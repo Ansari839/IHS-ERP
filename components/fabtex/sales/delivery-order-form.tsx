@@ -25,6 +25,7 @@ interface DOFormProps {
     brands?: any[]
     itemGrades?: any[]
     packingUnits?: any[]
+    warehouses?: any[]
     initialData?: any
     doId?: string
     segment?: string
@@ -39,6 +40,7 @@ export function DeliveryOrderForm({
     brands = [],
     itemGrades = [],
     packingUnits = [],
+    warehouses = [],
     initialData,
     doId,
     segment = 'YARN'
@@ -55,6 +57,8 @@ export function DeliveryOrderForm({
     const [gatePassNo, setGatePassNo] = useState(initialData?.gatePassNo || '')
     const [vehicleNo, setVehicleNo] = useState(initialData?.vehicleNo || '')
     const [remarks, setRemarks] = useState(initialData?.remarks || '')
+    const [warehouseId, setWarehouseId] = useState<string>(initialData?.warehouseId?.toString() || '')
+    const [warehouseRefNo, setWarehouseRefNo] = useState(initialData?.warehouseRefNo || '')
 
     // Items State
     const [items, setItems] = useState<any[]>(initialData?.items?.map((it: any) => ({
@@ -207,6 +211,8 @@ export function DeliveryOrderForm({
         formData.append('gatePassNo', gatePassNo)
         formData.append('vehicleNo', vehicleNo)
         formData.append('remarks', remarks)
+        formData.append('warehouseId', warehouseId)
+        formData.append('warehouseRefNo', warehouseRefNo)
         formData.append('items', JSON.stringify(validItems))
         formData.append('segment', segment)
 
@@ -245,34 +251,36 @@ export function DeliveryOrderForm({
                     )}
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-muted/20 p-4 rounded-lg">
-                        {mode === 'SO' ? (
-                            <div className="space-y-2">
-                                <Label className="text-blue-600 font-semibold">Sales Order</Label>
-                                <Select onValueChange={onSOChange} value={selectedSO?.id} disabled={!!doId}>
-                                    <SelectTrigger className="bg-white">
-                                        <SelectValue placeholder="Select SO" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {salesOrders.map(so => (
-                                            <SelectItem key={so.id} value={so.id}>
-                                                {so.soNumber} - {so.account?.name || so.partyName}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        ) : (
-                            <div className="space-y-2">
-                                <Label className="text-blue-600 font-semibold">Customer (Direct)</Label>
-                                <Combobox
-                                    options={accounts.map(a => ({ label: a.name, value: a.id.toString() }))}
-                                    value={selectedAccountId}
-                                    onChange={setSelectedAccountId}
-                                    placeholder="Search customer..."
-                                />
-                            </div>
-                        )}
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 bg-muted/20 p-4 rounded-lg">
+                        <div className="md:col-span-2 space-y-2">
+                            {mode === 'SO' ? (
+                                <>
+                                    <Label className="text-blue-600 font-semibold">Sales Order</Label>
+                                    <Select onValueChange={onSOChange} value={selectedSO?.id} disabled={!!doId}>
+                                        <SelectTrigger className="bg-white">
+                                            <SelectValue placeholder="Select SO" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {salesOrders.map(so => (
+                                                <SelectItem key={so.id} value={so.id}>
+                                                    {so.soNumber} - {so.account?.name || so.partyName}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </>
+                            ) : (
+                                <>
+                                    <Label className="text-blue-600 font-semibold">Customer (Direct)</Label>
+                                    <Combobox
+                                        options={accounts.map(a => ({ label: a.name, value: a.id.toString() }))}
+                                        value={selectedAccountId}
+                                        onChange={setSelectedAccountId}
+                                        placeholder="Search customer..."
+                                    />
+                                </>
+                            )}
+                        </div>
                         <div className="space-y-2">
                             <Label className="font-semibold">DO Number</Label>
                             <Input value={doNumber} onChange={e => setDoNumber(e.target.value)} required className="bg-white font-mono uppercase" />
@@ -282,11 +290,29 @@ export function DeliveryOrderForm({
                             <Input type="date" value={date} onChange={e => setDate(e.target.value)} required className="bg-white" />
                         </div>
                         <div className="space-y-2">
-                            <Label className="font-semibold">Gate Pass No</Label>
+                            <Label className="font-semibold text-orange-600">Gate Pass No</Label>
                             <Input value={gatePassNo} onChange={e => setGatePassNo(e.target.value)} placeholder="GP-XXXX" className="bg-white" />
                         </div>
+
                         <div className="space-y-2">
-                            <Label className="font-semibold">Vehicle No</Label>
+                            <Label className="font-semibold text-emerald-600">Warehouse / Godown</Label>
+                            <Select value={warehouseId} onValueChange={setWarehouseId}>
+                                <SelectTrigger className="bg-white">
+                                    <SelectValue placeholder="Select Godown" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {warehouses.map(w => (
+                                        <SelectItem key={w.id} value={w.id.toString()}>{w.name}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="space-y-2">
+                            <Label className="font-semibold text-emerald-600">Godown Ref</Label>
+                            <Input value={warehouseRefNo} onChange={e => setWarehouseRefNo(e.target.value)} placeholder="Ref/Challan No" className="bg-white" />
+                        </div>
+                        <div className="space-y-2">
+                            <Label className="font-semibold text-blue-600 font-semibold">Vehicle No</Label>
                             <Input value={vehicleNo} onChange={e => setVehicleNo(e.target.value)} placeholder="Vehicle Reg No" className="bg-white" />
                         </div>
                         {selectedSO?.fileNo && (
@@ -354,6 +380,22 @@ export function DeliveryOrderForm({
                                     </Select>
                                 </div>
                                 <div className="space-y-2">
+                                    <Label className="text-xs">P. Type</Label>
+                                    <Select value={currentItem.packingType} onValueChange={(val) => {
+                                        setCurrentItem({
+                                            ...currentItem,
+                                            packingType: val,
+                                            deliveredQty: val === 'EVEN' ? currentItem.pcs * currentItem.unitSize : currentItem.deliveredQty
+                                        })
+                                    }}>
+                                        <SelectTrigger className="bg-white"><SelectValue placeholder="Type" /></SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="EVEN">Even</SelectItem>
+                                            <SelectItem value="UNEVEN">Uneven</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-2">
                                     <Label className="text-xs">P.Unit</Label>
                                     <Select value={currentItem.packingUnitId} onValueChange={(val) => setCurrentItem({ ...currentItem, packingUnitId: val })}>
                                         <SelectTrigger className="bg-white"><SelectValue placeholder="Unit" /></SelectTrigger>
@@ -365,7 +407,7 @@ export function DeliveryOrderForm({
                                 <div className="grid grid-cols-3 gap-2 md:col-span-2">
                                     <div className="space-y-2">
                                         <Label className="text-xs">Pcs/Pkgs</Label>
-                                        <Input type="number" className="bg-white" value={currentItem.pcs} onChange={e => {
+                                        <Input type="number" className="bg-white font-bold" value={currentItem.pcs || ''} onChange={e => {
                                             const pcs = parseFloat(e.target.value) || 0;
                                             setCurrentItem({
                                                 ...currentItem,
@@ -376,7 +418,7 @@ export function DeliveryOrderForm({
                                     </div>
                                     <div className="space-y-2">
                                         <Label className="text-xs">Unit Size</Label>
-                                        <Input type="number" className="bg-white" value={currentItem.unitSize} onChange={e => {
+                                        <Input type="number" className="bg-white font-bold" value={currentItem.unitSize || ''} onChange={e => {
                                             const sz = parseFloat(e.target.value) || 0;
                                             setCurrentItem({
                                                 ...currentItem,
@@ -386,8 +428,8 @@ export function DeliveryOrderForm({
                                         }} />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label className="text-xs font-bold">Total Qty</Label>
-                                        <Input type="number" className="bg-white" value={currentItem.deliveredQty} onChange={e => setCurrentItem({ ...currentItem, deliveredQty: parseFloat(e.target.value) || 0 })} disabled={currentItem.packingType === 'EVEN'} />
+                                        <Label className="text-xs font-bold text-primary">Total Qty</Label>
+                                        <Input type="number" className={`bg-white font-bold ${currentItem.packingType === 'EVEN' ? 'bg-muted' : ''}`} value={currentItem.deliveredQty || ''} onChange={e => setCurrentItem({ ...currentItem, deliveredQty: parseFloat(e.target.value) || 0 })} disabled={currentItem.packingType === 'EVEN'} />
                                     </div>
                                 </div>
                                 <div className="flex items-end pb-0.5">
@@ -431,20 +473,34 @@ export function DeliveryOrderForm({
                                                 </Badge>
                                             </TableCell>
                                             <TableCell>
-                                                <Badge variant="outline" className="text-[10px] capitalize">
-                                                    {item.packingType?.toLowerCase() || 'even'}
-                                                </Badge>
+                                                <Select
+                                                    value={item.packingType || 'EVEN'}
+                                                    onValueChange={val => {
+                                                        setItems(prev => prev.map((it, i) => {
+                                                            if (i === idx) {
+                                                                const newRaw = { ...it, packingType: val }
+                                                                if (val === 'EVEN') {
+                                                                    newRaw.deliveredQty = (it.pcs || 0) * (it.unitSize || 0)
+                                                                }
+                                                                return newRaw
+                                                            }
+                                                            return it
+                                                        }))
+                                                    }}
+                                                >
+                                                    <SelectTrigger className="h-8 text-[10px] capitalize">
+                                                        <SelectValue />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="EVEN">Even</SelectItem>
+                                                        <SelectItem value="UNEVEN">Uneven</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
                                             </TableCell>
-                                            {mode === 'SO' && (
-                                                <TableCell>
-                                                    <div className="text-[10px] font-medium text-blue-600">Ord: {item.orderedQty}</div>
-                                                    <div className="text-[10px] font-medium text-orange-600">Rem: {item.remainingQty}</div>
-                                                </TableCell>
-                                            )}
                                             <TableCell>
                                                 <Input
                                                     type="number"
-                                                    value={item.pcs}
+                                                    value={item.pcs || ''}
                                                     step="0.01"
                                                     className="h-8 text-xs text-center font-bold"
                                                     onChange={e => {
@@ -465,7 +521,7 @@ export function DeliveryOrderForm({
                                             <TableCell>
                                                 <Input
                                                     type="number"
-                                                    value={item.unitSize}
+                                                    value={item.unitSize || ''}
                                                     step="0.01"
                                                     className="h-8 text-xs text-center font-bold"
                                                     onChange={e => {
@@ -487,7 +543,7 @@ export function DeliveryOrderForm({
                                                 <div className="flex items-center gap-1">
                                                     <Input
                                                         type="number"
-                                                        value={item.deliveredQty}
+                                                        value={item.deliveredQty || ''}
                                                         step="0.01"
                                                         className={`h-8 text-xs font-bold text-right ${item.packingType === 'EVEN' ? 'bg-muted' : ''}`}
                                                         disabled={item.packingType === 'EVEN'}

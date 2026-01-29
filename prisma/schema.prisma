@@ -152,6 +152,8 @@ model Warehouse {
   
   // Sales Relations
   salesOrders    SalesOrder[]
+  deliveryOrders  DeliveryOrder[]
+  salesInvoices   SalesInvoice[]
 }
 
 model UserWarehouse {
@@ -1060,6 +1062,10 @@ model DeliveryOrder {
   vehicleNo       String?
   gatePassNo      String?
   
+  warehouseId     Int?
+  warehouse       Warehouse?     @relation(fields: [warehouseId], references: [id])
+  warehouseRefNo  String?
+  
   remarks         String?
   
   companyId       Int
@@ -1123,6 +1129,10 @@ model SalesInvoice {
   accountId       Int?
   account         Account?              @relation(fields: [accountId], references: [id])
   
+  warehouseId     Int?
+  warehouse       Warehouse?            @relation(fields: [warehouseId], references: [id])
+  warehouseRefNo  String?
+  
   totalAmount     Float                 @default(0.0)
   status          String                @default("UNPAID")
   
@@ -1169,6 +1179,11 @@ model SalesInvoiceItem {
   invoicedQty         Float
   rate                Float
   amount              Float
+  
+  // Packing Details
+  pcs                 Float?            // Packages
+  unitSize            Float?            // Qty per package
+  packingType         PackingType?
   
   returnItems         SalesReturnItem[]
   

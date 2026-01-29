@@ -17,6 +17,8 @@ export async function getSalesOrdersForDO() {
         },
         include: {
             account: true,
+            company: true,
+            warehouse: true,
             items: {
                 include: {
                     itemMaster: true,
@@ -42,7 +44,7 @@ export async function getSalesOrdersForDO() {
 }
 
 export async function getDOFormData() {
-    const [salesOrders, accounts, itemMasters, units, colors, brands, itemGrades, packingUnits] = await Promise.all([
+    const [salesOrders, accounts, itemMasters, units, colors, brands, itemGrades, packingUnits, warehouses] = await Promise.all([
         getSalesOrdersForDO(),
         prisma.account.findMany({
             where: { isPosting: true },
@@ -56,7 +58,8 @@ export async function getDOFormData() {
         prisma.color.findMany({ orderBy: { name: 'asc' } }),
         prisma.brand.findMany({ orderBy: { name: 'asc' } }),
         prisma.itemGrade.findMany({ orderBy: { name: 'asc' } }),
-        prisma.packingUnit.findMany({ orderBy: { name: 'asc' } })
+        prisma.packingUnit.findMany({ orderBy: { name: 'asc' } }),
+        prisma.warehouse.findMany({ where: { status: 'ACTIVE' }, orderBy: { name: 'asc' } })
     ])
 
     return {
@@ -67,7 +70,8 @@ export async function getDOFormData() {
         colors,
         brands,
         itemGrades,
-        packingUnits
+        packingUnits,
+        warehouses
     }
 }
 
@@ -85,6 +89,8 @@ export async function createDeliveryOrder(prevState: DOState, formData: FormData
         const date = formData.get('date') as string
         const gatePassNo = formData.get('gatePassNo') as string
         const vehicleNo = formData.get('vehicleNo') as string
+        const warehouseId = formData.get('warehouseId') ? parseInt(formData.get('warehouseId') as string, 10) : null
+        const warehouseRefNo = formData.get('warehouseRefNo') as string
         const remarks = formData.get('remarks') as string
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
@@ -101,6 +107,8 @@ export async function createDeliveryOrder(prevState: DOState, formData: FormData
                 accountId: accountId ? parseInt(accountId, 10) : null,
                 gatePassNo: gatePassNo || null,
                 vehicleNo: vehicleNo || null,
+                warehouseId,
+                warehouseRefNo: warehouseRefNo || null,
                 remarks,
                 companyId: company.id,
                 segment: (formData.get('segment') as any) || 'GENERAL',
@@ -141,6 +149,8 @@ export async function updateDeliveryOrder(id: string, prevState: DOState, formDa
         const date = formData.get('date') as string
         const gatePassNo = formData.get('gatePassNo') as string
         const vehicleNo = formData.get('vehicleNo') as string
+        const warehouseId = formData.get('warehouseId') ? parseInt(formData.get('warehouseId') as string, 10) : null
+        const warehouseRefNo = formData.get('warehouseRefNo') as string
         const remarks = formData.get('remarks') as string
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
@@ -159,6 +169,8 @@ export async function updateDeliveryOrder(id: string, prevState: DOState, formDa
                 accountId: accountId ? parseInt(accountId, 10) : null,
                 gatePassNo: gatePassNo || null,
                 vehicleNo: vehicleNo || null,
+                warehouseId,
+                warehouseRefNo: warehouseRefNo || null,
                 remarks,
                 segment: (formData.get('segment') as any) || 'GENERAL',
                 items: {

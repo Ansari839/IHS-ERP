@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
 
 export async function getInvoiceFormData() {
-    const [{ sos: salesOrders, allEligibleDOs }, accounts, itemMasters, units, colors, brands, itemGrades, packingUnits] = await Promise.all([
+    const [{ sos: salesOrders, allEligibleDOs }, accounts, itemMasters, units, colors, brands, itemGrades, packingUnits, warehouses] = await Promise.all([
         getEligibleForInvoicing(),
         prisma.account.findMany({
             where: { isPosting: true },
@@ -19,7 +19,8 @@ export async function getInvoiceFormData() {
         prisma.color.findMany({ orderBy: { name: 'asc' } }),
         prisma.brand.findMany({ orderBy: { name: 'asc' } }),
         prisma.itemGrade.findMany({ orderBy: { name: 'asc' } }),
-        prisma.packingUnit.findMany({ orderBy: { name: 'asc' } })
+        prisma.packingUnit.findMany({ orderBy: { name: 'asc' } }),
+        prisma.warehouse.findMany({ where: { status: 'ACTIVE' }, orderBy: { name: 'asc' } })
     ])
 
     return {
@@ -31,7 +32,8 @@ export async function getInvoiceFormData() {
         brands,
         itemGrades,
         packingUnits,
-        allEligibleDOs
+        allEligibleDOs,
+        warehouses
     }
 }
 
@@ -148,6 +150,8 @@ export async function createSalesInvoice(prevState: InvoiceState, formData: Form
         const invoiceNumber = formData.get('invoiceNumber') as string
         const date = formData.get('date') as string
         const status = formData.get('status') as string || 'UNPAID'
+        const warehouseId = formData.get('warehouseId') ? parseInt(formData.get('warehouseId') as string, 10) : null
+        const warehouseRefNo = formData.get('warehouseRefNo') as string
         const remarks = formData.get('remarks') as string
 
         const itemsJson = formData.get('items') as string
@@ -167,6 +171,8 @@ export async function createSalesInvoice(prevState: InvoiceState, formData: Form
                 date: new Date(date),
                 salesOrderId: salesOrderId || undefined,
                 accountId,
+                warehouseId,
+                warehouseRefNo: warehouseRefNo || null,
                 remarks,
                 totalAmount,
                 status,
@@ -183,7 +189,10 @@ export async function createSalesInvoice(prevState: InvoiceState, formData: Form
                         unitId: item.unitId ? parseInt(item.unitId) : null,
                         invoicedQty: parseFloat(item.invoicedQty),
                         rate: parseFloat(item.rate),
-                        amount: parseFloat(item.amount)
+                        amount: parseFloat(item.amount),
+                        pcs: item.pcs ? parseFloat(item.pcs) : null,
+                        unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
+                        packingType: item.packingType || null
                     }))
                 }
             }
@@ -208,6 +217,8 @@ export async function updateSalesInvoice(invoiceId: string, prevState: InvoiceSt
         const invoiceNumber = formData.get('invoiceNumber') as string
         const date = formData.get('date') as string
         const status = formData.get('status') as string || 'UNPAID'
+        const warehouseId = formData.get('warehouseId') ? parseInt(formData.get('warehouseId') as string, 10) : null
+        const warehouseRefNo = formData.get('warehouseRefNo') as string
         const remarks = formData.get('remarks') as string
 
         const itemsJson = formData.get('items') as string
@@ -226,6 +237,8 @@ export async function updateSalesInvoice(invoiceId: string, prevState: InvoiceSt
                 date: new Date(date),
                 salesOrderId: salesOrderId || null,
                 accountId,
+                warehouseId,
+                warehouseRefNo: warehouseRefNo || null,
                 remarks,
                 totalAmount,
                 status,
@@ -242,7 +255,10 @@ export async function updateSalesInvoice(invoiceId: string, prevState: InvoiceSt
                         unitId: item.unitId ? parseInt(item.unitId) : null,
                         invoicedQty: parseFloat(item.invoicedQty),
                         rate: parseFloat(item.rate),
-                        amount: parseFloat(item.amount)
+                        amount: parseFloat(item.amount),
+                        pcs: item.pcs ? parseFloat(item.pcs) : null,
+                        unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
+                        packingType: item.packingType || null
                     }))
                 }
             }
@@ -316,6 +332,7 @@ export async function getSalesInvoiceById(id: string) {
             },
             account: true,
             company: true,
+            warehouse: true,
             items: {
                 include: {
                     salesOrderItem: {

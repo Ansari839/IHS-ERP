@@ -692,6 +692,8 @@ exports.Prisma.DeliveryOrderScalarFieldEnum = {
   driverName: 'driverName',
   vehicleNo: 'vehicleNo',
   gatePassNo: 'gatePassNo',
+  warehouseId: 'warehouseId',
+  warehouseRefNo: 'warehouseRefNo',
   remarks: 'remarks',
   companyId: 'companyId',
   segment: 'segment',
@@ -723,6 +725,8 @@ exports.Prisma.SalesInvoiceScalarFieldEnum = {
   date: 'date',
   salesOrderId: 'salesOrderId',
   accountId: 'accountId',
+  warehouseId: 'warehouseId',
+  warehouseRefNo: 'warehouseRefNo',
   totalAmount: 'totalAmount',
   status: 'status',
   remarks: 'remarks',
@@ -745,6 +749,9 @@ exports.Prisma.SalesInvoiceItemScalarFieldEnum = {
   invoicedQty: 'invoicedQty',
   rate: 'rate',
   amount: 'amount',
+  pcs: 'pcs',
+  unitSize: 'unitSize',
+  packingType: 'packingType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
