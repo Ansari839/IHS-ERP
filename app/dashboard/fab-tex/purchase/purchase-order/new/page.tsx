@@ -1,4 +1,6 @@
 
+export const dynamic = 'force-dynamic'
+
 import { PurchaseOrderForm } from '@/components/fabtex/purchase-order/purchase-order-form'
 import { getItemMasters } from '@/app/actions/fabtex/item-master'
 import { getColors } from '@/app/actions/fabtex/colors'
@@ -6,16 +8,18 @@ import { getBrands } from '@/app/actions/fabtex/brands'
 import { getItemGrades } from '@/app/actions/fabtex/item-grades'
 import { getUoms } from '@/app/actions/fabtex/uom'
 import { getWarehouses } from '@/app/actions/warehouses'
+import { getPackingUnits } from '@/app/actions/fabtex/packing-unit'
 import prisma from '@/lib/prisma'
 
 export default async function NewPurchaseOrderPage() {
-    const [items, colors, brands, itemGrades, units, warehouses] = await Promise.all([
+    const [items, colors, brands, itemGrades, units, warehouses, packingUnits] = await Promise.all([
         getItemMasters(),
         getColors(),
         getBrands(),
         getItemGrades(),
         getUoms(),
-        getWarehouses()
+        getWarehouses(),
+        getPackingUnits()
     ])
 
     // For accounts, we'll fetch posting accounts (Vendors usually fall under Liabilities/Assets depending on accounting setup)
@@ -40,6 +44,7 @@ export default async function NewPurchaseOrderPage() {
                 units={units}
                 warehouses={warehouses}
                 accounts={accounts}
+                packingUnits={packingUnits}
             />
         </div>
     )

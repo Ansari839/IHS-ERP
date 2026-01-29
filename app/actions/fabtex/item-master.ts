@@ -12,6 +12,7 @@ const itemMasterSchema = z.object({
     hsCode: z.string().optional(),
     itemGroupId: z.string().min(1, "Item Group is required"),
     baseUnitId: z.coerce.number().min(1, "Base Unit is required"),
+    packingUnitId: z.string().optional().nullable(),
     imageUrl: z.string().optional(),
 });
 
@@ -21,7 +22,7 @@ export type ItemMasterState = {
     data?: any;
 };
 
-export async function getItemMasters() {
+export async function getItemMasters(segment?: string) {
     try {
         const user = await getCurrentUser();
         if (!user) return [];
@@ -35,10 +36,14 @@ export async function getItemMasters() {
         }
 
         const items = await prisma.itemMaster.findMany({
-            where: { companyId: company.id },
+            where: {
+                companyId: company.id,
+                ...(segment && { segment: segment as any })
+            },
             include: {
                 itemGroup: true,
                 baseUnit: true,
+                packingUnit: true,
             },
             orderBy: { createdAt: 'desc' }
         });
@@ -62,6 +67,7 @@ export async function createItemMaster(prevState: ItemMasterState, formData: For
     const hsCode = formData.get('hsCode') as string;
     const itemGroupId = formData.get('itemGroupId') as string;
     const baseUnitId = formData.get('baseUnitId');
+    const packingUnitId = formData.get('packingUnitId') as string;
     const imageUrl = formData.get('imageUrl') as string;
 
     // Check if image file exists and upload if it does (for simplicity, we assume Client handles upload or we just save URL for now if using existing upload logic)
@@ -85,7 +91,7 @@ export async function createItemMaster(prevState: ItemMasterState, formData: For
 
 
     const validated = itemMasterSchema.safeParse({
-        name, shortDescription, status, hsCode, itemGroupId, baseUnitId, imageUrl: finalImageUrl
+        name, shortDescription, status, hsCode, itemGroupId, baseUnitId, packingUnitId, imageUrl: finalImageUrl
     });
 
     if (!validated.success) {
@@ -122,7 +128,9 @@ export async function createItemMaster(prevState: ItemMasterState, formData: For
                 imageUrl: validated.data.imageUrl,
                 itemGroupId: validated.data.itemGroupId,
                 baseUnitId: validated.data.baseUnitId,
-                companyId: company.id
+                packingUnitId: validated.data.packingUnitId || null,
+                companyId: company.id,
+                segment: (formData.get('segment') as any) || 'GENERAL'
             }
         });
 
@@ -144,6 +152,7 @@ export async function updateItemMaster(id: string, prevState: ItemMasterState, f
     const hsCode = formData.get('hsCode') as string;
     const itemGroupId = formData.get('itemGroupId') as string;
     const baseUnitId = formData.get('baseUnitId');
+    const packingUnitId = formData.get('packingUnitId') as string;
     let imageUrl = formData.get('imageUrl') as string;
 
     const imageFile = formData.get('imageFile') as File | null;
@@ -159,7 +168,7 @@ export async function updateItemMaster(id: string, prevState: ItemMasterState, f
     }
 
     const validated = itemMasterSchema.safeParse({
-        name, shortDescription, status, hsCode, itemGroupId, baseUnitId, imageUrl
+        name, shortDescription, status, hsCode, itemGroupId, baseUnitId, packingUnitId, imageUrl
     });
 
     if (!validated.success) {
@@ -177,6 +186,7 @@ export async function updateItemMaster(id: string, prevState: ItemMasterState, f
                 imageUrl: validated.data.imageUrl,
                 itemGroupId: validated.data.itemGroupId,
                 baseUnitId: validated.data.baseUnitId,
+                packingUnitId: validated.data.packingUnitId || null,
             }
         });
         revalidatePath('/dashboard/fab-tex/products/item-master');

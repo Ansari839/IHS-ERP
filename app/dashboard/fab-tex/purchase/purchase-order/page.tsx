@@ -8,8 +8,8 @@ import { Plus } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
-export default async function PurchaseOrderPage() {
-    const data = await getPurchaseOrders()
+export default async function PurchaseOrderList() {
+    const data = await getPurchaseOrders('YARN')
 
     return (
         <div className="space-y-6 p-8">

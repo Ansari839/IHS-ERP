@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { getItemMasters } from "@/app/actions/fabtex/item-master";
+import { getPackingUnits } from "@/app/actions/fabtex/packing-unit";
 import { getItemGroups } from "@/app/actions/fabtex/item-groups";
 import { getUoms } from "@/app/actions/fabtex/uom";
 import { ItemMasterClient } from "@/components/fabtex/item-master/item-master-client";
@@ -9,10 +10,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 export const dynamic = "force-dynamic";
 
 async function ItemMasterList() {
-    const [data, itemGroups, units] = await Promise.all([
-        getItemMasters(),
+    const [data, itemGroups, units, packingUnits] = await Promise.all([
+        getItemMasters('YARN'),
         getItemGroups(),
-        getUoms()
+        getUoms(),
+        getPackingUnits()
     ]);
 
     // Transform dates to strings or keep as Date if Client Component handles it. 
@@ -36,14 +38,16 @@ async function ItemMasterList() {
             data={data as any}
             itemGroups={itemGroups}
             units={units}
+            packingUnits={packingUnits}
         />
     );
 }
 
 async function ItemMasterHeader() {
-    const [itemGroups, units] = await Promise.all([
+    const [itemGroups, units, packingUnits] = await Promise.all([
         getItemGroups(),
-        getUoms()
+        getUoms(),
+        getPackingUnits()
     ]);
 
     return (
@@ -54,7 +58,11 @@ async function ItemMasterHeader() {
                     Manage master items for production.
                 </p>
             </div>
-            <ItemMasterForm itemGroups={itemGroups} units={units} />
+            <ItemMasterForm
+                itemGroups={itemGroups}
+                units={units}
+                packingUnits={packingUnits}
+            />
         </div>
     )
 }

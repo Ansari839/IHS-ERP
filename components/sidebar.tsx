@@ -30,6 +30,7 @@ import {
     Box,
     Award,
     Layers,
+    Undo2,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -76,6 +77,7 @@ const navigation: NavigationItem[] = [
                     { name: "Units & Conversions", href: "/dashboard/fab-tex/products/uom", icon: Scale, permission: "read:inventory" },
                     { name: "Item Packing", href: "/dashboard/fab-tex/products/item-packing", icon: Box, permission: "read:inventory" },
                     { name: "Item Grade", href: "/dashboard/fab-tex/products/item-grade", icon: Award, permission: "read:inventory" },
+                    { name: "Warehouses", href: "/dashboard/fab-tex/warehouses", icon: Warehouse, permission: "read:inventory" },
                 ]
             },
             {
@@ -85,10 +87,28 @@ const navigation: NavigationItem[] = [
                     { name: "Purchase Order", href: "/dashboard/fab-tex/purchase/purchase-order", icon: Layers, permission: "read:inventory" },
                     { name: "Goods Receipt Note (GRN)", href: "/dashboard/fab-tex/purchase/grn", icon: Package, permission: "read:inventory" },
                     { name: "Purchase Invoice", href: "/dashboard/fab-tex/purchase/invoice", icon: Receipt, permission: "read:inventory" },
+                    { name: "Purchase Return", href: "/dashboard/fab-tex/purchase/purchase-return", icon: Undo2, permission: "read:inventory" },
                     { name: "Vendors", href: "/dashboard/fab-tex/purchase/vendors", icon: Users, permission: "read:inventory" },
                 ]
             },
-            { name: "Sale", href: "/dashboard/fab-tex/sales", icon: Banknote, permission: "read:inventory" },
+            {
+                name: "Sale",
+                icon: Banknote,
+                children: [
+                    { name: "Sales Order", href: "/dashboard/fab-tex/sales/sales-order", icon: Layers, permission: "read:inventory" },
+                    { name: "Delivery Order (DO)", href: "/dashboard/fab-tex/sales/delivery-order", icon: Package, permission: "read:inventory" },
+                    { name: "Sales Invoice", href: "/dashboard/fab-tex/sales/invoice", icon: Receipt, permission: "read:inventory" },
+                    { name: "Sales Return", href: "/dashboard/fab-tex/sales/sales-return", icon: Undo2, permission: "read:inventory" },
+                    { name: "Customers", href: "/dashboard/fab-tex/sales/customers", icon: Users, permission: "read:inventory" },
+                ]
+            },
+            {
+                name: "Reports",
+                icon: BarChart3,
+                children: [
+                    { name: "Stock Ledger", href: "/dashboard/fab-tex/reports/stock", icon: ScrollText, permission: "read:reports" },
+                ]
+            },
         ]
     },
     {

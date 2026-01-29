@@ -213,6 +213,7 @@ exports.Prisma.WarehouseScalarFieldEnum = {
   contactPerson: 'contactPerson',
   contactNumbers: 'contactNumbers',
   status: 'status',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -242,6 +243,7 @@ exports.Prisma.UnitConversionScalarFieldEnum = {
   toUnitId: 'toUnitId',
   conversionRate: 'conversionRate',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -386,8 +388,14 @@ exports.Prisma.AccountScalarFieldEnum = {
   description: 'description',
   openingBalance: 'openingBalance',
   openingBalanceType: 'openingBalanceType',
+  segment: 'segment',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  brokerName: 'brokerName',
+  contactPerson: 'contactPerson',
+  phone: 'phone',
+  email: 'email',
+  taxId: 'taxId'
 };
 
 exports.Prisma.JournalEntryScalarFieldEnum = {
@@ -428,6 +436,7 @@ exports.Prisma.ItemGroupScalarFieldEnum = {
   status: 'status',
   parentId: 'parentId',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -463,6 +472,17 @@ exports.Prisma.ItemGradeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PackingUnitScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  symbol: 'symbol',
+  status: 'status',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ItemMasterScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -473,7 +493,9 @@ exports.Prisma.ItemMasterScalarFieldEnum = {
   imageUrl: 'imageUrl',
   itemGroupId: 'itemGroupId',
   baseUnitId: 'baseUnitId',
+  packingUnitId: 'packingUnitId',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -495,6 +517,7 @@ exports.Prisma.PurchaseOrderScalarFieldEnum = {
   currencyId: 'currencyId',
   exchangeRate: 'exchangeRate',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -506,6 +529,7 @@ exports.Prisma.PurchaseOrderItemScalarFieldEnum = {
   colorId: 'colorId',
   brandId: 'brandId',
   itemGradeId: 'itemGradeId',
+  packingUnitId: 'packingUnitId',
   packingType: 'packingType',
   pcs: 'pcs',
   unitSize: 'unitSize',
@@ -523,8 +547,11 @@ exports.Prisma.GRNScalarFieldEnum = {
   grnNumber: 'grnNumber',
   date: 'date',
   purchaseOrderId: 'purchaseOrderId',
+  lotNo: 'lotNo',
+  warehouseRefNo: 'warehouseRefNo',
   remarks: 'remarks',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -537,8 +564,11 @@ exports.Prisma.GRNItemScalarFieldEnum = {
   colorId: 'colorId',
   brandId: 'brandId',
   itemGradeId: 'itemGradeId',
+  packingUnitId: 'packingUnitId',
   receivedQty: 'receivedQty',
   pcs: 'pcs',
+  unitSize: 'unitSize',
+  packingType: 'packingType',
   unitId: 'unitId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -548,10 +578,14 @@ exports.Prisma.PurchaseInvoiceScalarFieldEnum = {
   id: 'id',
   invoiceNumber: 'invoiceNumber',
   date: 'date',
+  supplierInvoiceNo: 'supplierInvoiceNo',
+  remarks: 'remarks',
   purchaseOrderId: 'purchaseOrderId',
+  accountId: 'accountId',
   totalAmount: 'totalAmount',
   status: 'status',
   companyId: 'companyId',
+  segment: 'segment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -561,7 +595,194 @@ exports.Prisma.PurchaseInvoiceItemScalarFieldEnum = {
   invoiceId: 'invoiceId',
   purchaseOrderItemId: 'purchaseOrderItemId',
   grnItemId: 'grnItemId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  unitId: 'unitId',
   invoicedQty: 'invoicedQty',
+  rate: 'rate',
+  amount: 'amount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseReturnScalarFieldEnum = {
+  id: 'id',
+  returnNumber: 'returnNumber',
+  date: 'date',
+  remarks: 'remarks',
+  purchaseInvoiceId: 'purchaseInvoiceId',
+  grnId: 'grnId',
+  accountId: 'accountId',
+  totalAmount: 'totalAmount',
+  status: 'status',
+  companyId: 'companyId',
+  segment: 'segment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseReturnItemScalarFieldEnum = {
+  id: 'id',
+  returnId: 'returnId',
+  purchaseInvoiceItemId: 'purchaseInvoiceItemId',
+  grnItemId: 'grnItemId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  unitId: 'unitId',
+  returnedQty: 'returnedQty',
+  rate: 'rate',
+  amount: 'amount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SalesOrderScalarFieldEnum = {
+  id: 'id',
+  soNumber: 'soNumber',
+  type: 'type',
+  status: 'status',
+  date: 'date',
+  accountId: 'accountId',
+  partyName: 'partyName',
+  brokerName: 'brokerName',
+  warehouseId: 'warehouseId',
+  referenceNo: 'referenceNo',
+  documentDate: 'documentDate',
+  fileNo: 'fileNo',
+  remarks: 'remarks',
+  totalAmount: 'totalAmount',
+  currencyId: 'currencyId',
+  exchangeRate: 'exchangeRate',
+  companyId: 'companyId',
+  segment: 'segment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SalesOrderItemScalarFieldEnum = {
+  id: 'id',
+  salesOrderId: 'salesOrderId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  packingUnitId: 'packingUnitId',
+  packingType: 'packingType',
+  pcs: 'pcs',
+  unitSize: 'unitSize',
+  quantity: 'quantity',
+  unitId: 'unitId',
+  rate: 'rate',
+  amount: 'amount',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DeliveryOrderScalarFieldEnum = {
+  id: 'id',
+  doNumber: 'doNumber',
+  date: 'date',
+  salesOrderId: 'salesOrderId',
+  accountId: 'accountId',
+  driverName: 'driverName',
+  vehicleNo: 'vehicleNo',
+  gatePassNo: 'gatePassNo',
+  warehouseId: 'warehouseId',
+  warehouseRefNo: 'warehouseRefNo',
+  remarks: 'remarks',
+  companyId: 'companyId',
+  segment: 'segment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DeliveryOrderItemScalarFieldEnum = {
+  id: 'id',
+  deliveryOrderId: 'deliveryOrderId',
+  salesOrderItemId: 'salesOrderItemId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  packingUnitId: 'packingUnitId',
+  deliveredQty: 'deliveredQty',
+  pcs: 'pcs',
+  unitSize: 'unitSize',
+  packingType: 'packingType',
+  unitId: 'unitId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SalesInvoiceScalarFieldEnum = {
+  id: 'id',
+  invoiceNumber: 'invoiceNumber',
+  date: 'date',
+  salesOrderId: 'salesOrderId',
+  accountId: 'accountId',
+  warehouseId: 'warehouseId',
+  warehouseRefNo: 'warehouseRefNo',
+  totalAmount: 'totalAmount',
+  status: 'status',
+  remarks: 'remarks',
+  companyId: 'companyId',
+  segment: 'segment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SalesInvoiceItemScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  salesOrderItemId: 'salesOrderItemId',
+  deliveryOrderItemId: 'deliveryOrderItemId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  unitId: 'unitId',
+  invoicedQty: 'invoicedQty',
+  rate: 'rate',
+  amount: 'amount',
+  pcs: 'pcs',
+  unitSize: 'unitSize',
+  packingType: 'packingType',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SalesReturnScalarFieldEnum = {
+  id: 'id',
+  returnNumber: 'returnNumber',
+  date: 'date',
+  remarks: 'remarks',
+  salesInvoiceId: 'salesInvoiceId',
+  deliveryOrderId: 'deliveryOrderId',
+  accountId: 'accountId',
+  totalAmount: 'totalAmount',
+  status: 'status',
+  companyId: 'companyId',
+  segment: 'segment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SalesReturnItemScalarFieldEnum = {
+  id: 'id',
+  returnId: 'returnId',
+  salesInvoiceItemId: 'salesInvoiceItemId',
+  deliveryOrderItemId: 'deliveryOrderItemId',
+  itemMasterId: 'itemMasterId',
+  colorId: 'colorId',
+  brandId: 'brandId',
+  itemGradeId: 'itemGradeId',
+  unitId: 'unitId',
+  returnedQty: 'returnedQty',
   rate: 'rate',
   amount: 'amount',
   createdAt: 'createdAt',
@@ -593,6 +814,12 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+exports.BusinessSegment = exports.$Enums.BusinessSegment = {
+  GENERAL: 'GENERAL',
+  YARN: 'YARN',
+  FABRIC: 'FABRIC'
+};
+
 exports.ProductType = exports.$Enums.ProductType = {
   YARN: 'YARN',
   FABRIC: 'FABRIC',
@@ -643,6 +870,19 @@ exports.PackingType = exports.$Enums.PackingType = {
   UNEVEN: 'UNEVEN'
 };
 
+exports.SalesOrderType = exports.$Enums.SalesOrderType = {
+  LOCAL: 'LOCAL',
+  EXPORT: 'EXPORT'
+};
+
+exports.SalesOrderStatus = exports.$Enums.SalesOrderStatus = {
+  DRAFT: 'DRAFT',
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   AuditAccess: 'AuditAccess',
@@ -678,13 +918,24 @@ exports.Prisma.ModelName = {
   Color: 'Color',
   Brand: 'Brand',
   ItemGrade: 'ItemGrade',
+  PackingUnit: 'PackingUnit',
   ItemMaster: 'ItemMaster',
   PurchaseOrder: 'PurchaseOrder',
   PurchaseOrderItem: 'PurchaseOrderItem',
   GRN: 'GRN',
   GRNItem: 'GRNItem',
   PurchaseInvoice: 'PurchaseInvoice',
-  PurchaseInvoiceItem: 'PurchaseInvoiceItem'
+  PurchaseInvoiceItem: 'PurchaseInvoiceItem',
+  PurchaseReturn: 'PurchaseReturn',
+  PurchaseReturnItem: 'PurchaseReturnItem',
+  SalesOrder: 'SalesOrder',
+  SalesOrderItem: 'SalesOrderItem',
+  DeliveryOrder: 'DeliveryOrder',
+  DeliveryOrderItem: 'DeliveryOrderItem',
+  SalesInvoice: 'SalesInvoice',
+  SalesInvoiceItem: 'SalesInvoiceItem',
+  SalesReturn: 'SalesReturn',
+  SalesReturnItem: 'SalesReturnItem'
 };
 
 /**

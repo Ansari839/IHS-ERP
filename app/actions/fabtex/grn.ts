@@ -11,7 +11,7 @@ export type GRNState = {
 }
 
 export async function getPurchaseOrdersForGRN() {
-    return await prisma.purchaseOrder.findMany({
+    const pos = await prisma.purchaseOrder.findMany({
         where: {
             status: { in: ['APPROVED', 'PENDING', 'DRAFT', 'COMPLETED'] }
         },
@@ -24,11 +24,20 @@ export async function getPurchaseOrdersForGRN() {
                     brand: true,
                     itemGrade: true,
                     unit: true,
+                    packingUnit: true,
                     grnItems: true
                 }
             }
         },
         orderBy: { createdAt: 'desc' }
+    })
+
+    // Filter POs that have remaining quantity to be received
+    return pos.filter(po => {
+        return po.items.some(item => {
+            const totalReceived = (item.grnItems || []).reduce((sum, grnItem) => sum + (grnItem.receivedQty || 0), 0)
+            return (item.quantity || 0) > totalReceived
+        })
     })
 }
 
@@ -43,6 +52,8 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
         const poId = formData.get('purchaseOrderId') as string
         const grnNumber = formData.get('grnNumber') as string
         const date = formData.get('date') as string
+        const lotNo = formData.get('lotNo') as string
+        const warehouseRefNo = formData.get('warehouseRefNo') as string
         const remarks = formData.get('remarks') as string
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
@@ -56,8 +67,11 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
                 grnNumber,
                 date: new Date(date),
                 purchaseOrderId: poId,
+                lotNo: lotNo || null,
+                warehouseRefNo: warehouseRefNo || null,
                 remarks,
                 companyId: company.id,
+                segment: (formData.get('segment') as any) || 'GENERAL',
                 items: {
                     create: items.map((item: any) => ({
                         purchaseOrderItemId: item.purchaseOrderItemId,
@@ -67,6 +81,9 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
                         itemGradeId: item.itemGradeId || null,
                         receivedQty: parseFloat(item.receivedQty),
                         pcs: item.pcs ? parseFloat(item.pcs) : null,
+                        unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
+                        packingType: item.packingType || null,
+                        packingUnitId: (item.packingUnitId && item.packingUnitId !== 'none') ? item.packingUnitId : null,
                         unitId: item.unitId ? parseInt(item.unitId, 10) : null,
                     }))
                 }
@@ -88,6 +105,8 @@ export async function updateGRN(id: string, prevState: GRNState, formData: FormD
 
         const grnNumber = formData.get('grnNumber') as string
         const date = formData.get('date') as string
+        const lotNo = formData.get('lotNo') as string
+        const warehouseRefNo = formData.get('warehouseRefNo') as string
         const remarks = formData.get('remarks') as string
         const itemsJson = formData.get('items') as string
         const items = JSON.parse(itemsJson)
@@ -96,34 +115,35 @@ export async function updateGRN(id: string, prevState: GRNState, formData: FormD
             return { success: false, error: 'Invalid GRN data' }
         }
 
-        await prisma.$transaction(async (tx) => {
-            // 1. Delete old items
-            await tx.gRNItem.deleteMany({
-                where: { grnId: id }
-            })
-
-            // 2. Update GRN header
-            await tx.gRN.update({
-                where: { id },
-                data: {
-                    grnNumber,
-                    date: new Date(date),
-                    remarks,
-                    items: {
-                        create: items.map((item: any) => ({
-                            purchaseOrderItemId: item.purchaseOrderItemId,
-                            itemMasterId: item.itemMasterId,
-                            colorId: item.colorId || null,
-                            brandId: item.brandId || null,
-                            itemGradeId: item.itemGradeId || null,
-                            receivedQty: parseFloat(item.receivedQty),
-                            pcs: item.pcs ? parseFloat(item.pcs) : null,
-                            unitId: item.unitId ? parseInt(item.unitId, 10) : null,
-                        }))
-                    }
+        const startTime = Date.now()
+        await prisma.gRN.update({
+            where: { id },
+            data: {
+                grnNumber,
+                date: new Date(date),
+                lotNo: lotNo || null,
+                warehouseRefNo: warehouseRefNo || null,
+                remarks,
+                segment: (formData.get('segment') as any) || 'GENERAL',
+                items: {
+                    deleteMany: {}, // Delete old items
+                    create: items.map((item: any) => ({
+                        purchaseOrderItemId: item.purchaseOrderItemId,
+                        itemMasterId: item.itemMasterId,
+                        colorId: item.colorId || null,
+                        brandId: item.brandId || null,
+                        itemGradeId: item.itemGradeId || null,
+                        receivedQty: parseFloat(item.receivedQty),
+                        pcs: item.pcs ? parseFloat(item.pcs) : null,
+                        unitSize: item.unitSize ? parseFloat(item.unitSize) : null,
+                        packingType: item.packingType || null,
+                        packingUnitId: (item.packingUnitId && item.packingUnitId !== 'none') ? item.packingUnitId : null,
+                        unitId: item.unitId ? parseInt(item.unitId, 10) : null,
+                    }))
                 }
-            })
+            }
         })
+        console.log(`GRN Update completed in ${Date.now() - startTime}ms`)
 
         revalidatePath('/dashboard/fab-tex/purchase/grn')
         return { success: true, message: 'GRN updated successfully' }
@@ -150,14 +170,24 @@ export async function deleteGRN(id: string): Promise<GRNState> {
     }
 }
 
-export async function getGRNs() {
+export async function getGRNs(segment?: string) {
+    const company = await prisma.company.findFirst()
+    if (!company) return []
+
     return await prisma.gRN.findMany({
+        where: {
+            companyId: company.id,
+            ...(segment && { segment: segment as any })
+        },
         include: {
             purchaseOrder: {
                 include: { account: true }
             },
             items: {
-                include: { itemMaster: true }
+                include: {
+                    itemMaster: { include: { packingUnit: true } },
+                    packingUnit: true
+                }
             }
         },
         orderBy: { date: 'desc' }
@@ -169,15 +199,30 @@ export async function getGRNById(id: string) {
         where: { id },
         include: {
             purchaseOrder: {
-                include: { account: true, warehouse: true }
+                include: {
+                    account: true,
+                    warehouse: true,
+                    items: {
+                        include: {
+                            itemMaster: { include: { packingUnit: true } },
+                            color: true,
+                            brand: true,
+                            itemGrade: true,
+                            unit: true,
+                            packingUnit: true,
+                            grnItems: true
+                        }
+                    }
+                }
             },
             items: {
                 include: {
-                    itemMaster: true,
+                    itemMaster: { include: { packingUnit: true } },
                     color: true,
                     brand: true,
                     itemGrade: true,
-                    unit: true
+                    unit: true,
+                    packingUnit: true
                 }
             },
             company: true

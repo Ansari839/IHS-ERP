@@ -30,6 +30,7 @@ export const createWarehouse = createSafeAction(
                 contactPerson,
                 contactNumbers,
                 status,
+                segment: (formData.get('segment') as any) || 'GENERAL',
             },
         })
 
@@ -104,8 +105,11 @@ export const deleteWarehouse = createSafeAction(
     }
 )
 
-export async function getWarehouses() {
+export async function getWarehouses(segment?: string) {
     return await prisma.warehouse.findMany({
+        where: {
+            ...(segment && { segment: segment as any })
+        },
         orderBy: { name: 'asc' }
     })
 }

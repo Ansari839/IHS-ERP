@@ -28,15 +28,17 @@ export type ItemMaster = {
     imageUrl: string | null;
     itemGroupId: string;
     baseUnitId: number;
+    packingUnitId: string | null;
     companyId: number;
     itemGroup: { name: string };
     baseUnit: { name: string; symbol: string };
+    packingUnit?: { name: string; symbol: string | null } | null;
     createdAt: Date;
     updatedAt: Date;
 };
 
 // We need to pass lists for dropdowns to the edit form
-export const getItemMasterColumns = (itemGroups: any[], units: any[]): ColumnDef<ItemMaster>[] => [
+export const getItemMasterColumns = (itemGroups: any[], units: any[], packingUnits: any[]): ColumnDef<ItemMaster>[] => [
     {
         accessorKey: "imageUrl",
         header: "Image",
@@ -65,6 +67,15 @@ export const getItemMasterColumns = (itemGroups: any[], units: any[]): ColumnDef
     {
         accessorKey: "baseUnit.symbol",
         header: "Unit",
+    },
+    {
+        accessorKey: "packingUnit",
+        header: "Packing Unit",
+        cell: ({ row }) => {
+            const unit = row.original.packingUnit;
+            if (!unit) return <span className="text-muted-foreground">-</span>;
+            return <span>{unit.symbol || unit.name}</span>;
+        },
     },
     {
         accessorKey: "status",
@@ -126,6 +137,7 @@ export const getItemMasterColumns = (itemGroups: any[], units: any[]): ColumnDef
                         defaultValues={item}
                         itemGroups={itemGroups}
                         units={units}
+                        packingUnits={packingUnits}
                         open={showEditDialog}
                         onOpenChange={setShowEditDialog}
                     />

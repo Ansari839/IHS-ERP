@@ -73,7 +73,7 @@ export default async function GRNDetailPage({ params }: { params: Promise<{ id: 
                                     <TableHead>Item Name</TableHead>
                                     <TableHead>Specification (Color/Brand/Grade)</TableHead>
                                     <TableHead className="text-right">Received Qty</TableHead>
-                                    <TableHead className="text-right">Pcs/Packages</TableHead>
+                                    <TableHead className="text-right">{grn.items[0]?.packingUnit?.symbol || grn.items[0]?.packingUnit?.name || grn.items[0]?.itemMaster?.packingUnit?.symbol || grn.items[0]?.itemMaster?.packingUnit?.name || 'Pkgs'} Count</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -94,7 +94,7 @@ export default async function GRNDetailPage({ params }: { params: Promise<{ id: 
                                             {item.receivedQty} {item.unit?.symbol || 'kg'}
                                         </TableCell>
                                         <TableCell className="text-right">
-                                            {item.pcs || '-'}
+                                            {item.pcs ? `${item.pcs} ${item.packingUnit?.symbol || item.packingUnit?.name || item.itemMaster?.packingUnit?.symbol || item.itemMaster?.packingUnit?.name || 'Pkgs'}` : '-'}
                                         </TableCell>
                                     </TableRow>
                                 ))}

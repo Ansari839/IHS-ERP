@@ -7,6 +7,7 @@ import { getItemGrades } from '@/app/actions/fabtex/item-grades'
 import { getUoms } from '@/app/actions/fabtex/uom'
 import { getWarehouses } from '@/app/actions/warehouses'
 import { getPurchaseOrderById } from '@/app/actions/fabtex/purchase-order'
+import { getPackingUnits } from '@/app/actions/fabtex/packing-unit'
 import prisma from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 
@@ -20,14 +21,15 @@ export default async function EditPurchaseOrderPage({ params }: EditPOPageProps)
 
     console.log('EditPOPage: poId =', poId)
 
-    const [initialData, items, colors, brands, itemGrades, units, warehouses] = await Promise.all([
+    const [initialData, items, colors, brands, itemGrades, units, warehouses, packingUnits] = await Promise.all([
         getPurchaseOrderById(poId),
         getItemMasters(),
         getColors(),
         getBrands(),
         getItemGrades(),
         getUoms(),
-        getWarehouses()
+        getWarehouses(),
+        getPackingUnits()
     ])
 
     if (!initialData) {
@@ -55,6 +57,7 @@ export default async function EditPurchaseOrderPage({ params }: EditPOPageProps)
                 units={units}
                 warehouses={warehouses}
                 accounts={accounts}
+                packingUnits={packingUnits}
             />
         </div>
     )

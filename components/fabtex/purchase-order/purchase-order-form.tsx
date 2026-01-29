@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { Combobox } from '@/components/ui/combobox'
 import {
     Select,
     SelectContent,
@@ -37,6 +38,8 @@ interface POFormProps {
     brands: any[]
     itemGrades: any[]
     units: any[]
+    packingUnits: any[]
+    segment?: string
 }
 
 type POItemInput = {
@@ -45,6 +48,7 @@ type POItemInput = {
     brandId?: string
     itemGradeId?: string
 
+    packingUnitId?: string
     packingType: PackingType
     pcs: number
     unitSize: number
@@ -58,6 +62,7 @@ type POItemInput = {
     // UI Helpers
     itemName?: string
     unitSymbol?: string
+    packingUnitSymbol?: string
     colorName?: string
     brandName?: string
     gradeName?: string
@@ -71,13 +76,16 @@ export function PurchaseOrderForm({
     colors,
     brands,
     itemGrades,
-    units
+    units,
+    packingUnits,
+    segment = 'YARN'
 }: POFormProps) {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
 
     // Header State
     const [type, setType] = useState<PurchaseOrderType>(initialData?.type || 'LOCAL')
+    const [warehouseId, setWarehouseId] = useState<string>(initialData?.warehouseId?.toString() || '')
     const [partyDetails, setPartyDetails] = useState({
         accountId: initialData?.accountId?.toString() || '',
         partyName: initialData?.partyName || ''
@@ -98,6 +106,10 @@ export function PurchaseOrderForm({
 
             itemName: items.find(m => m.id === i.itemMasterId)?.name,
             unitSymbol: units.find(u => u.id === i.unitId)?.symbol,
+            packingUnitSymbol: packingUnits.find(p => p.id === i.packingUnitId)?.symbol ||
+                packingUnits.find(p => p.id === i.packingUnitId)?.name ||
+                i.itemMaster?.packingUnit?.symbol ||
+                i.itemMaster?.packingUnit?.name,
             colorName: colors.find(c => c.id === i.colorId)?.name,
             brandName: brands.find(b => b.id === i.brandId)?.name,
             gradeName: itemGrades.find(g => g.id === i.itemGradeId)?.name,
@@ -124,7 +136,9 @@ export function PurchaseOrderForm({
                 itemMasterId: itemId,
                 itemName: product.name,
                 unitId: product.baseUnitId, // Default to base unit
-                unitSymbol: product.baseUnit?.symbol
+                unitSymbol: product.baseUnit?.symbol,
+                packingUnitId: product.packingUnitId || undefined,
+                packingUnitSymbol: product.packingUnit?.symbol || product.packingUnit?.name || undefined
             }))
         }
     }
@@ -168,10 +182,12 @@ export function PurchaseOrderForm({
             rate: currentItem.rate || 0,
             amount: currentItem.amount || 0,
             unitId: currentItem.unitId,
+            packingUnitId: currentItem.packingUnitId,
             remarks: currentItem.remarks,
 
             itemName: currentItem.itemName,
             unitSymbol: currentItem.unitSymbol,
+            packingUnitSymbol: currentItem.packingUnitSymbol,
             colorName: colors.find(c => c.id === currentItem.colorId)?.name,
             brandName: brands.find(b => b.id === currentItem.brandId)?.name,
             gradeName: itemGrades.find(g => g.id === currentItem.itemGradeId)?.name,
@@ -203,6 +219,13 @@ export function PurchaseOrderForm({
         }
 
         formData.append('items', JSON.stringify(poItems))
+
+        // Ensure controlled fields are in formData
+        formData.set('type', type)
+        formData.set('accountId', partyDetails.accountId)
+        formData.set('partyName', partyDetails.partyName)
+        formData.set('warehouseId', warehouseId)
+        formData.set('segment', segment)
 
         startTransition(async () => {
             const result = initialData
@@ -245,39 +268,27 @@ export function PurchaseOrderForm({
                 {/* Party Selection */}
                 <div className="space-y-2">
                     <Label>Party (Vendor)</Label>
-                    <Select
-                        name="accountId"
+                    <Combobox
+                        options={accounts.map(a => ({ label: a.name, value: a.id.toString() }))}
                         value={partyDetails.accountId}
-                        onValueChange={(v) => setPartyDetails(p => ({ ...p, accountId: v }))}
-                    >
-                        <SelectTrigger>
-                            <SelectValue placeholder="Select Party" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {accounts.map(acc => (
-                                <SelectItem key={acc.id} value={acc.id.toString()}>
-                                    {acc.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                        onChange={(val) => setPartyDetails(p => ({ ...p, accountId: val }))}
+                        placeholder="Select Vendor..."
+                        searchPlaceholder="Search vendor..."
+                        emptyText="No vendor found."
+                    />
                 </div>
 
                 {/* Warehouse */}
                 <div className="space-y-2">
                     <Label>Warehouse</Label>
-                    <Select name="warehouseId" defaultValue={initialData?.warehouseId?.toString()}>
-                        <SelectTrigger>
-                            <SelectValue placeholder="Select Warehouse" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {warehouses.map(w => (
-                                <SelectItem key={w.id} value={w.id.toString()}>
-                                    {w.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                    <Combobox
+                        options={warehouses.map(w => ({ label: w.name, value: w.id.toString() }))}
+                        value={warehouseId}
+                        onChange={setWarehouseId}
+                        placeholder="Select Warehouse..."
+                        searchPlaceholder="Search warehouse..."
+                        emptyText="No warehouse found."
+                    />
                 </div>
 
                 {/* Date */}
@@ -331,83 +342,83 @@ export function PurchaseOrderForm({
                 {/* 1. Item Selection */}
                 <div className="max-w-md space-y-2">
                     <Label className="text-primary font-semibold">Choose Product</Label>
-                    <Select
+                    <Combobox
+                        options={items.map(i => ({ label: i.name, value: i.id }))}
                         value={currentItem.itemMasterId}
-                        onValueChange={handleProductSelect}
-                    >
-                        <SelectTrigger className="h-11 border-primary/20">
-                            <SelectValue placeholder="Select Product to start adding variants" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {items.map(item => (
-                                <SelectItem key={item.id} value={item.id}>
-                                    {item.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                        onChange={handleProductSelect}
+                        placeholder="Choose Product..."
+                        searchPlaceholder="Search product..."
+                        emptyText="No product found."
+                    />
                 </div>
 
                 {/* 2. Variant Sub-form (Visible only when item is selected) */}
                 {currentItem.itemMasterId && (
-                    <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-9 gap-3 items-end p-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-end p-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200">
 
                         {/* Color */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-3 lg:col-span-2 space-y-1">
                             <Label>Color</Label>
-                            <Select
+                            <Combobox
+                                options={colors.map(c => ({ label: c.name, value: c.id }))}
                                 value={currentItem.colorId}
-                                onValueChange={(v) => setCurrentItem(p => ({ ...p, colorId: v }))}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Color" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {colors.map(c => (
-                                        <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                                onChange={(val) => setCurrentItem(p => ({ ...p, colorId: val }))}
+                                placeholder="Select Color..."
+                                searchPlaceholder="Search color..."
+                                emptyText="No color found."
+                            />
                         </div>
 
                         {/* Brand */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-3 lg:col-span-2 space-y-1">
                             <Label>Brand</Label>
-                            <Select
+                            <Combobox
+                                options={brands.map(b => ({ label: b.name, value: b.id }))}
                                 value={currentItem.brandId}
-                                onValueChange={(v) => setCurrentItem(p => ({ ...p, brandId: v }))}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Brand" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {brands.map(b => (
-                                        <SelectItem key={b.id} value={b.id}>{b.name}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                                onChange={(val) => setCurrentItem(p => ({ ...p, brandId: val }))}
+                                placeholder="Select Brand..."
+                                searchPlaceholder="Search brand..."
+                                emptyText="No brand found."
+                            />
                         </div>
 
                         {/* Grade */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-3 lg:col-span-2 space-y-1">
                             <Label>Grade</Label>
-                            <Select
+                            <Combobox
+                                options={itemGrades.map(g => ({ label: g.name, value: g.id }))}
                                 value={currentItem.itemGradeId}
-                                onValueChange={(v) => setCurrentItem(p => ({ ...p, itemGradeId: v }))}
+                                onChange={(val) => setCurrentItem(p => ({ ...p, itemGradeId: val }))}
+                                placeholder="Select Grade..."
+                                searchPlaceholder="Search grade..."
+                                emptyText="No grade found."
+                            />
+                        </div>
+
+                        {/* Packing Unit */}
+                        <div className="md:col-span-3 lg:col-span-2 space-y-1">
+                            <Label>Packing Unit</Label>
+                            <Select
+                                value={currentItem.packingUnitId}
+                                onValueChange={(v) => {
+                                    const pu = packingUnits.find(p => p.id === v);
+                                    setCurrentItem(p => ({ ...p, packingUnitId: v, packingUnitSymbol: pu?.symbol || pu?.name }));
+                                }}
                             >
                                 <SelectTrigger>
-                                    <SelectValue placeholder="Grade" />
+                                    <SelectValue placeholder="P. Unit" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {itemGrades.map(g => (
-                                        <SelectItem key={g.id} value={g.id}>{g.name}</SelectItem>
+                                    <SelectItem value="none">None</SelectItem>
+                                    {packingUnits.map(pu => (
+                                        <SelectItem key={pu.id} value={pu.id}>{pu.name} {pu.symbol ? `(${pu.symbol})` : ''}</SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
                         </div>
 
                         {/* Packing Type */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
                             <Label>Packing</Label>
                             <Select
                                 value={currentItem.packingType}
@@ -423,23 +434,23 @@ export function PurchaseOrderForm({
                             </Select>
                         </div>
 
-                        {/* Qty of UOM */}
-                        <div className="space-y-1">
-                            <Label>Qty of {currentItem.unitSymbol || 'UOM'}</Label>
+                        {/* Qty of UOM (Packages) */}
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
+                            <Label>{currentItem.packingUnitSymbol || 'Pkgs'} Count</Label>
                             <Input
                                 type="number"
-                                placeholder={`e.g. 33 ${currentItem.unitSymbol || ''}`}
+                                placeholder={`e.g. 10 ${currentItem.packingUnitSymbol || 'Pkgs'}`}
                                 value={currentItem.pcs || ''}
                                 onChange={(e) => setCurrentItem(p => ({ ...p, pcs: parseFloat(e.target.value) || 0 }))}
                             />
                         </div>
 
-                        {/* UOM Size */}
-                        <div className="space-y-1">
-                            <Label>{currentItem.unitSymbol || 'UOM'} Size</Label>
+                        {/* UOM Size (Qty per Package) */}
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
+                            <Label>{currentItem.packingUnitSymbol || 'Pkg'} Size</Label>
                             <Input
                                 type="number"
-                                placeholder="Optional"
+                                placeholder={`Weight per ${currentItem.packingUnitSymbol || 'Pkg'}`}
                                 disabled={currentItem.packingType === 'UNEVEN'}
                                 value={currentItem.unitSize || ''}
                                 onChange={(e) => setCurrentItem(p => ({ ...p, unitSize: parseFloat(e.target.value) || 0 }))}
@@ -447,7 +458,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Weight (Total Qty) */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
                             <Label>Weight (kg)</Label>
                             <Input
                                 type="number"
@@ -459,7 +470,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Rate */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-4 lg:col-span-2 space-y-1">
                             <Label>Rate (Opt)</Label>
                             <Input
                                 type="number"
@@ -470,7 +481,7 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Amount */}
-                        <div className="space-y-1">
+                        <div className="md:col-span-6 lg:col-span-3 space-y-1">
                             <Label>Amount</Label>
                             <Input
                                 type="number"
@@ -481,9 +492,9 @@ export function PurchaseOrderForm({
                         </div>
 
                         {/* Add BTN */}
-                        <div>
+                        <div className="md:col-span-6 lg:col-span-3">
                             <Button type="button" onClick={addItem} className="w-full">
-                                <Plus className="h-4 w-4 mr-1" /> Add
+                                <Plus className="h-4 w-4 mr-1" /> Add Item
                             </Button>
                         </div>
 
@@ -498,7 +509,8 @@ export function PurchaseOrderForm({
                                 <TableHead className="font-bold">Product</TableHead>
                                 <TableHead className="font-bold">Variant (Clr/Grd/Brnd)</TableHead>
                                 <TableHead className="font-bold">Packing</TableHead>
-                                <TableHead className="font-bold text-center">Pcs</TableHead>
+                                <TableHead className="font-bold">P. Unit</TableHead>
+                                <TableHead className="font-bold text-center">{poItems.find(i => i.packingUnitSymbol)?.packingUnitSymbol || 'Pkgs'}</TableHead>
                                 <TableHead className="font-bold text-center">Weight</TableHead>
                                 <TableHead className="font-bold text-right">Rate</TableHead>
                                 <TableHead className="font-bold text-right">Amount</TableHead>
@@ -508,7 +520,7 @@ export function PurchaseOrderForm({
                         <TableBody>
                             {poItems.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={8} className="text-center h-32 text-muted-foreground">
+                                    <TableCell colSpan={9} className="text-center h-32 text-muted-foreground">
                                         No variant rows added yet. Select an item and fill the form above.
                                     </TableCell>
                                 </TableRow>
@@ -533,7 +545,12 @@ export function PurchaseOrderForm({
                                                 )}
                                             </div>
                                         </TableCell>
-                                        <TableCell className="text-center">{item.pcs || '-'}</TableCell>
+                                        <TableCell>
+                                            <div className="text-xs font-medium">{item.packingUnitSymbol || '-'}</div>
+                                        </TableCell>
+                                        <TableCell className="text-center">
+                                            {item.pcs ? `${item.pcs} ${item.packingUnitSymbol || 'Pkgs'}` : '-'}
+                                        </TableCell>
                                         <TableCell className="text-center font-bold">{item.quantity} {item.unitSymbol}</TableCell>
                                         <TableCell className="text-right">{item.rate.toFixed(2)}</TableCell>
                                         <TableCell className="text-right font-bold text-primary">
@@ -576,7 +593,7 @@ export function PurchaseOrderForm({
                     {initialData ? 'Update Purchase Order' : 'Confirm & Save Purchase Order'}
                 </Button>
             </div>
-        </form>
+        </form >
     )
 }
 

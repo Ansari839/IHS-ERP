@@ -102,7 +102,11 @@ export default async function PODetailPage({ params }: { params: Promise<{ id: s
                                                 {item.color && <div>Color: {item.color.name}</div>}
                                                 {item.brand && <div>Brand: {item.brand.name}</div>}
                                                 {item.itemGrade && <div>Grade: {item.itemGrade.name}</div>}
-                                                {item.packingType && <div>Packing: {item.packingType} ({item.pcs} Pcs)</div>}
+                                                {item.packingType && (
+                                                    <div>
+                                                        Packing: {item.packingType} ({item.pcs} {item.packingUnit?.symbol || item.packingUnit?.name || item.itemMaster?.packingUnit?.symbol || item.itemMaster?.packingUnit?.name || 'Pkgs'})
+                                                    </div>
+                                                )}
                                             </div>
                                         </TableCell>
                                         <TableCell className="text-right font-medium">

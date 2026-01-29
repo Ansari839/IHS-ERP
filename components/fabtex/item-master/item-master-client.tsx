@@ -7,10 +7,11 @@ interface ItemMasterClientProps {
     data: ItemMaster[];
     itemGroups: any[];
     units: any[];
+    packingUnits: any[];
 }
 
-export function ItemMasterClient({ data, itemGroups, units }: ItemMasterClientProps) {
-    const columns = getItemMasterColumns(itemGroups, units);
+export function ItemMasterClient({ data, itemGroups, units, packingUnits }: ItemMasterClientProps) {
+    const columns = getItemMasterColumns(itemGroups, units, packingUnits);
 
     return (
         <DataTable
