@@ -83,13 +83,13 @@ export function ItemMasterForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: (defaultValues?.name as string) || "",
-            shortDescription: (defaultValues?.shortDescription as string) || undefined,
+            shortDescription: (defaultValues?.shortDescription as string) || "",
             status: (defaultValues?.status as "ACTIVE" | "INACTIVE") || "ACTIVE",
-            hsCode: (defaultValues?.hsCode as string) || undefined,
+            hsCode: (defaultValues?.hsCode as string) || "",
             itemGroupId: (defaultValues?.itemGroupId as string) || "",
             baseUnitId: (defaultValues?.baseUnitId?.toString() as string) || "",
-            packingUnitId: (defaultValues?.packingUnitId as string) || undefined,
-            imageUrl: (defaultValues?.imageUrl as string) || undefined,
+            packingUnitId: (defaultValues?.packingUnitId as string) || undefined, // Select handles undefined/null better
+            imageUrl: (defaultValues?.imageUrl as string) || "",
         },
     });
 
