@@ -10,8 +10,7 @@ import { verifyAccessToken } from '@/lib/jwt';
 import { success } from '@/lib/response';
 import { withErrorHandler } from '@/middleware/errorHandler';
 
-// Use edge runtime for better performance
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 async function handleProtected(req: NextRequest) {
     // Extract token from Authorization header

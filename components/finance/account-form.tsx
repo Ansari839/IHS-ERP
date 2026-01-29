@@ -35,6 +35,7 @@ const formSchema = z.object({
     isPosting: z.boolean(),
     openingBalance: z.coerce.number(),
     openingBalanceType: z.enum(["DR", "CR"]),
+    segment: z.enum(["GENERAL", "YARN", "FABRIC"]).optional(),
 });
 
 interface AccountFormProps {
@@ -57,6 +58,7 @@ export function AccountForm({ initialData, parentId, onSuccess, segment = 'GENER
             isPosting: initialData.isPosting,
             openingBalance: initialData.openingBalance || 0,
             openingBalanceType: initialData.openingBalanceType || "DR",
+            segment: initialData.segment,
         } : {
             name: "",
             type: "ASSET",
@@ -64,6 +66,7 @@ export function AccountForm({ initialData, parentId, onSuccess, segment = 'GENER
             isPosting: true,
             openingBalance: 0,
             openingBalanceType: "DR",
+            segment: segment, // Use the passed segment as default for new accounts
         },
     });
 
@@ -208,6 +211,34 @@ export function AccountForm({ initialData, parentId, onSuccess, segment = 'GENER
                                                         {acc.code} - {acc.name}
                                                     </SelectItem>
                                                 ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <FormField
+                                control={form.control}
+                                name="segment"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="flex items-center gap-2 text-primary">
+                                            <Tag className="w-4 h-4" /> Business Segment
+                                        </FormLabel>
+                                        <Select onValueChange={field.onChange} value={field.value}>
+                                            <FormControl>
+                                                <div className="relative">
+                                                    <SelectTrigger className="pl-9 bg-background/50 border-primary/20 focus:border-primary">
+                                                        <SelectValue placeholder="Select Segment" />
+                                                    </SelectTrigger>
+                                                    <Tag className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground pointer-events-none" />
+                                                </div>
+                                            </FormControl>
+                                            <SelectContent>
+                                                <SelectItem value="GENERAL">General (Shared)</SelectItem>
+                                                <SelectItem value="YARN">FabTex Yarn</SelectItem>
+                                                <SelectItem value="FABRIC">FabTex Fabric</SelectItem>
                                             </SelectContent>
                                         </Select>
                                         <FormMessage />
