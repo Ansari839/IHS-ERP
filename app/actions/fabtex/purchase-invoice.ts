@@ -96,7 +96,8 @@ export async function getEligibleForInvoicing() {
                             color: true,
                             brand: true,
                             itemGrade: true,
-                            packingUnit: true
+                            packingUnit: true,
+                            invoiceItems: true // Added this
                         }
                     }
                 }
@@ -116,29 +117,33 @@ export async function getEligibleForInvoicing() {
         },
         orderBy: { createdAt: 'desc' }
     })
-    console.log(`[SERVER] Found ${pos.length} eligible POs`)
-    pos.forEach((po, index) => {
-        try {
-            console.log(`[SERVER] PO[${index}]: ${po.poNumber} (ID: ${po.id})`)
-            console.log(`   - Items Count: ${po.items?.length || 0}`)
-            console.log(`   - GRNs Count: ${po.grns?.length || 0}`)
-            if (po.items && po.items.length > 0) {
-                console.log(`   - First Item: ${po.items[0].itemMaster?.name || 'No ItemMaster'} | Qty: ${po.items[0].quantity}`)
-            }
-        } catch (e: any) {
-            console.log(`[SERVER] Error logging PO[${index}]:`, e.message)
-        }
+    // Filter POs that have at least one GRN with pending quantities for invoicing
+    const filteredPos = pos.filter(po => {
+        return (po.grns || []).some(grn => {
+            return (grn.items || []).some((item: any) => {
+                // Find all invoice items for this GRN item across all invoices
+                const totalInvoiced = (item.invoiceItems || []).reduce((sum: number, invItem: any) => sum + (invItem.invoicedQty || 0), 0)
+                return (item.receivedQty || 0) > totalInvoiced
+            })
+        })
     })
-    // Flatten all GRNs for direct selection if needed
-    const allEligibleGRNs = pos.flatMap(po =>
+
+    console.log(`[SERVER] Found ${filteredPos.length} filtered eligible POs`)
+
+    // Flatten all GRNs and filter those that have remaining quantities to be invoiced
+    const allEligibleGRNs = filteredPos.flatMap(po =>
         (po.grns || []).map(grn => ({
             ...grn,
             poNumber: po.poNumber,
-            vendorName: po.account?.name || po.partyName
+            vendorName: po.account?.name || po.partyName,
+            isFullyInvoiced: !(grn.items || []).some((item: any) => {
+                const totalInvoiced = (item.invoiceItems || []).reduce((sum: number, invItem: any) => sum + (invItem.invoicedQty || 0), 0)
+                return (item.receivedQty || 0) > totalInvoiced
+            })
         }))
-    )
+    ).filter(grn => !grn.isFullyInvoiced)
 
-    return { pos, allEligibleGRNs }
+    return { pos: filteredPos, allEligibleGRNs }
 }
 
 

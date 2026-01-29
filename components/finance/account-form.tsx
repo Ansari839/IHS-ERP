@@ -4,6 +4,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { AccountType, BalanceType, BusinessSegment } from "@/app/generated/prisma/client";
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -30,12 +31,17 @@ import { Layers, Tag, Wallet, FileText, CheckCircle2, DollarSign, Banknote, Fold
 
 const formSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
-    type: z.enum(["ASSET", "LIABILITY", "EQUITY", "INCOME", "EXPENSE"]),
+    type: z.nativeEnum(AccountType),
+    contactPerson: z.string().optional(),
+    brokerName: z.string().optional(),
+    phone: z.string().optional(),
+    email: z.string().email("Invalid email").optional().or(z.literal("")),
+    taxId: z.string().optional(),
     parentId: z.string().optional().nullable(),
     isPosting: z.boolean(),
-    openingBalance: z.coerce.number(),
-    openingBalanceType: z.enum(["DR", "CR"]),
-    segment: z.enum(["GENERAL", "YARN", "FABRIC"]).optional(),
+    openingBalance: z.coerce.number().optional(),
+    openingBalanceType: z.nativeEnum(BalanceType),
+    segment: z.nativeEnum(BusinessSegment).optional(),
 });
 
 interface AccountFormProps {
@@ -49,16 +55,21 @@ export function AccountForm({ initialData, parentId, onSuccess, segment = 'GENER
     const [loading, setLoading] = useState(false);
     const [summaryAccounts, setSummaryAccounts] = useState<Account[]>([]);
 
-    const form = useForm<any>({
-        resolver: zodResolver(formSchema),
+    const form = useForm({
+        resolver: zodResolver(formSchema as any),
         defaultValues: initialData ? {
             name: initialData.name,
-            type: initialData.type,
+            type: initialData.type as any,
             parentId: initialData.parentId?.toString() || "none",
             isPosting: initialData.isPosting,
             openingBalance: initialData.openingBalance || 0,
-            openingBalanceType: initialData.openingBalanceType || "DR",
-            segment: initialData.segment,
+            openingBalanceType: (initialData.openingBalanceType as any) || "DR",
+            segment: (initialData.segment as any) || 'GENERAL',
+            contactPerson: initialData.contactPerson || "",
+            brokerName: initialData.brokerName || "",
+            phone: initialData.phone || "",
+            email: initialData.email || "",
+            taxId: initialData.taxId || "",
         } : {
             name: "",
             type: "ASSET",
@@ -150,6 +161,19 @@ export function AccountForm({ initialData, parentId, onSuccess, segment = 'GENER
                                             <Input placeholder="e.g. Cash in Hand" {...field} className="pl-9 bg-background/50 border-primary/20 focus:border-primary" />
                                             <FileText className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground pointer-events-none" />
                                         </div>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="brokerName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Broker / Agent</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Broker Name" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

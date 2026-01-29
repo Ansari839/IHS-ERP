@@ -95,7 +95,10 @@ const navigation: NavigationItem[] = [
                 name: "Sale",
                 icon: Banknote,
                 children: [
-                    { name: "Sales Order", href: "/dashboard/fab-tex/sales", icon: Layers, permission: "read:inventory" },
+                    { name: "Sales Order", href: "/dashboard/fab-tex/sales/sales-order", icon: Layers, permission: "read:inventory" },
+                    { name: "Delivery Order (DO)", href: "/dashboard/fab-tex/sales/delivery-order", icon: Package, permission: "read:inventory" },
+                    { name: "Sales Invoice", href: "/dashboard/fab-tex/sales/invoice", icon: Receipt, permission: "read:inventory" },
+                    { name: "Sales Return", href: "/dashboard/fab-tex/sales/sales-return", icon: Undo2, permission: "read:inventory" },
                     { name: "Customers", href: "/dashboard/fab-tex/sales/customers", icon: Users, permission: "read:inventory" },
                 ]
             },

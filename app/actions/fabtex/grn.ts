@@ -11,7 +11,7 @@ export type GRNState = {
 }
 
 export async function getPurchaseOrdersForGRN() {
-    return await prisma.purchaseOrder.findMany({
+    const pos = await prisma.purchaseOrder.findMany({
         where: {
             status: { in: ['APPROVED', 'PENDING', 'DRAFT', 'COMPLETED'] }
         },
@@ -30,6 +30,14 @@ export async function getPurchaseOrdersForGRN() {
             }
         },
         orderBy: { createdAt: 'desc' }
+    })
+
+    // Filter POs that have remaining quantity to be received
+    return pos.filter(po => {
+        return po.items.some(item => {
+            const totalReceived = (item.grnItems || []).reduce((sum, grnItem) => sum + (grnItem.receivedQty || 0), 0)
+            return (item.quantity || 0) > totalReceived
+        })
     })
 }
 

@@ -11,7 +11,7 @@ export type ReturnState = {
 }
 
 export async function getPurchaseInvoicesForReturn() {
-    return await prisma.purchaseInvoice.findMany({
+    const invoices = await prisma.purchaseInvoice.findMany({
         include: {
             account: true,
             purchaseOrder: true,
@@ -21,11 +21,21 @@ export async function getPurchaseInvoicesForReturn() {
                     unit: true,
                     color: true,
                     brand: true,
-                    itemGrade: true
+                    itemGrade: true,
+                    returnItems: true
                 }
             }
         },
         orderBy: { createdAt: 'desc' }
+    })
+
+    // Filter invoices that have remaining quantity to be returned
+    // Return only those where at least one item has invoicedQty > totalReturned
+    return invoices.filter(invoice => {
+        return (invoice.items || []).some(item => {
+            const totalReturned = (item.returnItems || []).reduce((sum, retItem) => sum + (retItem.returnedQty || 0), 0)
+            return (item.invoicedQty || 0) > totalReturned
+        })
     })
 }
 

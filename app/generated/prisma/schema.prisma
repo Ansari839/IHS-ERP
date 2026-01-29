@@ -149,6 +149,9 @@ model Warehouse {
   updatedAt      DateTime        @updatedAt
   userWarehouses UserWarehouse[]
   purchaseOrders PurchaseOrder[]
+
+  // Sales Relations
+  salesOrders SalesOrder[]
 }
 
 model UserWarehouse {
@@ -184,6 +187,12 @@ model Unit {
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
   purchaseReturnItems  PurchaseReturnItem[]
+
+  // Sales Relations
+  salesOrderItems    SalesOrderItem[]
+  deliveryOrderItems DeliveryOrderItem[]
+  salesInvoiceItems  SalesInvoiceItem[]
+  salesReturnItems   SalesReturnItem[]
 }
 
 model UnitConversion {
@@ -231,6 +240,12 @@ model Company {
   purchaseInvoices PurchaseInvoice[]
   purchaseReturns  PurchaseReturn[]
   packingUnits     PackingUnit[]
+
+  // Sales Relations
+  salesOrders    SalesOrder[]
+  deliveryOrders DeliveryOrder[]
+  salesInvoices  SalesInvoice[]
+  salesReturns   SalesReturn[]
 }
 
 model FiscalYear {
@@ -246,14 +261,18 @@ model FiscalYear {
 }
 
 model Currency {
-  id             Int             @id @default(autoincrement())
-  code           String          @unique // e.g., "USD", "PKR"
-  symbol         String // e.g., "$", "Rs"
-  isBase         Boolean         @default(false)
-  exchangeRate   Float           @default(1.0) // Rate relative to Base Currency
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  id           Int      @id @default(autoincrement())
+  code         String   @unique // e.g., "USD", "PKR"
+  symbol       String // e.g., "$", "Rs"
+  isBase       Boolean  @default(false)
+  exchangeRate Float    @default(1.0) // Rate relative to Base Currency
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
   purchaseOrders PurchaseOrder[]
+
+  // Sales Relations
+  salesOrders SalesOrder[]
 }
 
 model SystemConfig {
@@ -424,6 +443,17 @@ model Account {
   purchaseOrders   PurchaseOrder[]
   purchaseInvoices PurchaseInvoice[]
   purchaseReturns  PurchaseReturn[]
+
+  // Sales Relations
+  salesOrders   SalesOrder[]
+  salesInvoices SalesInvoice[]
+  salesReturns  SalesReturn[]
+
+  brokerName    String?
+  contactPerson String?
+  phone         String?
+  email         String?
+  taxId         String?
 }
 
 model JournalEntry {
@@ -496,6 +526,12 @@ model Color {
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
   purchaseReturnItems  PurchaseReturnItem[]
+
+  // Sales Relations
+  salesOrderItems    SalesOrderItem[]
+  deliveryOrderItems DeliveryOrderItem[]
+  salesInvoiceItems  SalesInvoiceItem[]
+  salesReturnItems   SalesReturnItem[]
 }
 
 model Brand {
@@ -513,6 +549,12 @@ model Brand {
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
   purchaseReturnItems  PurchaseReturnItem[]
+
+  // Sales Relations
+  salesOrderItems    SalesOrderItem[]
+  deliveryOrderItems DeliveryOrderItem[]
+  salesInvoiceItems  SalesInvoiceItem[]
+  salesReturnItems   SalesReturnItem[]
 }
 
 model ItemGrade {
@@ -530,6 +572,12 @@ model ItemGrade {
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
   purchaseReturnItems  PurchaseReturnItem[]
+
+  // Sales Relations
+  salesOrderItems    SalesOrderItem[]
+  deliveryOrderItems DeliveryOrderItem[]
+  salesInvoiceItems  SalesInvoiceItem[]
+  salesReturnItems   SalesReturnItem[]
 }
 
 model PackingUnit {
@@ -547,6 +595,10 @@ model PackingUnit {
   itemMasters        ItemMaster[]
   purchaseOrderItems PurchaseOrderItem[]
   grnItems           GRNItem[]
+
+  // Sales Relations
+  salesOrderItems    SalesOrderItem[]
+  deliveryOrderItems DeliveryOrderItem[]
 }
 
 model ItemMaster {
@@ -577,6 +629,12 @@ model ItemMaster {
   grnItems             GRNItem[]
   purchaseInvoiceItems PurchaseInvoiceItem[]
   purchaseReturnItems  PurchaseReturnItem[]
+
+  // Sales Relations
+  salesOrderItems    SalesOrderItem[]
+  deliveryOrderItems DeliveryOrderItem[]
+  salesInvoiceItems  SalesInvoiceItem[]
+  salesReturnItems   SalesReturnItem[]
 }
 
 // --- Purchase Order Models ---
@@ -741,6 +799,7 @@ model GRNItem {
   unit   Unit? @relation(fields: [unitId], references: [id])
 
   invoiceItems PurchaseInvoiceItem[]
+  returnItems  PurchaseReturnItem[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -804,6 +863,8 @@ model PurchaseInvoiceItem {
   rate        Float
   amount      Float
 
+  returnItems PurchaseReturnItem[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -843,7 +904,302 @@ model PurchaseReturnItem {
   return   PurchaseReturn @relation(fields: [returnId], references: [id], onDelete: Cascade)
 
   purchaseInvoiceItemId String?
+  purchaseInvoiceItem   PurchaseInvoiceItem? @relation(fields: [purchaseInvoiceItemId], references: [id])
   grnItemId             String?
+  grnItem               GRNItem?             @relation(fields: [grnItemId], references: [id])
+
+  itemMasterId String
+  itemMaster   ItemMaster @relation(fields: [itemMasterId], references: [id])
+
+  colorId String?
+  color   Color?  @relation(fields: [colorId], references: [id])
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  itemGradeId String?
+  itemGrade   ItemGrade? @relation(fields: [itemGradeId], references: [id])
+
+  unitId Int?
+  unit   Unit? @relation(fields: [unitId], references: [id])
+
+  returnedQty Float
+  rate        Float
+  amount      Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// --- Sales Order Models ---
+
+enum SalesOrderType {
+  LOCAL
+  EXPORT
+}
+
+enum SalesOrderStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  COMPLETED
+  CANCELLED
+}
+
+model SalesOrder {
+  id       String           @id @default(uuid())
+  soNumber String           @unique // Auto-generated SO-xxxx
+  type     SalesOrderType
+  status   SalesOrderStatus @default(DRAFT)
+
+  date DateTime @default(now())
+
+  // Party Info (Customer)
+  accountId Int? // Link to Account (Customer)
+  account   Account? @relation(fields: [accountId], references: [id])
+  partyName String? // Fallback name
+
+  // Broker Info (Snapshot from Customer or specific to Order)
+  brokerName String?
+
+  // Warehouse (Source warehouse usually)
+  warehouseId Int?
+  warehouse   Warehouse? @relation(fields: [warehouseId], references: [id])
+
+  // Conditional Fields
+  referenceNo  String? // Customer PO No etc.
+  documentDate DateTime?
+  fileNo       String? // User defined
+
+  remarks String?
+
+  // Financials
+  totalAmount  Float     @default(0.0)
+  currencyId   Int?
+  currency     Currency? @relation(fields: [currencyId], references: [id])
+  exchangeRate Float     @default(1.0)
+
+  companyId Int
+  company   Company         @relation(fields: [companyId], references: [id])
+  segment   BusinessSegment @default(GENERAL)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  items          SalesOrderItem[]
+  deliveryOrders DeliveryOrder[]
+  invoices       SalesInvoice[]
+}
+
+model SalesOrderItem {
+  id String @id @default(uuid())
+
+  salesOrderId String
+  salesOrder   SalesOrder @relation(fields: [salesOrderId], references: [id], onDelete: Cascade)
+
+  itemMasterId String
+  itemMaster   ItemMaster @relation(fields: [itemMasterId], references: [id])
+
+  // Variant Details
+  colorId String?
+  color   Color?  @relation(fields: [colorId], references: [id])
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  itemGradeId String?
+  itemGrade   ItemGrade? @relation(fields: [itemGradeId], references: [id])
+
+  // Packing Details
+  packingUnitId String?
+  packingUnit   PackingUnit? @relation(fields: [packingUnitId], references: [id])
+  packingType   PackingType?
+  pcs           Float? // Number of packages
+  unitSize      Float? // Qty per package
+
+  // Quantity & Rate
+  quantity Float?
+  unitId   Int?
+  unit     Unit?  @relation(fields: [unitId], references: [id])
+
+  rate   Float
+  amount Float
+
+  remarks String?
+
+  deliveryOrderItems DeliveryOrderItem[]
+  invoiceItems       SalesInvoiceItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DeliveryOrder {
+  id       String   @id @default(uuid())
+  doNumber String   @unique // Auto DO-xxxx
+  date     DateTime @default(now())
+
+  salesOrderId String
+  salesOrder   SalesOrder @relation(fields: [salesOrderId], references: [id])
+
+  driverName String?
+  vehicleNo  String?
+  gatePassNo String?
+
+  remarks String?
+
+  companyId Int
+  company   Company         @relation(fields: [companyId], references: [id])
+  segment   BusinessSegment @default(GENERAL)
+
+  items        DeliveryOrderItem[]
+  salesReturns SalesReturn[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DeliveryOrderItem {
+  id String @id @default(uuid())
+
+  deliveryOrderId String
+  deliveryOrder   DeliveryOrder @relation(fields: [deliveryOrderId], references: [id], onDelete: Cascade)
+
+  salesOrderItemId String
+  salesOrderItem   SalesOrderItem @relation(fields: [salesOrderItemId], references: [id])
+
+  itemMasterId String
+  itemMaster   ItemMaster @relation(fields: [itemMasterId], references: [id])
+
+  colorId String?
+  color   Color?  @relation(fields: [colorId], references: [id])
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  itemGradeId String?
+  itemGrade   ItemGrade? @relation(fields: [itemGradeId], references: [id])
+
+  packingUnitId String?
+  packingUnit   PackingUnit? @relation(fields: [packingUnitId], references: [id])
+
+  deliveredQty Float // Weight (kg)
+  pcs          Float? // Packages
+  unitSize     Float? // Qty per package
+  packingType  PackingType?
+
+  unitId Int?
+  unit   Unit? @relation(fields: [unitId], references: [id])
+
+  invoiceItems SalesInvoiceItem[]
+  returnItems  SalesReturnItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SalesInvoice {
+  id            String   @id @default(uuid())
+  invoiceNumber String   @unique // INV-xxxx
+  date          DateTime @default(now())
+
+  salesOrderId String?
+  salesOrder   SalesOrder? @relation(fields: [salesOrderId], references: [id])
+
+  accountId Int?
+  account   Account? @relation(fields: [accountId], references: [id])
+
+  totalAmount Float  @default(0.0)
+  status      String @default("UNPAID")
+
+  remarks String?
+
+  companyId Int
+  company   Company         @relation(fields: [companyId], references: [id])
+  segment   BusinessSegment @default(GENERAL)
+
+  items        SalesInvoiceItem[]
+  salesReturns SalesReturn[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SalesInvoiceItem {
+  id String @id @default(uuid())
+
+  invoiceId String
+  invoice   SalesInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  salesOrderItemId String?
+  salesOrderItem   SalesOrderItem? @relation(fields: [salesOrderItemId], references: [id])
+
+  deliveryOrderItemId String?
+  deliveryOrderItem   DeliveryOrderItem? @relation(fields: [deliveryOrderItemId], references: [id])
+
+  itemMasterId String?
+  itemMaster   ItemMaster? @relation(fields: [itemMasterId], references: [id])
+
+  colorId String?
+  color   Color?  @relation(fields: [colorId], references: [id])
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  itemGradeId String?
+  itemGrade   ItemGrade? @relation(fields: [itemGradeId], references: [id])
+
+  unitId Int?
+  unit   Unit? @relation(fields: [unitId], references: [id])
+
+  invoicedQty Float
+  rate        Float
+  amount      Float
+
+  returnItems SalesReturnItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SalesReturn {
+  id           String   @id @default(uuid())
+  returnNumber String   @unique // SR-xxxx
+  date         DateTime @default(now())
+  remarks      String?
+
+  salesInvoiceId String?
+  salesInvoice   SalesInvoice? @relation(fields: [salesInvoiceId], references: [id])
+
+  deliveryOrderId String?
+  deliveryOrder   DeliveryOrder? @relation(fields: [deliveryOrderId], references: [id])
+
+  accountId Int?
+  account   Account? @relation(fields: [accountId], references: [id])
+
+  totalAmount Float  @default(0.0)
+  status      String @default("PENDING")
+
+  companyId Int
+  company   Company         @relation(fields: [companyId], references: [id])
+  segment   BusinessSegment @default(GENERAL)
+
+  items SalesReturnItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SalesReturnItem {
+  id String @id @default(uuid())
+
+  returnId String
+  return   SalesReturn @relation(fields: [returnId], references: [id], onDelete: Cascade)
+
+  salesInvoiceItemId  String?
+  salesInvoiceItem    SalesInvoiceItem?  @relation(fields: [salesInvoiceItemId], references: [id])
+  deliveryOrderItemId String?
+  deliveryOrderItem   DeliveryOrderItem? @relation(fields: [deliveryOrderItemId], references: [id])
 
   itemMasterId String
   itemMaster   ItemMaster @relation(fields: [itemMasterId], references: [id])
