@@ -67,7 +67,7 @@ export async function loginAction(formData: FormData) {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        maxAge: 60 * 15, // 15 minutes
+        maxAge: 60 * 60 * 10, // 10 hours
         path: '/',
     })
 
@@ -124,7 +124,7 @@ export async function changePasswordAction(formData: FormData) {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        maxAge: 60 * 15,
+        maxAge: 60 * 60 * 10, // 10 hours
         path: '/',
     })
 
@@ -191,7 +191,7 @@ export async function loginWithCredentials(email: string, password: string) {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        maxAge: 60 * 15,
+        maxAge: 60 * 60 * 10, // 10 hours
         path: '/',
     })
 

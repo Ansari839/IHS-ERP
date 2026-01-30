@@ -45,6 +45,8 @@ export function GRNForm({ purchaseOrders, initialData, grnId, segment = 'YARN' }
         packingUnitSymbol: it.packingUnit?.symbol || it.packingUnit?.name || it.itemMaster?.packingUnit?.symbol || it.itemMaster?.packingUnit?.name,
         packingType: it.packingType || 'EVEN',
         unitSize: it.unitSize || 0,
+        lotNo: it.lotNo || '',
+        warehouseRefNo: it.warehouseRefNo || '',
         // These are needed for validation/UI even in edit
         remainingQty: 999999, // placeholder, will refine if needed
         orderedQty: 999999
@@ -78,7 +80,9 @@ export function GRNForm({ purchaseOrders, initialData, grnId, segment = 'YARN' }
                     packingType: currentGrnItem?.packingType || poItem.packingType || 'EVEN',
                     unitId: poItem.unitId,
                     packingUnitId: poItem.packingUnitId,
-                    packingUnitSymbol: poItem.packingUnit?.symbol || poItem.packingUnit?.name || poItem.itemMaster?.packingUnit?.symbol || poItem.itemMaster?.packingUnit?.name
+                    packingUnitSymbol: poItem.packingUnit?.symbol || poItem.packingUnit?.name || poItem.itemMaster?.packingUnit?.symbol || poItem.itemMaster?.packingUnit?.name,
+                    lotNo: currentGrnItem?.lotNo || '',
+                    warehouseRefNo: currentGrnItem?.warehouseRefNo || '',
                 }
             })
             setItems(mappedItems)
@@ -111,7 +115,9 @@ export function GRNForm({ purchaseOrders, initialData, grnId, segment = 'YARN' }
                 packingType: item.packingType || 'EVEN',
                 unitId: item.unitId,
                 packingUnitId: item.packingUnitId,
-                packingUnitSymbol: item.packingUnit?.symbol || item.packingUnit?.name || item.itemMaster?.packingUnit?.symbol || item.itemMaster?.packingUnit?.name
+                packingUnitSymbol: item.packingUnit?.symbol || item.packingUnit?.name || item.itemMaster?.packingUnit?.symbol || item.itemMaster?.packingUnit?.name,
+                lotNo: '',
+                warehouseRefNo: ''
             }
         })
         setItems(grnItems)
@@ -197,15 +203,8 @@ export function GRNForm({ purchaseOrders, initialData, grnId, segment = 'YARN' }
                                 </div>
                             </div>
                         )}
-                        <div className="space-y-2">
-                            <Label>Lot No</Label>
-                            <Input value={lotNo} onChange={e => setLotNo(e.target.value)} placeholder="Entry Lot No" />
-                        </div>
-                        <div className="space-y-2">
-                            <Label>Warehouse Ref No</Label>
-                            <Input value={warehouseRefNo} onChange={e => setWarehouseRefNo(e.target.value)} placeholder="Warehouse Reference" />
-                        </div>
                     </div>
+
 
                     {selectedPO && (
                         <div className="rounded-md border mt-4">
@@ -217,9 +216,11 @@ export function GRNForm({ purchaseOrders, initialData, grnId, segment = 'YARN' }
                                         <TableHead>P. Type</TableHead>
                                         <TableHead>Ordered</TableHead>
                                         <TableHead>Remaining</TableHead>
+                                        <TableHead className="w-[120px]">Lot No</TableHead>
+                                        <TableHead className="w-[120px]">WH Ref</TableHead>
                                         <TableHead className="w-[100px]">{items.find(i => i.packingUnitSymbol)?.packingUnitSymbol || 'Pkgs'} Count</TableHead>
                                         <TableHead className="w-[100px]">{items.find(i => i.packingUnitSymbol)?.packingUnitSymbol || 'Pkg'} Size</TableHead>
-                                        <TableHead className="w-[150px]">Receiving Qty</TableHead>
+                                        <TableHead className="w-[100px]">Qty</TableHead>
                                         <TableHead className="w-[50px]"></TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -245,6 +246,26 @@ export function GRNForm({ purchaseOrders, initialData, grnId, segment = 'YARN' }
                                                 <Badge variant={item.remainingQty > 0 ? 'outline' : 'secondary'}>
                                                     {item.remainingQty} {item.unitSymbol}
                                                 </Badge>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Input
+                                                    value={item.lotNo}
+                                                    onChange={e => {
+                                                        const val = e.target.value
+                                                        setItems(prev => prev.map((it, i) => i === idx ? { ...it, lotNo: val } : it))
+                                                    }}
+                                                    placeholder="Lot No"
+                                                />
+                                            </TableCell>
+                                            <TableCell>
+                                                <Input
+                                                    value={item.warehouseRefNo}
+                                                    onChange={e => {
+                                                        const val = e.target.value
+                                                        setItems(prev => prev.map((it, i) => i === idx ? { ...it, warehouseRefNo: val } : it))
+                                                    }}
+                                                    placeholder="WH Ref"
+                                                />
                                             </TableCell>
                                             <TableCell>
                                                 <Input

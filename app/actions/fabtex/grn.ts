@@ -85,6 +85,8 @@ export async function createGRN(prevState: GRNState, formData: FormData): Promis
                         packingType: item.packingType || null,
                         packingUnitId: (item.packingUnitId && item.packingUnitId !== 'none') ? item.packingUnitId : null,
                         unitId: item.unitId ? parseInt(item.unitId, 10) : null,
+                        lotNo: item.lotNo || null,
+                        warehouseRefNo: item.warehouseRefNo || null,
                     }))
                 }
             }
@@ -139,6 +141,8 @@ export async function updateGRN(id: string, prevState: GRNState, formData: FormD
                         packingType: item.packingType || null,
                         packingUnitId: (item.packingUnitId && item.packingUnitId !== 'none') ? item.packingUnitId : null,
                         unitId: item.unitId ? parseInt(item.unitId, 10) : null,
+                        lotNo: item.lotNo || null,
+                        warehouseRefNo: item.warehouseRefNo || null,
                     }))
                 }
             }

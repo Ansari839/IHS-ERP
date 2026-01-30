@@ -793,6 +793,9 @@ model GRNItem {
   packingUnitId String?
   packingUnit   PackingUnit? @relation(fields: [packingUnitId], references: [id])
 
+  lotNo          String?
+  warehouseRefNo String?
+
   receivedQty Float // Weight (kg)
   pcs         Float? // Packages
   unitSize    Float? // Qty per package

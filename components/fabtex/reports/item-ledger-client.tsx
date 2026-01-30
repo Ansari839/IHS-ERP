@@ -48,6 +48,7 @@ export function ItemLedgerClient({ entries, itemName, itemCode }: ItemLedgerClie
                                 <TableHead>Type</TableHead>
                                 <TableHead>Document No</TableHead>
                                 <TableHead>Party</TableHead>
+                                <TableHead>Color/Brand</TableHead>
                                 <TableHead>Warehouse</TableHead>
                                 <TableHead className="text-right text-emerald-600">Qty In</TableHead>
                                 <TableHead className="text-right text-red-600">Qty Out</TableHead>
@@ -58,7 +59,7 @@ export function ItemLedgerClient({ entries, itemName, itemCode }: ItemLedgerClie
                         <TableBody>
                             {entries.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={9} className="h-24 text-center">
+                                    <TableCell colSpan={10} className="h-24 text-center">
                                         No transactions found.
                                     </TableCell>
                                 </TableRow>
@@ -67,12 +68,16 @@ export function ItemLedgerClient({ entries, itemName, itemCode }: ItemLedgerClie
                                     <TableRow key={entry.id}>
                                         <TableCell>{format(new Date(entry.date), 'dd/MM/yyyy')}</TableCell>
                                         <TableCell>
-                                            <Badge variant={entry.type === 'GRN' ? 'default' : 'destructive'}>
+                                            <Badge variant={entry.type === 'GRN' || entry.type === 'SALES_RETURN' ? 'default' : 'destructive'}>
                                                 {entry.type}
                                             </Badge>
                                         </TableCell>
-                                        <TableCell>{entry.documentNo}</TableCell>
-                                        <TableCell>{entry.partyName}</TableCell>
+                                        <TableCell className="font-medium">{entry.documentNo}</TableCell>
+                                        <TableCell className="text-sm">{entry.partyName}</TableCell>
+                                        <TableCell>
+                                            <div className="text-xs font-semibold">{entry.colorName || '-'}</div>
+                                            <div className="text-[10px] text-muted-foreground">{entry.brandName || '-'}</div>
+                                        </TableCell>
                                         <TableCell>{entry.warehouseName || '-'}</TableCell>
                                         <TableCell className="text-right text-emerald-600 font-medium">
                                             {entry.qtyIn > 0 ? entry.qtyIn.toLocaleString() : '-'}

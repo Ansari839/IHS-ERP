@@ -6,8 +6,8 @@
 
 // Token Configuration
 export const TOKEN_CONFIG = {
-    ACCESS_TOKEN_EXPIRY: process.env.ACCESS_TOKEN_EXPIRY || '30d',
-    REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY || '30d',
+    ACCESS_TOKEN_EXPIRY: process.env.ACCESS_TOKEN_EXPIRY || '10H',
+    REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY || '10H',
     TOKEN_TYPE: {
         ACCESS: 'access',
         REFRESH: 'refresh',

@@ -4,154 +4,234 @@ import prisma from '@/lib/prisma'
 import { verifyPermission } from '@/lib/auth-checks'
 
 export type StockSummaryItem = {
+    id: string // composite key
     itemMasterId: string
     itemCode: string
     itemName: string
+    warehouseId: number | null
+    warehouseName: string
+    warehouseRefNo: string
+    fileNo: string
+    lotNo: string
+    colorId: string | null
+    colorName: string
+    brandId: string | null
+    brandName: string
+    itemGradeId: string | null
+    gradeName: string
+    packingUnitId: string | null
     packingUnitSymbol: string
-    unitName: string
-    categoryName: string
-    totalReceived: number
-    totalReturned: number // Purchase Returns
-    totalDelivered: number // Sales DO
-    totalSalesReturned: number // Sales Return (Customer Return)
+    packingType: string | null
+    unitSize: number | null
+    totalIn: number
+    totalOut: number
     currentStock: number
+    pcs: number
 }
 
 export async function getStockSummary(segment: string = 'YARN', warehouseId?: string) {
-    // 1. Fetch all items for the segment OR aggregate transactions
+    const filters = {
+        segment: segment as any,
+        warehouseId: warehouseId ? parseInt(warehouseId) : undefined
+    }
 
-    // Fetch GRN Items (IN)
+    // 1. Fetch IN (GRNs)
     const grnItems = await prisma.gRNItem.findMany({
         where: {
             grn: {
-                segment: segment as any,
-                purchaseOrder: warehouseId ? { warehouseId: parseInt(warehouseId) } : undefined
+                segment: filters.segment,
+                purchaseOrder: filters.warehouseId ? { warehouseId: filters.warehouseId } : undefined
             }
         },
         include: {
-            itemMaster: {
-                include: {
-                    packingUnit: true,
-                    baseUnit: true,
-                    itemGroup: true
-                }
-            },
-            grn: true
+            itemMaster: { include: { packingUnit: true, baseUnit: true, itemGroup: true } },
+            grn: { include: { purchaseOrder: { include: { warehouse: true } } } },
+            color: true,
+            brand: true,
+            itemGrade: true,
+            packingUnit: true
         }
     })
 
-    // Fetch Purchase Returns (OUT)
+    // 2. Fetch OUT (Purchase Returns)
     const purchaseReturnItems = await prisma.purchaseReturnItem.findMany({
         where: {
             return: {
-                segment: segment as any
+                segment: filters.segment,
+                grn: filters.warehouseId ? { purchaseOrder: { warehouseId: filters.warehouseId } } : undefined
             }
         },
-        include: { return: true }
+        include: {
+            return: { include: { grn: { include: { purchaseOrder: { include: { warehouse: true } } } } } },
+            itemMaster: true,
+            color: true,
+            brand: true,
+            itemGrade: true
+        }
     })
 
-    // Fetch Delivery Orders (OUT)
+    // 3. Fetch OUT (Delivery Orders)
     const deliveryItems = await prisma.deliveryOrderItem.findMany({
         where: {
             deliveryOrder: {
-                segment: segment as any,
-                salesOrder: warehouseId ? { warehouseId: parseInt(warehouseId) } : undefined
+                segment: filters.segment,
+                warehouseId: filters.warehouseId
             }
         },
-        include: { deliveryOrder: true }
+        include: {
+            deliveryOrder: { include: { warehouse: true, salesOrder: true } },
+            itemMaster: true,
+            color: true,
+            brand: true,
+            itemGrade: true
+        }
     })
 
-    // Fetch Sales Returns (IN)
+    // 4. Fetch IN (Sales Returns)
     const salesReturnItems = await prisma.salesReturnItem.findMany({
         where: {
             return: {
-                segment: segment as any
+                segment: filters.segment,
+                deliveryOrder: filters.warehouseId ? { warehouseId: filters.warehouseId } : undefined
             }
         },
-        include: { return: true }
+        include: {
+            return: { include: { deliveryOrder: { include: { warehouse: true, salesOrder: true } } } },
+            itemMaster: true,
+            color: true,
+            brand: true,
+            itemGrade: true
+        }
     })
 
-    // Aggregate
     const stockMap = new Map<string, StockSummaryItem>();
 
-    // Helper to ensure entry exists
-    const ensureEntry = (item: any) => {
-        if (!stockMap.has(item.itemMasterId)) {
-            // Need itemMaster details. If simpler approach implies we might lose details if only OUT exists?
-            // Usually we have IN first. But to be safe, we assume itemMaster is fetched or we relay on relations.
-            // In GRN loop we have itemMaster.
-            // For others we might not have it loaded if we don't include it. 
-            // Let's assume most stock has GRN. If not, we might miss details.
-            // BETTER: Load Item Masters for these IDs? 
-            // For now, initializing with defaults if missing (might be minimal for pure OUT/Return scenarios without GRN)
-            // But usually GRN is the source.
-            // If itemMaster is not in include, we can't populate details perfectly.
-            // Let's rely on GRN for details or partial details.
+    const getBatchKey = (item: any, type: 'GRN' | 'PR' | 'DO' | 'SR') => {
+        let whId = '';
+        let whRef = '';
+        let file = '';
+        let lot = '';
+        let pkgType = item.packingType || 'EVEN';
+        let uSize = item.unitSize || 0;
 
-            // Correction: I should include itemMaster in ALL queries or fetch ItemMasters separately.
-            // Ideally fetch all item masters first. But that is heavy.
-            // Let's trust GRN provides the base.
-            // If an item has NO GRN but has Returns (weird), it won't show fully correctly.
-            // I'll proceed with what I have.
+        if (type === 'GRN') {
+            whId = item.grn.purchaseOrder?.warehouseId?.toString() || '';
+            whRef = item.warehouseRefNo || item.grn.warehouseRefNo || '';
+            file = item.grn.purchaseOrder?.fileNo || '';
+            lot = item.lotNo || item.grn.lotNo || '';
+        } else if (type === 'DO') {
+            whId = item.deliveryOrder.warehouseId?.toString() || '';
+            whRef = item.deliveryOrder.warehouseRefNo || '';
+            file = item.deliveryOrder.salesOrder?.fileNo || '';
+            // DO items usually don't have distinct lotNo themselves but link to PO/GRN in a full system
+            // For now we use header lot if applicable or empty
+        } else if (type === 'PR') {
+            whId = item.return.grn?.purchaseOrder?.warehouseId?.toString() || '';
+            whRef = item.return.grn?.warehouseRefNo || '';
+            file = item.return.returnNumber || '';
+        } else if (type === 'SR') {
+            whId = item.return.deliveryOrder?.warehouseId?.toString() || '';
+            whRef = item.return.deliveryOrder?.warehouseRefNo || '';
+            file = item.return.returnNumber || '';
         }
-        // Actually, let's just initialize if strict.
-        if (!stockMap.has(item.itemMasterId) && item.itemMaster) {
-            stockMap.set(item.itemMasterId, {
+
+        return `${item.itemMasterId}-${whId}-${item.colorId || 'none'}-${item.brandId || 'none'}-${item.itemGradeId || 'none'}-${pkgType}-${uSize}-${whRef}-${lot}-${file}`;
+    }
+
+    const ensureEntry = (item: any, type: 'GRN' | 'PR' | 'DO' | 'SR') => {
+        const key = getBatchKey(item, type);
+        if (!stockMap.has(key)) {
+            let whId = null;
+            let whName = '-';
+            let whRef = '';
+            let file = '';
+            let lot = '';
+
+            if (type === 'GRN') {
+                whId = item.grn.purchaseOrder?.warehouseId || null;
+                whName = item.grn.purchaseOrder?.warehouse?.name || '-';
+                whRef = item.warehouseRefNo || item.grn.warehouseRefNo || '';
+                file = item.grn.purchaseOrder?.fileNo || '';
+                lot = item.lotNo || item.grn.lotNo || '';
+            } else if (type === 'DO') {
+                whId = item.deliveryOrder.warehouseId || null;
+                whName = item.deliveryOrder.warehouse?.name || '-';
+                whRef = item.deliveryOrder.warehouseRefNo || '';
+                file = item.deliveryOrder.salesOrder?.fileNo || '';
+            } else if (type === 'PR') {
+                whId = item.return.grn?.purchaseOrder?.warehouseId || null;
+                whName = item.return.grn?.purchaseOrder?.warehouse?.name || '-';
+                whRef = item.return.grn?.warehouseRefNo || '';
+                file = item.return.grn?.purchaseOrder?.fileNo || '';
+            } else if (type === 'SR') {
+                whId = item.return.deliveryOrder?.warehouseId || null;
+                whName = item.return.deliveryOrder?.warehouse?.name || '-';
+                whRef = item.return.deliveryOrder?.warehouseRefNo || '';
+                file = item.return.deliveryOrder?.salesOrder?.fileNo || '';
+            }
+
+            stockMap.set(key, {
+                id: key,
                 itemMasterId: item.itemMasterId,
-                itemCode: item.itemMaster.code,
-                itemName: item.itemMaster.name,
-                packingUnitSymbol: item.itemMaster.packingUnit?.symbol || item.itemMaster.packingUnit?.name || 'Inits',
-                unitName: item.itemMaster.baseUnit?.name || '',
-                categoryName: item.itemMaster.itemGroup?.name || '',
-                totalReceived: 0,
-                totalReturned: 0,
-                totalDelivered: 0,
-                totalSalesReturned: 0,
-                currentStock: 0
+                itemCode: item.itemMaster?.code || '-',
+                itemName: item.itemMaster?.name || '-',
+                warehouseId: whId,
+                warehouseName: whName,
+                warehouseRefNo: whRef,
+                fileNo: file,
+                lotNo: lot,
+                colorId: item.colorId || null,
+                colorName: item.color?.name || '-',
+                brandId: item.brandId || null,
+                brandName: item.brand?.name || '-',
+                itemGradeId: item.itemGradeId || null,
+                gradeName: item.itemGrade?.name || '-',
+                packingUnitId: item.packingUnitId || item.itemMaster?.packingUnitId || null,
+                packingUnitSymbol: item.packingUnit?.symbol || item.itemMaster?.packingUnit?.symbol || '-',
+                packingType: item.packingType || 'EVEN',
+                unitSize: item.unitSize || 0,
+                totalIn: 0,
+                totalOut: 0,
+                currentStock: 0,
+                pcs: 0
             })
         }
+        return stockMap.get(key)!;
     }
 
-    // Process IN (GRNs)
+    // Accumulate
     for (const item of grnItems) {
-        ensureEntry(item)
-        if (stockMap.has(item.itemMasterId)) {
-            const entry = stockMap.get(item.itemMasterId)!;
-            entry.totalReceived += (item.receivedQty || 0);
-            entry.currentStock += (item.receivedQty || 0);
-        }
+        const entry = ensureEntry(item, 'GRN');
+        entry.totalIn += (item.receivedQty || 0);
+        entry.currentStock += (item.receivedQty || 0);
+        entry.pcs += (item.pcs || 0);
     }
 
-    // Process OUT (Purchase Returns)
     for (const item of purchaseReturnItems) {
-        // We might not have itemMaster detail if no GRN. skip for now or fetch?
-        // Let's skip safely.
-        if (stockMap.has(item.itemMasterId)) {
-            const entry = stockMap.get(item.itemMasterId)!;
-            entry.totalReturned += (item.returnedQty || 0);
-            entry.currentStock -= (item.returnedQty || 0);
-        }
+        if (!item.itemMaster) continue; // safety
+        const entry = ensureEntry(item, 'PR');
+        entry.totalOut += (item.returnedQty || 0);
+        entry.currentStock -= (item.returnedQty || 0);
+        // PR items in schema lack pcs
     }
 
-    // Process OUT (Delivery Orders)
     for (const item of deliveryItems) {
-        if (stockMap.has(item.itemMasterId)) {
-            const entry = stockMap.get(item.itemMasterId)!;
-            entry.totalDelivered += (item.deliveredQty || 0);
-            entry.currentStock -= (item.deliveredQty || 0);
-        }
+        if (!item.itemMaster) continue;
+        const entry = ensureEntry(item, 'DO');
+        entry.totalOut += (item.deliveredQty || 0);
+        entry.currentStock -= (item.deliveredQty || 0);
+        entry.pcs -= (item.pcs || 0);
     }
 
-    // Process IN (Sales Returns)
     for (const item of salesReturnItems) {
-        if (stockMap.has(item.itemMasterId)) {
-            const entry = stockMap.get(item.itemMasterId)!;
-            entry.totalSalesReturned += (item.returnedQty || 0);
-            entry.currentStock += (item.returnedQty || 0);
-        }
+        if (!item.itemMaster) continue;
+        const entry = ensureEntry(item, 'SR');
+        entry.totalIn += (item.returnedQty || 0);
+        entry.currentStock += (item.returnedQty || 0);
+        // Sales Return items in schema lack pcs
     }
 
-    return Array.from(stockMap.values());
+    return Array.from(stockMap.values()).filter(item => Math.abs(item.currentStock) > 0.0001);
 }
 
 export type LedgerEntry = {
@@ -165,51 +245,65 @@ export type LedgerEntry = {
     balance: number
     remarks?: string
     warehouseName?: string
+    colorName?: string
+    brandName?: string
 }
 
-export async function getItemLedger(itemId: string, segment: string = 'YARN') {
+export async function getItemLedger(itemId: string, segment: string = 'YARN', colorId?: string) {
+    const commonWhere = {
+        itemMasterId: itemId,
+        colorId: colorId || undefined
+    }
+
     // 1. Fetch Inward (GRN Items)
     const grnItems = await prisma.gRNItem.findMany({
-        where: { itemMasterId: itemId, grn: { segment: segment as any } },
+        where: { ...commonWhere, grn: { segment: segment as any } },
         include: {
             grn: {
                 include: {
-                    purchaseOrder: { include: { account: true, warehouse: true } },
-                    company: true
+                    purchaseOrder: { include: { account: true, warehouse: true } }
                 }
-            }
+            },
+            color: true,
+            brand: true
         }
     })
 
     // 2. Fetch Outward (Purchase Return Items)
     const purchaseReturnItems = await prisma.purchaseReturnItem.findMany({
-        where: { itemMasterId: itemId, return: { segment: segment as any } },
+        where: { ...commonWhere, return: { segment: segment as any } },
         include: {
-            return: { include: { account: true } }
+            return: { include: { account: true, grn: { include: { purchaseOrder: { include: { warehouse: true } } } } } },
+            color: true,
+            brand: true
         }
     })
 
     // 3. Fetch Outward (Delivery Order Items)
     const deliveryItems = await prisma.deliveryOrderItem.findMany({
-        where: { itemMasterId: itemId, deliveryOrder: { segment: segment as any } },
+        where: { ...commonWhere, deliveryOrder: { segment: segment as any } },
         include: {
             deliveryOrder: {
                 include: {
-                    salesOrder: { include: { account: true, warehouse: true } }
+                    warehouse: true,
+                    salesOrder: { include: { account: true } }
                 }
-            }
+            },
+            color: true,
+            brand: true
         }
     })
 
     // 4. Fetch Inward (Sales Return Items)
     const salesReturnItems = await prisma.salesReturnItem.findMany({
-        where: { itemMasterId: itemId, return: { segment: segment as any } },
+        where: { ...commonWhere, return: { segment: segment as any } },
         include: {
-            return: { include: { account: true } }
+            return: { include: { account: true, deliveryOrder: { include: { warehouse: true } } } },
+            color: true,
+            brand: true
         }
     })
 
-    // 5. Combine and Sort
     const transactions: LedgerEntry[] = []
 
     for (const item of grnItems) {
@@ -220,6 +314,8 @@ export async function getItemLedger(itemId: string, segment: string = 'YARN') {
             documentNo: item.grn.grnNumber,
             partyName: item.grn.purchaseOrder?.account?.name || item.grn.purchaseOrder?.partyName || 'Unknown',
             warehouseName: item.grn.purchaseOrder?.warehouse?.name || '-',
+            colorName: item.color?.name,
+            brandName: item.brand?.name,
             qtyIn: item.receivedQty,
             qtyOut: 0,
             balance: 0,
@@ -230,18 +326,17 @@ export async function getItemLedger(itemId: string, segment: string = 'YARN') {
     for (const item of purchaseReturnItems) {
         transactions.push({
             id: item.id,
-            // @ts-ignore
             date: item.return.date,
             type: 'PURCHASE_RETURN',
-            // @ts-ignore
-            documentNo: item.return.returnNumber,
-            // @ts-ignore
+            documentNo: (item.return as any).returnNumber || '-',
             partyName: item.return.account?.name || 'Unknown',
+            warehouseName: item.return.grn?.purchaseOrder?.warehouse?.name || '-',
+            colorName: item.color?.name,
+            brandName: item.brand?.name,
             qtyIn: 0,
             qtyOut: item.returnedQty,
             balance: 0,
-            // @ts-ignore
-            remarks: item.return.remarks || ''
+            remarks: (item.return as any).remarks || ''
         })
     }
 
@@ -252,7 +347,9 @@ export async function getItemLedger(itemId: string, segment: string = 'YARN') {
             type: 'DELIVERY_ORDER',
             documentNo: item.deliveryOrder.doNumber,
             partyName: item.deliveryOrder.salesOrder?.account?.name || item.deliveryOrder.salesOrder?.partyName || 'Unknown',
-            warehouseName: item.deliveryOrder.salesOrder?.warehouse?.name || '-',
+            warehouseName: item.deliveryOrder.warehouse?.name || '-',
+            colorName: item.color?.name,
+            brandName: item.brand?.name,
             qtyIn: 0,
             qtyOut: item.deliveredQty,
             balance: 0,
@@ -263,31 +360,27 @@ export async function getItemLedger(itemId: string, segment: string = 'YARN') {
     for (const item of salesReturnItems) {
         transactions.push({
             id: item.id,
-            // @ts-ignore
             date: item.return.date,
             type: 'SALES_RETURN',
-            // @ts-ignore
-            documentNo: item.return.returnNumber,
-            // @ts-ignore
+            documentNo: (item.return as any).returnNumber || '-',
             partyName: item.return.account?.name || 'Unknown',
+            warehouseName: item.return.deliveryOrder?.warehouse?.name || '-',
+            colorName: item.color?.name,
+            brandName: item.brand?.name,
             qtyIn: item.returnedQty,
             qtyOut: 0,
             balance: 0,
-            // @ts-ignore
-            remarks: item.return.remarks || ''
+            remarks: (item.return as any).remarks || ''
         })
     }
 
-    // Sort by Date Ascending
     transactions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
-    // 6. Calculate Running Balance
     let runningBalance = 0
     for (const tx of transactions) {
         runningBalance = runningBalance + tx.qtyIn - tx.qtyOut
         tx.balance = runningBalance
     }
 
-    // Return in ascending order (Oldest first) as requested
     return transactions
 }
