@@ -22,7 +22,6 @@ model User {
   isActive            Boolean @default(true)
 
   // Relations
-  posts         Post[]
   refreshTokens RefreshToken[]
   auditLogs     AuditLog[]
 
@@ -96,15 +95,6 @@ model UserRole {
   assignedAt DateTime @default(now())
 
   @@id([userId, roleId])
-}
-
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
 }
 
 model RefreshToken {

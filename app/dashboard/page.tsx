@@ -19,32 +19,15 @@ export default async function Home() {
   // Fetch real data from database with parallel queries
   const [
     totalUsers,
-    totalPosts,
-    publishedPosts,
-    todayPosts,
+    totalWarehouses,
+    totalAccounts,
+    totalItemMasters,
   ] = await Promise.all([
     prisma.user.count(),
-    prisma.post.count(),
-    prisma.post.count({ where: { published: true } }),
-    prisma.post.count({
-      where: {
-        id: {
-          gte: 1, // This is a placeholder - adjust based on your actual data
-        },
-      },
-    }),
+    prisma.warehouse.count(),
+    prisma.account.count(),
+    prisma.itemMaster.count(),
   ])
-
-  // Get recent posts for activity feed
-  const recentPosts = await prisma.post.findMany({
-    take: 4,
-    orderBy: { id: 'desc' },
-    include: {
-      author: {
-        select: { name: true, email: true },
-      },
-    },
-  })
 
   /* eslint-disable react/jsx-key */
   const stats = [
@@ -59,43 +42,38 @@ export default async function Home() {
       iconClassName: "text-blue-600 dark:text-blue-400",
     },
     {
-      title: "Total Posts",
-      value: todayPosts.toLocaleString(),
-      change: "+8.2%",
+      title: "Warehouses",
+      value: totalWarehouses.toLocaleString(),
+      change: "+1",
       trend: "up" as const,
-      icon: ShoppingCart,
-      description: "Posts created",
+      icon: Package,
+      description: "Total warehouses",
       className: "bg-violet-100 dark:bg-violet-900/20",
       iconClassName: "text-violet-600 dark:text-violet-400",
     },
     {
-      title: "Published Posts",
-      value: publishedPosts.toLocaleString(),
-      change: "+23.1%",
+      title: "Chart of Accounts",
+      value: totalAccounts.toLocaleString(),
+      change: "+5.2%",
       trend: "up" as const,
-      icon: Package,
-      description: "Published content",
+      icon: DollarSign,
+      description: "Total accounts",
       className: "bg-emerald-100 dark:bg-emerald-900/20",
       iconClassName: "text-emerald-600 dark:text-emerald-400",
     },
     {
-      title: "All Posts",
-      value: totalPosts.toLocaleString(),
-      change: "-3.2%",
-      trend: "down" as const,
-      icon: DollarSign,
-      description: "Total posts in system",
+      title: "Item Masters",
+      value: totalItemMasters.toLocaleString(),
+      change: "+8.2%",
+      trend: "up" as const,
+      icon: ShoppingCart,
+      description: "Items in catalog",
       className: "bg-amber-100 dark:bg-amber-900/20",
       iconClassName: "text-amber-600 dark:text-amber-400",
     },
   ]
 
-  const recentActivities = recentPosts.map((post) => ({
-    id: post.id,
-    action: post.published ? `Published: ${post.title}` : `Draft: ${post.title}`,
-    customer: post.author?.name || post.author?.email || "Unknown",
-    time: `Post #${post.id}`,
-  }))
+  const recentActivities: any[] = [] // Placeholder for real activity logic
 
   return (
     <>

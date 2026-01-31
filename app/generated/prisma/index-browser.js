@@ -177,14 +177,6 @@ exports.Prisma.UserRoleScalarFieldEnum = {
   assignedAt: 'assignedAt'
 };
 
-exports.Prisma.PostScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  content: 'content',
-  published: 'published',
-  authorId: 'authorId'
-};
-
 exports.Prisma.RefreshTokenScalarFieldEnum = {
   id: 'id',
   token: 'token',
@@ -893,7 +885,6 @@ exports.Prisma.ModelName = {
   Permission: 'Permission',
   RolePermission: 'RolePermission',
   UserRole: 'UserRole',
-  Post: 'Post',
   RefreshToken: 'RefreshToken',
   AuditLog: 'AuditLog',
   Warehouse: 'Warehouse',
